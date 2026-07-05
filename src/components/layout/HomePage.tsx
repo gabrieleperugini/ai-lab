@@ -4,10 +4,11 @@ export function HomePage() {
   return (
     <div className="fadeIn">
       <section className="hero">
-        <h1>AI Lab</h1>
+        <span className="heroYear">Bocconi Summer School · 2026 edition</span>
+        <h1>Machine Learning and Artificial Intelligence Lab</h1>
         <p className="subtitle">Patterns, predictions, and policies</p>
         <p className="heroNote">
-          Pick a day, open a module, and start turning knobs. No coding needed — your curiosity is
+          Pick a day, open a module, and start turning knobs. No coding needed. Your curiosity is
           the only requirement.
         </p>
       </section>

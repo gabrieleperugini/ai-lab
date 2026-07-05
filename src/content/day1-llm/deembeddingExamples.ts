@@ -27,7 +27,16 @@ export const deembeddingTokens: TokenVector[] = [
   { label: "hello", x: 6.1, y: 5.6 },
   { label: "I", x: 5.8, y: 5.2 },
   { label: "why", x: 6.5, y: 5.0 },
-  { label: "lions", x: 1.8, y: -5.1 }
+  { label: "lions", x: 1.8, y: -5.1 },
+  // Directions are spread so each preset has a clear winning token.
+  { label: "umbrella", x: -2.4, y: -2.8 },
+  { label: "rain", x: -2.7, y: -3.0 },
+  { label: "cheer", x: 1.0, y: -1.6 },
+  { label: "order", x: -3.8, y: -3.8 },
+  { label: "mammal", x: 4.4, y: 0.5 },
+  { label: "buongiorno", x: 5.4, y: 4.6 },
+  { label: "field", x: 2.8, y: -2.0 },
+  { label: "icon", x: 0.3, y: 2.4 }
 ];
 
 export type HiddenPreset = {
@@ -58,5 +67,30 @@ export const hiddenPresets: HiddenPreset[] = [
     label: "Chatbot greeting",
     vector: { x: 6.0, y: 5.4 },
     prompt: "The small stone looked at me and said ..."
+  },
+  {
+    label: "Rainy day",
+    vector: { x: -2.5, y: -2.9 },
+    prompt: "The clouds became dark, so I took my ..."
+  },
+  {
+    label: "Restaurant",
+    vector: { x: -3.8, y: -3.7 },
+    prompt: "The waiter gave us the menu and asked what we wanted to ..."
+  },
+  {
+    label: "Logic",
+    vector: { x: 4.6, y: 0.5 },
+    prompt: "All cats are mammals. Luna is a cat. Therefore Luna is a ..."
+  },
+  {
+    label: "Computer mouse",
+    vector: { x: 0.5, y: 4.2 },
+    prompt: "I moved the mouse and clicked on the ..."
+  },
+  {
+    label: "Baseball bat",
+    vector: { x: 3.4, y: -2.4 },
+    prompt: "The player picked up the bat and stepped onto the ..."
   }
 ];

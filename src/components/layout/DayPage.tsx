@@ -44,7 +44,7 @@ export function DayPage({ dayId, mode }: { dayId: string; mode: ClassroomMode })
         <section className="timelinePanel">
           <h2>Suggested Day 1 timeline</h2>
           <p className="tlNote">
-            Guidance for instructors — modules slot in between the lecture slides. Visible in
+            Guidance for instructors: modules slot in between the lecture slides. Visible in
             teacher mode only.
           </p>
           {day1Timeline.map((s) => (

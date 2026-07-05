@@ -10,7 +10,7 @@ export const day3Modules: LabModule[] = [
     subtitle: "Find groups nobody labeled",
     durationMin: 25,
     level: "intro",
-    mission: "Watch K-means discover groups in unlabeled points — then make it fail.",
+    mission: "Watch K-means discover groups in unlabeled points, then make it fail.",
     studentInstructions: [
       "Scatter points on the canvas.",
       "Choose k and step through the K-means iterations.",
@@ -18,9 +18,9 @@ export const day3Modules: LabModule[] = [
     ],
     component: "Placeholder",
     dataKey: "clustering-detective",
-    reflectionQuestions: ["What does the algorithm 'see' that you don't — and vice versa?"],
+    reflectionQuestions: ["What does the algorithm 'see' that you don't, and vice versa?"],
     noticePoints: ["No labels were given: structure emerged from distances alone."],
-    takeaway: "Unsupervised learning finds structure without answers — but its idea of structure is geometric.",
+    takeaway: "Unsupervised learning finds structure without answers, but its idea of structure is geometric.",
     placeholder: true
   },
   {
@@ -39,7 +39,7 @@ export const day3Modules: LabModule[] = [
     component: "Placeholder",
     dataKey: "recommender",
     reflectionQuestions: ["How could a recommender lock you into a bubble?"],
-    noticePoints: ["Recommendation = nearest neighbors in taste space — geometry again!"],
+    noticePoints: ["Recommendation = nearest neighbors in taste space: geometry again!"],
     takeaway: "Recommendations are geometry: you are a point, and the system suggests what is nearby.",
     placeholder: true
   },
@@ -59,7 +59,7 @@ export const day3Modules: LabModule[] = [
     component: "Placeholder",
     dataKey: "gridworld-rl",
     reflectionQuestions: ["Why does the agent need to explore before it can exploit?"],
-    noticePoints: ["Nobody tells the agent the path — only rewards do."],
+    noticePoints: ["Nobody tells the agent the path; only rewards do."],
     takeaway: "Reinforcement learning trades instructions for incentives.",
     placeholder: true
   },

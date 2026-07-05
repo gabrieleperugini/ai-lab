@@ -10,12 +10,20 @@ export default function ChatbotBridge({ mode, onResult, resetSignal }: ModuleCom
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [openCard, setOpenCard] = useState<string | null>(chatbotChallengePrompts[0].id);
   const [projectorText, setProjectorText] = useState("");
+  const [category, setCategory] = useState<string>("all");
+
+  const categories = ["all", ...Array.from(new Set(chatbotChallengePrompts.map((c) => c.category)))];
+  const cards =
+    category === "all"
+      ? chatbotChallengePrompts
+      : chatbotChallengePrompts.filter((c) => c.category === category);
 
   useEffect(() => {
     setPredictions({});
     setCopiedId(null);
     setOpenCard(chatbotChallengePrompts[0].id);
     setProjectorText("");
+    setCategory("all");
   }, [resetSignal]);
 
   const copyPrompt = async (id: string, prompt: string) => {
@@ -53,8 +61,25 @@ export default function ChatbotBridge({ mode, onResult, resetSignal }: ModuleCom
         <span className="hintText">…or watch your teacher run them on the projector.</span>
       </div>
 
+      <p className="hintText" style={{ marginBottom: 12 }}>
+        Different chatbots may answer differently. That is part of the lesson.
+      </p>
+
+      <div className="controlRow" style={{ marginBottom: 14 }}>
+        {categories.map((c) => (
+          <button
+            key={c}
+            className={"legendChip" + (category === c ? " active" : "")}
+            style={{ color: "var(--blue)" }}
+            onClick={() => setCategory(c)}
+          >
+            {c === "all" ? "all categories" : c}
+          </button>
+        ))}
+      </div>
+
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        {chatbotChallengePrompts.map((card, i) => {
+        {cards.map((card, i) => {
           const isOpen = openCard === card.id;
           return (
             <div
@@ -65,7 +90,13 @@ export default function ChatbotBridge({ mode, onResult, resetSignal }: ModuleCom
             >
               <div className="controlRow" style={{ justifyContent: "space-between" }}>
                 <strong style={{ fontSize: 17 }}>
-                  {i + 1}. {card.title}
+                  {i + 1}. {card.title}{" "}
+                  <span
+                    className="levelTag core"
+                    style={{ marginLeft: 6, verticalAlign: "middle", textTransform: "none", letterSpacing: 0 }}
+                  >
+                    {card.category}
+                  </span>
                 </strong>
                 <button
                   className="btn subtle small"
@@ -100,7 +131,7 @@ export default function ChatbotBridge({ mode, onResult, resetSignal }: ModuleCom
                   </div>
                   <div className="reflectionBox" style={{ marginTop: 12 }}>
                     <label htmlFor={`pred-${card.id}`}>
-                      ✍️ BEFORE testing — {card.beforeQuestion}
+                      ✍️ BEFORE testing: {card.beforeQuestion}
                     </label>
                     <textarea
                       id={`pred-${card.id}`}

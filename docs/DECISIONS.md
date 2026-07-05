@@ -2,6 +2,26 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Revision pass (July 2026)
+
+- Title made explicit: "Machine Learning and Artificial Intelligence Lab",
+  year 2026 shown on the home page and top bar.
+- M2 simplified to flip-only interaction (side-by-side removed as redundant).
+- M3 rebuilt as multi-step branching (nested choice trees, two levels).
+- M4 gained 6 new prompt families, a New prompt button, and Generate 3 versions.
+- M5 simplified to a single microscope; comparison is an opt-in
+  "Compare with word split" toggle (the old Microscope A/B labels confused).
+- M6 rebuilt as a rotatable 3D map: custom orthographic-with-perspective
+  projection in plain SVG, drag to rotate, depth-scaled points, floating
+  neighbor card, four puzzle cards (two analogy with arrows, two click-to-answer).
+  Three.js was deliberately NOT added: the custom projection is ~30 lines,
+  keeps the bundle small, and cannot break the static deployment.
+- M7 canvas shrunk ~40%, labels renamed for students (thought vector, word
+  directions, match scores) with technical names in tooltips.
+- Licensing: MIT for code (LICENSE), CC BY-NC 4.0 for authored educational
+  content (CONTENT_LICENSE.md), THIRD_PARTY_NOTICES.md for dependencies.
+- Em dashes removed from visible UI text per style guidance.
+
 ## Placement and repo
 
 - The app lives in `MLAISummerSchool/2026/ai-lab` as its own git repository

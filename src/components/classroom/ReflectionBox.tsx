@@ -23,11 +23,11 @@ export function ReflectionBox({ module, mode, observedResult }: ReflectionBoxPro
   const buildCard = () => {
     const lines = [
       `📋 AI Lab submission`,
-      `Class: ${mode.classId ?? "—"}`,
-      `Group: ${groupName || "—"}`,
+      `Class: ${mode.classId ?? "-"}`,
+      `Group: ${groupName || "-"}`,
       `Module: ${module.id} (${module.title})`,
       observedResult ? `Result: ${observedResult}` : null,
-      `Reflection: ${reflection || "—"}`
+      `Reflection: ${reflection || "-"}`
     ].filter(Boolean);
     return lines.join("\n");
   };
@@ -62,7 +62,7 @@ export function ReflectionBox({ module, mode, observedResult }: ReflectionBoxPro
         id={`group-${module.id}`}
         type="text"
         value={groupName}
-        placeholder="e.g. Group 7 — The Lions"
+        placeholder="e.g. Group 7, The Lions"
         onChange={(e) => setGroupName(e.target.value)}
       />
       <label htmlFor={`refl-${module.id}`}>Your answer</label>

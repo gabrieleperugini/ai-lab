@@ -8,26 +8,40 @@ export const tokenizerPresets: string[] = [
   "Hello world!",
   "hello world!",
   " Hello world!",
+  "bank",
+  " bank",
+  "Bank",
+  "New York",
+  "NewYork",
   "ChatGPT",
   "chatbot",
   "Bocconi",
+  "Bocconi Summer School 2026",
   "BocconiSummerSchool2026",
+  "Machine Learning and Artificial Intelligence Lab 2026",
   "unbelievable",
+  "un-believ-able",
   "anti-dis-establishment",
   "antidisestablishmentarianism",
+  "Once upon a time",
+  "Once upon a crime",
+  "The student opened the test and realized that she had studied the wrong chapter.",
+  "The student opened the test and realized what the teacher meant.",
+  "No coding needed. Your curiosity is the only requirement.",
+  "ChatGPT is not magic; it is computation.",
+  "Ciao! Sto studiando intelligenza artificiale.",
+  "Non tutte le parole diventano un solo token.",
   "Ciao, come va?",
-  "Sto studiando intelligenza artificiale.",
   "The capital of France is Paris.",
   "The capital of France is Berlin, she said jokingly.",
   "2 + 2 = 4",
   "n = 2k + 1",
   "ha ha ha ha ha",
+  "pizza pizza pizza",
   "hhsdjh",
   "pizza 🍕",
   "I love AI!!!",
-  "I looooove AI!!!",
-  "New York",
-  "NewYork"
+  "I looooove AI!!!"
 ];
 
 /** Random-ish strings for the "Surprise me" button. */
@@ -48,10 +62,10 @@ export const surpriseStrings: string[] = [
 ];
 
 export const tokenizerActivities: string[] = [
-  "Which sentence has more tokens than you expected?",
-  "Does capitalization matter? Compare 'Hello world!' and 'hello world!'.",
-  "Do spaces matter? Try adding a space before 'Hello'.",
-  "Are emojis one token or several?",
-  "Are Italian and English split similarly?",
-  "What happens to made-up words like 'hhsdjh'?"
+  "Which preset has more tokens than expected?",
+  "Does a leading space matter? Try 'bank' and ' bank'.",
+  "Does capitalization matter? Try 'bank' and 'Bank'.",
+  "What happens to a made-up word like 'hhsdjh'?",
+  "What happens to repeated words? Try 'pizza pizza pizza'.",
+  "What happens to Italian text? Compare it with English."
 ];

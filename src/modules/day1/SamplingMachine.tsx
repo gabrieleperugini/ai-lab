@@ -17,6 +17,7 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
   const [generated, setGenerated] = useState<string[]>([]);
   const [lastPicked, setLastPicked] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
+  const [versions, setVersions] = useState<string[]>([]);
   const runningRef = useRef(false);
   const genRef = useRef<string[]>([]);
 
@@ -34,6 +35,7 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
     setFamilyId(samplingFamilies[0].id);
     setTemperature(1.0);
     setTopK(0);
+    setVersions([]);
     reset();
   }, [resetSignal, reset]);
 
@@ -55,6 +57,22 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
     if (endsSentence(token) || genRef.current.length >= MAX_TOKENS) setFinished(true);
     return token;
   }, [family, temperature, topK]);
+
+  /** Run one silent, complete generation with the current settings. */
+  const generateFull = useCallback((): string => {
+    const tokens: string[] = [];
+    for (let i = 0; i < MAX_TOKENS; i++) {
+      const { dist } = nextTokenDistribution(family, tokens);
+      const token = sample(applyTopK(applyTemperature(dist, temperature), topK));
+      tokens.push(token);
+      if (endsSentence(token)) break;
+    }
+    return tokens.join(" ");
+  }, [family, temperature, topK]);
+
+  const generateThree = useCallback(() => {
+    setVersions([generateFull(), generateFull(), generateFull()]);
+  }, [generateFull]);
 
   const runToPunctuation = useCallback(() => {
     if (runningRef.current) return;
@@ -81,26 +99,56 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
 
   const extremeWarning =
     temperature >= 1.7
-      ? "🌶️ Extreme temperature: the distribution is nearly flat — expect chaos."
+      ? "🌶️ Extreme temperature: the distribution is nearly flat; expect chaos."
       : temperature <= 0.3 && topK === 1
         ? "🧊 Maximum boredom: the model will now say the same thing every single time."
         : null;
 
   return (
     <div className="panel">
-      <div className="controlRow" style={{ marginBottom: 6 }}>
-        <span className="panelTitle" style={{ marginBottom: 0 }}>Starting prompt</span>
-      </div>
-      <div className="controlRow" style={{ marginBottom: 16 }}>
-        <Segmented
-          ariaLabel="Prompt family"
-          options={samplingFamilies.map((f) => ({ value: f.id, label: `${f.emoji} ${f.label}` }))}
-          value={familyId}
-          onChange={(id) => {
+      <div className="controlRow" style={{ marginBottom: 16, justifyContent: "space-between" }}>
+        <label className="statPill" style={{ gap: 10 }}>
+          Starting prompt
+          <select
+            value={familyId}
+            onChange={(e) => {
+              setFamilyId(e.target.value);
+              setVersions([]);
+              reset();
+            }}
+            aria-label="Choose a starting prompt"
+            style={{
+              border: "none",
+              background: "transparent",
+              fontFamily: "inherit",
+              fontSize: 15,
+              fontWeight: 700,
+              color: "var(--blue)",
+              cursor: "pointer",
+              maxWidth: 240
+            }}
+          >
+            {samplingFamilies.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.emoji} {f.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button
+          className="btn ghost small"
+          onClick={() => {
+            let id = familyId;
+            while (id === familyId && samplingFamilies.length > 1) {
+              id = samplingFamilies[Math.floor(Math.random() * samplingFamilies.length)].id;
+            }
             setFamilyId(id);
+            setVersions([]);
             reset();
           }}
-        />
+        >
+          🎰 New prompt
+        </button>
       </div>
 
       <div className="vizStage" style={{ padding: 18 }}>
@@ -123,7 +171,7 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
 
       <div className="controlRow" style={{ marginTop: 18, alignItems: "flex-end" }}>
         <Slider
-          label="Temperature — how adventurous is the sampler?"
+          label="Temperature: how adventurous is the sampler?"
           value={temperature}
           min={0.2}
           max={2}
@@ -135,7 +183,7 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
         />
         <div>
           <div className="sliderHead" style={{ fontSize: 14.5, fontWeight: 700, color: "var(--ink-soft)", marginBottom: 6 }}>
-            Top-k — how many tokens stay in the race?
+            Top-k: how many tokens stay in the race?
           </div>
           <Segmented
             ariaLabel="Top-k"
@@ -160,10 +208,43 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
         <button className="btn accent" onClick={runToPunctuation} disabled={finished}>
           ⏩ Finish the sentence
         </button>
+        <button className="btn ghost" onClick={generateThree}>
+          ⚡ Generate 3 versions
+        </button>
         <button className="btn subtle" onClick={reset}>
           ↺ New attempt
         </button>
       </div>
+
+      {versions.length > 0 && (
+        <div className="fadeIn" style={{ marginTop: 16 }}>
+          <div className="panelTitle">
+            Three runs, same settings (T={temperature.toFixed(1)}, top-k={topK === 0 ? "all" : topK})
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {versions.map((v, i) => (
+              <div
+                key={i}
+                style={{
+                  background: "var(--paper-2)",
+                  border: "1px solid var(--line)",
+                  borderRadius: 10,
+                  padding: "10px 14px",
+                  fontSize: 15
+                }}
+              >
+                <span style={{ color: "var(--ink-faint)", fontWeight: 700, marginRight: 8 }}>
+                  {i + 1}.
+                </span>
+                <span style={{ color: "var(--ink-faint)" }}>{family.start}</span> {v}
+              </div>
+            ))}
+          </div>
+          <p className="hintText" style={{ marginTop: 8 }}>
+            Identical runs? Lower top-k or temperature is squeezing out the randomness.
+          </p>
+        </div>
+      )}
 
       <hr className="divider" />
 
@@ -172,6 +253,13 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
         {lastPicked && !finished ? "(green = just sampled)" : ""}
       </div>
       <ProbabilityBars distribution={shaped} picked={finished ? null : lastPicked} maxBars={9} />
+
+      <div className="revealBox" style={{ marginTop: 14, fontSize: 14.5 }}>
+        <strong>Cheat sheet:</strong> Low temperature: safer, more repetitive. Medium temperature:
+        varied but still coherent. High temperature: surprising, sometimes nonsense. Top-k = 1:
+        always choose the most likely token.
+      </div>
+
       <p className="hintText" style={{ marginTop: 10 }}>
         The math is real: probabilities are raised to 1/T and renormalized, then only the top-k
         stay in the race. Only the story tree is hand-made.

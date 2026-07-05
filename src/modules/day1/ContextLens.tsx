@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { contextPairs } from "../../content/day1-llm/contextExamples";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
-import { Segmented } from "../../components/controls/Segmented";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 import type { ContextSide } from "../../content/day1-llm/contextExamples";
 
@@ -24,104 +23,92 @@ function HighlightedPrompt({ side, showHighlights }: { side: ContextSide; showHi
   );
 }
 
+/**
+ * One prompt at a time. A big flip button swaps the few context words and
+ * the probability bars animate between the two worlds.
+ */
 export default function ContextLens({ onResult, resetSignal }: ModuleComponentProps) {
   const [pairIndex, setPairIndex] = useState(0);
   const [world, setWorld] = useState<"left" | "right">("left");
   const [showHighlights, setShowHighlights] = useState(false);
-  const [sideBySide, setSideBySide] = useState(true);
 
   const pair = contextPairs[pairIndex];
+  const activeSide = pair[world];
+  const otherLabel = world === "left" ? pair.rightLabel : pair.leftLabel;
 
   useEffect(() => {
     setPairIndex(0);
     setWorld("left");
     setShowHighlights(false);
-    setSideBySide(true);
   }, [resetSignal]);
 
   useEffect(() => {
-    onResult(`pair '${pair.id}', viewing: ${sideBySide ? "side by side" : pair[world].prompt}`);
-  }, [pair, world, sideBySide, onResult]);
+    onResult(`pair '${pair.id}', world: ${world === "left" ? pair.leftLabel : pair.rightLabel}`);
+  }, [pair, world, onResult]);
 
-  const activeSide = pair[world];
+  const selectPair = (index: number) => {
+    setPairIndex(index);
+    setWorld("left");
+    setShowHighlights(false);
+  };
 
   return (
     <div className="panel">
-      <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 16 }}>
-        <span className="statPill">
-          Pair <span className="statValue">{pairIndex + 1}</span> / {contextPairs.length} —{" "}
-          {pair.title}
-        </span>
-        <Segmented
-          ariaLabel="View"
-          options={[
-            { value: "both", label: "Side by side" },
-            { value: "flip", label: "Flip between worlds" }
-          ]}
-          value={sideBySide ? "both" : "flip"}
-          onChange={(v) => setSideBySide(v === "both")}
-        />
+      <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 14 }}>
+        <label className="statPill" style={{ gap: 10 }}>
+          Case
+          <select
+            value={pairIndex}
+            onChange={(e) => selectPair(Number(e.target.value))}
+            aria-label="Choose a context pair"
+            style={{
+              border: "none",
+              background: "transparent",
+              fontFamily: "inherit",
+              fontSize: 15,
+              fontWeight: 700,
+              color: "var(--blue)",
+              cursor: "pointer"
+            }}
+          >
+            {contextPairs.map((p, i) => (
+              <option key={p.id} value={i}>
+                {i + 1}. {p.title}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button className="btn primary" onClick={() => setWorld(world === "left" ? "right" : "left")}>
+          🔄 Flip to “{otherLabel}”
+        </button>
       </div>
 
-      {sideBySide ? (
-        <div className="ctxGrid">
-          {(["left", "right"] as const).map((s) => (
-            <div key={s} className="vizStage" style={{ padding: 18 }}>
-              <div className="panelTitle">{s === "left" ? pair.leftLabel : pair.rightLabel}</div>
-              <HighlightedPrompt side={pair[s]} showHighlights={showHighlights} />
-              <div style={{ marginTop: 14 }}>
-                <ProbabilityBars
-                  distribution={pair[s].probabilities}
-                  color={s === "left" ? "blue" : "amber"}
-                />
-              </div>
-            </div>
-          ))}
+      <div className="vizStage" style={{ padding: 18 }}>
+        <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 8 }}>
+          <span className="panelTitle" style={{ marginBottom: 0 }}>
+            World: {world === "left" ? pair.leftLabel : pair.rightLabel}
+          </span>
+          <span className="hintText">The sentence is almost the same, but the world has changed.</span>
         </div>
-      ) : (
-        <div className="vizStage" style={{ padding: 18 }}>
-          <div className="controlRow" style={{ marginBottom: 12 }}>
-            <Segmented
-              ariaLabel="World"
-              options={[
-                { value: "left", label: pair.leftLabel },
-                { value: "right", label: pair.rightLabel }
-              ]}
-              value={world}
-              onChange={setWorld}
-            />
-            <span className="hintText">Flip back and forth — watch the bars move.</span>
-          </div>
-          <HighlightedPrompt side={activeSide} showHighlights={showHighlights} />
-          <div style={{ marginTop: 14 }}>
-            <ProbabilityBars
-              distribution={activeSide.probabilities}
-              color={world === "left" ? "blue" : "amber"}
-            />
-          </div>
+        <HighlightedPrompt side={activeSide} showHighlights={showHighlights} />
+        <div style={{ marginTop: 14 }}>
+          <ProbabilityBars
+            distribution={activeSide.probabilities}
+            color={world === "left" ? "blue" : "amber"}
+            maxBars={6}
+          />
         </div>
-      )}
+      </div>
 
-      <hr className="divider" />
-
-      <div className="controlRow">
-        <button className="btn accent" onClick={() => setShowHighlights((s) => !s)}>
+      <div className="controlRow" style={{ marginTop: 14 }}>
+        <button className="btn accent small" onClick={() => setShowHighlights((s) => !s)}>
           {showHighlights ? "Hide the changed words" : "🔍 Reveal the changed words"}
         </button>
-        <button
-          className="btn primary"
-          onClick={() => {
-            setPairIndex((pairIndex + 1) % contextPairs.length);
-            setShowHighlights(false);
-            setWorld("left");
-          }}
-        >
-          Next pair →
-        </button>
+        <span className="hintText">Flip a few times before revealing. Which word does the work?</span>
       </div>
 
       {showHighlights && (
-        <div className="revealBox" style={{ marginTop: 16 }}>
+        <div className="revealBox" style={{ marginTop: 14 }}>
           <strong>Why:</strong> {pair.explanation}
           <br />
           <strong>Idea:</strong> {pair.takeaway}

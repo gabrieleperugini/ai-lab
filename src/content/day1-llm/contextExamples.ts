@@ -96,5 +96,98 @@ export const contextPairs: ContextPair[] = [
     explanation:
       "The consequence of forgetting the umbrella is not explicit, but it is easy to infer.",
     takeaway: "The model must often use information that is implied rather than stated."
+  },
+
+  // ---- Original pairs beyond the slides ----
+  {
+    id: "bat-animal-sport",
+    title: "Animal or sports equipment?",
+    leftLabel: "Cave",
+    rightLabel: "Baseball",
+    left: {
+      prompt: "The bat flew out of the cave and into the",
+      highlight: ["flew", "cave"],
+      probabilities: { night: 0.57, sky: 0.2, stadium: 0.05, other: 0.18 }
+    },
+    right: {
+      prompt: "The player picked up the bat and walked to the",
+      highlight: ["player", "picked", "walked"],
+      probabilities: { plate: 0.34, field: 0.29, stadium: 0.16, cave: 0.02, other: 0.19 }
+    },
+    explanation:
+      "The word 'bat' stays the same, but the surrounding words select a different meaning.",
+    takeaway: "One word, two worlds; the context picks the world."
+  },
+  {
+    id: "mouse-animal-computer",
+    title: "Animal or device?",
+    leftLabel: "Kitchen",
+    rightLabel: "Computer",
+    left: {
+      prompt: "I saw a mouse running under the kitchen",
+      highlight: ["running", "kitchen"],
+      probabilities: { table: 0.32, cabinet: 0.22, door: 0.12, cursor: 0.01, other: 0.33 }
+    },
+    right: {
+      prompt: "I moved the mouse and clicked on the",
+      highlight: ["moved", "clicked"],
+      probabilities: { icon: 0.35, button: 0.24, file: 0.12, cheese: 0.01, other: 0.28 }
+    },
+    explanation: "Actions like running and clicking make different meanings likely.",
+    takeaway: "Verbs are powerful context clues."
+  },
+  {
+    id: "apple-fruit-company",
+    title: "Fruit or company?",
+    leftLabel: "Lunch",
+    rightLabel: "Technology",
+    left: {
+      prompt: "For lunch she ate an apple and a",
+      highlight: ["ate", "lunch"],
+      probabilities: { sandwich: 0.32, banana: 0.2, yogurt: 0.12, laptop: 0.02, other: 0.34 }
+    },
+    right: {
+      prompt: "She bought an Apple laptop and a",
+      highlight: ["bought", "laptop"],
+      probabilities: { charger: 0.24, phone: 0.18, case: 0.14, banana: 0.01, other: 0.43 }
+    },
+    explanation: "Capitalization and nearby words can change the meaning completely.",
+    takeaway: "Even a capital letter is context."
+  },
+  {
+    id: "cold-drink-illness",
+    title: "Temperature or illness?",
+    leftLabel: "Drink",
+    rightLabel: "Illness",
+    left: {
+      prompt: "The water was cold, so I added some",
+      highlight: ["water", "added"],
+      probabilities: { ice: 0.22, lemon: 0.18, sugar: 0.12, medicine: 0.02, other: 0.46 }
+    },
+    right: {
+      prompt: "I had a cold, so I took some",
+      highlight: ["had", "took"],
+      probabilities: { medicine: 0.44, tea: 0.16, rest: 0.08, ice: 0.01, other: 0.31 }
+    },
+    explanation: "The same word can describe temperature or illness.",
+    takeaway: "Meaning lives in the sentence, not in the word alone."
+  },
+  {
+    id: "light-weight-brightness",
+    title: "Not heavy or not dark?",
+    leftLabel: "Weight",
+    rightLabel: "Brightness",
+    left: {
+      prompt: "The suitcase was light, so I could carry it with one",
+      highlight: ["suitcase", "carry"],
+      probabilities: { hand: 0.66, lamp: 0.03, candle: 0.02, other: 0.29 }
+    },
+    right: {
+      prompt: "The room was light, so I could read without a",
+      highlight: ["room", "read"],
+      probabilities: { lamp: 0.44, flashlight: 0.18, problem: 0.05, hand: 0.02, other: 0.31 }
+    },
+    explanation: "The same surface word points to different concepts in context.",
+    takeaway: "Adjectives can be ambiguous too."
   }
 ];

@@ -215,5 +215,239 @@ export const nextTokenRounds: NextTokenRound[] = [
     explanation:
       "The likely token requires doing a small inverse calculation: (20 - 10) / 5 = 2.",
     takeaway: "Sometimes the best next token requires computation or reasoning."
+  },
+
+  // ---- Original examples beyond the slides ----
+  {
+    id: "weather-clouds",
+    category: "common sense",
+    prompt: "The sky became dark and full of clouds, so I took my",
+    choices: ["umbrella", "sunglasses", "piano", "sandwich", "lions"],
+    probabilities: {
+      umbrella: 0.66,
+      sunglasses: 0.08,
+      sandwich: 0.06,
+      piano: 0.02,
+      lions: 0.01,
+      other: 0.17
+    },
+    explanation: "The sentence suggests rain without explicitly saying rain.",
+    takeaway: "Next-token prediction often uses implied information."
+  },
+  {
+    id: "restaurant-menu",
+    category: "context",
+    prompt: "The waiter handed us the menu and asked what we wanted to",
+    choices: ["order", "wear", "download", "repair", "lions"],
+    probabilities: {
+      order: 0.74,
+      wear: 0.04,
+      download: 0.03,
+      repair: 0.03,
+      lions: 0.01,
+      other: 0.15
+    },
+    explanation: "The restaurant context makes 'order' much more likely.",
+    takeaway: "Context narrows the space of plausible next tokens."
+  },
+  {
+    id: "doctor-stethoscope",
+    category: "world knowledge",
+    prompt: "The doctor put the stethoscope on the patient's",
+    choices: ["chest", "shoe", "sandwich", "keyboard", "lions"],
+    probabilities: {
+      chest: 0.71,
+      shoe: 0.04,
+      sandwich: 0.02,
+      keyboard: 0.02,
+      lions: 0.01,
+      other: 0.2
+    },
+    explanation: "The likely token depends on knowing how a stethoscope is used.",
+    takeaway: "Some predictions look like practical knowledge."
+  },
+  {
+    id: "library-whisper",
+    category: "social context",
+    prompt: "In the library, everyone started to",
+    choices: ["whisper", "shout", "swim", "explode", "lions"],
+    probabilities: {
+      whisper: 0.46,
+      read: 0.2,
+      study: 0.14,
+      shout: 0.04,
+      swim: 0.01,
+      lions: 0.01,
+      other: 0.14
+    },
+    explanation: "Social norms make quiet behaviors more likely in a library.",
+    takeaway: "Language models pick up social patterns from text."
+  },
+  {
+    id: "recipe-flour",
+    category: "procedural knowledge",
+    prompt: "To bake a cake, first mix the flour with the",
+    choices: ["sugar", "engine", "umbrella", "moon", "lions"],
+    probabilities: {
+      sugar: 0.41,
+      eggs: 0.22,
+      butter: 0.14,
+      milk: 0.08,
+      engine: 0.01,
+      umbrella: 0.01,
+      lions: 0.01,
+      other: 0.12
+    },
+    explanation: "A recipe context makes ingredients likely.",
+    takeaway: "Prediction can encode sequences of actions."
+  },
+  {
+    id: "music-concert",
+    category: "event context",
+    prompt: "When the singer walked on stage, the crowd began to",
+    choices: ["cheer", "sleep", "calculate", "melt", "lions"],
+    probabilities: {
+      cheer: 0.64,
+      clap: 0.18,
+      sing: 0.05,
+      sleep: 0.02,
+      calculate: 0.01,
+      lions: 0.01,
+      other: 0.09
+    },
+    explanation: "The event frame makes audience reactions likely.",
+    takeaway: "The prompt activates a scenario."
+  },
+  {
+    id: "ambiguous-bat",
+    category: "ambiguity",
+    prompt: "The bat flew out of the cave and into the",
+    choices: ["night", "stadium", "drawer", "spreadsheet", "lions"],
+    probabilities: {
+      night: 0.57,
+      sky: 0.2,
+      stadium: 0.05,
+      drawer: 0.01,
+      spreadsheet: 0.01,
+      lions: 0.01,
+      other: 0.15
+    },
+    explanation: "Here 'bat' is an animal, not sports equipment.",
+    takeaway: "Nearby words select the relevant meaning."
+  },
+  {
+    id: "ambiguous-bat-sport",
+    category: "ambiguity",
+    prompt: "The player picked up the bat and stepped onto the",
+    choices: ["field", "cave", "night", "freezer", "lions"],
+    probabilities: {
+      field: 0.49,
+      plate: 0.22,
+      diamond: 0.12,
+      cave: 0.02,
+      night: 0.02,
+      lions: 0.01,
+      other: 0.12
+    },
+    explanation: "Here 'bat' is sports equipment.",
+    takeaway: "The same token can sit in different worlds."
+  },
+  {
+    id: "fake-news-plausibility",
+    category: "plausibility versus truth",
+    prompt: "According to the imaginary Institute of Cloud Statistics, clouds are made of",
+    choices: ["water", "dreams", "cotton", "data", "lions"],
+    probabilities: {
+      water: 0.44,
+      cotton: 0.19,
+      data: 0.1,
+      dreams: 0.08,
+      lions: 0.01,
+      other: 0.18
+    },
+    explanation:
+      "The prompt is fictional, but the model can still produce plausible-sounding completions.",
+    takeaway: "Plausibility and truth are different goals."
+  },
+  {
+    id: "logic-all-mammals",
+    category: "reasoning",
+    prompt: "All cats are mammals. Luna is a cat. Therefore, Luna is a",
+    choices: ["mammal", "dog", "planet", "proof", "lions"],
+    probabilities: {
+      mammal: 0.82,
+      dog: 0.03,
+      proof: 0.02,
+      planet: 0.01,
+      lions: 0.01,
+      other: 0.11
+    },
+    explanation: "This needs a tiny logical inference.",
+    takeaway: "Some next-token choices require reasoning over the prompt."
+  },
+  {
+    id: "translation-cue",
+    category: "instruction following",
+    prompt: "Translate into Italian: good morning =",
+    choices: ["buongiorno", "merci", "hola", "night", "lions"],
+    probabilities: {
+      buongiorno: 0.82,
+      hola: 0.03,
+      merci: 0.03,
+      night: 0.01,
+      lions: 0.01,
+      other: 0.1
+    },
+    explanation: "The prompt tells the model what kind of continuation is expected.",
+    takeaway: "Instructions become part of the context."
+  },
+  {
+    id: "style-poem",
+    category: "style",
+    prompt: "Write like a pirate: The treasure is hidden in the",
+    choices: ["cave", "ship", "sea", "spreadsheet", "lions"],
+    probabilities: {
+      cave: 0.32,
+      ship: 0.23,
+      sea: 0.19,
+      chest: 0.1,
+      spreadsheet: 0.01,
+      lions: 0.01,
+      other: 0.14
+    },
+    explanation: "The style instruction changes the likely vocabulary.",
+    takeaway: "The context controls not only facts, but style."
+  },
+  {
+    id: "phone-battery",
+    category: "common sense",
+    prompt: "My phone battery was at 1 percent, so I looked for a",
+    choices: ["charger", "pizza", "pillow", "map", "lions"],
+    probabilities: {
+      charger: 0.72,
+      map: 0.03,
+      pillow: 0.02,
+      pizza: 0.02,
+      lions: 0.01,
+      other: 0.2
+    },
+    explanation: "Everyday problems come with typical solutions.",
+    takeaway: "Common situations create strong expectations."
+  },
+  {
+    id: "goalkeeper-save",
+    category: "event context",
+    prompt: "The striker kicked the ball and the goalkeeper made an incredible",
+    choices: ["save", "sandwich", "speech", "nap", "lions"],
+    probabilities: {
+      save: 0.78,
+      speech: 0.03,
+      sandwich: 0.02,
+      nap: 0.01,
+      lions: 0.01,
+      other: 0.15
+    },
+    explanation: "The football scenario makes 'save' by far the most likely.",
+    takeaway: "A scenario is a strong probability magnet."
   }
 ];

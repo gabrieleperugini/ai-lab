@@ -141,5 +141,165 @@ export const samplingFamilies: SamplingFamily[] = [
       "follows": 0.08,
       ".": 0.3
     }
+  },
+  {
+    id: "rainy-morning",
+    label: "Rainy morning",
+    emoji: "🌧️",
+    start: "When I opened the window, the street was",
+    storylines: [
+      { text: "wet and full of tiny reflections.", weight: 0.3 },
+      { text: "wet, and the smell of rain filled the room.", weight: 0.12 },
+      { text: "empty except for one cyclist fighting the rain.", weight: 0.16 },
+      { text: "shining as if the city had been freshly painted.", weight: 0.12 },
+      { text: "noisy with umbrellas, buses, and hurried footsteps.", weight: 0.08 },
+      { text: "purple, which made me suspect this was not a normal morning.", weight: 0.02 },
+      { text: "singing, or maybe that was just the wind in the wires.", weight: 0.01 }
+    ],
+    noise: { lions: 0.3, spreadsheet: 0.25, lava: 0.2, wifi: 0.25 },
+    noiseMass: 0.05,
+    fallback: {
+      "and": 0.2,
+      "the": 0.16,
+      "rain": 0.1,
+      "quietly": 0.08,
+      "somehow": 0.07,
+      "still": 0.07,
+      ".": 0.32
+    }
+  },
+  {
+    id: "robot-cafeteria",
+    label: "Robot cafeteria",
+    emoji: "🤖",
+    start: "The robot entered the cafeteria and ordered",
+    storylines: [
+      { text: "coffee, mostly because everyone else did.", weight: 0.28 },
+      { text: "pizza and asked whether cheese was a software update.", weight: 0.18 },
+      { text: "electricity with a side of politeness.", weight: 0.12 },
+      { text: "nothing, then wrote a long review about the experience.", weight: 0.1 },
+      { text: "friendship, which was not on the menu but should be.", weight: 0.05 },
+      { text: "uranium, and the cook politely suggested soup instead.", weight: 0.01 }
+    ],
+    noise: { lions: 0.3, "404": 0.25, bolts: 0.2, poetry: 0.25 },
+    noiseMass: 0.05,
+    fallback: {
+      "and": 0.18,
+      "the": 0.16,
+      "menu": 0.1,
+      "again": 0.08,
+      "politely": 0.08,
+      "loudly": 0.05,
+      ".": 0.35
+    }
+  },
+  {
+    id: "detective-clue",
+    label: "Detective clue",
+    emoji: "🕵️",
+    start: "The detective looked at the clue and realized",
+    storylines: [
+      { text: "that the missing word was the key.", weight: 0.32 },
+      { text: "it had been placed there too carefully.", weight: 0.22 },
+      { text: "the answer was hidden in plain sight.", weight: 0.16 },
+      { text: "someone wanted the mistake to be noticed.", weight: 0.08 },
+      { text: "nothing, which was itself suspicious.", weight: 0.05 }
+    ],
+    noise: { lions: 0.35, pizza: 0.3, thorium: 0.35 },
+    noiseMass: 0.04,
+    fallback: {
+      "the": 0.2,
+      "and": 0.15,
+      "case": 0.1,
+      "suddenly": 0.08,
+      "someone": 0.08,
+      "everything": 0.07,
+      ".": 0.32
+    }
+  },
+  {
+    id: "space-school",
+    label: "Space school",
+    emoji: "🚀",
+    start: "On the first day of school on Mars, the teacher explained",
+    storylines: [
+      { text: "gravity would make basketball very confusing.", weight: 0.22 },
+      { text: "how to keep notebooks from floating away.", weight: 0.18 },
+      { text: "that homework was still required, even on another planet.", weight: 0.16 },
+      { text: "why oxygen was not optional.", weight: 0.12 },
+      { text: "homework rules first, because some things never change.", weight: 0.1 },
+      { text: "spaghetti physics, the most popular subject in the solar system.", weight: 0.01 }
+    ],
+    noise: { lions: 0.3, wifi: 0.25, dust: 0.2, karaoke: 0.25 },
+    noiseMass: 0.05,
+    fallback: {
+      "the": 0.18,
+      "and": 0.16,
+      "planet": 0.09,
+      "students": 0.09,
+      "carefully": 0.07,
+      "tomorrow": 0.06,
+      ".": 0.35
+    }
+  },
+  {
+    id: "ai-proof-helper",
+    label: "AI proof helper",
+    emoji: "📐",
+    start: "To prove that the square of an odd number is odd, first",
+    storylines: [
+      { text: "write the odd number as 2k + 1.", weight: 0.34 },
+      { text: "let n = 2k + 1 for some integer k.", weight: 0.24 },
+      { text: "define what odd means in algebraic form.", weight: 0.12 },
+      { text: "assume the number has the form 2k + 1 and expand the square.", weight: 0.1 },
+      { text: "panic quietly, then remember that algebra is your friend.", weight: 0.01 }
+    ],
+    noise: { lions: 0.35, banana: 0.3, maybe: 0.35 },
+    noiseMass: 0.03,
+    fallback: {
+      "then": 0.18,
+      "the": 0.16,
+      "expand": 0.1,
+      "square": 0.1,
+      "integer": 0.08,
+      "carefully": 0.06,
+      ".": 0.32
+    }
+  },
+  {
+    id: "fake-encyclopedia",
+    label: "Plausible nonsense",
+    emoji: "📖",
+    start: "The Bocconi Mineral Chatbot Theorem states that",
+    storylines: [
+      {
+        text: "all sufficiently polite stones can simulate conversation if given enough tokens.",
+        weight: 0.22
+      },
+      {
+        text: "a mineral can appear intelligent when its predictions are fluent enough.",
+        weight: 0.2
+      },
+      {
+        text: "mineral reasoning is not a real scientific field, but it sounds convincing here.",
+        weight: 0.12
+      },
+      {
+        text: "under carefully imaginary conditions, probability may pretend to be wisdom.",
+        weight: 0.08
+      },
+      { text: "pizza-based logic remains an open research problem.", weight: 0.02 }
+    ],
+    noise: { lions: 0.3, quartz: 0.3, footnote: 0.4 },
+    noiseMass: 0.05,
+    fallback: {
+      "the": 0.18,
+      "and": 0.14,
+      "theorem": 0.1,
+      "clearly": 0.08,
+      "allegedly": 0.08,
+      "therefore": 0.07,
+      ".": 0.35
+    }
   }
 ];

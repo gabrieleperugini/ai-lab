@@ -64,7 +64,7 @@ export const day2Modules: LabModule[] = [
     component: "Placeholder",
     dataKey: "tiny-network",
     reflectionQuestions: ["How many neurons does the spiral need?"],
-    noticePoints: ["More neurons bend the boundary more — for better and worse."],
+    noticePoints: ["More neurons bend the boundary more, for better and worse."],
     takeaway: "A neural network is a flexible boundary-bending machine trained by gradient descent.",
     placeholder: true
   },

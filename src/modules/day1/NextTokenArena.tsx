@@ -1,19 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { nextTokenRounds } from "../../content/day1-llm/nextTokenExamples";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
 export default function NextTokenArena({ onResult, resetSignal }: ModuleComponentProps) {
+  const [category, setCategory] = useState<string>("all");
   const [roundIndex, setRoundIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
 
-  const round = nextTokenRounds[roundIndex];
+  const categories = useMemo(
+    () => ["all", ...Array.from(new Set(nextTokenRounds.map((r) => r.category)))],
+    []
+  );
+  const rounds = useMemo(
+    () => (category === "all" ? nextTokenRounds : nextTokenRounds.filter((r) => r.category === category)),
+    [category]
+  );
+  const round = rounds[Math.min(roundIndex, rounds.length - 1)];
   const best = Object.entries(round.probabilities)
     .filter(([k]) => k !== "other")
     .sort((a, b) => b[1] - a[1])[0][0];
 
   useEffect(() => {
+    setCategory("all");
     setRoundIndex(0);
     setSelected(null);
     setRevealed(false);
@@ -35,9 +45,36 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
     <div className="panel">
       <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 18 }}>
         <span className="statPill">
-          Round <span className="statValue">{roundIndex + 1}</span> / {nextTokenRounds.length}
+          Round <span className="statValue">{Math.min(roundIndex, rounds.length - 1) + 1}</span> /{" "}
+          {rounds.length}
         </span>
-        <span className="statPill">📚 {round.category}</span>
+        <label className="statPill" style={{ gap: 8 }}>
+          📚
+          <select
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+              goTo(0);
+            }}
+            aria-label="Filter rounds by category"
+            style={{
+              border: "none",
+              background: "transparent",
+              fontFamily: "inherit",
+              fontSize: 14.5,
+              fontWeight: 700,
+              color: "var(--blue)",
+              cursor: "pointer"
+            }}
+          >
+            {categories.map((c) => (
+              <option key={c} value={c}>
+                {c === "all" ? "all categories" : c}
+              </option>
+            ))}
+          </select>
+        </label>
+        <span className="statPill">🏷 {round.category}</span>
       </div>
 
       <p className="promptDisplay">
@@ -71,7 +108,7 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
           >
             🎲 Reveal probabilities
           </button>
-          {selected === null && <span className="hintText">Pick a token first — trust your gut.</span>}
+          {selected === null && <span className="hintText">Pick a token first. Trust your gut.</span>}
         </div>
       ) : (
         <div className="fadeIn">
@@ -92,18 +129,15 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
       <hr className="divider" />
 
       <div className="controlRow">
-        <button
-          className="btn primary"
-          onClick={() => goTo((roundIndex + 1) % nextTokenRounds.length)}
-        >
+        <button className="btn primary" onClick={() => goTo((roundIndex + 1) % rounds.length)}>
           Next example →
         </button>
         <button
           className="btn ghost"
           onClick={() => {
             let r = roundIndex;
-            while (r === roundIndex && nextTokenRounds.length > 1) {
-              r = Math.floor(Math.random() * nextTokenRounds.length);
+            while (r === roundIndex && rounds.length > 1) {
+              r = Math.floor(Math.random() * rounds.length);
             }
             goTo(r);
           }}

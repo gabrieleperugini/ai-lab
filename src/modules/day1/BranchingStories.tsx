@@ -1,178 +1,166 @@
 import { useEffect, useState } from "react";
 import { branchingExamples } from "../../content/day1-llm/branchingExamples";
+import type { BranchChoice } from "../../content/day1-llm/branchingExamples";
 import { Segmented } from "../../components/controls/Segmented";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
 /**
- * SVG story tree: the root prompt on the left, candidate tokens as branches.
- * Clicking a token commits to it (branch turns solid, others fade) and the
- * continuation types itself out.
+ * Multi-step branching: students pick a token, new probabilities appear,
+ * they pick again, and a short ending is revealed. The committed path is
+ * shown as token chips; explored paths accumulate in a breadcrumb list.
  */
 export default function BranchingStories({ onResult, resetSignal }: ModuleComponentProps) {
   const [exampleId, setExampleId] = useState(branchingExamples[0].id);
-  const [chosen, setChosen] = useState<string | null>(null);
-  const [typed, setTyped] = useState("");
+  const [path, setPath] = useState<BranchChoice[]>([]);
+  const [explored, setExplored] = useState<string[]>([]);
 
   const example = branchingExamples.find((e) => e.id === exampleId)!;
-  const chosenBranch = example.branches.find((b) => b.token === chosen) ?? null;
+  const current = path.length === 0 ? null : path[path.length - 1];
+  const options: BranchChoice[] = current ? (current.choices ?? []) : example.choices;
+  const ended = current !== null && current.ending !== undefined;
 
   useEffect(() => {
     setExampleId(branchingExamples[0].id);
-    setChosen(null);
-    setTyped("");
+    setPath([]);
+    setExplored([]);
   }, [resetSignal]);
 
-  // Typewriter effect for the continuation.
-  useEffect(() => {
-    if (!chosenBranch) {
-      setTyped("");
-      return;
-    }
-    setTyped("");
-    let i = 0;
-    const iv = setInterval(() => {
-      i += 2;
-      setTyped(chosenBranch.continuation.slice(0, i));
-      if (i >= chosenBranch.continuation.length) clearInterval(iv);
-    }, 24);
-    return () => clearInterval(iv);
-  }, [chosenBranch]);
-
-  const W = 860;
-  const rowH = example.flavor === "proof" ? 92 : 78;
-  const H = Math.max(example.branches.length * rowH + 40, 340);
-  const rootX = 30;
-  const rootY = H / 2;
-  const branchX = 330;
-
-  const pick = (token: string) => {
-    setChosen(token);
-    onResult(`example '${example.id}': committed to token '${token}'`);
+  const fullText = () => {
+    const tokens = path.map((p) => p.token).join(" ");
+    const ending = ended ? " " + current!.ending : "";
+    return `${example.root} ${tokens}${ending}`.replace(/\s+([,.])/g, "$1");
   };
+
+  const pick = (choice: BranchChoice) => {
+    const nextPath = [...path, choice];
+    setPath(nextPath);
+    if (choice.ending !== undefined) {
+      const text = `${example.root} ${nextPath.map((p) => p.token).join(" ")} ${choice.ending}`
+        .replace(/\s+([,.])/g, "$1");
+      setExplored((prev) => (prev.includes(text) ? prev : [...prev, text]));
+      onResult(`example '${example.id}': reached "${text}"`);
+    } else {
+      onResult(`example '${example.id}': committed to '${choice.token}'`);
+    }
+  };
+
+  const retry = () => setPath([]);
+
+  const stepLabel =
+    path.length === 0 ? "Step 1: choose the first token" : ended ? "The future you built" : `Step ${path.length + 1}: the story continues. Choose again`;
 
   return (
     <div className="panel">
       <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 14 }}>
         <Segmented
           ariaLabel="Example"
-          options={branchingExamples.map((e) => ({ value: e.id, label: e.label }))}
+          options={branchingExamples.map((e) => ({ value: e.id, label: e.title }))}
           value={exampleId}
           onChange={(id) => {
             setExampleId(id);
-            setChosen(null);
+            setPath([]);
+            setExplored([]);
           }}
         />
-        <button
-          className="btn subtle small"
-          onClick={() => setChosen(null)}
-          disabled={chosen === null}
-        >
+        <button className="btn subtle small" onClick={retry} disabled={path.length === 0}>
           ↺ Try another branch
         </button>
       </div>
 
-      <p className="promptDisplay" style={{ fontSize: "clamp(18px, 2.4vw, 23px)" }}>
-        {example.root} <span className="blank">{chosen ?? "____"}</span>
-      </p>
-
-      <div className="vizStage" style={{ marginTop: 16 }}>
-        <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Branching tree of possible continuations">
-          {/* root node */}
-          <circle cx={rootX} cy={rootY} r={10} fill="var(--blue)" />
-          <text x={rootX} y={rootY - 18} fontSize={13} fill="var(--ink-faint)" textAnchor="start" fontWeight={700}>
-            story so far
-          </text>
-
-          {example.branches.map((b, i) => {
-            const y = 34 + i * rowH + rowH / 2 - 10;
-            const isChosen = chosen === b.token;
-            const faded = chosen !== null && !isChosen;
-            const strokeW = 2 + b.probability * 26;
-            const midX = (rootX + branchX) / 2;
-            return (
-              <g
-                key={b.token}
-                opacity={faded ? 0.22 : 1}
-                style={{ transition: "opacity 0.4s ease", cursor: "pointer" }}
-                onClick={() => pick(b.token)}
-              >
-                <path
-                  d={`M ${rootX + 10} ${rootY} C ${midX} ${rootY}, ${midX} ${y}, ${branchX - 12} ${y}`}
-                  fill="none"
-                  stroke={isChosen ? "var(--amber-deep)" : "var(--blue-mid)"}
-                  strokeWidth={isChosen ? strokeW + 2 : strokeW}
-                  strokeLinecap="round"
-                  opacity={isChosen ? 1 : 0.55}
-                />
-                <rect
-                  x={branchX - 10}
-                  y={y - 22}
-                  rx={18}
-                  ry={18}
-                  width={110}
-                  height={42}
-                  fill={isChosen ? "var(--amber)" : "#fff"}
-                  stroke={isChosen ? "var(--amber-deep)" : "var(--line)"}
-                  strokeWidth={2}
-                />
-                <text
-                  x={branchX + 45}
-                  y={y + 5}
-                  textAnchor="middle"
-                  fontSize={17}
-                  fontWeight={750}
-                  fill={isChosen ? "#4d3403" : "var(--ink)"}
-                >
-                  {b.token}
-                </text>
-                <text x={branchX + 116} y={y + 5} fontSize={13} fontFamily="var(--font-mono)" fill="var(--ink-faint)">
-                  {(b.probability * 100).toFixed(0)}%
-                </text>
-                {isChosen && (
-                  <foreignObject x={branchX + 160} y={y - 34} width={W - branchX - 175} height={rowH + 10}>
-                    <div
-                      style={{
-                        fontSize: 15.5,
-                        lineHeight: 1.4,
-                        color: "var(--ink)",
-                        background: "var(--amber-soft)",
-                        border: "1px solid #f3d9a4",
-                        borderRadius: 12,
-                        padding: "8px 12px",
-                        height: "fit-content"
-                      }}
-                    >
-                      {typed}
-                      {typed.length < b.continuation.length && <span style={{ opacity: 0.5 }}>▌</span>}
-                    </div>
-                  </foreignObject>
-                )}
-                {!chosen && (
-                  <foreignObject x={branchX + 160} y={y - 26} width={W - branchX - 175} height={rowH}>
-                    <div style={{ fontSize: 13.5, color: "var(--ink-faint)", fontStyle: "italic" }}>
-                      {example.flavor === "proof" ? "→ a rung of the proof ladder" : "→ a possible future"}
-                    </div>
-                  </foreignObject>
-                )}
-              </g>
-            );
-          })}
-        </svg>
+      {/* The story so far, as committed chips */}
+      <div className="vizStage" style={{ padding: "16px 18px" }}>
+        <div className="tokenChips" style={{ fontSize: 17 }}>
+          <span
+            className="tokenChip"
+            style={{ background: "var(--paper-2)", color: "var(--ink-soft)", fontFamily: "var(--font-body)", fontWeight: 600 }}
+          >
+            {example.root}
+          </span>
+          {path.map((p, i) => (
+            <span
+              key={i}
+              className="tokenChip"
+              style={{
+                background: "var(--amber-soft)",
+                border: "1.5px solid var(--amber-deep)",
+                fontWeight: 700
+              }}
+            >
+              {p.token}
+            </span>
+          ))}
+          {ended && (
+            <span
+              className="tokenChip fadeIn"
+              style={{ background: "var(--green-soft)", fontFamily: "var(--font-body)" }}
+            >
+              {current!.ending}
+            </span>
+          )}
+          {!ended && <span className="blank" style={{ borderBottom: "3px solid var(--amber-deep)", minWidth: 60 }}>&nbsp;</span>}
+        </div>
       </div>
 
-      {chosenBranch && typed.length >= chosenBranch.continuation.length && (
-        <div className="revealBox" style={{ marginTop: 16 }}>
-          <strong>What you committed to:</strong> {chosenBranch.consequence}
-          <br />
-          <strong>Ask yourselves:</strong> what did this choice make impossible?
+      <div className="panelTitle" style={{ margin: "16px 0 10px" }}>
+        {stepLabel}
+      </div>
+
+      {!ended ? (
+        <div className="controlRow">
+          {options.map((c) => (
+            <button key={c.token} className="choiceChip" onClick={() => pick(c)}>
+              {c.token}
+              <span
+                style={{
+                  marginLeft: 8,
+                  fontSize: 12.5,
+                  color: "var(--ink-faint)",
+                  fontFamily: "var(--font-mono)"
+                }}
+              >
+                {Math.round(c.probability * 100)}%
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="revealBox fadeIn">
+          <strong>“{fullText()}”</strong>
+          <p style={{ marginTop: 8 }}>
+            {example.flavor === "proof"
+              ? "Each rung of this ladder narrowed what mathematics allows next."
+              : "Ask yourselves: what did the FIRST choice make impossible?"}
+          </p>
+          <div className="controlRow" style={{ marginTop: 10 }}>
+            <button className="btn accent small" onClick={retry}>
+              ↺ Try another branch
+            </button>
+          </div>
         </div>
       )}
 
-      <p className="hintText" style={{ marginTop: 12 }}>
-        {example.flavor === "proof"
-          ? "This one is a ladder of commitments: each token narrows what mathematics allows next."
-          : "Click a token to commit. Thicker branches are more probable."}
-      </p>
+      {/* Explanation of the last committed (non-final) token */}
+      {current && !ended && current.explanation && (
+        <p className="hintText fadeIn" style={{ marginTop: 12 }}>
+          💡 {current.explanation}
+        </p>
+      )}
+
+      {explored.length > 0 && (
+        <>
+          <hr className="divider" />
+          <div className="panelTitle">
+            Futures you explored ({explored.length})
+          </div>
+          <ul style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6 }}>
+            {explored.map((t, i) => (
+              <li key={i} style={{ fontSize: 14.5, color: "var(--ink-soft)" }}>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </div>
   );
 }
