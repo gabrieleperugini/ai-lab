@@ -76,6 +76,28 @@ Full steps, including the base-path rule and collaborator access:
 Routing is hash-based (`#/day1/next-token-arena`), so page refreshes never 404 on
 GitHub Pages. The app also works on Netlify or Vercel unchanged (set `VITE_BASE=/`).
 
+## Deep links for the slides (QR codes)
+
+Day 1 activities can be linked directly from the slides. The Next Token Arena
+categories follow the six Arena stops of the v2 slide deck:
+
+| Slide stop | Link |
+| --- | --- |
+| Arena 1 (basics) | `.../ai-lab/#/day1/next-token-arena/basics` |
+| Arena 2 (context) + Context Lens | `.../next-token-arena/context` and `.../context-lens` |
+| Arena 3 (the suitcase) | `.../next-token-arena/suitcase` |
+| Arena 4 (world knowledge) | `.../next-token-arena/world-knowledge` |
+| Arena 5 (probability) + Branching Stories | `.../next-token-arena/probability` and `.../branching-stories` |
+| Arena 6 (reasoning) + Reasoning Demo | `.../next-token-arena/reasoning` and `.../reasoning-demo` |
+| Tokenizer Microscope | `.../ai-lab/#/day1/tokenizer-microscope` |
+| Meaning Map | `.../ai-lab/#/day1/meaning-map` |
+| De-embedding Lens | `.../ai-lab/#/day1/deembedding-lens` |
+| Sampling Machine | `.../ai-lab/#/day1/sampling-machine` |
+| Real Chatbot Bridge | `.../ai-lab/#/day1/real-chatbot-bridge` |
+
+Matching bridge buttons inside the modules move students between related
+activities (Arena → Context Lens / Branching Stories / Reasoning Demo and back).
+
 ## Classroom modes (URL parameters)
 
 Parameters go **before** the `#`:

@@ -74,9 +74,14 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
             ))}
           </select>
         </label>
-        <button className="btn primary" onClick={() => setSide(side === "a" ? "b" : "a")}>
-          🔄 Flip to “{otherLabel}”
-        </button>
+        <div className="controlRow">
+          <a className="btn subtle small" href="#/day1/next-token-arena/context">
+            ← Back to the Arena
+          </a>
+          <button className="btn primary" onClick={() => setSide(side === "a" ? "b" : "a")}>
+            🔄 Flip to “{otherLabel}”
+          </button>
+        </div>
       </div>
 
       <div className="vizStage" style={{ padding: 18 }}>

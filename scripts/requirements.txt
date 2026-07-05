@@ -1,5 +1,6 @@
-transformers
-torch
+# transformers pinned to a release compatible with torch 2.2 (system install)
+transformers==4.46.3
 numpy
 gensim
 scipy==1.12
+# torch comes from the system site-packages (venv created with --system-site-packages)

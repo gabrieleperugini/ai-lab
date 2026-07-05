@@ -14,6 +14,7 @@ export const moduleRegistry: Record<
   NextTokenArena: lazy(() => import("./day1/NextTokenArena")),
   ContextLens: lazy(() => import("./day1/ContextLens")),
   BranchingStories: lazy(() => import("./day1/BranchingStories")),
+  ReasoningDemo: lazy(() => import("./day1/ReasoningDemo")),
   SamplingMachine: lazy(() => import("./day1/SamplingMachine")),
   TokenizerMicroscope: lazy(() => import("./day1/TokenizerMicroscope")),
   MeaningMap: lazy(() => import("./day1/MeaningMap")),

@@ -22,7 +22,7 @@ export const day1Modules: LabModule[] = [
       "Each of you picks the token you think comes next.",
       "Agree on one group answer and click it.",
       "Press 'Reveal probabilities' and compare with your intuition.",
-      "Use the category filter: familiar phrases, facts, context, ambiguity, reasoning."
+      "Use the category filter; the six categories follow the lecture: basics, context, the suitcase, world knowledge, probability, reasoning."
     ],
     component: "NextTokenArena",
     reflectionQuestions: [
@@ -42,8 +42,8 @@ export const day1Modules: LabModule[] = [
       "Ask groups to shout their token before revealing; it makes the distribution feel earned.",
       "Probabilities are real GPT-2 outputs. GPT-2 is from 2019 and small: it nails 'Once upon a time' but fumbles the World Cup chain. Contrast with modern chatbots.",
       "Options marked as added by the model show where GPT-2 actually puts its mass (often 'the' or 'now'): models continue text, they do not answer quizzes.",
-      "Timing: about 2 min per round; 23 rounds in 5 categories, 6 to 8 are enough.",
-      "The 'student test' round links straight into Branching Stories; use it as the bridge."
+      "Timing: about 2 min per round; 30 rounds in 6 categories matching the slide stops (Arena 1-6). Categories can be deep-linked from the slides: #/day1/next-token-arena/basics, /context, /suitcase, /world-knowledge, /probability, /reasoning.",
+      "Bridge buttons follow the slides: context and suitcase rounds open Context Lens, probability opens Branching Stories, reasoning opens the Reasoning Demo."
     ],
     poll: {
       question: "Which next token did your group choose?"
@@ -124,6 +124,159 @@ export const day1Modules: LabModule[] = [
     }
   },
   {
+    id: "reasoning-demo",
+    dayId: "day1",
+    title: "Reasoning Demo",
+    subtitle: "A proof, one committed token at a time",
+    durationMin: 15,
+    level: "challenge",
+    mission:
+      "Walk the odd-square proof from the slides. At every step only one token keeps the proof alive; every other road is a dead end.",
+    studentInstructions: [
+      "Read the statement: the square of an odd number is odd.",
+      "Choose the next step of the proof from the options.",
+      "Hit a dead end? Read why the road dies, then start again.",
+      "Reach QED, then press 'Show what GPT-2 would pick' and compare.",
+      "Ask yourselves: what would happen to a model that cannot look ahead?"
+    ],
+    component: "ReasoningDemo",
+    reflectionQuestions: [
+      "Which dead end was the most tempting, and why?",
+      "GPT-2 often prefers a dead end. What is missing in the way it chooses tokens?"
+    ],
+    noticePoints: [
+      "The options at each step come from the lecture slides; only one keeps the proof alive.",
+      "A proof is a chain of commitments: one wrong token and the future is ruined.",
+      "GPT-2's preferences (chain-rule scores) show that a small model lacks the look-ahead reasoning needs."
+    ],
+    takeaway:
+      "To produce structured reasoning by next-token prediction, the probabilities must encode planning: the model has to prefer tokens whose future works out.",
+    teacherNotes: [
+      "This is the slides' 'NTP part 5 - intelligence' proof, turned into a game.",
+      "Let students crash into dead ends; the restart is the lesson, not a punishment.",
+      "The 🤖 toggle is the punchline: GPT-2 picks 'The' at step 1 (92%), a wrong expansion at step 4, and a premature QED at step 5. Small models do not plan.",
+      "Bridge to the slides' discussion: probabilities must encode a form of look-ahead for reasoning to work.",
+      "Fast groups: ask them to design their own 4-option step where only one road survives."
+    ]
+  },
+  {
+    id: "tokenizer-microscope",
+    dayId: "day1",
+    title: "Tokenizer Microscope",
+    subtitle: "Words are not tokens",
+    durationMin: 25,
+    level: "core",
+    mission: "Type text and see what the model actually reads.",
+    studentInstructions: [
+      "Type any sentence in the box, or press a preset.",
+      "Each colored chip is one token: what the model actually reads.",
+      "Turn on 'Compare with word split' to see how humans would cut the sentence.",
+      "Work through the checklist: leading spaces, capitals, made-up words, repetitions, Italian."
+    ],
+    component: "TokenizerMicroscope",
+    reflectionQuestions: [
+      "Which preset had more tokens than you expected?",
+      "What happens to made-up words? And to emojis?"
+    ],
+    noticePoints: [
+      "In the slides we pretended TOKEN = WORD. Real chatbots usually use smaller pieces.",
+      "Spaces and capitalization change the tokens.",
+      "Rare or made-up words get split into many small pieces; common words are one token."
+    ],
+    takeaway:
+      "A chatbot does not see text exactly like we do. Before prediction, text is chopped into tokens.",
+    teacherNotes: [
+      "This module uses the REAL GPT-4 tokenizer (cl100k_base), bundled in the page; it is not a toy.",
+      "Nice reveals: 'BocconiSummerSchool2026' explodes into pieces; ' bank' vs 'bank' differ; the emoji is several tokens.",
+      "Italian is usually split into more tokens than English; ask why (less Italian in the training data).",
+      "Token IDs can be toggled on: each chip is literally a number to the model."
+    ],
+    poll: {
+      question: "Which preset had the most surprising tokenization?"
+    }
+  },
+  {
+    id: "meaning-map",
+    dayId: "day1",
+    wide: true,
+    title: "Meaning Map",
+    subtitle: "Embeddings as geometry",
+    durationMin: 35,
+    level: "core",
+    mission: "Explore a 3D map of real word embeddings. Find neighbors, clusters, and surprises.",
+    studentInstructions: [
+      "Every point is a word. Close points have related meanings.",
+      "Drag to rotate, scroll to zoom, click a point for its true nearest neighbors.",
+      "Search for 'bank'. Which meaning won, money or river?",
+      "Toggle categories to isolate the clusters.",
+      "Work through the puzzles in the side panel: analogies, odd-one-out, and more."
+    ],
+    component: "MeaningMap",
+    reflectionQuestions: [
+      "Which neighbor surprised you the most? Why might the model have put them together?",
+      "Why does 'bank' get only ONE point here, and why is that a problem?"
+    ],
+    noticePoints: [
+      "These are REAL word vectors (GloVe), reduced to 3D just for display.",
+      "Neighbors and puzzle answers are computed from the full 100-dimensional vectors.",
+      "king - man + woman really lands closest to queen: relationships become directions.",
+      "Classic embeddings give one point per word, so 'bank' must pick one meaning. Modern models fix this with context."
+    ],
+    takeaway:
+      "Inside a model, words can be represented by numbers. Similar meanings become nearby points, and language becomes geometry.",
+    teacherNotes: [
+      "The vectors are real (GloVe, trained on Wikipedia+news). PCA squeezes 100 dimensions into 3, so on-screen distances are approximate; neighbor lists use the true vectors.",
+      "The analogy puzzles were verified against the real vectors: king-man+woman = queen, Paris-France+Italy = Rome, Rome-Italy+Germany = Berlin.",
+      "The 'bank' ambiguity puzzle sets up tomorrow's contextual embeddings story.",
+      "Odd-one-out answers are computed, not hand-picked: snake loses to python/java/code!",
+      "If rotation confuses a group, press 'Reset view'."
+    ],
+    poll: {
+      question: "Which neighbor or cluster surprised you most?"
+    }
+  },
+  {
+    id: "deembedding-lens",
+    dayId: "day1",
+    wide: true,
+    title: "De-embedding Lens",
+    subtitle: "From the model's thought to next-token scores",
+    durationMin: 25,
+    level: "challenge",
+    mission: "Move the model's thought vector and watch which words become likely.",
+    studentInstructions: [
+      "Pick a preset: the arrow becomes the model's thought after that prompt.",
+      "Drag the arrow tip; words pointing the same way score higher.",
+      "Task: choose 'Fairy tale'. Which token wins?",
+      "Task: choose 'River bank'. Why do 'ducks' become likely?",
+      "Task: drag the thought toward 'pizza'. What happens?",
+      "Task: increase temperature. Do low-score tokens get more chance?"
+    ],
+    component: "DeembeddingLens",
+    reflectionQuestions: [
+      "Point the arrow between two clusters. What happens to the bars?",
+      "Why does making the arrow longer sharpen the probabilities?"
+    ],
+    noticePoints: [
+      "1. The model has an internal state, a vector.",
+      "2. Each possible next token also has an output vector, a word direction.",
+      "3. Tokens pointing in a similar direction get higher match scores; softmax turns scores into probabilities.",
+      "This is a toy de-embedding model. It is not a real chatbot, but it shows the idea."
+    ],
+    takeaway:
+      "At the end of a step, the model has an internal state. De-embedding turns that state into scores for possible next tokens. The highest-scoring token is not always the one we sample.",
+    teacherNotes: [
+      "This is the lighthouse metaphor: the thought vector shines toward some words and leaves others dark.",
+      "Real models do exactly this at every step, but in thousands of dimensions with about 100k output tokens.",
+      "Connect the presets to earlier modules: 'River bank' lights up 'ducks' (Context Lens), 'Logic' lights up 'mammal' (Arena), 'Baseball bat' lights up 'field' (new pairs).",
+      "Student-friendly names are used on screen: thought vector, word directions, match scores. Technical names are in the tooltip.",
+      "Challenge question: can they find a direction where 'lions' wins?"
+    ],
+    poll: {
+      question: "Which preset made the clearest de-embedding behavior?"
+    }
+  },
+  {
     id: "sampling-machine",
     dayId: "day1",
     title: "Sampling Machine",
@@ -165,121 +318,6 @@ export const day1Modules: LabModule[] = [
     }
   },
   {
-    id: "tokenizer-microscope",
-    dayId: "day1",
-    title: "Tokenizer Microscope",
-    subtitle: "Words are not tokens",
-    durationMin: 25,
-    level: "core",
-    mission: "Type text and see what the model actually reads.",
-    studentInstructions: [
-      "Type any sentence in the box, or press a preset.",
-      "Each colored chip is one token: what the model actually reads.",
-      "Turn on 'Compare with word split' to see how humans would cut the sentence.",
-      "Work through the checklist: leading spaces, capitals, made-up words, repetitions, Italian."
-    ],
-    component: "TokenizerMicroscope",
-    reflectionQuestions: [
-      "Which preset had more tokens than you expected?",
-      "What happens to made-up words? And to emojis?"
-    ],
-    noticePoints: [
-      "In the slides we pretended TOKEN = WORD. Real chatbots usually use smaller pieces.",
-      "Spaces and capitalization change the tokens.",
-      "Rare or made-up words get split into many small pieces; common words are one token."
-    ],
-    takeaway:
-      "A chatbot does not see text exactly like we do. Before prediction, text is chopped into tokens.",
-    teacherNotes: [
-      "This module uses the REAL GPT-4 tokenizer (cl100k_base), bundled in the page; it is not a toy.",
-      "Nice reveals: 'BocconiSummerSchool2026' explodes into pieces; ' bank' vs 'bank' differ; the emoji is several tokens.",
-      "Italian is usually split into more tokens than English; ask why (less Italian in the training data).",
-      "Token IDs can be toggled on: each chip is literally a number to the model."
-    ],
-    poll: {
-      question: "Which preset had the most surprising tokenization?"
-    }
-  },
-  {
-    id: "meaning-map",
-    dayId: "day1",
-    title: "Meaning Map",
-    subtitle: "Embeddings as geometry",
-    durationMin: 35,
-    level: "core",
-    mission: "Explore a 3D map of real word embeddings. Find neighbors, clusters, and surprises.",
-    studentInstructions: [
-      "Every point is a word. Close points have related meanings.",
-      "Drag to rotate, scroll to zoom, click a point for its true nearest neighbors.",
-      "Search for 'bank'. Which meaning won, money or river?",
-      "Toggle categories to isolate the clusters.",
-      "Work through the puzzles in the side panel: analogies, odd-one-out, and more."
-    ],
-    component: "MeaningMap",
-    reflectionQuestions: [
-      "Which neighbor surprised you the most? Why might the model have put them together?",
-      "Why does 'bank' get only ONE point here, and why is that a problem?"
-    ],
-    noticePoints: [
-      "These are REAL word vectors (GloVe), reduced to 3D just for display.",
-      "Neighbors and puzzle answers are computed from the full 100-dimensional vectors.",
-      "king - man + woman really lands closest to queen: relationships become directions.",
-      "Classic embeddings give one point per word, so 'bank' must pick one meaning. Modern models fix this with context."
-    ],
-    takeaway:
-      "Inside a model, words can be represented by numbers. Similar meanings become nearby points, and language becomes geometry.",
-    teacherNotes: [
-      "The vectors are real (GloVe, trained on Wikipedia+news). PCA squeezes 100 dimensions into 3, so on-screen distances are approximate; neighbor lists use the true vectors.",
-      "The analogy puzzles were verified against the real vectors: king-man+woman = queen, Paris-France+Italy = Rome, Rome-Italy+Germany = Berlin.",
-      "The 'bank' ambiguity puzzle sets up tomorrow's contextual embeddings story.",
-      "Odd-one-out answers are computed, not hand-picked: snake loses to python/java/code!",
-      "If rotation confuses a group, press 'Reset view'."
-    ],
-    poll: {
-      question: "Which neighbor or cluster surprised you most?"
-    }
-  },
-  {
-    id: "deembedding-lens",
-    dayId: "day1",
-    title: "De-embedding Lens",
-    subtitle: "From the model's thought to next-token scores",
-    durationMin: 25,
-    level: "challenge",
-    mission: "Move the model's thought vector and watch which words become likely.",
-    studentInstructions: [
-      "Pick a preset: the arrow becomes the model's thought after that prompt.",
-      "Drag the arrow tip; words pointing the same way score higher.",
-      "Task: choose 'Fairy tale'. Which token wins?",
-      "Task: choose 'River bank'. Why do 'ducks' become likely?",
-      "Task: drag the thought toward 'pizza'. What happens?",
-      "Task: increase temperature. Do low-score tokens get more chance?"
-    ],
-    component: "DeembeddingLens",
-    reflectionQuestions: [
-      "Point the arrow between two clusters. What happens to the bars?",
-      "Why does making the arrow longer sharpen the probabilities?"
-    ],
-    noticePoints: [
-      "1. The model has an internal state, a vector.",
-      "2. Each possible next token also has an output vector, a word direction.",
-      "3. Tokens pointing in a similar direction get higher match scores; softmax turns scores into probabilities.",
-      "This is a toy de-embedding model. It is not a real chatbot, but it shows the idea."
-    ],
-    takeaway:
-      "At the end of a step, the model has an internal state. De-embedding turns that state into scores for possible next tokens. The highest-scoring token is not always the one we sample.",
-    teacherNotes: [
-      "This is the lighthouse metaphor: the thought vector shines toward some words and leaves others dark.",
-      "Real models do exactly this at every step, but in thousands of dimensions with about 100k output tokens.",
-      "Connect the presets to earlier modules: 'River bank' lights up 'ducks' (Context Lens), 'Logic' lights up 'mammal' (Arena), 'Baseball bat' lights up 'field' (new pairs).",
-      "Student-friendly names are used on screen: thought vector, word directions, match scores. Technical names are in the tooltip.",
-      "Challenge question: can they find a direction where 'lions' wins?"
-    ],
-    poll: {
-      question: "Which preset made the clearest de-embedding behavior?"
-    }
-  },
-  {
     id: "real-chatbot-bridge",
     dayId: "day1",
     title: "Real Chatbot Bridge",
@@ -316,43 +354,43 @@ export const day1Modules: LabModule[] = [
     poll: {
       question: "What did the real chatbot do that the simulator did not?"
     }
-  }
+  },
 ];
 
 export const day1Timeline: TimelineSession[] = [
   {
-    title: "Session A: What does a chatbot do?",
+    title: "Session A: Let's be next-token predictors (slides Part II)",
     items: [
       "Slides: chatbots, mineral matter, computation, language, learning from examples",
-      "M1 Next Token Arena: 20 min"
+      "Arena stop 1 (basics), stop 2 (context) + M2 Context Lens, stop 3 (the suitcase), stop 4 (world knowledge): 35-45 min total, interleaved with the slides"
     ]
   },
   {
-    title: "Session B: Context and probability",
+    title: "Session B: Probability, branching, reasoning",
     items: [
-      "Slides: NTP basics, context, world knowledge, probability",
-      "M2 Context Lens: 20 min",
-      "M3 Branching Stories: 20 min"
+      "Slides: probability, humble function words, reasoning",
+      "Arena stop 5 (probability) + M3 Branching Stories: 20-25 min",
+      "Arena stop 6 (reasoning) + M4 Reasoning Demo: 15-20 min"
     ]
   },
   {
-    title: "Session C: From probabilities to generated text",
+    title: "Session C: Inside the chatbot's brain (slides Part III)",
     items: [
-      "Slides: repeated next-token prediction, probability distribution, issues",
-      "M4 Sampling Machine: 30-35 min"
-    ]
-  },
-  {
-    title: "Session D: Inside the chatbot's brain",
-    items: [
-      "Slides: tokens, embeddings, internal vectors, de-embedding",
+      "Slides: UTF-8, tokenization, embeddings, de-embedding",
       "M5 Tokenizer Microscope: 20-25 min",
       "M6 Meaning Map: 30-35 min",
       "M7 De-embedding Lens: 20-25 min"
     ]
   },
   {
+    title: "Session D: Putting it together, generation",
+    items: [
+      "Slides: summary, repeated next-token prediction",
+      "M8 Sampling Machine: 30-35 min"
+    ]
+  },
+  {
     title: "Session E: Real chatbot bridge",
-    items: ["M8 Real Chatbot Bridge: 15-25 min"]
+    items: ["M9 Real Chatbot Bridge: 15-25 min"]
   }
 ];

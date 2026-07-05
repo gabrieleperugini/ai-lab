@@ -18,22 +18,26 @@ is the real cl100k_base.
 - You (projector): add `&teacher=1`. This reveals teacher notes, the timeline,
   and projector tools. Do not share this link with students.
 
-## Suggested timeline
+## Suggested timeline (matches the v2 slide deck)
+
+The Arena is not one block: its six categories are the six "Next Token
+Arena" stops in the slides, each openable by QR deep link (see README,
+"Deep links for the slides").
 
 | Session | Slides | Lab | Time |
 | --- | --- | --- | --- |
-| A: What does a chatbot do? | mineral, computation, language, learning from examples | M1 Next Token Arena | 20 min |
-| B: Context and probability | NTP basics, context, world knowledge, probability | M2 Context Lens, M3 Branching Stories | 20 + 20 min |
-| C: From probabilities to text | repeated NTP, sampling, issues | M4 Sampling Machine | 30-35 min |
-| D: Inside the chatbot's brain | tokens, embeddings, de-embedding | M5 Tokenizer, M6 Meaning Map, M7 De-embedding Lens | 20-25 + 30-35 + 20-25 min |
-| E: Real chatbot bridge | (none) | M8 Real Chatbot Bridge | 15-25 min |
+| A: Let's be next-token predictors | Part I + II start | Arena stops 1-4, M2 Context Lens interleaved | 35-45 min |
+| B: Probability, branching, reasoning | probability, function words, reasoning | Arena 5 + M3 Branching Stories; Arena 6 + M4 Reasoning Demo | 20-25 + 15-20 min |
+| C: Inside the chatbot's brain | UTF-8, tokenization, embeddings, de-embedding | M5 Tokenizer, M6 Meaning Map, M7 De-embedding Lens | 20-25 + 30-35 + 20-25 min |
+| D: Putting it together | summary, repeated NTP | M8 Sampling Machine | 30-35 min |
+| E: Real chatbot bridge | (none) | M9 Real Chatbot Bridge | 15-25 min |
 
-Cut list if running late: shorten M1 to 4 rounds; make M7 a 10-minute
-projector demo; fold M8's discussion into the wrap-up.
+Cut list if running late: use 1-2 rounds per Arena stop; make M7 a 10-minute
+projector demo; fold M9's discussion into the wrap-up.
 
 ## Module-by-module script
 
-### M1: Next Token Arena (20 min, 23 rounds in 5 categories)
+### M1: Next Token Arena (30 rounds in 6 slide-matching categories)
 1. Project round 1 ("Once upon a"). Groups shout their token, then reveal.
    The bars are real GPT-2 probabilities; 'other' is the rest of the vocabulary.
 2. Do "capital of France" and "World Cup 1998" together. GPT-2 puts more mass
@@ -41,19 +45,23 @@ projector demo; fold M8's discussion into the wrap-up.
    do the knowledge chain. That failure is the discussion.
 3. Options labeled as added by the model show GPT-2's own favorites; they
    teach that models continue text rather than answer quizzes.
-4. Categories: familiar phrases, facts and knowledge, context changes meaning,
-   ambiguity and probability, reasoning-like steps.
-5. The 'student test' round has an 'Explore branching' button; use it as the
-   bridge into M3.
+4. Categories match the slide stops: basics, context, the suitcase, world
+   knowledge, probability, reasoning. Each is deep-linkable for QR codes.
+5. Bridge buttons follow the slides: context/suitcase rounds open Context
+   Lens, probability opens Branching Stories, reasoning opens the Reasoning
+   Demo; each companion module links back to its Arena category.
 
-### M2: Context Lens (20 min, 5 pairs, real probabilities)
+### M2: Context Lens (8 pairs, real probabilities)
 1. The interaction is one big flip button; the same five candidate words keep
    their bars while the context flips, so the trade is unmissable.
 2. Start with bank: loan and deposit trade places with river and lake.
 3. The percentages are small because GPT-2 spreads mass over 50k tokens; tell
    students to watch the RATIOS, not the absolute numbers.
-4. Pairs: bank, bat, mouse, cold, python. Suggested question: "Which context
-   word did the work?"
+4. Pairs, slide ones first: ice cream (oven/freezer), fire (water/gasoline),
+   umbrella (remembered/forgot), then bank, bat, mouse, cold, python.
+   Suggested question: "Which context word did the work?"
+5. A trophy/suitcase pair was tried and removed: GPT-2 cannot resolve the
+   Winograd pronoun, so the bars did not flip. Tell this story if asked!
 
 ### M3: Branching Stories (20 min, three steps deep, 5 stories)
 1. Students choose three tokens in a row; real GPT-2 probabilities update
@@ -63,17 +71,15 @@ projector demo; fold M8's discussion into the wrap-up.
    them to find the strangest GPT-2 ending.
 4. Stories: the test, the robot, the detective, the meeting, the dragon.
 
-### M4: Sampling Machine (30-35 min, 10 prompts, cached GPT-2 samples)
-1. Everything shown was genuinely sampled from GPT-2 offline at the settings
-   displayed; the site replays the cache, so classroom Wi-Fi does not matter.
-2. Have groups generate repeatedly at LOW randomness first: the continuations
-   start repeating quickly because only a few distinct ones exist. That IS
-   the lesson.
-3. Then HIGH randomness: hunt for the strangest continuation.
-4. 'Compare the three modes' puts one sample of each side by side; 'Inspect
-   first step' shows the real first-token bars (connect back to M1).
-5. Suggested question: "Is creativity the same as correctness?" Mention that
-   temperature and top-p are real settings in LLM APIs.
+### M4: Reasoning Demo (15-20 min, the slides' proof as a game)
+1. This is the "NTP part 5 - intelligence" proof ladder. At every step only
+   one option keeps the proof alive; the options are the v1 slide options.
+2. Let students crash into dead ends: the explanation of WHY each road dies
+   is the mathematical content of the activity.
+3. The punchline is the 🤖 toggle: GPT-2 prefers 'The' at step 1 (92%), a
+   wrong expansion at step 4, and a premature QED at step 5. Ask: what is
+   missing? (Look-ahead. Planning. This bridges to the slides' discussion.)
+4. Suggested question: "Which dead end was the most tempting, and why?"
 
 ### M5: Tokenizer Microscope (20-25 min)
 1. Reveal that the lecture simplified: token is not word. This microscope is
@@ -106,14 +112,26 @@ projector demo; fold M8's discussion into the wrap-up.
    directions get high match scores, and softmax turns scores into
    probabilities.
 2. On screen the labels are student-friendly (thought vector, word directions,
-   match scores); hover the info title for the technical names.
+   match scores); press the visible 'technical names' button for the formal ones.
 3. Walk the presets: Fairy tale, Proof, River bank, Financial bank; then the
    new ones: Rainy day, Restaurant, Logic (mammal!), Computer mouse, Baseball
    bat. Each preset reproduces an earlier module's behavior.
 4. Tasks are listed in the module: drag toward pizza, raise the temperature,
    find a direction where 'lions' wins.
 
-### M8: Real Chatbot Bridge (15-25 min, 17 cards)
+### M8: Sampling Machine (30-35 min, 10 prompts, cached GPT-2 samples)
+1. Everything shown was genuinely sampled from GPT-2 offline at the settings
+   displayed; the site replays the cache, so classroom Wi-Fi does not matter.
+2. Have groups generate repeatedly at LOW randomness first: the continuations
+   start repeating quickly because only a few distinct ones exist. That IS
+   the lesson.
+3. Then HIGH randomness: hunt for the strangest continuation.
+4. 'Compare the three modes' puts one sample of each side by side; 'Inspect
+   first step' shows the real first-token bars (connect back to M1).
+5. Suggested question: "Is creativity the same as correctness?" Mention that
+   temperature and top-p are real settings in LLM APIs.
+
+### M9: Real Chatbot Bridge (15-25 min, 17 cards)
 1. Teacher-led on the projector if chatbot access is blocked or limited:
    open the card, copy the prompt, run it in a real chatbot on your machine,
    and paste the output into the projector notepad (visible in teacher mode)

@@ -15,7 +15,37 @@ type Round = {
   other: number;
   explanation: string;
   takeaway: string;
-  branchingLink?: boolean;
+  link?: { module: string; label: string } | null;
+};
+
+/** URL slugs for deep links from the slides: #/day1/next-token-arena/<slug> */
+const CATEGORY_SLUGS: Record<string, string> = {
+  "Basics: familiar phrases and facts": "basics",
+  "Context: one word, two worlds": "context",
+  "The suitcase problem": "suitcase",
+  "World knowledge": "world-knowledge",
+  "Probability and branching": "probability",
+  "Reasoning steps": "reasoning"
+};
+
+/** Bridge buttons to the companion module of each Arena stop (v2 slides). */
+const CATEGORY_BRIDGES: Record<string, { href: string; label: string }> = {
+  "Context: one word, two worlds": {
+    href: "#/day1/context-lens",
+    label: "Open Context Lens"
+  },
+  "The suitcase problem": {
+    href: "#/day1/context-lens",
+    label: "Open Context Lens"
+  },
+  "Probability and branching": {
+    href: "#/day1/branching-stories",
+    label: "Open Branching Stories"
+  },
+  "Reasoning steps": {
+    href: "#/day1/reasoning-demo",
+    label: "Open the Reasoning Demo"
+  }
 };
 
 function generatedRounds(): Round[] {
@@ -33,7 +63,7 @@ function generatedRounds(): Round[] {
     other: ex.other,
     explanation: ex.explanation,
     takeaway: ex.takeaway,
-    branchingLink: ex.branchingLink
+    link: ex.link
   }));
 }
 
@@ -59,8 +89,14 @@ function handmadeRounds(): Round[] {
 const rounds: Round[] = labConfig.useGeneratedProbabilities ? generatedRounds() : handmadeRounds();
 const modelName = labConfig.useGeneratedProbabilities ? (generatedData as GenM1).model : "teaching distribution";
 
-export default function NextTokenArena({ onResult, resetSignal }: ModuleComponentProps) {
-  const [category, setCategory] = useState<string>("all");
+export default function NextTokenArena({ onResult, resetSignal, initialArg }: ModuleComponentProps) {
+  const initialCategory = useMemo(() => {
+    if (!initialArg) return "all";
+    const hit = Object.entries(CATEGORY_SLUGS).find(([, slug]) => slug === initialArg);
+    return hit ? hit[0] : "all";
+  }, [initialArg]);
+
+  const [category, setCategory] = useState<string>(initialCategory);
   const [roundIndex, setRoundIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -84,11 +120,11 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
   const anyMulti = round.options.some((o) => o.multiToken);
 
   useEffect(() => {
-    setCategory("all");
+    setCategory(initialCategory);
     setRoundIndex(0);
     setSelected(null);
     setRevealed(false);
-  }, [resetSignal]);
+  }, [resetSignal, initialCategory]);
 
   const goTo = (index: number) => {
     setRoundIndex(index);
@@ -193,10 +229,10 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
             <br />
             <strong>Idea:</strong> {round.takeaway}
           </div>
-          {round.branchingLink && (
+          {round.link && (
             <div className="controlRow" style={{ marginTop: 12 }}>
-              <a className="btn ghost small" href="#/day1/branching-stories">
-                🌿 Explore branching: see how this choice changes the future
+              <a className="btn ghost small" href={`#/day1/${round.link.module}`}>
+                🔗 {round.link.label}
               </a>
             </div>
           )}
@@ -205,22 +241,29 @@ export default function NextTokenArena({ onResult, resetSignal }: ModuleComponen
 
       <hr className="divider" />
 
-      <div className="controlRow">
-        <button className="btn primary" onClick={() => goTo((roundIndex + 1) % filtered.length)}>
-          Next example →
-        </button>
-        <button
-          className="btn ghost"
-          onClick={() => {
-            let r = roundIndex;
-            while (r === roundIndex && filtered.length > 1) {
-              r = Math.floor(Math.random() * filtered.length);
-            }
-            goTo(r);
-          }}
-        >
-          🎰 Random example
-        </button>
+      <div className="controlRow" style={{ justifyContent: "space-between" }}>
+        <div className="controlRow">
+          <button className="btn primary" onClick={() => goTo((roundIndex + 1) % filtered.length)}>
+            Next example →
+          </button>
+          <button
+            className="btn ghost"
+            onClick={() => {
+              let r = roundIndex;
+              while (r === roundIndex && filtered.length > 1) {
+                r = Math.floor(Math.random() * filtered.length);
+              }
+              goTo(r);
+            }}
+          >
+            🎰 Random example
+          </button>
+        </div>
+        {CATEGORY_BRIDGES[round.category] && (
+          <a className="btn accent small" href={CATEGORY_BRIDGES[round.category].href}>
+            {CATEGORY_BRIDGES[round.category].label} →
+          </a>
+        )}
       </div>
     </div>
   );

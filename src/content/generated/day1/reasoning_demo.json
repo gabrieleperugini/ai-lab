@@ -1,0 +1,188 @@
+{
+ "model": "gpt2",
+ "root": "The square of an odd number is odd. Proof:",
+ "finalText": "The square of an odd number is odd. Proof: Let n = 2k + 1. Then, n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1. QED.",
+ "steps": [
+  {
+   "context": "The square of an odd number is odd. Proof:",
+   "why": "The standard move: introduce a variable to work with.",
+   "options": [
+    {
+     "display": "Let",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.0591
+    },
+    {
+     "display": "The",
+     "deadEnd": true,
+     "note": "'The result follows...' might work in prose, but it produces no algebra to build on.",
+     "relativeScore": 0.9225
+    },
+    {
+     "display": "Pizza",
+     "deadEnd": true,
+     "note": "The proof derails instantly. Very unlikely tokens can break the task.",
+     "relativeScore": 0.0001
+    },
+    {
+     "display": "By",
+     "deadEnd": true,
+     "note": "'By...' promises a justification that has not been established yet.",
+     "relativeScore": 0.0183
+    }
+   ]
+  },
+  {
+   "context": "The square of an odd number is odd. Proof: Let",
+   "why": "Every odd number can be written as 2k + 1. Now the algebra can start.",
+   "options": [
+    {
+     "display": "n = 2k + 2.",
+     "deadEnd": true,
+     "note": "2k + 2 is EVEN. This road can never end at 'odd'.",
+     "relativeScore": 0.0002
+    },
+    {
+     "display": "n = 2k + 1.",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.0028
+    },
+    {
+     "display": "n = 2k.",
+     "deadEnd": true,
+     "note": "2k is even; a dead end for proving oddness.",
+     "relativeScore": 0.6013
+    },
+    {
+     "display": "n = k + 1.",
+     "deadEnd": true,
+     "note": "k + 1 could be even or odd; too weak to finish the proof.",
+     "relativeScore": 0.3956
+    }
+   ]
+  },
+  {
+   "context": "The square of an odd number is odd. Proof: Let n = 2k + 1.",
+   "why": "'Then,' commits us to deriving the next line.",
+   "options": [
+    {
+     "display": "Then,",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.8054
+    },
+    {
+     "display": "Indeed,",
+     "deadEnd": true,
+     "note": "Grammatical, but it stalls: nothing new gets derived.",
+     "relativeScore": 0.0051
+    },
+    {
+     "display": "By",
+     "deadEnd": true,
+     "note": "'By...' needs a lemma we do not have.",
+     "relativeScore": 0.1895
+    },
+    {
+     "display": "QED.",
+     "deadEnd": true,
+     "note": "Nothing has been proven yet. Declaring victory is not a proof.",
+     "relativeScore": 0.0
+    }
+   ]
+  },
+  {
+   "context": "The square of an odd number is odd. Proof: Let n = 2k + 1. Then,",
+   "why": "The correct expansion of (2k + 1)².",
+   "options": [
+    {
+     "display": "nk = 2k² + 2k",
+     "deadEnd": true,
+     "note": "True, but nk is not what we are studying. A road to nowhere.",
+     "relativeScore": 0.0
+    },
+    {
+     "display": "n + 1 = 2k + 2",
+     "deadEnd": true,
+     "note": "True, but it describes the NEXT number, not n squared.",
+     "relativeScore": 0.9997
+    },
+    {
+     "display": "n² = 4k² + 1",
+     "deadEnd": true,
+     "note": "False: (2k + 1)² = 4k² + 4k + 1. One wrong expansion poisons everything after it.",
+     "relativeScore": 0.0003
+    },
+    {
+     "display": "n² = 4k² + 4k + 1",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.0
+    }
+   ]
+  },
+  {
+   "context": "The square of an odd number is odd. Proof: Let n = 2k + 1. Then, n² = 4k² + 4k + 1",
+   "why": "This exhibits n² as 2·(integer) + 1: the definition of odd.",
+   "options": [
+    {
+     "display": "= 4(k² + k) + 1.",
+     "deadEnd": true,
+     "note": "True, but the goal is the odd form 2·(integer) + 1; this detour does not show it directly.",
+     "relativeScore": 0.0018
+    },
+    {
+     "display": "= 2(2k² + 2k) + 1.",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.0034
+    },
+    {
+     "display": "= k(4k + 4) + 1.",
+     "deadEnd": true,
+     "note": "True but shapeless; it does not exhibit 2·(integer) + 1.",
+     "relativeScore": 0.0002
+    },
+    {
+     "display": "QED.",
+     "deadEnd": true,
+     "note": "Not yet: we still need to show the odd form 2·(integer) + 1.",
+     "relativeScore": 0.9946
+    }
+   ]
+  },
+  {
+   "context": "The square of an odd number is odd. Proof: Let n = 2k + 1. Then, n² = 4k² + 4k + 1 = 2(2k² + 2k) + 1.",
+   "why": "Now the claim is proven, and we can say so.",
+   "options": [
+    {
+     "display": "For",
+     "deadEnd": true,
+     "note": "The proof is complete; opening a new clause leads nowhere.",
+     "relativeScore": 0.2288
+    },
+    {
+     "display": "If",
+     "deadEnd": true,
+     "note": "No new hypothesis is needed; the argument is finished.",
+     "relativeScore": 0.6656
+    },
+    {
+     "display": "But",
+     "deadEnd": true,
+     "note": "There is nothing to object to; the argument is finished.",
+     "relativeScore": 0.1056
+    },
+    {
+     "display": "QED.",
+     "deadEnd": false,
+     "note": "",
+     "relativeScore": 0.0
+    }
+   ]
+  }
+ ],
+ "notes": "Scores are GPT-2 chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability)."
+}

@@ -2,6 +2,234 @@
  "model": "gpt2",
  "pairs": [
   {
+   "id": "ice_cream",
+   "title": "Physics from language",
+   "labelA": "Oven",
+   "labelB": "Freezer",
+   "a": {
+    "prompt": "He put the ice cream in the oven and it",
+    "options": [
+     {
+      "label": "melted",
+      "probability": 0.030576,
+      "multiToken": false
+     },
+     {
+      "label": "froze",
+      "probability": 0.007437,
+      "multiToken": false
+     },
+     {
+      "label": "burned",
+      "probability": 0.003756,
+      "multiToken": false
+     },
+     {
+      "label": "cooled",
+      "probability": 0.004227,
+      "multiToken": false
+     },
+     {
+      "label": "hardened",
+      "probability": 0.000231,
+      "multiToken": false
+     }
+    ],
+    "other": 0.953773
+   },
+   "b": {
+    "prompt": "He put the ice cream in the freezer and it",
+    "options": [
+     {
+      "label": "melted",
+      "probability": 0.016193,
+      "multiToken": false
+     },
+     {
+      "label": "froze",
+      "probability": 0.026599,
+      "multiToken": false
+     },
+     {
+      "label": "burned",
+      "probability": 0.001637,
+      "multiToken": false
+     },
+     {
+      "label": "cooled",
+      "probability": 0.006723,
+      "multiToken": false
+     },
+     {
+      "label": "hardened",
+      "probability": 0.000311,
+      "multiToken": false
+     }
+    ],
+    "other": 0.948537
+   },
+   "candidates": [
+    "melted",
+    "froze",
+    "burned",
+    "cooled",
+    "hardened"
+   ],
+   "explanation": "The model has seen many patterns linking heat to melting and cold to freezing."
+  },
+  {
+   "id": "fire",
+   "title": "Cause and effect",
+   "labelA": "Water",
+   "labelB": "Gasoline",
+   "a": {
+    "prompt": "He poured water on the fire, and the flames",
+    "options": [
+     {
+      "label": "died",
+      "probability": 0.007413,
+      "multiToken": false
+     },
+     {
+      "label": "grew",
+      "probability": 0.031463,
+      "multiToken": false
+     },
+     {
+      "label": "exploded",
+      "probability": 0.004784,
+      "multiToken": false
+     },
+     {
+      "label": "spread",
+      "probability": 0.084865,
+      "multiToken": false
+     },
+     {
+      "label": "went",
+      "probability": 0.034519,
+      "multiToken": false
+     }
+    ],
+    "other": 0.836956
+   },
+   "b": {
+    "prompt": "He poured gasoline on the fire, and the flames",
+    "options": [
+     {
+      "label": "died",
+      "probability": 0.004045,
+      "multiToken": false
+     },
+     {
+      "label": "grew",
+      "probability": 0.015444,
+      "multiToken": false
+     },
+     {
+      "label": "exploded",
+      "probability": 0.0053,
+      "multiToken": false
+     },
+     {
+      "label": "spread",
+      "probability": 0.144089,
+      "multiToken": false
+     },
+     {
+      "label": "went",
+      "probability": 0.021301,
+      "multiToken": false
+     }
+    ],
+    "other": 0.809821
+   },
+   "candidates": [
+    "died",
+    "grew",
+    "exploded",
+    "spread",
+    "went"
+   ],
+   "explanation": "Different causes imply different likely effects."
+  },
+  {
+   "id": "umbrella",
+   "title": "An implied outcome",
+   "labelA": "Remembered",
+   "labelB": "Forgot",
+   "a": {
+    "prompt": "Tom remembered his umbrella. When he arrived at school, his clothes were",
+    "options": [
+     {
+      "label": "dry",
+      "probability": 0.003438,
+      "multiToken": false
+     },
+     {
+      "label": "wet",
+      "probability": 0.011147,
+      "multiToken": false
+     },
+     {
+      "label": "clean",
+      "probability": 0.008016,
+      "multiToken": false
+     },
+     {
+      "label": "soaked",
+      "probability": 0.030365,
+      "multiToken": false
+     },
+     {
+      "label": "fine",
+      "probability": 0.000636,
+      "multiToken": false
+     }
+    ],
+    "other": 0.946398
+   },
+   "b": {
+    "prompt": "Tom forgot his umbrella. When he arrived at school, his clothes were",
+    "options": [
+     {
+      "label": "dry",
+      "probability": 0.002558,
+      "multiToken": false
+     },
+     {
+      "label": "wet",
+      "probability": 0.01133,
+      "multiToken": false
+     },
+     {
+      "label": "clean",
+      "probability": 0.005031,
+      "multiToken": false
+     },
+     {
+      "label": "soaked",
+      "probability": 0.029517,
+      "multiToken": false
+     },
+     {
+      "label": "fine",
+      "probability": 0.000672,
+      "multiToken": false
+     }
+    ],
+    "other": 0.950892
+   },
+   "candidates": [
+    "dry",
+    "wet",
+    "clean",
+    "soaked",
+    "fine"
+   ],
+   "explanation": "The consequence is never stated; the model must use what is implied."
+  },
+  {
    "id": "bank",
    "title": "Finance or river?",
    "labelA": "Financial bank",

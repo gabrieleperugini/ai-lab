@@ -8,10 +8,12 @@ import { PollPanel } from "../classroom/PollPanel";
 export function ModulePage({
   dayId,
   moduleId,
+  extra,
   mode
 }: {
   dayId: string;
   moduleId: string;
+  extra?: string;
   mode: ClassroomMode;
 }) {
   const day = getDay(dayId);
@@ -35,6 +37,61 @@ export function ModulePage({
   const { prev, next } = getAdjacentModules(dayId, moduleId);
   const moduleIndex = day.modules.findIndex((m) => m.id === moduleId) + 1;
 
+  const componentNode = Component ? (
+    <Suspense
+      fallback={
+        <div className="panel" style={{ textAlign: "center", color: "var(--ink-faint)" }}>
+          Loading the lab bench…
+        </div>
+      }
+    >
+      <Component
+        module={module}
+        mode={mode}
+        onResult={setObservedResult}
+        resetSignal={resetSignal}
+        initialArg={extra}
+      />
+    </Suspense>
+  ) : (
+    <div className="panel">Unknown module component: {module.component}</div>
+  );
+
+  const takeawayPanel = (
+    <div className="panel takeawayPanel">
+      <div className="panelTitle">Takeaway</div>
+      <p className="takeawayText">{module.takeaway}</p>
+    </div>
+  );
+
+  const sidePanels = (
+    <>
+      <div className="panel tight">
+        <div className="panelTitle">What to do</div>
+        <ol className="instructionsList">
+          {module.studentInstructions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ol>
+      </div>
+
+      <PollPanel poll={module.poll} mode={mode} />
+
+      <ReflectionBox module={module} mode={mode} observedResult={observedResult} />
+
+      {mode.isTeacher && module.teacherNotes && (
+        <div className="panel tight teacherPanel">
+          <div className="panelTitle">🧑‍🏫 Teacher notes</div>
+          <ul>
+            {module.teacherNotes.map((n, i) => (
+              <li key={i}>{n}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
+  );
+
   return (
     <div className="modulePage fadeIn" key={module.id}>
       <div>
@@ -50,10 +107,7 @@ export function ModulePage({
             <p className="modSubtitle">{module.subtitle}</p>
           </div>
           <div className="controlRow">
-            <button
-              className="btn subtle small"
-              onClick={() => setShowNotice((s) => !s)}
-            >
+            <button className="btn subtle small" onClick={() => setShowNotice((s) => !s)}>
               {showNotice ? "Hide" : "💡 What should I notice?"}
             </button>
             <button
@@ -85,59 +139,21 @@ export function ModulePage({
         </div>
       )}
 
-      <div className="moduleLayout">
-        <div className="mainColumn">
-          {Component ? (
-            <Suspense
-              fallback={
-                <div className="panel" style={{ textAlign: "center", color: "var(--ink-faint)" }}>
-                  Loading the lab bench…
-                </div>
-              }
-            >
-              <Component
-                module={module}
-                mode={mode}
-                onResult={setObservedResult}
-                resetSignal={resetSignal}
-              />
-            </Suspense>
-          ) : (
-            <div className="panel">Unknown module component: {module.component}</div>
-          )}
-
-          <div className="panel takeawayPanel">
-            <div className="panelTitle">Takeaway</div>
-            <p className="takeawayText">{module.takeaway}</p>
+      {module.wide ? (
+        <>
+          {componentNode}
+          {takeawayPanel}
+          <div className="wideSidePanels">{sidePanels}</div>
+        </>
+      ) : (
+        <div className="moduleLayout">
+          <div className="mainColumn">
+            {componentNode}
+            {takeawayPanel}
           </div>
+          <aside className="sideColumn">{sidePanels}</aside>
         </div>
-
-        <aside className="sideColumn">
-          <div className="panel tight">
-            <div className="panelTitle">What to do</div>
-            <ol className="instructionsList">
-              {module.studentInstructions.map((s, i) => (
-                <li key={i}>{s}</li>
-              ))}
-            </ol>
-          </div>
-
-          <PollPanel poll={module.poll} mode={mode} />
-
-          <ReflectionBox module={module} mode={mode} observedResult={observedResult} />
-
-          {mode.isTeacher && module.teacherNotes && (
-            <div className="panel tight teacherPanel">
-              <div className="panelTitle">🧑‍🏫 Teacher notes</div>
-              <ul>
-                {module.teacherNotes.map((n, i) => (
-                  <li key={i}>{n}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </aside>
-      </div>
+      )}
 
       <nav className="moduleNav">
         {prev ? (

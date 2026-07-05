@@ -7,8 +7,8 @@ import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
 import { Slider } from "../../components/controls/Slider";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
-const W = 740;
-const H = 400;
+const W = 760;
+const H = 480;
 const RANGE_X = 8;
 const RANGE_Y = 6.6;
 
@@ -30,6 +30,7 @@ export default function DeembeddingLens({ onResult, resetSignal }: ModuleCompone
   const [presetLabel, setPresetLabel] = useState<string>(hiddenPresets[0].label);
   const [temperature, setTemperature] = useState(1.0);
   const [dragging, setDragging] = useState(false);
+  const [showTech, setShowTech] = useState(false);
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
@@ -101,8 +102,8 @@ export default function DeembeddingLens({ onResult, resetSignal }: ModuleCompone
         )}
       </p>
 
-      <div className="ctxGrid" style={{ gridTemplateColumns: "3fr 2fr" }}>
-        <div className="vizStage">
+      <div className="ctxGrid" style={{ gridTemplateColumns: "3fr 2fr", alignItems: "start" }}>
+        <div className="vizStage" style={{ lineHeight: 0 }}>
           <svg
             ref={svgRef}
             viewBox={`0 0 ${W} ${H}`}
@@ -209,12 +210,20 @@ export default function DeembeddingLens({ onResult, resetSignal }: ModuleCompone
         </div>
 
         <div>
-          <div
-            className="panelTitle"
-            title="Technical names: score(token) = dot(hidden state, token output vector); probabilities = softmax(scores / T)"
-          >
-            Match scores → probabilities ⓘ
+          <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 10 }}>
+            <span className="panelTitle" style={{ marginBottom: 0 }}>
+              Match scores → probabilities
+            </span>
+            <button className="btn subtle small" onClick={() => setShowTech((s) => !s)}>
+              {showTech ? "Hide" : "ⓘ Technical names"}
+            </button>
           </div>
+          {showTech && (
+            <p className="hintText fadeIn" style={{ marginBottom: 10, fontSize: 13.5 }}>
+              thought vector = hidden state h · word direction = output token embedding e ·
+              match score = dot(h, e) · probabilities = softmax(scores / T)
+            </p>
+          )}
           <ProbabilityBars distribution={probs} maxBars={8} />
           <div style={{ marginTop: 14 }}>
             <Slider
@@ -234,7 +243,7 @@ export default function DeembeddingLens({ onResult, resetSignal }: ModuleCompone
 
       <p className="hintText" style={{ marginTop: 12 }}>
         Words inside the beam get high match scores. A longer arrow means a more confident thought
-        and sharper probabilities. Hover the ⓘ title above the bars for the technical names.
+        and sharper probabilities. Press the ⓘ button for the technical names.
       </p>
     </div>
   );

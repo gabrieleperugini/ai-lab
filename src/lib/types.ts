@@ -25,6 +25,9 @@ export type LabModule = {
   poll?: PollConfig;
   /** True for Day 2/3 scaffolded modules that are not yet implemented. */
   placeholder?: boolean;
+  /** Wide modules render the interactive panel at full width, with the
+   * instructions/reflection panels below (used by visual modules). */
+  wide?: boolean;
 };
 
 export type LabDay = {

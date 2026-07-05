@@ -2,6 +2,37 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Round 3 (July 2026): consistency with the v2 slides
+
+- Pre-round-3 state preserved on branch `backup/day1-before-round3` and tag
+  `day1-v2-real-probs` (pushed to origin).
+- All v1-slide examples restored on top of the round-2 ones: M1 now has 30
+  rounds in 6 categories matching the six "Next Token Arena" stops of the v2
+  slides, in slide order, with v1 candidate options (including 'also', 'is',
+  'lions', 'Schwarzwälderkirschtorte', 'thorium', 'diamonds').
+- Categories are deep-linkable for slide QR codes:
+  `#/day1/next-token-arena/<basics|context|suitcase|world-knowledge|probability|reasoning>`.
+- New module: Reasoning Demo (the v1 "NTP part 5 - intelligence" proof as a
+  ladder where only one option per step survives; dead ends explain
+  themselves and force a restart). GPT-2 chain-rule scores per option are
+  shown on demand; the small model prefers a dead end at most steps, which
+  demonstrates that reasoning needs look-ahead.
+- Module order now follows the v2 slides: Arena, Context Lens, Branching
+  Stories, Reasoning Demo, Tokenizer, Meaning Map, De-embedding Lens,
+  Sampling Machine, Real Chatbot Bridge (9 modules).
+- Bridges: Arena categories link to their companion module and each companion
+  links back to the matching Arena category.
+- A trophy/suitcase pair was tried in M2 and removed: GPT-2 cannot resolve
+  the Winograd pronoun, so the bars did not flip. The suitcase examples live
+  in M1, where the model's own top tokens ('size', 'bag') are sensible.
+- M6: point clicks are hit-tested on pointer-up (pointer capture had been
+  retargeting click events to the svg, breaking selection and puzzles);
+  map enlarged and both M6/M7 use a full-width layout (`wide` module flag).
+- M7: canvas fills its box (align-start + larger viewBox); hover-only
+  tooltips replaced with a visible "technical names" toggle.
+- scripts/.venv accidentally tracked in round 2 is now untracked/ignored
+  (history still contains it; the venv is rebuilt from scripts/requirements.txt).
+
 ## Round 2 (July 2026): real-model content
 
 - Pre-round-2 state preserved on branch `backup/day1-before-round2` and tag

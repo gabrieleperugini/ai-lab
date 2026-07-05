@@ -991,9 +991,16 @@ a {
   gap: 20px;
 }
 
+.wideSidePanels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
 .meaningLayout {
   display: grid;
-  grid-template-columns: minmax(0, 2.4fr) minmax(220px, 1fr);
+  grid-template-columns: minmax(0, 3fr) minmax(230px, 1fr);
   gap: 16px;
   align-items: start;
 }
