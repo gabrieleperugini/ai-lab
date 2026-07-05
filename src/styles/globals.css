@@ -991,6 +991,26 @@ a {
   gap: 20px;
 }
 
+.meaningLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(220px, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.puzzlePanel {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+@media (max-width: 900px) {
+  .meaningLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 760px) {
   .ctxGrid {
     grid-template-columns: 1fr;

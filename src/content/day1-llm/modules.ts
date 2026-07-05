@@ -22,26 +22,28 @@ export const day1Modules: LabModule[] = [
       "Each of you picks the token you think comes next.",
       "Agree on one group answer and click it.",
       "Press 'Reveal probabilities' and compare with your intuition.",
-      "Use the category filter to explore: context, world knowledge, reasoning, style."
+      "Use the category filter: familiar phrases, facts, context, ambiguity, reasoning."
     ],
     component: "NextTokenArena",
     reflectionQuestions: [
       "Which example surprised you the most, and why?",
-      "Which examples needed knowledge about the world, not just grammar?"
+      "Where did the small model put its probability somewhere you did not expect?"
     ],
     noticePoints: [
       "Sometimes one token is almost certain; sometimes many are plausible.",
-      "Some prompts need knowledge (Paris), some need reasoning (the algebra one).",
-      "The bars are teaching distributions: hand-made, model-like probabilities, not measured outputs of a real model."
+      "The bars are REAL probabilities from GPT-2, a small open model, computed offline.",
+      "'other' is all the rest of the vocabulary; a model can prefer tokens nobody offered.",
+      "Small models fail some knowledge and reasoning rounds; that failure is part of the lesson."
     ],
     takeaway:
       "Predicting the next token is a probabilistic task. Behind one blank there can be grammar, knowledge, context, or reasoning.",
     teacherNotes: [
       "Run the first two rounds as a full-class warm-up before letting groups continue.",
       "Ask groups to shout their token before revealing; it makes the distribution feel earned.",
-      "The 'lions' option is a running gag: it gets a small but nonzero probability everywhere.",
-      "Timing: about 2 min per round; 26 rounds available, 6 to 8 are enough. Use the category filter to pick themes.",
-      "Link back to slides: the first rounds mirror NTP parts 1 to 5 (basics, context, world knowledge, probability, reasoning). Later rounds are new; same concepts."
+      "Probabilities are real GPT-2 outputs. GPT-2 is from 2019 and small: it nails 'Once upon a time' but fumbles the World Cup chain. Contrast with modern chatbots.",
+      "Options marked as added by the model show where GPT-2 actually puts its mass (often 'the' or 'now'): models continue text, they do not answer quizzes.",
+      "Timing: about 2 min per round; 23 rounds in 5 categories, 6 to 8 are enough.",
+      "The 'student test' round links straight into Branching Stories; use it as the bridge."
     ],
     poll: {
       question: "Which next token did your group choose?"
@@ -57,10 +59,10 @@ export const day1Modules: LabModule[] = [
     mission: "Flip the context. Watch the probabilities move.",
     studentInstructions: [
       "Read the sentence and its probability bars.",
-      "Press the big flip button: only a few context words change.",
+      "Press the big flip button: the context changes, the word stays.",
       "Watch which bars grow and which collapse.",
-      "Press 'Reveal the changed words' to check your guess.",
-      "Pick another pair from the selector and repeat."
+      "Pick another pair from the selector and repeat.",
+      "Discuss: which context word did the work?"
     ],
     component: "ContextLens",
     reflectionQuestions: [
@@ -69,15 +71,15 @@ export const day1Modules: LabModule[] = [
     ],
     noticePoints: [
       "The sentence is almost the same, but the world it describes has changed.",
-      "One changed word can flip the whole distribution.",
-      "The model uses implied information, not just what is written."
+      "The SAME candidate words get very different probabilities in the two contexts.",
+      "These are real GPT-2 probabilities, computed offline; small numbers are normal, the flip is the point."
     ],
-    takeaway: "Small context changes can cause large probability changes.",
+    takeaway: "Same word, different context, different next-token distribution.",
     teacherNotes: [
-      "Start with the bank pair; it echoes the slides directly.",
-      "Push on the umbrella pair: nothing says 'rain', yet 'wet' wins. Good discussion about implicit knowledge.",
-      "New pairs beyond the slides: bat, mouse, apple, cold, light. All are ambiguity flips.",
-      "Ask: where did the model learn that gasoline feeds fire? (From patterns in text, not from experiments.)"
+      "Start with the bank pair; loan and deposit trade places with river and lake.",
+      "The percentages look small because the model spreads mass over 50k tokens; focus on the RATIOS between the two contexts.",
+      "Pairs: bank, bat, mouse, cold, python. Python (program vs snake) lands well with students.",
+      "Ask: where did the model learn this? (From patterns in text, not from a dictionary.)"
     ],
     poll: {
       question: "Which context word changed the prediction most?"
@@ -91,30 +93,30 @@ export const day1Modules: LabModule[] = [
     durationMin: 20,
     level: "core",
     mission:
-      "Build a continuation one token at a time. After each choice, new probabilities appear. What did your first choice make impossible?",
+      "Build a continuation three tokens deep. After each choice, new real probabilities appear. What did your first choice make impossible?",
     studentInstructions: [
       "Read the starting sentence.",
-      "Choose the first token; it gets appended to the story.",
-      "New probabilities appear: choose the second token.",
-      "Read the ending you reached, then press 'Try another branch'.",
-      "Explore at least three different paths. Then try the proof example."
+      "Choose a token: it gets appended, and the probabilities update.",
+      "Choose two more times; then read the ending the model wrote.",
+      "Press 'Restart this branch' and take a different first token.",
+      "Try all five stories. How early does the future get locked in?"
     ],
     component: "BranchingStories",
     reflectionQuestions: [
       "What did your first token choice make impossible?",
-      "In the proof, which token felt forced? Which felt free?"
+      "Did the probabilities get sharper or flatter as the sentence grew?"
     ],
     noticePoints: [
-      "Generation happens one token at a time; each token is appended and becomes context.",
-      "Small function words ('that', 'what', 'for') control large branches.",
-      "A proof is a ladder: each step narrows what can come next."
+      "Each token commits the text to a branch; the next distribution depends on the path so far.",
+      "The percentages are real GPT-2 probabilities recomputed at every step.",
+      "The grey 'other' chip is everything we did not display; the model could go there too."
     ],
     takeaway:
       "Generation is a sequence of commitments. Small early choices can force very different futures.",
     teacherNotes: [
-      "Demo one full path on the projector ('that', then 'she'), then free exploration.",
-      "The explored-paths list at the bottom shows how many futures the class has visited.",
-      "The proof example previews 'reasoning as repeated next-token prediction'.",
+      "Demo one full path on the projector, then free exploration.",
+      "Five stories: the test, the robot, the detective, the meeting, the dragon.",
+      "The endings after the third choice were also written by GPT-2 (sampled offline); some are charmingly weird.",
       "Discussion: why can't the model go back once a token is emitted? Compare with how students write essays."
     ],
     poll: {
@@ -132,31 +134,31 @@ export const day1Modules: LabModule[] = [
       "Generate several continuations from the same starting sentence. Make the model boring, balanced, and chaotic.",
     studentInstructions: [
       "Pick a starting prompt (there are ten).",
-      "Press 'One token' a few times and watch tokens get sampled from the bars.",
-      "Press 'Generate 3 versions' to compare three complete continuations.",
-      "Now make it BORING: temperature 0.2, top-k = 1. Generate again.",
-      "Now make it CHAOTIC: temperature 2.0, all tokens. Generate again.",
-      "Find the settings that give the most interesting but still sensible text."
+      "Press 'Generate another continuation' several times at medium randomness.",
+      "Switch to LOW randomness: how quickly do continuations repeat?",
+      "Switch to HIGH randomness: how strange can it get?",
+      "Press 'Compare the three modes' to see them side by side.",
+      "Open 'Inspect first step' to see the real token probabilities underneath."
     ],
     component: "SamplingMachine",
     reflectionQuestions: [
-      "What happened at low temperature? And at high temperature?",
+      "What happened at low randomness? And at high randomness?",
       "Which setting made the most reliable text? Which the most interesting?",
       "Is creativity the same as correctness?"
     ],
     noticePoints: [
       "The model does not always pick the most likely token; it samples.",
-      "Low temperature: safer, more repetitive. Medium: varied but coherent. High: surprising, sometimes nonsense.",
-      "Top-k = 1 always chooses the most likely token, so every run is identical."
+      "Low randomness: safer, more repetitive. Medium: varied but coherent. High: surprising, sometimes nonsense.",
+      "Every continuation here was really sampled from GPT-2 at the settings shown, offline; the site replays the cache."
     ],
     takeaway:
-      "Generation is not just choosing the best word. It is repeated probabilistic sampling, and the sampling rule changes the personality of the output.",
+      "The model does not always pick the most likely next token. Sampling controls how predictable or surprising the continuation becomes.",
     teacherNotes: [
-      "The temperature math is real: p^(1/T), renormalize, then top-k cut. Only the token tree is hand-made.",
-      "Race idea: which group gets the weirdest complete sentence at T=2.0?",
-      "At top-k = 1 every run is identical; let students discover this themselves.",
-      "'Generate 3 versions' is the fastest way to show variety at a given setting.",
-      "Connect to real chatbots: 'temperature' is a real setting in LLM APIs."
+      "All continuations are genuine GPT-2 samples generated offline (temperature/top-k/top-p as displayed). Nothing is generated live in class.",
+      "At low randomness the cache holds only a handful of distinct continuations; repeats ARE the lesson.",
+      "Race idea: which group finds the strangest high-randomness continuation?",
+      "'Inspect first step' shows the model's real first-token distribution; connect it back to M1.",
+      "Connect to real chatbots: temperature and top-p are real settings in LLM APIs."
     ],
     poll: {
       question: "Which temperature produced the best continuation?"
@@ -205,32 +207,33 @@ export const day1Modules: LabModule[] = [
     subtitle: "Embeddings as geometry",
     durationMin: 35,
     level: "core",
-    mission: "Explore a 3D map of meaning. Find neighbors, clusters, and strange mistakes.",
+    mission: "Explore a 3D map of real word embeddings. Find neighbors, clusters, and surprises.",
     studentInstructions: [
       "Every point is a word. Close points have related meanings.",
-      "Drag the map to rotate it in 3D. Click a point to see its nearest neighbors.",
-      "Search for 'bank'. Why does it appear twice?",
-      "Toggle categories on and off to isolate the clusters.",
-      "Open the puzzles and solve all four. Click your answer on the map."
+      "Drag to rotate, scroll to zoom, click a point for its true nearest neighbors.",
+      "Search for 'bank'. Which meaning won, money or river?",
+      "Toggle categories to isolate the clusters.",
+      "Work through the puzzles in the side panel: analogies, odd-one-out, and more."
     ],
     component: "MeaningMap",
     reflectionQuestions: [
-      "Which cluster surprised you? Which point seems misplaced?",
-      "Why does the map need two points for 'bank' and two for 'mouse'?"
+      "Which neighbor surprised you the most? Why might the model have put them together?",
+      "Why does 'bank' get only ONE point here, and why is that a problem?"
     ],
     noticePoints: [
-      "Similar meanings sit close together: geometry is doing the work of meaning.",
-      "Ambiguous words like 'bank' and 'mouse' need two points; context picks one.",
-      "Analogies become directions: the same displacement encodes the same relationship."
+      "These are REAL word vectors (GloVe), reduced to 3D just for display.",
+      "Neighbors and puzzle answers are computed from the full 100-dimensional vectors.",
+      "king - man + woman really lands closest to queen: relationships become directions.",
+      "Classic embeddings give one point per word, so 'bank' must pick one meaning. Modern models fix this with context."
     ],
     takeaway:
       "Inside a model, words can be represented by numbers. Similar meanings become nearby points, and language becomes geometry.",
     teacherNotes: [
-      "This is a hand-made teaching map, NOT real embeddings; say it explicitly. Real ones live in hundreds of dimensions.",
-      "The two 'bank' points bridge back to the Context Lens module; 'mouse' is the new twin example.",
-      "Rotating in 3D makes the point physically: more dimensions give meanings more room to organize.",
-      "Puzzle answers: princess, Paris, bank (river), pasta. The analogy arrows draw the relation direction on the map.",
-      "If rotation confuses a group, press 'Reset view'; the starting angle shows all clusters."
+      "The vectors are real (GloVe, trained on Wikipedia+news). PCA squeezes 100 dimensions into 3, so on-screen distances are approximate; neighbor lists use the true vectors.",
+      "The analogy puzzles were verified against the real vectors: king-man+woman = queen, Paris-France+Italy = Rome, Rome-Italy+Germany = Berlin.",
+      "The 'bank' ambiguity puzzle sets up tomorrow's contextual embeddings story.",
+      "Odd-one-out answers are computed, not hand-picked: snake loses to python/java/code!",
+      "If rotation confuses a group, press 'Reset view'."
     ],
     poll: {
       question: "Which neighbor or cluster surprised you most?"

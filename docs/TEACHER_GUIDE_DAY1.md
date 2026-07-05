@@ -4,10 +4,12 @@ Total lab time: **150-180 min**, split into short sessions between slides.
 Two classes run in parallel (about 50 students each), students work in groups
 of 3-4 on laptops.
 
-A note repeated throughout the modules and worth repeating in class: **every
-probability bar in the platform is a teaching distribution**. The numbers are
-hand-designed to be plausible and instructive; they are not measured outputs
-of a real model. The sampling math (M4, M7) and the tokenizer (M5) are real.
+A note worth repeating in class: **the probability bars in M1-M4 are real
+outputs of GPT-2**, a small open language model from 2019, computed offline
+and cached as static files. They are not meant to represent ChatGPT or any
+current frontier model exactly; GPT-2's failures (weak facts, no arithmetic)
+are part of the lesson. M6 shows real GloVe word embeddings. The M5 tokenizer
+is the real cl100k_base.
 
 ## Links to hand out
 
@@ -31,44 +33,47 @@ projector demo; fold M8's discussion into the wrap-up.
 
 ## Module-by-module script
 
-### M1: Next Token Arena (20 min, 26 rounds available)
+### M1: Next Token Arena (20 min, 23 rounds in 5 categories)
 1. Project round 1 ("Once upon a"). Groups shout their token, then reveal.
-2. Do "capital of France" and "World Cup 1998" together; the second needs a
-   knowledge chain, make that explicit.
-3. Free exploration (about 10 min). Use the category filter: the slide rounds
-   cover NTP parts 1-5; the new rounds add common sense, social context,
-   procedures, ambiguity (bat!), instruction following, and style.
-4. Suggested questions: "Where do these probabilities come from?" "Which round
-   needed knowledge no grammar book contains?"
-5. Expected observations: obvious answers are still probabilistic; some blanks
-   need knowledge or computation; 'lions' never quite dies.
+   The bars are real GPT-2 probabilities; 'other' is the rest of the vocabulary.
+2. Do "capital of France" and "World Cup 1998" together. GPT-2 puts more mass
+   on 'the' and 'now' than on 'Paris' in the second one: a small model cannot
+   do the knowledge chain. That failure is the discussion.
+3. Options labeled as added by the model show GPT-2's own favorites; they
+   teach that models continue text rather than answer quizzes.
+4. Categories: familiar phrases, facts and knowledge, context changes meaning,
+   ambiguity and probability, reasoning-like steps.
+5. The 'student test' round has an 'Explore branching' button; use it as the
+   bridge into M3.
 
-### M2: Context Lens (20 min, 9 pairs)
-1. The interaction is one big flip button. Start with the bank pair (echoes
-   the slides), flip back and forth twice before revealing the changed words.
-2. Push on the umbrella pair: nothing says "rain", yet "wet" wins. The model
-   uses implied information.
-3. New pairs to explore: bat (cave/baseball), mouse (kitchen/computer), apple
-   (lunch/technology), cold (drink/illness), light (weight/brightness).
-4. Suggested question: "Which single word did the most work?"
+### M2: Context Lens (20 min, 5 pairs, real probabilities)
+1. The interaction is one big flip button; the same five candidate words keep
+   their bars while the context flips, so the trade is unmissable.
+2. Start with bank: loan and deposit trade places with river and lake.
+3. The percentages are small because GPT-2 spreads mass over 50k tokens; tell
+   students to watch the RATIOS, not the absolute numbers.
+4. Pairs: bank, bat, mouse, cold, python. Suggested question: "Which context
+   word did the work?"
 
-### M3: Branching Stories (20 min, now two-step)
-1. Students now choose the FIRST token, see new probabilities, choose the
-   SECOND token, and reach an ending. Demo one full path ('that', then 'she').
+### M3: Branching Stories (20 min, three steps deep, 5 stories)
+1. Students choose three tokens in a row; real GPT-2 probabilities update
+   after every choice, then GPT-2 writes a short ending.
 2. Ask every time: "What did the first choice make impossible?"
-3. The explored-futures list at the bottom counts how many endings a group
-   has visited; challenge them to reach them all.
-4. The proof example frames reasoning as a ladder of commitments.
+3. The explored-futures list counts endings a group has visited; challenge
+   them to find the strangest GPT-2 ending.
+4. Stories: the test, the robot, the detective, the meeting, the dragon.
 
-### M4: Sampling Machine (30-35 min, 10 prompt families)
-1. Explain the two knobs ONCE on the projector: temperature reshapes the bars,
-   top-k cuts the tail. The math is real.
-2. 'Generate 3 versions' shows three complete runs side by side; it is the
-   fastest way to see variety (or the lack of it at top-k = 1).
-3. Challenge sequence: (a) boring machine, T=0.2 and top-k=1: every run is
-   identical; (b) chaotic machine, T=2.0 and all tokens; (c) find the sweet spot.
-4. Suggested question: "Is creativity the same as correctness?" Mention that
-   temperature is a real setting in LLM APIs.
+### M4: Sampling Machine (30-35 min, 10 prompts, cached GPT-2 samples)
+1. Everything shown was genuinely sampled from GPT-2 offline at the settings
+   displayed; the site replays the cache, so classroom Wi-Fi does not matter.
+2. Have groups generate repeatedly at LOW randomness first: the continuations
+   start repeating quickly because only a few distinct ones exist. That IS
+   the lesson.
+3. Then HIGH randomness: hunt for the strangest continuation.
+4. 'Compare the three modes' puts one sample of each side by side; 'Inspect
+   first step' shows the real first-token bars (connect back to M1).
+5. Suggested question: "Is creativity the same as correctness?" Mention that
+   temperature and top-p are real settings in LLM APIs.
 
 ### M5: Tokenizer Microscope (20-25 min)
 1. Reveal that the lecture simplified: token is not word. This microscope is
@@ -81,18 +86,19 @@ projector demo; fold M8's discussion into the wrap-up.
 5. Suggested question: why does Italian split into more pieces than English?
    (Less Italian in the training data.)
 
-### M6: Meaning Map (30-35 min, now in 3D)
-1. Say it plainly: this is a hand-made teaching map; real embeddings have
-   hundreds of dimensions. The geometry idea is the real thing, and rotating
-   in 3D shows why more dimensions give meanings more room.
-2. Let groups drag to rotate for a minute; then search "bank": two points.
-   Same for "mouse". Bridge back to Context Lens.
-3. Category toggles isolate clusters; the floating card shows nearest
-   neighbors with distances.
-4. The four puzzles are buttons above the map. Answers: princess, Paris,
-   bank (river), pasta. The analogy puzzles draw the relation arrow solid and
-   the reused direction dashed; students click the landing point.
-5. If a group gets lost in the rotation, 'Reset view' restores the start.
+### M6: Meaning Map (30-35 min, real GloVe embeddings in 3D)
+1. These are REAL word vectors (GloVe, 100 dimensions), squeezed to 3D by PCA
+   for display. Neighbors and puzzle answers use the full vectors.
+2. Let groups drag to rotate and scroll to zoom; then search "bank" and click
+   it: its true neighbors are money and loan. One point per word means the
+   frequent meaning wins; this sets up contextual embeddings.
+3. The puzzle side panel has 10 puzzles: three verified analogies
+   (king-man+woman = queen; Paris-France+Italy = Rome; Rome-Italy+Germany =
+   Berlin), computed odd-one-outs (python/java/code vs snake is the star),
+   the bank ambiguity, cluster naming, and a free 'surprising neighbor' hunt.
+4. Analogy arrows: solid = the relation, dashed = the same direction reused;
+   students click the landing point on the map.
+5. 'Reset view' restores the camera if a group gets lost.
 
 ### M7: De-embedding Lens (20-25 min)
 1. The story in three steps (also shown in the module): the model has an
@@ -122,12 +128,11 @@ projector demo; fold M8's discussion into the wrap-up.
 
 ## Collecting answers
 
-- Configure poll links per module in `src/content/day1-llm/modules.ts`
-  (see CONTENT_EDITING.md). Separate URLs for class A and B. Every module
-  ships with a suggested poll question.
-- Without polls: groups press **Copy reflection**; a formatted card (class,
-  group, module, result, reflection) lands in their clipboard; they paste it
-  into a Google Form, Teams/chat, or email.
+Polls and reflection submissions are **currently disabled**: reflection
+prompts are discussion-only and any notes students type stay on their device.
+Collect answers by voice, raised hands, or your own external form. To
+re-enable the poll panels and the copy-to-clipboard submission cards later,
+flip `enablePolls` / `enableSubmissions` in `src/content/config.ts`.
 
 ## Fallback plans
 

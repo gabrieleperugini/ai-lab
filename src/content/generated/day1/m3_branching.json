@@ -1,0 +1,2031 @@
+{
+ "model": "gpt2",
+ "trees": [
+  {
+   "id": "student_test",
+   "title": "The test",
+   "root": "The student opened the test and realized",
+   "nodes": {
+    "root_0_0": {
+     "context": "The student opened the test and realized that he",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.273957,
+       "next": null,
+       "ending": "getting a bit of a pushback."
+      },
+      {
+       "text": " had",
+       "probability": 0.239062,
+       "next": null,
+       "ending": "to go to a bar to get his drink, so he went to"
+      },
+      {
+       "text": " could",
+       "probability": 0.071431,
+       "next": null,
+       "ending": "not get a single point."
+      }
+     ],
+     "other": 0.41555
+    },
+    "root_0_1": {
+     "context": "The student opened the test and realized that the",
+     "options": [
+      {
+       "text": " test",
+       "probability": 0.076721,
+       "next": null,
+       "ending": "had been completely automated, and he wasn't even sure what was going"
+      },
+      {
+       "text": " student",
+       "probability": 0.026955,
+       "next": null,
+       "ending": "was a student of the same institution."
+      },
+      {
+       "text": " answer",
+       "probability": 0.019332,
+       "next": null,
+       "ending": "was not good enough."
+      }
+     ],
+     "other": 0.876992
+    },
+    "root_0_2": {
+     "context": "The student opened the test and realized that she",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.297057,
+       "next": null,
+       "ending": "not ready to take it, and she asked him to come and help"
+      },
+      {
+       "text": " had",
+       "probability": 0.24283,
+       "next": null,
+       "ending": "been using a new app that would allow her to track her emotions."
+      },
+      {
+       "text": " could",
+       "probability": 0.060116,
+       "next": null,
+       "ending": "not read any language other than French, which she had already learnt in"
+      }
+     ],
+     "other": 0.399997
+    },
+    "root_0": {
+     "context": "The student opened the test and realized that",
+     "options": [
+      {
+       "text": " he",
+       "probability": 0.206034,
+       "next": "root_0_0"
+      },
+      {
+       "text": " the",
+       "probability": 0.140163,
+       "next": "root_0_1"
+      },
+      {
+       "text": " she",
+       "probability": 0.092786,
+       "next": "root_0_2"
+      }
+     ],
+     "other": 0.561017
+    },
+    "root_1_0": {
+     "context": "The student opened the test and realized he was",
+     "options": [
+      {
+       "text": " not",
+       "probability": 0.062244,
+       "next": null,
+       "ending": "the most interesting student in class."
+      },
+      {
+       "text": " in",
+       "probability": 0.047829,
+       "next": null,
+       "ending": "no way in the room."
+      },
+      {
+       "text": " a",
+       "probability": 0.046359,
+       "next": null,
+       "ending": "little bit more difficult than he thought."
+      }
+     ],
+     "other": 0.843568
+    },
+    "root_1_1": {
+     "context": "The student opened the test and realized he had",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.114626,
+       "next": null,
+       "ending": "major problem: He was still using the wrong word."
+      },
+      {
+       "text": " been",
+       "probability": 0.089065,
+       "next": null,
+       "ending": "mis-represented in the class."
+      },
+      {
+       "text": " to",
+       "probability": 0.067877,
+       "next": null,
+       "ending": "ask the student a question."
+      }
+     ],
+     "other": 0.728432
+    },
+    "root_1_2": {
+     "context": "The student opened the test and realized he could",
+     "options": [
+      {
+       "text": " not",
+       "probability": 0.176708,
+       "next": null,
+       "ending": "be bothered to write."
+      },
+      {
+       "text": " do",
+       "probability": 0.070295,
+       "next": null,
+       "ending": "it, so he wrote an essay for the student."
+      },
+      {
+       "text": " only",
+       "probability": 0.044857,
+       "next": null,
+       "ending": "play a game with the student."
+      }
+     ],
+     "other": 0.70814
+    },
+    "root_1": {
+     "context": "The student opened the test and realized he",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.303091,
+       "next": "root_1_0"
+      },
+      {
+       "text": " had",
+       "probability": 0.22729,
+       "next": "root_1_1"
+      },
+      {
+       "text": " could",
+       "probability": 0.062663,
+       "next": "root_1_2"
+      }
+     ],
+     "other": 0.406956
+    },
+    "root_2_0": {
+     "context": "The student opened the test and realized she was",
+     "options": [
+      {
+       "text": " not",
+       "probability": 0.056876,
+       "next": null,
+       "ending": "ready to go."
+      },
+      {
+       "text": " a",
+       "probability": 0.045159,
+       "next": null,
+       "ending": "student of a major and did not understand it, so she did not"
+      },
+      {
+       "text": " in",
+       "probability": 0.043466,
+       "next": null,
+       "ending": "a very bad way."
+      }
+     ],
+     "other": 0.854498
+    },
+    "root_2_1": {
+     "context": "The student opened the test and realized she had",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.116564,
+       "next": null,
+       "ending": "good idea of the meaning behind the word \"the\" and had not"
+      },
+      {
+       "text": " been",
+       "probability": 0.104387,
+       "next": null,
+       "ending": "given a blank page."
+      },
+      {
+       "text": " to",
+       "probability": 0.063725,
+       "next": null,
+       "ending": "take a second test."
+      }
+     ],
+     "other": 0.715324
+    },
+    "root_2_2": {
+     "context": "The student opened the test and realized she could",
+     "options": [
+      {
+       "text": " not",
+       "probability": 0.187971,
+       "next": null,
+       "ending": "write a few words."
+      },
+      {
+       "text": " do",
+       "probability": 0.073382,
+       "next": null,
+       "ending": "the job well."
+      },
+      {
+       "text": " only",
+       "probability": 0.044163,
+       "next": null,
+       "ending": "do one thing: She had to test the concept of the \"p"
+      }
+     ],
+     "other": 0.694483
+    },
+    "root_2": {
+     "context": "The student opened the test and realized she",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.331698,
+       "next": "root_2_0"
+      },
+      {
+       "text": " had",
+       "probability": 0.230651,
+       "next": "root_2_1"
+      },
+      {
+       "text": " could",
+       "probability": 0.050887,
+       "next": "root_2_2"
+      }
+     ],
+     "other": 0.386764
+    },
+    "root_3_0": {
+     "context": "The student opened the test and realized the test",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.401489,
+       "next": null,
+       "ending": "about to be completed."
+      },
+      {
+       "text": " had",
+       "probability": 0.062991,
+       "next": null,
+       "ending": "no effect on his scores."
+      },
+      {
+       "text": " is",
+       "probability": 0.040128,
+       "next": null,
+       "ending": "too much for him."
+      }
+     ],
+     "other": 0.495392
+    },
+    "root_3_1": {
+     "context": "The student opened the test and realized the student",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.330788,
+       "next": null,
+       "ending": "a total jerk."
+      },
+      {
+       "text": " had",
+       "probability": 0.220942,
+       "next": null,
+       "ending": "a hard time reading."
+      },
+      {
+       "text": " wasn",
+       "probability": 0.024997,
+       "next": null,
+       "ending": "'t reading the book."
+      }
+     ],
+     "other": 0.423272
+    },
+    "root_3_2": {
+     "context": "The student opened the test and realized the results",
+     "options": [
+      {
+       "text": " were",
+       "probability": 0.40665,
+       "next": null,
+       "ending": "far from what he expected."
+      },
+      {
+       "text": " of",
+       "probability": 0.073106,
+       "next": null,
+       "ending": "the previous test were incorrect."
+      },
+      {
+       "text": " would",
+       "probability": 0.049062,
+       "next": null,
+       "ending": "be completely different than they had expected."
+      }
+     ],
+     "other": 0.471182
+    },
+    "root_3": {
+     "context": "The student opened the test and realized the",
+     "options": [
+      {
+       "text": " test",
+       "probability": 0.06924,
+       "next": "root_3_0"
+      },
+      {
+       "text": " student",
+       "probability": 0.0229,
+       "next": "root_3_1"
+      },
+      {
+       "text": " results",
+       "probability": 0.021443,
+       "next": "root_3_2"
+      }
+     ],
+     "other": 0.886417
+    },
+    "root": {
+     "context": "The student opened the test and realized",
+     "options": [
+      {
+       "text": " that",
+       "probability": 0.339478,
+       "next": "root_0"
+      },
+      {
+       "text": " he",
+       "probability": 0.200347,
+       "next": "root_1"
+      },
+      {
+       "text": " she",
+       "probability": 0.093368,
+       "next": "root_2"
+      },
+      {
+       "text": " the",
+       "probability": 0.05397,
+       "next": "root_3"
+      }
+     ],
+     "other": 0.312838
+    }
+   }
+  },
+  {
+   "id": "robot_button",
+   "title": "The robot",
+   "root": "The robot saw the red button and",
+   "nodes": {
+    "root_0_0": {
+     "context": "The robot saw the red button and the red",
+     "options": [
+      {
+       "text": " light",
+       "probability": 0.112005,
+       "next": null,
+       "ending": "flashing and realized they were on the same side of the road."
+      },
+      {
+       "text": " button",
+       "probability": 0.100223,
+       "next": null,
+       "ending": "'s icon, and was able to quickly and effectively block the red button"
+      },
+      {
+       "text": " arrow",
+       "probability": 0.015724,
+       "next": null,
+       "ending": "and it went down to its left."
+      }
+     ],
+     "other": 0.772048
+    },
+    "root_0_1": {
+     "context": "The robot saw the red button and the robot",
+     "options": [
+      {
+       "text": " saw",
+       "probability": 0.070724,
+       "next": null,
+       "ending": "the green button, but the red button did not work."
+      },
+      {
+       "text": " was",
+       "probability": 0.043004,
+       "next": null,
+       "ending": "ready to fight back."
+      },
+      {
+       "text": " said",
+       "probability": 0.019535,
+       "next": null,
+       "ending": "\"Stop!\" The robot said \"Yes, I know it"
+      }
+     ],
+     "other": 0.866737
+    },
+    "root_0_2": {
+     "context": "The robot saw the red button and the blue",
+     "options": [
+      {
+       "text": " button",
+       "probability": 0.515091,
+       "next": null,
+       "ending": "and then began to push the button until the red button began to turn"
+      },
+      {
+       "text": " one",
+       "probability": 0.172641,
+       "next": null,
+       "ending": ", and it said, \"I want to go to the bar."
+      },
+      {
+       "text": " light",
+       "probability": 0.018034,
+       "next": null,
+       "ending": "went on, and it felt a bit like an electric jolt,"
+      }
+     ],
+     "other": 0.294234
+    },
+    "root_0": {
+     "context": "The robot saw the red button and the",
+     "options": [
+      {
+       "text": " red",
+       "probability": 0.052714,
+       "next": "root_0_0"
+      },
+      {
+       "text": " robot",
+       "probability": 0.027791,
+       "next": "root_0_1"
+      },
+      {
+       "text": " blue",
+       "probability": 0.025784,
+       "next": "root_0_2"
+      }
+     ],
+     "other": 0.893712
+    },
+    "root_1_0": {
+     "context": "The robot saw the red button and then the",
+     "options": [
+      {
+       "text": " red",
+       "probability": 0.111597,
+       "next": null,
+       "ending": "button that was on the keyboard, and the robot was just as excited"
+      },
+      {
+       "text": " green",
+       "probability": 0.064602,
+       "next": null,
+       "ending": "button and the green button."
+      },
+      {
+       "text": " blue",
+       "probability": 0.056663,
+       "next": null,
+       "ending": "button that was attached to it."
+      }
+     ],
+     "other": 0.767139
+    },
+    "root_1_1": {
+     "context": "The robot saw the red button and then turned",
+     "options": [
+      {
+       "text": " around",
+       "probability": 0.243074,
+       "next": null,
+       "ending": "and made a gesture to touch it."
+      },
+      {
+       "text": " to",
+       "probability": 0.143427,
+       "next": null,
+       "ending": "face the robot."
+      },
+      {
+       "text": " its",
+       "probability": 0.078735,
+       "next": null,
+       "ending": "head and pointed."
+      }
+     ],
+     "other": 0.534763
+    },
+    "root_1_2": {
+     "context": "The robot saw the red button and then it",
+     "options": [
+      {
+       "text": " started",
+       "probability": 0.032792,
+       "next": null,
+       "ending": "to run, so it didn't go to sleep."
+      },
+      {
+       "text": " was",
+       "probability": 0.026741,
+       "next": null,
+       "ending": "back to it's normal state."
+      },
+      {
+       "text": " began",
+       "probability": 0.026341,
+       "next": null,
+       "ending": "to move away from the robot."
+      }
+     ],
+     "other": 0.914125
+    },
+    "root_1": {
+     "context": "The robot saw the red button and then",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.057869,
+       "next": "root_1_0"
+      },
+      {
+       "text": " turned",
+       "probability": 0.028634,
+       "next": "root_1_1"
+      },
+      {
+       "text": " it",
+       "probability": 0.020552,
+       "next": "root_1_2"
+      }
+     ],
+     "other": 0.892945
+    },
+    "root_2_0": {
+     "context": "The robot saw the red button and was able",
+     "options": [
+      {
+       "text": " to",
+       "probability": 0.99159,
+       "next": null,
+       "ending": "perform a simple trick."
+      },
+      {
+       "text": " take",
+       "probability": 0.000198,
+       "next": null,
+       "ending": "the lever and move the robot to a position where it was able to"
+      },
+      {
+       "text": " do",
+       "probability": 0.000184,
+       "next": null,
+       "ending": "a few things."
+      }
+     ],
+     "other": 0.008028
+    },
+    "root_2_1": {
+     "context": "The robot saw the red button and was ready",
+     "options": [
+      {
+       "text": " to",
+       "probability": 0.805303,
+       "next": null,
+       "ending": "press the button."
+      },
+      {
+       "text": " for",
+       "probability": 0.068454,
+       "next": null,
+       "ending": "..."
+      },
+      {
+       "text": " when",
+       "probability": 0.006026,
+       "next": null,
+       "ending": "the robot saw the red button and the robot had a reaction."
+      }
+     ],
+     "other": 0.120217
+    },
+    "root_2_2": {
+     "context": "The robot saw the red button and was about",
+     "options": [
+      {
+       "text": " to",
+       "probability": 0.90632,
+       "next": null,
+       "ending": "press it, but it was too late."
+      },
+      {
+       "text": " five",
+       "probability": 0.004271,
+       "next": null,
+       "ending": "seconds into the session."
+      },
+      {
+       "text": " the",
+       "probability": 0.003803,
+       "next": null,
+       "ending": "same size as its human counterpart."
+      }
+     ],
+     "other": 0.085605
+    },
+    "root_2": {
+     "context": "The robot saw the red button and was",
+     "options": [
+      {
+       "text": " able",
+       "probability": 0.107636,
+       "next": "root_2_0"
+      },
+      {
+       "text": " ready",
+       "probability": 0.051656,
+       "next": "root_2_1"
+      },
+      {
+       "text": " about",
+       "probability": 0.048159,
+       "next": "root_2_2"
+      }
+     ],
+     "other": 0.792548
+    },
+    "root_3_0": {
+     "context": "The robot saw the red button and started to",
+     "options": [
+      {
+       "text": " move",
+       "probability": 0.11215,
+       "next": null,
+       "ending": "..."
+      },
+      {
+       "text": " run",
+       "probability": 0.043626,
+       "next": null,
+       "ending": "out of fuel, but the robot was quickly defeated by a powerful attack"
+      },
+      {
+       "text": " walk",
+       "probability": 0.040073,
+       "next": null,
+       "ending": "slowly toward the side, toward the camera."
+      }
+     ],
+     "other": 0.80415
+    },
+    "root_3_1": {
+     "context": "The robot saw the red button and started moving",
+     "options": [
+      {
+       "text": " forward",
+       "probability": 0.037028,
+       "next": null,
+       "ending": ", and the robot's head was moving."
+      },
+      {
+       "text": " it",
+       "probability": 0.032424,
+       "next": null,
+       "ending": ", but the robot only saw the red button and didn't move."
+      },
+      {
+       "text": " towards",
+       "probability": 0.029519,
+       "next": null,
+       "ending": "..."
+      }
+     ],
+     "other": 0.90103
+    },
+    "root_3_2": {
+     "context": "The robot saw the red button and started running",
+     "options": [
+      {
+       "text": " away",
+       "probability": 0.051616,
+       "next": null,
+       "ending": "..."
+      },
+      {
+       "text": " towards",
+       "probability": 0.028467,
+       "next": null,
+       "ending": "the machine, but it didn't know what to do with the red"
+      },
+      {
+       "text": " to",
+       "probability": 0.027532,
+       "next": null,
+       "ending": "the next room."
+      }
+     ],
+     "other": 0.892384
+    },
+    "root_3": {
+     "context": "The robot saw the red button and started",
+     "options": [
+      {
+       "text": " to",
+       "probability": 0.326097,
+       "next": "root_3_0"
+      },
+      {
+       "text": " moving",
+       "probability": 0.071031,
+       "next": "root_3_1"
+      },
+      {
+       "text": " running",
+       "probability": 0.036064,
+       "next": "root_3_2"
+      }
+     ],
+     "other": 0.566809
+    },
+    "root": {
+     "context": "The robot saw the red button and",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.0431,
+       "next": "root_0"
+      },
+      {
+       "text": " then",
+       "probability": 0.034103,
+       "next": "root_1"
+      },
+      {
+       "text": " was",
+       "probability": 0.023703,
+       "next": "root_2"
+      },
+      {
+       "text": " started",
+       "probability": 0.023351,
+       "next": "root_3"
+      }
+     ],
+     "other": 0.875742
+    }
+   }
+  },
+  {
+   "id": "detective",
+   "title": "The detective",
+   "root": "The detective found a single clue under the",
+   "nodes": {
+    "root_0_0": {
+     "context": "The detective found a single clue under the door of",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.495074,
+       "next": null,
+       "ending": "apartment that she was in, which she had been looking for for more"
+      },
+      {
+       "text": " a",
+       "probability": 0.162632,
+       "next": null,
+       "ending": "room in the house, and they went to the house, and found"
+      },
+      {
+       "text": " his",
+       "probability": 0.08284,
+       "next": null,
+       "ending": "car that he had been looking for."
+      }
+     ],
+     "other": 0.259454
+    },
+    "root_0_1": {
+     "context": "The detective found a single clue under the door and",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.032636,
+       "next": null,
+       "ending": "girl's phone, but he found nothing that would lead to the girl"
+      },
+      {
+       "text": " a",
+       "probability": 0.031818,
+       "next": null,
+       "ending": "small piece of paper in the window."
+      },
+      {
+       "text": " was",
+       "probability": 0.030744,
+       "next": null,
+       "ending": "able to trace it to a safe in the basement of a nearby home"
+      }
+     ],
+     "other": 0.904801
+    },
+    "root_0_2": {
+     "context": "The detective found a single clue under the door that",
+     "options": [
+      {
+       "text": " led",
+       "probability": 0.204333,
+       "next": null,
+       "ending": "to the next floor and a door leading to a second floor."
+      },
+      {
+       "text": " would",
+       "probability": 0.056513,
+       "next": null,
+       "ending": "lead to a new, more sinister explanation: that the child had been"
+      },
+      {
+       "text": " had",
+       "probability": 0.042957,
+       "next": null,
+       "ending": "been tampered with."
+      }
+     ],
+     "other": 0.696197
+    },
+    "root_0": {
+     "context": "The detective found a single clue under the door",
+     "options": [
+      {
+       "text": " of",
+       "probability": 0.090146,
+       "next": "root_0_0"
+      },
+      {
+       "text": " and",
+       "probability": 0.080446,
+       "next": "root_0_1"
+      },
+      {
+       "text": " that",
+       "probability": 0.059376,
+       "next": "root_0_2"
+      }
+     ],
+     "other": 0.770032
+    },
+    "root_1_0": {
+     "context": "The detective found a single clue under the bed and",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.046175,
+       "next": null,
+       "ending": "book in the corner of the room."
+      },
+      {
+       "text": " found",
+       "probability": 0.036372,
+       "next": null,
+       "ending": "that it had been pulled from a drawer under the bed."
+      },
+      {
+       "text": " the",
+       "probability": 0.030374,
+       "next": null,
+       "ending": "key was locked."
+      }
+     ],
+     "other": 0.887079
+    },
+    "root_1_1": {
+     "context": "The detective found a single clue under the bed that",
+     "options": [
+      {
+       "text": " led",
+       "probability": 0.117695,
+       "next": null,
+       "ending": "to the location of the man's home."
+      },
+      {
+       "text": " had",
+       "probability": 0.058967,
+       "next": null,
+       "ending": "been taken from a nearby house in the area where the bodies had been"
+      },
+      {
+       "text": " was",
+       "probability": 0.052706,
+       "next": null,
+       "ending": "not there before."
+      }
+     ],
+     "other": 0.770632
+    },
+    "root_1_2": {
+     "context": "The detective found a single clue under the bed in",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.468832,
+       "next": null,
+       "ending": "closet, which was also a red plastic bag with a red plastic bag"
+      },
+      {
+       "text": " a",
+       "probability": 0.140331,
+       "next": null,
+       "ending": "bedroom, which he had been hiding from her."
+      },
+      {
+       "text": " which",
+       "probability": 0.069205,
+       "next": null,
+       "ending": "he had made a series of incriminating notes."
+      }
+     ],
+     "other": 0.321632
+    },
+    "root_1": {
+     "context": "The detective found a single clue under the bed",
+     "options": [
+      {
+       "text": " and",
+       "probability": 0.066944,
+       "next": "root_1_0"
+      },
+      {
+       "text": " that",
+       "probability": 0.06196,
+       "next": "root_1_1"
+      },
+      {
+       "text": " in",
+       "probability": 0.040147,
+       "next": "root_1_2"
+      }
+     ],
+     "other": 0.830949
+    },
+    "root_2_0": {
+     "context": "The detective found a single clue under the table and",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.038529,
+       "next": null,
+       "ending": "note on it."
+      },
+      {
+       "text": " began",
+       "probability": 0.034532,
+       "next": null,
+       "ending": "investigating the missing girl's disappearance."
+      },
+      {
+       "text": " the",
+       "probability": 0.032622,
+       "next": null,
+       "ending": "only other clue was that he had been in the room with the girl"
+      }
+     ],
+     "other": 0.894317
+    },
+    "root_2_1": {
+     "context": "The detective found a single clue under the table that",
+     "options": [
+      {
+       "text": " led",
+       "probability": 0.126189,
+       "next": null,
+       "ending": "to the crime."
+      },
+      {
+       "text": " would",
+       "probability": 0.05503,
+       "next": null,
+       "ending": "lead to the police's investigation of the crime scene."
+      },
+      {
+       "text": " had",
+       "probability": 0.051933,
+       "next": null,
+       "ending": "been removed from the house."
+      }
+     ],
+     "other": 0.766848
+    },
+    "root_2_2": {
+     "context": "The detective found a single clue under the table in",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.436307,
+       "next": null,
+       "ending": "car's trunk, but it was a small red box."
+      },
+      {
+       "text": " a",
+       "probability": 0.178249,
+       "next": null,
+       "ending": "large envelope, which she was able to place under the table."
+      },
+      {
+       "text": " his",
+       "probability": 0.058899,
+       "next": null,
+       "ending": "pocket, which was a note from a friend."
+      }
+     ],
+     "other": 0.326546
+    },
+    "root_2": {
+     "context": "The detective found a single clue under the table",
+     "options": [
+      {
+       "text": " and",
+       "probability": 0.092454,
+       "next": "root_2_0"
+      },
+      {
+       "text": " that",
+       "probability": 0.077021,
+       "next": "root_2_1"
+      },
+      {
+       "text": " in",
+       "probability": 0.067595,
+       "next": "root_2_2"
+      }
+     ],
+     "other": 0.76293
+    },
+    "root_3_0": {
+     "context": "The detective found a single clue under the car door",
+     "options": [
+      {
+       "text": " that",
+       "probability": 0.111338,
+       "next": null,
+       "ending": "matched the description of the suspect, but the man didn't have his"
+      },
+      {
+       "text": " and",
+       "probability": 0.07512,
+       "next": null,
+       "ending": "a key in the back seat."
+      },
+      {
+       "text": " in",
+       "probability": 0.032226,
+       "next": null,
+       "ending": "the trunk of the car, but didn't discover any more."
+      }
+     ],
+     "other": 0.781317
+    },
+    "root_3_1": {
+     "context": "The detective found a single clue under the car window",
+     "options": [
+      {
+       "text": " that",
+       "probability": 0.209356,
+       "next": null,
+       "ending": "suggested the vehicle was in the same neighborhood."
+      },
+      {
+       "text": " and",
+       "probability": 0.065643,
+       "next": null,
+       "ending": "a note that read: \"I want to go back to my apartment"
+      },
+      {
+       "text": " of",
+       "probability": 0.02957,
+       "next": null,
+       "ending": "the vehicle, which was the only one left."
+      }
+     ],
+     "other": 0.695431
+    },
+    "root_3_2": {
+     "context": "The detective found a single clue under the car seat",
+     "options": [
+      {
+       "text": " that",
+       "probability": 0.115884,
+       "next": null,
+       "ending": "was missing from the vehicle."
+      },
+      {
+       "text": " and",
+       "probability": 0.068553,
+       "next": null,
+       "ending": "a bullet hole in the back of the car, police said."
+      },
+      {
+       "text": " of",
+       "probability": 0.057793,
+       "next": null,
+       "ending": "his car, which was parked on the ground."
+      }
+     ],
+     "other": 0.75777
+    },
+    "root_3": {
+     "context": "The detective found a single clue under the car",
+     "options": [
+      {
+       "text": " door",
+       "probability": 0.099754,
+       "next": "root_3_0"
+      },
+      {
+       "text": " window",
+       "probability": 0.097415,
+       "next": "root_3_1"
+      },
+      {
+       "text": " seat",
+       "probability": 0.051185,
+       "next": "root_3_2"
+      }
+     ],
+     "other": 0.751646
+    },
+    "root": {
+     "context": "The detective found a single clue under the",
+     "options": [
+      {
+       "text": " door",
+       "probability": 0.083633,
+       "next": "root_0"
+      },
+      {
+       "text": " bed",
+       "probability": 0.039873,
+       "next": "root_1"
+      },
+      {
+       "text": " table",
+       "probability": 0.030854,
+       "next": "root_2"
+      },
+      {
+       "text": " car",
+       "probability": 0.026566,
+       "next": "root_3"
+      }
+     ],
+     "other": 0.819074
+    }
+   }
+  },
+  {
+   "id": "meeting",
+   "title": "The meeting",
+   "root": "The message said the meeting was moved to",
+   "nodes": {
+    "root_0_0": {
+     "context": "The message said the meeting was moved to a different",
+     "options": [
+      {
+       "text": " location",
+       "probability": 0.215599,
+       "next": null,
+       "ending": ", but one that was more appropriate to the \"diverse\" city"
+      },
+      {
+       "text": " venue",
+       "probability": 0.104606,
+       "next": null,
+       "ending": "to prevent \"miscommunication\" between staff and the company, and to"
+      },
+      {
+       "text": " room",
+       "probability": 0.099549,
+       "next": null,
+       "ending": "where security staff could be present."
+      }
+     ],
+     "other": 0.580246
+    },
+    "root_0_1": {
+     "context": "The message said the meeting was moved to a separate",
+     "options": [
+      {
+       "text": " room",
+       "probability": 0.265978,
+       "next": null,
+       "ending": "for security as it was \"very close to the White House,\" according"
+      },
+      {
+       "text": " meeting",
+       "probability": 0.182691,
+       "next": null,
+       "ending": ", but that no such action was taken."
+      },
+      {
+       "text": " location",
+       "probability": 0.071669,
+       "next": null,
+       "ending": "where a second meeting is scheduled."
+      }
+     ],
+     "other": 0.479662
+    },
+    "root_0_2": {
+     "context": "The message said the meeting was moved to a new",
+     "options": [
+      {
+       "text": " location",
+       "probability": 0.38987,
+       "next": null,
+       "ending": ", where she could talk to other members of the group, the message"
+      },
+      {
+       "text": " meeting",
+       "probability": 0.081674,
+       "next": null,
+       "ending": "after an internal investigation."
+      },
+      {
+       "text": " venue",
+       "probability": 0.068519,
+       "next": null,
+       "ending": ", the Royal Albert Hall, because it was \"unacceptable for such"
+      }
+     ],
+     "other": 0.459937
+    },
+    "root_0": {
+     "context": "The message said the meeting was moved to a",
+     "options": [
+      {
+       "text": " different",
+       "probability": 0.188647,
+       "next": "root_0_0"
+      },
+      {
+       "text": " separate",
+       "probability": 0.073298,
+       "next": "root_0_1"
+      },
+      {
+       "text": " new",
+       "probability": 0.072707,
+       "next": "root_0_2"
+      }
+     ],
+     "other": 0.665348
+    },
+    "root_1_0": {
+     "context": "The message said the meeting was moved to the next",
+     "options": [
+      {
+       "text": " day",
+       "probability": 0.451955,
+       "next": null,
+       "ending": "because he was \"not satisfied\" with the proposal."
+      },
+      {
+       "text": " meeting",
+       "probability": 0.12479,
+       "next": null,
+       "ending": "at 9 a.m., a day after the mayor's office released"
+      },
+      {
+       "text": " floor",
+       "probability": 0.037315,
+       "next": null,
+       "ending": ", where the chief said he was \"not sure\" whether to allow"
+      }
+     ],
+     "other": 0.385939
+    },
+    "root_1_1": {
+     "context": "The message said the meeting was moved to the back",
+     "options": [
+      {
+       "text": " of",
+       "probability": 0.638976,
+       "next": null,
+       "ending": "the schedule, because the schedule is more important than the message."
+      },
+      {
+       "text": " burner",
+       "probability": 0.108512,
+       "next": null,
+       "ending": "to avoid the backlash of the protesters, who have called the meeting \""
+      },
+      {
+       "text": " room",
+       "probability": 0.039586,
+       "next": null,
+       "ending": "after the president said the meeting would be held in the Oval Office."
+      }
+     ],
+     "other": 0.212927
+    },
+    "root_1_2": {
+     "context": "The message said the meeting was moved to the second",
+     "options": [
+      {
+       "text": " floor",
+       "probability": 0.77292,
+       "next": null,
+       "ending": "of the building after the gunman opened fire."
+      },
+      {
+       "text": " day",
+       "probability": 0.05036,
+       "next": null,
+       "ending": "of the meeting, when an individual from the \"Sisterhood\""
+      },
+      {
+       "text": " week",
+       "probability": 0.011466,
+       "next": null,
+       "ending": "of April, but that it was being held in the presence of members"
+      }
+     ],
+     "other": 0.165253
+    },
+    "root_1": {
+     "context": "The message said the meeting was moved to the",
+     "options": [
+      {
+       "text": " next",
+       "probability": 0.047228,
+       "next": "root_1_0"
+      },
+      {
+       "text": " back",
+       "probability": 0.015,
+       "next": "root_1_1"
+      },
+      {
+       "text": " second",
+       "probability": 0.012622,
+       "next": "root_1_2"
+      }
+     ],
+     "other": 0.925149
+    },
+    "root_2_0": {
+     "context": "The message said the meeting was moved to an undisclosed",
+     "options": [
+      {
+       "text": " location",
+       "probability": 0.916134,
+       "next": null,
+       "ending": "and that it was \"a matter of time before it is resolved.\""
+      },
+      {
+       "text": " time",
+       "probability": 0.009035,
+       "next": null,
+       "ending": "and that \"no one will be held responsible for any action taken in"
+      },
+      {
+       "text": " place",
+       "probability": 0.007932,
+       "next": null,
+       "ending": ", and the meeting was not disclosed."
+      }
+     ],
+     "other": 0.066898
+    },
+    "root_2_1": {
+     "context": "The message said the meeting was moved to an earlier",
+     "options": [
+      {
+       "text": " date",
+       "probability": 0.28572,
+       "next": null,
+       "ending": "because it was \"unacceptable and disruptive\"."
+      },
+      {
+       "text": " meeting",
+       "probability": 0.216562,
+       "next": null,
+       "ending": "of the Commission on Human Rights (CHR)."
+      },
+      {
+       "text": " time",
+       "probability": 0.074699,
+       "next": null,
+       "ending": ", but it was unclear when it would take place."
+      }
+     ],
+     "other": 0.423019
+    },
+    "root_2_2": {
+     "context": "The message said the meeting was moved to an area",
+     "options": [
+      {
+       "text": " of",
+       "probability": 0.136758,
+       "next": null,
+       "ending": "the town where the group had gathered to meet their friends and family."
+      },
+      {
+       "text": " where",
+       "probability": 0.12037,
+       "next": null,
+       "ending": "the meeting would be held."
+      },
+      {
+       "text": " near",
+       "probability": 0.053561,
+       "next": null,
+       "ending": "the beach where it was hoped to be moved to a safe location,"
+      }
+     ],
+     "other": 0.689311
+    },
+    "root_2": {
+     "context": "The message said the meeting was moved to an",
+     "options": [
+      {
+       "text": " undisclosed",
+       "probability": 0.097838,
+       "next": "root_2_0"
+      },
+      {
+       "text": " earlier",
+       "probability": 0.038485,
+       "next": "root_2_1"
+      },
+      {
+       "text": " area",
+       "probability": 0.026295,
+       "next": "root_2_2"
+      }
+     ],
+     "other": 0.837382
+    },
+    "root_3_0": {
+     "context": "The message said the meeting was moved to avoid a",
+     "options": [
+      {
+       "text": " potential",
+       "probability": 0.073764,
+       "next": null,
+       "ending": "conflict of interest by the meeting was being held in a private meeting with"
+      },
+      {
+       "text": " conflict",
+       "probability": 0.061755,
+       "next": null,
+       "ending": "of interest, and that it was intended to make it clear that the"
+      },
+      {
+       "text": " confrontation",
+       "probability": 0.054625,
+       "next": null,
+       "ending": "and that the police chief should have known what had happened."
+      }
+     ],
+     "other": 0.809856
+    },
+    "root_3_1": {
+     "context": "The message said the meeting was moved to avoid any",
+     "options": [
+      {
+       "text": " confusion",
+       "probability": 0.047433,
+       "next": null,
+       "ending": "about what would happen in Syria, saying that it was \"the right"
+      },
+      {
+       "text": " further",
+       "probability": 0.046112,
+       "next": null,
+       "ending": "disruption to the city's main railway lines and to avoid further disruptions to"
+      },
+      {
+       "text": " potential",
+       "probability": 0.041085,
+       "next": null,
+       "ending": "confrontation with the White House."
+      }
+     ],
+     "other": 0.865369
+    },
+    "root_3_2": {
+     "context": "The message said the meeting was moved to avoid the",
+     "options": [
+      {
+       "text": " possibility",
+       "probability": 0.084523,
+       "next": null,
+       "ending": "of losing a deal."
+      },
+      {
+       "text": " risk",
+       "probability": 0.050579,
+       "next": null,
+       "ending": "of \"an embarrassing confrontation.\" The meeting was also attended by"
+      },
+      {
+       "text": " appearance",
+       "probability": 0.044181,
+       "next": null,
+       "ending": "of \"contempt for national security.\" \"We are deeply"
+      }
+     ],
+     "other": 0.820718
+    },
+    "root_3": {
+     "context": "The message said the meeting was moved to avoid",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.09182,
+       "next": "root_3_0"
+      },
+      {
+       "text": " any",
+       "probability": 0.059315,
+       "next": "root_3_1"
+      },
+      {
+       "text": " the",
+       "probability": 0.054983,
+       "next": "root_3_2"
+      }
+     ],
+     "other": 0.793882
+    },
+    "root": {
+     "context": "The message said the meeting was moved to",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.105079,
+       "next": "root_0"
+      },
+      {
+       "text": " the",
+       "probability": 0.094787,
+       "next": "root_1"
+      },
+      {
+       "text": " an",
+       "probability": 0.02716,
+       "next": "root_2"
+      },
+      {
+       "text": " avoid",
+       "probability": 0.026081,
+       "next": "root_3"
+      }
+     ],
+     "other": 0.746893
+    }
+   }
+  },
+  {
+   "id": "dragon",
+   "title": "The dragon",
+   "root": "When the dragon reached the village, it",
+   "nodes": {
+    "root_0_0": {
+     "context": "When the dragon reached the village, it was immediately",
+     "options": [
+      {
+       "text": " attacked",
+       "probability": 0.151792,
+       "next": null,
+       "ending": "by a swarm of monsters."
+      },
+      {
+       "text": " discovered",
+       "probability": 0.029431,
+       "next": null,
+       "ending": "that its leader was a young man who was only twenty-five years"
+      },
+      {
+       "text": " surrounded",
+       "probability": 0.027859,
+       "next": null,
+       "ending": "by several large monsters, and the four adventurers were already at the entrance"
+      }
+     ],
+     "other": 0.790918
+    },
+    "root_0_1": {
+     "context": "When the dragon reached the village, it was revealed",
+     "options": [
+      {
+       "text": " that",
+       "probability": 0.805854,
+       "next": null,
+       "ending": "the dragon had a lot of treasure inside."
+      },
+      {
+       "text": " to",
+       "probability": 0.075886,
+       "next": null,
+       "ending": "be a massive, magical beast, with a huge head and a large"
+      },
+      {
+       "text": " the",
+       "probability": 0.020248,
+       "next": null,
+       "ending": "location of the dragon's lair."
+      }
+     ],
+     "other": 0.098012
+    },
+    "root_0_2": {
+     "context": "When the dragon reached the village, it was not",
+     "options": [
+      {
+       "text": " long",
+       "probability": 0.097205,
+       "next": null,
+       "ending": "before the bandits began to attack."
+      },
+      {
+       "text": " clear",
+       "probability": 0.072216,
+       "next": null,
+       "ending": "what it wanted."
+      },
+      {
+       "text": " only",
+       "probability": 0.044375,
+       "next": null,
+       "ending": "the villagers who were affected but also the villagers themselves."
+      }
+     ],
+     "other": 0.786204
+    },
+    "root_0": {
+     "context": "When the dragon reached the village, it was",
+     "options": [
+      {
+       "text": " immediately",
+       "probability": 0.032987,
+       "next": "root_0_0"
+      },
+      {
+       "text": " revealed",
+       "probability": 0.026136,
+       "next": "root_0_1"
+      },
+      {
+       "text": " not",
+       "probability": 0.017158,
+       "next": "root_0_2"
+      }
+     ],
+     "other": 0.923718
+    },
+    "root_1_0": {
+     "context": "When the dragon reached the village, it began to",
+     "options": [
+      {
+       "text": " attack",
+       "probability": 0.060266,
+       "next": null,
+       "ending": "the village, killing many villagers."
+      },
+      {
+       "text": " grow",
+       "probability": 0.027396,
+       "next": null,
+       "ending": "l and start to bite."
+      },
+      {
+       "text": " fight",
+       "probability": 0.022469,
+       "next": null,
+       "ending": "its way through the villagers."
+      }
+     ],
+     "other": 0.889869
+    },
+    "root_1_1": {
+     "context": "When the dragon reached the village, it began a",
+     "options": [
+      {
+       "text": " series",
+       "probability": 0.036387,
+       "next": null,
+       "ending": "of events that would lead it to become the first known dragon to attack"
+      },
+      {
+       "text": " battle",
+       "probability": 0.033803,
+       "next": null,
+       "ending": "with the dragon's tail."
+      },
+      {
+       "text": " ritual",
+       "probability": 0.030268,
+       "next": null,
+       "ending": "to cast an egg charm on the villagers."
+      }
+     ],
+     "other": 0.899542
+    },
+    "root_1_2": {
+     "context": "When the dragon reached the village, it began its",
+     "options": [
+      {
+       "text": " journey",
+       "probability": 0.139112,
+       "next": null,
+       "ending": "toward the village."
+      },
+      {
+       "text": " attack",
+       "probability": 0.079691,
+       "next": null,
+       "ending": "upon the villagers."
+      },
+      {
+       "text": " descent",
+       "probability": 0.055942,
+       "next": null,
+       "ending": "into the forest."
+      }
+     ],
+     "other": 0.725254
+    },
+    "root_1": {
+     "context": "When the dragon reached the village, it began",
+     "options": [
+      {
+       "text": " to",
+       "probability": 0.570672,
+       "next": "root_1_0"
+      },
+      {
+       "text": " a",
+       "probability": 0.021581,
+       "next": "root_1_1"
+      },
+      {
+       "text": " its",
+       "probability": 0.020351,
+       "next": "root_1_2"
+      }
+     ],
+     "other": 0.387396
+    },
+    "root_2_0": {
+     "context": "When the dragon reached the village, it attacked the",
+     "options": [
+      {
+       "text": " villagers",
+       "probability": 0.094715,
+       "next": null,
+       "ending": ", killing all of the villagers and destroying all of the houses and buildings"
+      },
+      {
+       "text": " village",
+       "probability": 0.071557,
+       "next": null,
+       "ending": "..."
+      },
+      {
+       "text": " two",
+       "probability": 0.016019,
+       "next": null,
+       "ending": "of them in the process."
+      }
+     ],
+     "other": 0.817709
+    },
+    "root_2_1": {
+     "context": "When the dragon reached the village, it attacked and",
+     "options": [
+      {
+       "text": " attacked",
+       "probability": 0.063117,
+       "next": null,
+       "ending": "all of the villagers."
+      },
+      {
+       "text": " destroyed",
+       "probability": 0.046316,
+       "next": null,
+       "ending": "a large part of the village."
+      },
+      {
+       "text": " took",
+       "probability": 0.038198,
+       "next": null,
+       "ending": "over the town."
+      }
+     ],
+     "other": 0.852369
+    },
+    "root_2_2": {
+     "context": "When the dragon reached the village, it attacked them",
+     "options": [
+      {
+       "text": " with",
+       "probability": 0.207024,
+       "next": null,
+       "ending": "its claws and attacked them with its claws."
+      },
+      {
+       "text": " and",
+       "probability": 0.084288,
+       "next": null,
+       "ending": "took the lives of the villagers, and as they fled, the dragon"
+      },
+      {
+       "text": " all",
+       "probability": 0.033012,
+       "next": null,
+       "ending": ", but the dragon was still fighting."
+      }
+     ],
+     "other": 0.675677
+    },
+    "root_2": {
+     "context": "When the dragon reached the village, it attacked",
+     "options": [
+      {
+       "text": " the",
+       "probability": 0.223743,
+       "next": "root_2_0"
+      },
+      {
+       "text": " and",
+       "probability": 0.045286,
+       "next": "root_2_1"
+      },
+      {
+       "text": " them",
+       "probability": 0.043452,
+       "next": "root_2_2"
+      }
+     ],
+     "other": 0.687518
+    },
+    "root_3_0": {
+     "context": "When the dragon reached the village, it had a",
+     "options": [
+      {
+       "text": " very",
+       "probability": 0.023493,
+       "next": null,
+       "ending": "strong feeling of safety."
+      },
+      {
+       "text": " large",
+       "probability": 0.018812,
+       "next": null,
+       "ending": "battle axe and a heavy shield."
+      },
+      {
+       "text": " small",
+       "probability": 0.017834,
+       "next": null,
+       "ending": "feast of eggs and rice, and when it came to eating the meat"
+      }
+     ],
+     "other": 0.93986
+    },
+    "root_3_1": {
+     "context": "When the dragon reached the village, it had already",
+     "options": [
+      {
+       "text": " been",
+       "probability": 0.063752,
+       "next": null,
+       "ending": "able to use all the resources of the village."
+      },
+      {
+       "text": " attacked",
+       "probability": 0.030224,
+       "next": null,
+       "ending": "the other party."
+      },
+      {
+       "text": " begun",
+       "probability": 0.026415,
+       "next": null,
+       "ending": "to attack the village and had attacked the dragon again."
+      }
+     ],
+     "other": 0.87961
+    },
+    "root_3_2": {
+     "context": "When the dragon reached the village, it had been",
+     "options": [
+      {
+       "text": " attacked",
+       "probability": 0.024355,
+       "next": null,
+       "ending": "by the dragon's horde."
+      },
+      {
+       "text": " waiting",
+       "probability": 0.017597,
+       "next": null,
+       "ending": "for all of its kind."
+      },
+      {
+       "text": " a",
+       "probability": 0.017182,
+       "next": null,
+       "ending": "small village with a few people."
+      }
+     ],
+     "other": 0.940865
+    },
+    "root_3": {
+     "context": "When the dragon reached the village, it had",
+     "options": [
+      {
+       "text": " a",
+       "probability": 0.0744,
+       "next": "root_3_0"
+      },
+      {
+       "text": " already",
+       "probability": 0.064416,
+       "next": "root_3_1"
+      },
+      {
+       "text": " been",
+       "probability": 0.060908,
+       "next": "root_3_2"
+      }
+     ],
+     "other": 0.800277
+    },
+    "root": {
+     "context": "When the dragon reached the village, it",
+     "options": [
+      {
+       "text": " was",
+       "probability": 0.131553,
+       "next": "root_0"
+      },
+      {
+       "text": " began",
+       "probability": 0.03116,
+       "next": "root_1"
+      },
+      {
+       "text": " attacked",
+       "probability": 0.024648,
+       "next": "root_2"
+      },
+      {
+       "text": " had",
+       "probability": 0.022599,
+       "next": "root_3"
+      }
+     ],
+     "other": 0.79004
+    }
+   }
+  }
+ ],
+ "notes": "Options are the most likely plain-word tokens at each step; 'other' covers everything else."
+}

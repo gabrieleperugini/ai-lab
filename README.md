@@ -9,10 +9,42 @@ no accounts, no API keys.
 - **Day 2: How neural networks learn** (scaffolded placeholders)
 - **Day 3: Unsupervised learning and RL** (scaffolded placeholders)
 
-All probability distributions shown in the modules are **teaching distributions**:
-hand-designed, model-like values chosen for clarity. They are not measured outputs
-of any real model. The sampling math (temperature, top-k, softmax) and the M5
-tokenizer (real cl100k_base) are real.
+**The probabilities are real.** Day 1 modules M1 to M4 show next-token
+probabilities and sampled continuations computed offline from **GPT-2** (a small
+open language model), and M6 shows **real GloVe word embeddings**. A note for
+instructors: these come from a small open model used for teaching; they are not
+meant to represent ChatGPT or any current frontier model exactly. The M5
+tokenizer (cl100k_base) and the sampling settings shown are also real.
+
+## Regenerating the Day 1 model content
+
+The site never runs a model in the browser: an offline pipeline writes static
+JSON into `src/content/generated/day1/`, and the app imports it at build time.
+
+```bash
+python3 -m venv --system-site-packages scripts/.venv
+scripts/.venv/bin/pip install -r scripts/requirements.txt
+scripts/.venv/bin/python scripts/generate_day1_llm_content.py    # M1-M4 (GPT-2)
+scripts/.venv/bin/python scripts/generate_day1_embeddings.py     # M6 (GloVe)
+```
+
+- `generate_day1_llm_content.py` computes next-token probabilities (single-token
+  candidates use exact probabilities; multi-token candidates use chain-rule
+  phrase probabilities), 3-level branching trees, and cached sampled
+  continuations at three randomness settings. `--only m1,m3` regenerates a subset.
+- `generate_day1_embeddings.py` loads glove-wiki-gigaword-100, projects a curated
+  vocabulary to 3D with PCA, and computes neighbors and puzzle answers from the
+  full vectors.
+- Diagnostics land in `scripts/output/day1_generation_report.md`.
+
+### Switching back to the hand-made v1 content
+
+The pre-round-2 version is preserved on branch `backup/day1-before-round2` and
+tag `day1-v1-handmade-probs`. For M1 only, you can also set
+`useGeneratedProbabilities: false` in `src/content/config.ts` to fall back to
+the hand-made rounds without switching branches. Polls and reflection
+submissions are currently disabled via the same file (`enablePolls`,
+`enableSubmissions`).
 
 ## Install and run locally
 
@@ -59,8 +91,11 @@ Give students the plain link with their class (`?class=A`); keep `teacher=1` for
 
 ## How to configure poll links
 
-No polling backend is built in. Each module can show external poll links
-(Slido, Mentimeter, Google Forms, Microsoft Forms, any URL):
+**Polls are currently disabled** (`enablePolls: false` in `src/content/config.ts`);
+reflection prompts are local-only and nothing is collected. To re-enable later:
+flip the flag, then configure per-module links. No polling backend is built in;
+each module can show external poll links (Slido, Mentimeter, Google Forms,
+Microsoft Forms, any URL):
 
 1. Open `src/content/day1-llm/modules.ts`.
 2. In a module's `poll` field set:

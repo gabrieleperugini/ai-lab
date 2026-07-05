@@ -1,0 +1,385 @@
+{
+ "model": "gpt2",
+ "pairs": [
+  {
+   "id": "bank",
+   "title": "Finance or river?",
+   "labelA": "Financial bank",
+   "labelB": "River bank",
+   "a": {
+    "prompt": "I walked into the bank and asked for a",
+    "options": [
+     {
+      "label": "loan",
+      "probability": 0.04866,
+      "multiToken": false
+     },
+     {
+      "label": "river",
+      "probability": 1e-05,
+      "multiToken": false
+     },
+     {
+      "label": "deposit",
+      "probability": 0.057832,
+      "multiToken": false
+     },
+     {
+      "label": "lake",
+      "probability": 1e-06,
+      "multiToken": false
+     },
+     {
+      "label": "check",
+      "probability": 0.038392,
+      "multiToken": false
+     }
+    ],
+    "other": 0.855105
+   },
+   "b": {
+    "prompt": "We had a picnic on the grassy bank of the",
+    "options": [
+     {
+      "label": "loan",
+      "probability": 3e-06,
+      "multiToken": false
+     },
+     {
+      "label": "river",
+      "probability": 0.214287,
+      "multiToken": false
+     },
+     {
+      "label": "deposit",
+      "probability": 6e-06,
+      "multiToken": false
+     },
+     {
+      "label": "lake",
+      "probability": 0.032937,
+      "multiToken": false
+     },
+     {
+      "label": "check",
+      "probability": 7e-06,
+      "multiToken": false
+     }
+    ],
+    "other": 0.75276
+   },
+   "candidates": [
+    "loan",
+    "river",
+    "deposit",
+    "lake",
+    "check"
+   ],
+   "explanation": "The words around 'bank' decide whether it is a building or a riverside."
+  },
+  {
+   "id": "bat",
+   "title": "Baseball or animal?",
+   "labelA": "Baseball",
+   "labelB": "Night animal",
+   "a": {
+    "prompt": "The player picked up the bat and hit the",
+    "options": [
+     {
+      "label": "ball",
+      "probability": 0.226242,
+      "multiToken": false
+     },
+     {
+      "label": "cave",
+      "probability": 4e-06,
+      "multiToken": false
+     },
+     {
+      "label": "window",
+      "probability": 0.000163,
+      "multiToken": false
+     },
+     {
+      "label": "pitch",
+      "probability": 0.008164,
+      "multiToken": false
+     },
+     {
+      "label": "darkness",
+      "probability": 4.4e-05,
+      "multiToken": false
+     }
+    ],
+    "other": 0.765383
+   },
+   "b": {
+    "prompt": "At night, the bat flew out of the",
+    "options": [
+     {
+      "label": "ball",
+      "probability": 0.009542,
+      "multiToken": false
+     },
+     {
+      "label": "cave",
+      "probability": 0.001997,
+      "multiToken": false
+     },
+     {
+      "label": "window",
+      "probability": 0.036587,
+      "multiToken": false
+     },
+     {
+      "label": "pitch",
+      "probability": 0.000406,
+      "multiToken": false
+     },
+     {
+      "label": "darkness",
+      "probability": 0.001546,
+      "multiToken": false
+     }
+    ],
+    "other": 0.949922
+   },
+   "candidates": [
+    "ball",
+    "cave",
+    "window",
+    "pitch",
+    "darkness"
+   ],
+   "explanation": "The actions 'picked up and hit' versus 'flew out' select the meaning."
+  },
+  {
+   "id": "mouse",
+   "title": "Computer or animal?",
+   "labelA": "Computer",
+   "labelB": "Animal",
+   "a": {
+    "prompt": "She clicked the mouse and opened the",
+    "options": [
+     {
+      "label": "file",
+      "probability": 0.046894,
+      "multiToken": false
+     },
+     {
+      "label": "table",
+      "probability": 0.00055,
+      "multiToken": false
+     },
+     {
+      "label": "bed",
+      "probability": 0.000196,
+      "multiToken": false
+     },
+     {
+      "label": "window",
+      "probability": 0.023543,
+      "multiToken": false
+     },
+     {
+      "label": "program",
+      "probability": 0.002052,
+      "multiToken": false
+     }
+    ],
+    "other": 0.926765
+   },
+   "b": {
+    "prompt": "The cat chased the mouse under the",
+    "options": [
+     {
+      "label": "file",
+      "probability": 3e-05,
+      "multiToken": false
+     },
+     {
+      "label": "table",
+      "probability": 0.051847,
+      "multiToken": false
+     },
+     {
+      "label": "bed",
+      "probability": 0.018946,
+      "multiToken": false
+     },
+     {
+      "label": "window",
+      "probability": 0.003113,
+      "multiToken": false
+     },
+     {
+      "label": "program",
+      "probability": 3.5e-05,
+      "multiToken": false
+     }
+    ],
+    "other": 0.926029
+   },
+   "candidates": [
+    "file",
+    "table",
+    "bed",
+    "window",
+    "program"
+   ],
+   "explanation": "Clicking selects the device; chasing selects the animal."
+  },
+  {
+   "id": "cold",
+   "title": "Illness or temperature?",
+   "labelA": "Illness",
+   "labelB": "Temperature",
+   "a": {
+    "prompt": "I stayed out in the rain and now I have a bad",
+    "options": [
+     {
+      "label": "cold",
+      "probability": 0.013294,
+      "multiToken": false
+     },
+     {
+      "label": "numb",
+      "probability": 4e-05,
+      "multiToken": false
+     },
+     {
+      "label": "cough",
+      "probability": 0.014216,
+      "multiToken": false
+     },
+     {
+      "label": "headache",
+      "probability": 0.103395,
+      "multiToken": false
+     },
+     {
+      "label": "wet",
+      "probability": 0.000735,
+      "multiToken": false
+     }
+    ],
+    "other": 0.86832
+   },
+   "b": {
+    "prompt": "The lake water was freezing, and my hands felt",
+    "options": [
+     {
+      "label": "cold",
+      "probability": 0.1442,
+      "multiToken": false
+     },
+     {
+      "label": "numb",
+      "probability": 0.031024,
+      "multiToken": false
+     },
+     {
+      "label": "cough",
+      "probability": 4e-06,
+      "multiToken": false
+     },
+     {
+      "label": "headache",
+      "probability": 7e-06,
+      "multiToken": false
+     },
+     {
+      "label": "wet",
+      "probability": 0.017225,
+      "multiToken": false
+     }
+    ],
+    "other": 0.80754
+   },
+   "candidates": [
+    "cold",
+    "numb",
+    "cough",
+    "headache",
+    "wet"
+   ],
+   "explanation": "The same word can be a sickness or a sensation, depending on the sentence."
+  },
+  {
+   "id": "python",
+   "title": "Programming or animal?",
+   "labelA": "Coding class",
+   "labelB": "Zoo",
+   "a": {
+    "prompt": "In the coding class, they learned Python and wrote a",
+    "options": [
+     {
+      "label": "program",
+      "probability": 0.043156,
+      "multiToken": false
+     },
+     {
+      "label": "tree",
+      "probability": 0.000262,
+      "multiToken": false
+     },
+     {
+      "label": "branch",
+      "probability": 9.7e-05,
+      "multiToken": false
+     },
+     {
+      "label": "script",
+      "probability": 0.023895,
+      "multiToken": false
+     },
+     {
+      "label": "snake",
+      "probability": 5.9e-05,
+      "multiToken": false
+     }
+    ],
+    "other": 0.932531
+   },
+   "b": {
+    "prompt": "At the zoo, they saw a python wrapped around a",
+    "options": [
+     {
+      "label": "program",
+      "probability": 9e-06,
+      "multiToken": false
+     },
+     {
+      "label": "tree",
+      "probability": 0.048611,
+      "multiToken": false
+     },
+     {
+      "label": "branch",
+      "probability": 0.002844,
+      "multiToken": false
+     },
+     {
+      "label": "script",
+      "probability": 1.9e-05,
+      "multiToken": false
+     },
+     {
+      "label": "snake",
+      "probability": 0.008485,
+      "multiToken": false
+     }
+    ],
+    "other": 0.940032
+   },
+   "candidates": [
+    "program",
+    "tree",
+    "branch",
+    "script",
+    "snake"
+   ],
+   "explanation": "The same word belongs to two completely different worlds."
+  }
+ ]
+}

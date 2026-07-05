@@ -3,6 +3,9 @@ import type { Distribution } from "../../lib/sampling";
 
 type ProbabilityBarsProps = {
   distribution: Distribution;
+  /** Render rows in exactly this label order instead of sorting by value.
+   * Labels missing from the distribution get a zero bar. */
+  order?: string[];
   /** When false, bars render at zero width (pre-reveal state). */
   revealed?: boolean;
   /** Token the student picked — gets a "YOU" badge. */
@@ -19,13 +22,16 @@ type ProbabilityBarsProps = {
  */
 export function ProbabilityBars({
   distribution,
+  order,
   revealed = true,
   highlight = null,
   picked = null,
   color = "amber",
   maxBars
 }: ProbabilityBarsProps) {
-  let entries = sortedEntries(distribution);
+  let entries: [string, number][] = order
+    ? order.map((label) => [label, distribution[label] ?? 0])
+    : sortedEntries(distribution);
   if (maxBars && entries.length > maxBars) {
     const kept = entries.slice(0, maxBars);
     const rest = entries.slice(maxBars).reduce((a, [, v]) => a + v, 0);

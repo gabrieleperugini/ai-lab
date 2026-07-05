@@ -29,7 +29,7 @@ export const chatbotChallengePrompts: ChallengePrompt[] = [
     category: "context",
     title: "Context changes meaning",
     prompt:
-      "For each sentence, give the three most likely next words: (1) I entered my bank and saw some ___ (2) I sat by the bank and saw some ___",
+      "Complete each sentence with one word: (1) I entered my bank and saw some ___ (2) I sat by the bank and saw some ___",
     beforeQuestion: "Which continuation changes the most?",
     discussion: "Compare with the Context Lens module."
   },
@@ -85,9 +85,19 @@ export const chatbotChallengePrompts: ChallengePrompt[] = [
     category: "context",
     title: "Bat ambiguity",
     prompt:
-      "Give the three most likely next words for each sentence: (1) The bat flew out of the cave and into the ___ (2) The player picked up the bat and walked to the ___",
+      "Complete each sentence with one word: (1) The bat flew out of the cave and into the ___ (2) The player picked up the bat and walked to the ___",
     beforeQuestion: "Which meaning of bat is active in each sentence?",
     discussion: "Compare with the Context Lens module."
+  },
+  {
+    id: "plausible-vs-true",
+    category: "hallucination",
+    title: "Plausible is not the same as true",
+    prompt:
+      "Complete each sentence in a few words, then say which completions are actually true: (1) The first person to walk on Mars was ___ (2) The capital of Australia is ___ (3) The author of The Hobbit was ___ (4) The largest animal alive today is the ___ (5) A triangle has three ___",
+    beforeQuestion: "Which of these can the chatbot answer truthfully? Which one has no true answer at all?",
+    discussion:
+      "Nobody has walked on Mars, yet a fluent completion is easy to produce. Plausible continuation is not the same as guaranteed truth."
   },
   {
     id: "mouse-ambiguity",

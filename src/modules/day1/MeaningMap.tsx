@@ -1,111 +1,129 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  embeddingCategories,
-  embeddingPoints,
-  embeddingPuzzles
-} from "../../content/day1-llm/embeddingDataset";
-import type { EmbeddingPoint, EmbeddingPuzzle } from "../../content/day1-llm/embeddingDataset";
+import generatedData from "../../content/generated/day1/m6_embeddings.json";
+import type { GenM6, GenEmbeddingPoint, GenEmbeddingPuzzle } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
+const data = generatedData as GenM6;
+const points = data.points;
+const puzzles = data.puzzles;
+
 const W = 880;
-const H = 520;
-const SCALE = 34;
-const FOCAL = 26;
-const START_YAW = -0.45;
-const START_PITCH = 0.32;
+const H = 540;
+const BASE_SCALE = 46;
+const FOCAL = 30;
+const START_YAW = -0.5;
+const START_PITCH = 0.3;
 
-type Projected = { p: EmbeddingPoint; px: number; py: number; depth: number; scale: number };
-
-function colorFor(p: EmbeddingPoint): string {
-  for (const c of embeddingCategories) {
-    if (p.tags.includes(c.tag)) return c.color;
-  }
-  return "var(--ink-soft)";
-}
-
-function dist3(a: EmbeddingPoint, b: EmbeddingPoint): number {
-  return Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z);
-}
-
-/** Center of the cloud, so rotation pivots around the data, not the origin. */
-const center = {
-  x: embeddingPoints.reduce((s, p) => s + p.x, 0) / embeddingPoints.length,
-  y: embeddingPoints.reduce((s, p) => s + p.y, 0) / embeddingPoints.length,
-  z: embeddingPoints.reduce((s, p) => s + p.z, 0) / embeddingPoints.length
+const CATEGORY_COLORS: Record<string, string> = {
+  "royalty & people": "#7b5cd6",
+  places: "#1d9e9e",
+  "food & drink": "#d97e00",
+  animals: "#8a6d1a",
+  transport: "#3a7ca5",
+  emotions: "#d64550",
+  school: "#123c8c",
+  technology: "#b0399f",
+  "river & money": "#2c9c6a"
 };
 
-function project(p: EmbeddingPoint, yaw: number, pitch: number): Projected {
+const center = {
+  x: points.reduce((s, p) => s + p.x, 0) / points.length,
+  y: points.reduce((s, p) => s + p.y, 0) / points.length,
+  z: points.reduce((s, p) => s + p.z, 0) / points.length
+};
+
+type XYZ = { x: number; y: number; z: number };
+
+function project(p: XYZ, yaw: number, pitch: number, zoom: number) {
   const cx = p.x - center.x;
   const cy = p.y - center.y;
   const cz = p.z - center.z;
-  // rotate around the vertical axis (yaw), then tilt (pitch)
   const x1 = cx * Math.cos(yaw) + cz * Math.sin(yaw);
   const z1 = -cx * Math.sin(yaw) + cz * Math.cos(yaw);
   const y2 = cy * Math.cos(pitch) - z1 * Math.sin(pitch);
   const z2 = cy * Math.sin(pitch) + z1 * Math.cos(pitch);
-  const scale = FOCAL / (FOCAL + z2);
+  const scale = (FOCAL / (FOCAL + z2)) * zoom;
   return {
-    p,
-    px: W / 2 + x1 * SCALE * scale,
-    py: H / 2 - y2 * SCALE * scale,
+    px: W / 2 + x1 * BASE_SCALE * scale,
+    py: H / 2 - y2 * BASE_SCALE * scale,
     depth: z2,
     scale
   };
 }
 
+const byLabel = new Map(points.map((p) => [p.label, p]));
+
 export default function MeaningMap({ onResult, resetSignal }: ModuleComponentProps) {
   const [yaw, setYaw] = useState(START_YAW);
   const [pitch, setPitch] = useState(START_PITCH);
+  const [zoom, setZoom] = useState(1);
   const [selected, setSelected] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [hiddenTags, setHiddenTags] = useState<Set<string>>(new Set());
+  const [hiddenCats, setHiddenCats] = useState<Set<string>>(new Set());
   const [puzzleIndex, setPuzzleIndex] = useState<number | null>(null);
-  const [puzzleGuess, setPuzzleGuess] = useState<string | null>(null);
+  const [guess, setGuess] = useState<string | null>(null);
   const dragRef = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  useEffect(() => {
+  const resetCamera = () => {
     setYaw(START_YAW);
     setPitch(START_PITCH);
+    setZoom(1);
+  };
+
+  useEffect(() => {
+    resetCamera();
     setSelected(null);
     setSearch("");
-    setHiddenTags(new Set());
+    setHiddenCats(new Set());
     setPuzzleIndex(null);
-    setPuzzleGuess(null);
+    setGuess(null);
   }, [resetSignal]);
 
-  const puzzle: EmbeddingPuzzle | null = puzzleIndex === null ? null : embeddingPuzzles[puzzleIndex];
+  // Wheel zoom needs a non-passive listener so preventDefault works.
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      setZoom((z) => Math.max(0.5, Math.min(3.5, z * (e.deltaY < 0 ? 1.1 : 0.9))));
+    };
+    svg.addEventListener("wheel", onWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", onWheel);
+  }, []);
 
-  const relevantLabels = useMemo(() => {
+  const puzzle: GenEmbeddingPuzzle | null = puzzleIndex === null ? null : puzzles[puzzleIndex];
+
+  const relevant = useMemo(() => {
     if (!puzzle) return null;
     const set = new Set<string>();
     if (puzzle.kind === "analogy") {
-      [puzzle.relationFrom, puzzle.relationTo, puzzle.start].forEach((l) => l && set.add(l));
-    } else {
-      (puzzle.options ?? []).forEach((l) => set.add(l));
-      // include words mentioned in the prompt so the reference is visible
-      embeddingPoints.forEach((p) => {
+      [puzzle.a, puzzle.b, puzzle.c].forEach((l) => l && set.add(l));
+    } else if (puzzle.options) {
+      puzzle.options.forEach((o) => byLabel.has(o) && set.add(o));
+      // include words the prompt mentions
+      for (const p of points) {
         if (puzzle.prompt.toLowerCase().includes(p.label.toLowerCase())) set.add(p.label);
-      });
+      }
     }
-    if (puzzleGuess) set.add(puzzleGuess);
-    return set;
-  }, [puzzle, puzzleGuess]);
+    if (guess && byLabel.has(guess)) set.add(guess);
+    return set.size > 0 ? set : null;
+  }, [puzzle, guess]);
 
   const visible = useMemo(
-    () => embeddingPoints.filter((p) => !p.tags.some((t) => hiddenTags.has(t))),
-    [hiddenTags]
+    () => points.filter((p) => !hiddenCats.has(p.category)),
+    [hiddenCats]
   );
 
   const projected = useMemo(() => {
-    const list = visible.map((p) => project(p, yaw, pitch));
-    list.sort((a, b) => b.depth - a.depth); // far points first
+    const list = visible.map((p) => ({ p, ...project(p, yaw, pitch, zoom) }));
+    list.sort((a, b) => b.depth - a.depth);
     return list;
-  }, [visible, yaw, pitch]);
+  }, [visible, yaw, pitch, zoom]);
 
-  const byLabel = useMemo(() => {
-    const m = new Map<string, Projected>();
-    projected.forEach((pr) => m.set(pr.p.label, pr));
+  const projByLabel = useMemo(() => {
+    const m = new Map<string, { px: number; py: number }>();
+    projected.forEach((pr) => m.set(pr.p.label, { px: pr.px, py: pr.py }));
     return m;
   }, [projected]);
 
@@ -114,58 +132,50 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
     ? visible.filter((p) => p.label.toLowerCase().includes(searchLower))
     : [];
 
-  const selectedPoint = embeddingPoints.find((p) => p.label === selected) ?? null;
-  const neighbors = selectedPoint
-    ? visible
-        .filter((p) => p.label !== selectedPoint.label)
-        .map((p) => ({ p, d: dist3(selectedPoint, p) }))
-        .sort((a, b) => a.d - b.d)
-        .slice(0, 4)
-    : [];
+  const selectedPoint = selected ? byLabel.get(selected) : null;
 
-  const clickPoint = (p: EmbeddingPoint) => {
-    if (puzzle) {
-      setPuzzleGuess(p.label);
-      onResult(
-        `puzzle '${puzzle.id}': guessed '${p.label}' (${p.label === puzzle.answer ? "correct" : "not quite"})`
-      );
+  const answerWith = (label: string) => {
+    if (!puzzle || puzzle.kind === "explore") return;
+    setGuess(label);
+    onResult(
+      `puzzle '${puzzle.id}': answered '${label}' (${label === puzzle.answer ? "correct" : "not quite"})`
+    );
+  };
+
+  const clickPoint = (p: GenEmbeddingPoint) => {
+    if (puzzle && puzzle.kind !== "explore") {
+      answerWith(p.label);
       return;
     }
     setSelected(p.label === selected ? null : p.label);
-    onResult(`explored '${p.label}'`);
+    onResult(`explored '${p.label}' (neighbors: ${p.neighbors.map((n) => n.label).join(", ")})`);
   };
 
-  // Analogy ghost arrow: start + (relationTo - relationFrom), projected live.
-  const analogyArrows = useMemo(() => {
+  // Analogy arrows: a -> b solid; c -> c + (b - a) dashed ghost.
+  const arrows = useMemo(() => {
     if (!puzzle || puzzle.kind !== "analogy") return null;
-    const from = embeddingPoints.find((p) => p.label === puzzle.relationFrom);
-    const to = embeddingPoints.find((p) => p.label === puzzle.relationTo);
-    const start = embeddingPoints.find((p) => p.label === puzzle.start);
-    if (!from || !to || !start) return null;
-    const ghostTarget: EmbeddingPoint = {
-      label: "?",
-      x: start.x + (to.x - from.x),
-      y: start.y + (to.y - from.y),
-      z: start.z + (to.z - from.z),
-      tags: []
-    };
+    const a = byLabel.get(puzzle.a!);
+    const b = byLabel.get(puzzle.b!);
+    const c = byLabel.get(puzzle.c!);
+    if (!a || !b || !c) return null;
+    const ghost: XYZ = { x: c.x + (b.x - a.x), y: c.y + (b.y - a.y), z: c.z + (b.z - a.z) };
     return {
-      a1: project(from, yaw, pitch),
-      a2: project(to, yaw, pitch),
-      b1: project(start, yaw, pitch),
-      b2: project(ghostTarget, yaw, pitch)
+      a1: project(a, yaw, pitch, zoom),
+      a2: project(b, yaw, pitch, zoom),
+      b1: project(c, yaw, pitch, zoom),
+      b2: project(ghost, yaw, pitch, zoom)
     };
-  }, [puzzle, yaw, pitch]);
+  }, [puzzle, yaw, pitch, zoom]);
 
   const startPuzzle = (i: number) => {
     setPuzzleIndex(i);
-    setPuzzleGuess(null);
+    setGuess(null);
     setSelected(null);
   };
 
   return (
     <div className="panel">
-      {/* top bar: search, view controls, puzzles */}
+      {/* top bar */}
       <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 12 }}>
         <input
           type="text"
@@ -179,318 +189,287 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
             padding: "8px 15px",
             fontSize: 14.5,
             fontFamily: "inherit",
-            minWidth: 210,
+            minWidth: 200,
             background: "#fff"
           }}
         />
         <div className="controlRow">
-          {embeddingPuzzles.map((pz, i) => (
-            <button
-              key={pz.id}
-              className={"btn small " + (puzzleIndex === i ? "accent" : "ghost")}
-              onClick={() => (puzzleIndex === i ? setPuzzleIndex(null) : startPuzzle(i))}
-            >
-              🧩 {i + 1}
-            </button>
-          ))}
-          <button
-            className="btn subtle small"
-            onClick={() => {
-              setYaw(START_YAW);
-              setPitch(START_PITCH);
-            }}
-          >
+          <button className="btn subtle small" onClick={() => setZoom((z) => Math.min(3.5, z * 1.25))}>
+            ➕ Zoom in
+          </button>
+          <button className="btn subtle small" onClick={() => setZoom((z) => Math.max(0.5, z / 1.25))}>
+            ➖ Zoom out
+          </button>
+          <button className="btn subtle small" onClick={resetCamera}>
             🧭 Reset view
           </button>
         </div>
       </div>
 
-      {/* the 3D map */}
-      <div className="vizStage" style={{ position: "relative" }}>
-        <svg
-          ref={svgRef}
-          viewBox={`0 0 ${W} ${H}`}
-          width="100%"
-          role="img"
-          aria-label="Rotatable 3D map of word meanings"
-          style={{ touchAction: "none", cursor: "grab" }}
-          onPointerDown={(e) => {
-            dragRef.current = { x: e.clientX, y: e.clientY, moved: false };
-            (e.currentTarget as SVGSVGElement).setPointerCapture?.(e.pointerId);
-          }}
-          onPointerMove={(e) => {
-            const d = dragRef.current;
-            if (!d) return;
-            const dx = e.clientX - d.x;
-            const dy = e.clientY - d.y;
-            if (Math.abs(dx) + Math.abs(dy) > 3) d.moved = true;
-            setYaw((v) => v + dx * 0.008);
-            setPitch((v) => Math.max(-1.3, Math.min(1.3, v + dy * 0.008)));
-            d.x = e.clientX;
-            d.y = e.clientY;
-          }}
-          onPointerUp={() => (dragRef.current = null)}
-          onPointerLeave={() => (dragRef.current = null)}
-        >
-          {/* ground shadow ellipse for depth reference */}
-          <ellipse cx={W / 2} cy={H - 26} rx={W * 0.34} ry={14} fill="var(--paper-2)" />
-
-          {/* analogy arrows */}
-          {analogyArrows && (
-            <>
-              <defs>
-                <marker id="anaArrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-                  <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--violet)" />
-                </marker>
-              </defs>
-              <line
-                x1={analogyArrows.a1.px}
-                y1={analogyArrows.a1.py}
-                x2={analogyArrows.a2.px}
-                y2={analogyArrows.a2.py}
-                stroke="var(--violet)"
-                strokeWidth={3.5}
-                markerEnd="url(#anaArrow)"
-              />
-              <line
-                x1={analogyArrows.b1.px}
-                y1={analogyArrows.b1.py}
-                x2={analogyArrows.b2.px}
-                y2={analogyArrows.b2.py}
-                stroke="var(--violet)"
-                strokeWidth={3.5}
-                strokeDasharray="7 6"
-                markerEnd="url(#anaArrow)"
-                opacity={0.75}
-              />
-              <text
-                x={analogyArrows.b2.px + 10}
-                y={analogyArrows.b2.py}
-                fontSize={20}
-                fontWeight={900}
-                fill="var(--violet)"
-              >
-                ?
-              </text>
-            </>
-          )}
-
-          {/* neighbor links */}
-          {selectedPoint &&
-            !puzzle &&
-            byLabel.get(selectedPoint.label) &&
-            neighbors.map(({ p }) => {
-              const a = byLabel.get(selectedPoint.label)!;
-              const b = byLabel.get(p.label);
-              if (!b) return null;
-              return (
+      <div className="meaningLayout">
+        {/* the 3D map */}
+        <div className="vizStage" style={{ position: "relative" }}>
+          <svg
+            ref={svgRef}
+            viewBox={`0 0 ${W} ${H}`}
+            width="100%"
+            role="img"
+            aria-label="Rotatable, zoomable 3D map of word meanings"
+            style={{ touchAction: "none", cursor: "grab", display: "block" }}
+            onPointerDown={(e) => {
+              dragRef.current = { x: e.clientX, y: e.clientY, moved: false };
+              (e.currentTarget as SVGSVGElement).setPointerCapture?.(e.pointerId);
+            }}
+            onPointerMove={(e) => {
+              const d = dragRef.current;
+              if (!d) return;
+              const dx = e.clientX - d.x;
+              const dy = e.clientY - d.y;
+              if (Math.abs(dx) + Math.abs(dy) > 3) d.moved = true;
+              setYaw((v) => v + dx * 0.008);
+              setPitch((v) => Math.max(-1.3, Math.min(1.3, v + dy * 0.008)));
+              d.x = e.clientX;
+              d.y = e.clientY;
+            }}
+            onPointerUp={() => {
+              // cleared on the next tick so point onClick can still read `moved`
+              setTimeout(() => (dragRef.current = null), 0);
+            }}
+            onPointerLeave={() => (dragRef.current = null)}
+          >
+            {/* analogy arrows (drawn under the points) */}
+            {arrows && (
+              <>
+                <defs>
+                  <marker id="anaArrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+                    <path d="M0,0 L7,3.5 L0,7 Z" fill="var(--violet)" />
+                  </marker>
+                </defs>
                 <line
-                  key={p.label}
-                  x1={a.px}
-                  y1={a.py}
-                  x2={b.px}
-                  y2={b.py}
-                  stroke="var(--amber-deep)"
-                  strokeWidth={2}
-                  strokeDasharray="4 4"
-                  opacity={0.8}
+                  x1={arrows.a1.px} y1={arrows.a1.py} x2={arrows.a2.px} y2={arrows.a2.py}
+                  stroke="var(--violet)" strokeWidth={3.5} markerEnd="url(#anaArrow)"
                 />
+                <line
+                  x1={arrows.b1.px} y1={arrows.b1.py} x2={arrows.b2.px} y2={arrows.b2.py}
+                  stroke="var(--violet)" strokeWidth={3.5} strokeDasharray="7 6"
+                  markerEnd="url(#anaArrow)" opacity={0.75}
+                />
+                <text x={arrows.b2.px + 10} y={arrows.b2.py} fontSize={22} fontWeight={900} fill="var(--violet)">
+                  ?
+                </text>
+              </>
+            )}
+
+            {/* neighbor links */}
+            {selectedPoint &&
+              !puzzle &&
+              selectedPoint.neighbors.map((n) => {
+                const a = projByLabel.get(selectedPoint.label);
+                const b = projByLabel.get(n.label);
+                if (!a || !b) return null;
+                return (
+                  <line
+                    key={n.label}
+                    x1={a.px} y1={a.py} x2={b.px} y2={b.py}
+                    stroke="var(--amber-deep)" strokeWidth={2} strokeDasharray="4 4" opacity={0.8}
+                  />
+                );
+              })}
+
+            {/* points, far to near */}
+            {projected.map(({ p, px, py, scale }) => {
+              const isSel = selected === p.label;
+              const isHit = searchHits.some((h) => h.label === p.label);
+              const isNb = selectedPoint?.neighbors.some((n) => n.label === p.label) ?? false;
+              const isRel = relevant ? relevant.has(p.label) : true;
+              const dim =
+                (puzzle && relevant && !isRel) ||
+                (searchLower && !isHit) ||
+                (selectedPoint && !isSel && !isNb && !searchLower && !puzzle);
+              const r = (isSel || isHit ? 8 : 5) * scale;
+              const guessed = guess === p.label;
+              return (
+                <g
+                  key={p.label}
+                  style={{ cursor: "pointer" }}
+                  opacity={dim ? 0.15 : Math.min(0.55 + scale * 0.45, 1)}
+                  onClick={() => {
+                    if (dragRef.current?.moved) return;
+                    clickPoint(p);
+                  }}
+                >
+                  <circle cx={px} cy={py} r={r + 7} fill="transparent" />
+                  <circle
+                    cx={px} cy={py} r={r}
+                    fill={CATEGORY_COLORS[p.category] ?? "var(--ink-soft)"}
+                    stroke={isSel || isHit || guessed ? "var(--amber-deep)" : "#fff"}
+                    strokeWidth={isSel || isHit || guessed ? 3 : 1.2}
+                  />
+                  <text
+                    x={px} y={py - r - 5}
+                    textAnchor="middle"
+                    fontSize={(isSel || isHit ? 14.5 : 11.5) * Math.min(Math.max(scale, 0.85), 1.4)}
+                    fontWeight={isSel || isHit || (puzzle ? isRel : false) ? 800 : 600}
+                    fill="var(--ink)"
+                  >
+                    {p.label}
+                  </text>
+                </g>
               );
             })}
+          </svg>
 
-          {/* points, far to near */}
-          {projected.map(({ p, px, py, scale }) => {
-            const isSel = selected === p.label;
-            const isHit = searchHits.some((h) => h.label === p.label);
-            const isNeighbor = neighbors.some((n) => n.p.label === p.label);
-            const isRelevant = relevantLabels ? relevantLabels.has(p.label) : true;
-            const dimBySearch = searchLower && !isHit;
-            const dimBySelect = selectedPoint && !isSel && !isNeighbor && !searchLower && !puzzle;
-            const dimByPuzzle = puzzle && !isRelevant;
-            const opacity = dimByPuzzle ? 0.14 : dimBySearch || dimBySelect ? 0.22 : 0.55 + scale * 0.45;
-            const r = (isSel || isHit ? 8 : 5) * scale;
-            const guessed = puzzleGuess === p.label;
-            return (
-              <g
-                key={p.label}
-                style={{ cursor: "pointer" }}
-                opacity={Math.min(opacity, 1)}
-                onClick={() => {
-                  if (dragRef.current?.moved) return;
-                  clickPoint(p);
-                }}
-              >
-                <circle cx={px} cy={py} r={r + 7} fill="transparent" />
-                <circle
-                  cx={px}
-                  cy={py}
-                  r={r}
-                  fill={colorFor(p)}
-                  stroke={isSel || isHit || guessed ? "var(--amber-deep)" : "#fff"}
-                  strokeWidth={isSel || isHit || guessed ? 3 : 1.2}
-                />
-                <text
-                  x={px}
-                  y={py - r - 5}
-                  textAnchor="middle"
-                  fontSize={(isSel || isHit ? 14.5 : 11.5) * Math.max(scale, 0.8)}
-                  fontWeight={isSel || isHit || (puzzle ? isRelevant : false) ? 800 : 600}
-                  fill="var(--ink)"
-                >
-                  {p.label}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-
-        {/* floating neighbor card */}
-        {selectedPoint && !puzzle && (
-          <div
-            className="fadeIn"
-            style={{
-              position: "absolute",
-              top: 12,
-              right: 12,
-              background: "#fff",
-              border: "1px solid var(--line)",
-              borderRadius: 12,
-              boxShadow: "var(--shadow)",
-              padding: "12px 16px",
-              maxWidth: 240,
-              fontSize: 14
-            }}
-          >
-            <strong style={{ fontSize: 16 }}>{selectedPoint.label}</strong>
-            <div className="hintText" style={{ fontSize: 12.5, marginTop: 2 }}>
-              {selectedPoint.tags.join(" · ")}
-            </div>
-            <div style={{ marginTop: 8, fontWeight: 700, fontSize: 12.5, color: "var(--ink-faint)" }}>
-              NEAREST NEIGHBORS
-            </div>
-            {neighbors.map(({ p, d }) => (
-              <div key={p.label} style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
-                <button
-                  onClick={() => setSelected(p.label)}
-                  style={{
-                    border: "none",
-                    background: "none",
-                    padding: 0,
-                    color: "var(--blue)",
-                    fontWeight: 700,
-                    fontSize: 14
-                  }}
-                >
-                  {p.label}
-                </button>
-                <span style={{ fontFamily: "var(--font-mono)", color: "var(--ink-faint)", fontSize: 12.5 }}>
-                  {d.toFixed(1)}
-                </span>
+          {/* floating neighbor card */}
+          {selectedPoint && !puzzle && (
+            <div
+              className="fadeIn"
+              style={{
+                position: "absolute", top: 12, right: 12,
+                background: "#fff", border: "1px solid var(--line)", borderRadius: 12,
+                boxShadow: "var(--shadow)", padding: "12px 16px", maxWidth: 235, fontSize: 14
+              }}
+            >
+              <strong style={{ fontSize: 16 }}>{selectedPoint.label}</strong>
+              <div className="hintText" style={{ fontSize: 12.5, marginTop: 2 }}>
+                {selectedPoint.category}
               </div>
-            ))}
-            <button className="btn subtle small" style={{ marginTop: 8 }} onClick={() => setSelected(null)}>
-              Close
-            </button>
-          </div>
-        )}
-
-        {/* drag hint */}
-        {!selectedPoint && !puzzle && (
-          <div
-            style={{
-              position: "absolute",
-              bottom: 10,
-              left: 14,
-              fontSize: 12.5,
-              color: "var(--ink-faint)",
-              fontWeight: 600
-            }}
-          >
-            🖐 drag to rotate · click a point for neighbors
-          </div>
-        )}
-      </div>
-
-      {/* active puzzle card */}
-      {puzzle && (
-        <div className="revealBox fadeIn" style={{ marginTop: 12 }}>
-          <strong>
-            Puzzle {puzzleIndex! + 1} of {embeddingPuzzles.length}: {puzzle.prompt}
-          </strong>
-          {puzzle.kind === "analogy" ? (
-            <p style={{ marginTop: 6, fontSize: 14.5 }}>
-              Start at <strong>{puzzle.start}</strong>, apply the direction{" "}
-              <strong>
-                {puzzle.relationFrom} → {puzzle.relationTo}
-              </strong>{" "}
-              (the dashed arrow), then click the point where it lands.
-            </p>
-          ) : (
-            <div className="controlRow" style={{ marginTop: 8 }}>
-              {(puzzle.options ?? []).map((o) => (
-                <button
-                  key={o}
-                  className={"choiceChip" + (puzzleGuess === o ? " selected" : "")}
-                  style={{ fontSize: 14, padding: "6px 13px" }}
-                  onClick={() => {
-                    setPuzzleGuess(o);
-                    onResult(
-                      `puzzle '${puzzle.id}': guessed '${o}' (${o === puzzle.answer ? "correct" : "not quite"})`
-                    );
-                  }}
-                >
-                  {o}
-                </button>
+              <div style={{ marginTop: 8, fontWeight: 700, fontSize: 12.5, color: "var(--ink-faint)" }}>
+                NEAREST NEIGHBORS (real vectors)
+              </div>
+              {selectedPoint.neighbors.map((n) => (
+                <div key={n.label} style={{ display: "flex", justifyContent: "space-between", gap: 10 }}>
+                  <button
+                    onClick={() => setSelected(n.label)}
+                    style={{ border: "none", background: "none", padding: 0, color: "var(--blue)", fontWeight: 700, fontSize: 14 }}
+                  >
+                    {n.label}
+                  </button>
+                  <span style={{ fontFamily: "var(--font-mono)", color: "var(--ink-faint)", fontSize: 12.5 }}>
+                    {n.similarity.toFixed(2)}
+                  </span>
+                </div>
               ))}
+              <button className="btn subtle small" style={{ marginTop: 8 }} onClick={() => setSelected(null)}>
+                Close
+              </button>
             </div>
           )}
-          {puzzleGuess && (
-            <p style={{ marginTop: 8 }}>
-              {puzzleGuess === puzzle.answer ? (
-                <strong>✅ Yes, {puzzle.answer}! {puzzle.explanation}</strong>
-              ) : (
-                <span>🤔 You picked '{puzzleGuess}'. Look again at the dimmed map and retry.</span>
-              )}
-            </p>
-          )}
-          <div className="controlRow" style={{ marginTop: 8 }}>
-            {puzzleIndex! < embeddingPuzzles.length - 1 && (
-              <button className="btn primary small" onClick={() => startPuzzle(puzzleIndex! + 1)}>
-                Next puzzle →
-              </button>
-            )}
-            <button className="btn subtle small" onClick={() => setPuzzleIndex(null)}>
-              Exit puzzles
-            </button>
-          </div>
-        </div>
-      )}
 
-      {/* category legend */}
-      <div className="legendRow">
-        {embeddingCategories.map((c) => (
-          <button
-            key={c.tag}
-            className={"legendChip" + (hiddenTags.has(c.tag) ? "" : " active")}
-            style={{ color: c.color }}
-            onClick={() =>
-              setHiddenTags((prev) => {
-                const next = new Set(prev);
-                if (next.has(c.tag)) next.delete(c.tag);
-                else next.add(c.tag);
-                return next;
-              })
-            }
-            title={hiddenTags.has(c.tag) ? "Show this category" : "Hide this category"}
-          >
-            ● {c.label}
-          </button>
-        ))}
+          {!selectedPoint && !puzzle && (
+            <div style={{ position: "absolute", bottom: 10, left: 14, fontSize: 12.5, color: "var(--ink-faint)", fontWeight: 600 }}>
+              🖐 drag to rotate · scroll to zoom · click a point
+            </div>
+          )}
+        </div>
+
+        {/* puzzle side panel */}
+        <aside className="puzzlePanel">
+          <div className="panelTitle">Puzzles</div>
+          {puzzle === null ? (
+            <>
+              <p className="hintText" style={{ marginBottom: 10 }}>
+                Five kinds of puzzle, answered by clicking the map or the choices.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {puzzles.map((pz, i) => (
+                  <button key={pz.id} className="btn ghost small" style={{ justifyContent: "flex-start" }} onClick={() => startPuzzle(i)}>
+                    🧩 {i + 1}. {pz.kind}
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="fadeIn">
+              <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 8 }}>
+                <span className="statPill">
+                  🧩 <span className="statValue">{puzzleIndex! + 1}</span> / {puzzles.length}
+                </span>
+                <div className="controlRow" style={{ gap: 6 }}>
+                  <button
+                    className="btn subtle small"
+                    disabled={puzzleIndex === 0}
+                    onClick={() => startPuzzle(puzzleIndex! - 1)}
+                  >
+                    ←
+                  </button>
+                  <button
+                    className="btn subtle small"
+                    disabled={puzzleIndex === puzzles.length - 1}
+                    onClick={() => startPuzzle(puzzleIndex! + 1)}
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
+              <p style={{ fontWeight: 700, fontSize: 15.5 }}>{puzzle.prompt}</p>
+              {puzzle.kind === "analogy" && (
+                <p className="hintText" style={{ marginTop: 6 }}>
+                  The solid arrow shows {puzzle.b} − {puzzle.a}. Follow the dashed copy from{" "}
+                  {puzzle.c} and click where it lands.
+                </p>
+              )}
+              {puzzle.options && (
+                <div className="controlRow" style={{ marginTop: 10 }}>
+                  {puzzle.options.map((o) => (
+                    <button
+                      key={o}
+                      className={"choiceChip" + (guess === o ? " selected" : "")}
+                      style={{ fontSize: 14, padding: "6px 13px" }}
+                      onClick={() => answerWith(o)}
+                    >
+                      {o}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {puzzle.kind === "explore" && (
+                <p className="hintText" style={{ marginTop: 8 }}>
+                  No right answer here: click around and compare notes with your group.
+                </p>
+              )}
+              {guess && puzzle.kind !== "explore" && (
+                <div className="revealBox" style={{ marginTop: 10, fontSize: 14 }}>
+                  {guess === puzzle.answer ? (
+                    <strong>✅ {puzzle.answer}! {puzzle.explanation}</strong>
+                  ) : (
+                    <span>🤔 You picked '{guess}'. Look at the dimmed map and try again.</span>
+                  )}
+                </div>
+              )}
+              <div className="controlRow" style={{ marginTop: 10 }}>
+                <button className="btn subtle small" onClick={() => setPuzzleIndex(null)}>
+                  Exit puzzles
+                </button>
+              </div>
+            </div>
+          )}
+
+          <hr className="divider" />
+          <div className="legendRow" style={{ marginTop: 0 }}>
+            {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
+              <button
+                key={cat}
+                className={"legendChip" + (hiddenCats.has(cat) ? "" : " active")}
+                style={{ color, fontSize: 12 }}
+                onClick={() =>
+                  setHiddenCats((prev) => {
+                    const next = new Set(prev);
+                    if (next.has(cat)) next.delete(cat);
+                    else next.add(cat);
+                    return next;
+                  })
+                }
+              >
+                ● {cat}
+              </button>
+            ))}
+          </div>
+        </aside>
       </div>
 
-      <p className="hintText" style={{ marginTop: 10 }}>
-        This is a hand-made teaching map in 3 dimensions, not real embeddings. Real models use
-        hundreds of dimensions; the geometry idea is exactly the same.
+      <p className="hintText" style={{ marginTop: 12 }}>
+        These are REAL word embeddings ({data.model}), reduced to 3D for display. Neighbors and
+        puzzle answers are computed from the full 100-dimensional vectors.
       </p>
     </div>
   );
