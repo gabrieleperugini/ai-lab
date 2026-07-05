@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { LabModule } from "../../lib/types";
 import type { ClassroomMode } from "../../lib/classMode";
+import { labConfig } from "../../content/config";
 
 type ReflectionBoxProps = {
   module: LabModule;
@@ -11,9 +12,11 @@ type ReflectionBoxProps = {
 };
 
 /**
- * Local-only reflection: groups type an answer, then copy a formatted
- * submission card to the clipboard and paste it into the class form/chat.
- * Nothing is sent anywhere by the app itself.
+ * Local-only reflection: groups discuss and can type notes for themselves.
+ * Nothing is sent or collected anywhere.
+ * When labConfig.enableSubmissions is true, a copy-to-clipboard submission
+ * card (class, group, module, result, reflection) is offered so answers can
+ * be pasted into an external form; disabled for now.
  */
 export function ReflectionBox({ module, mode, observedResult }: ReflectionBoxProps) {
   const [groupName, setGroupName] = useState("");
@@ -37,7 +40,6 @@ export function ReflectionBox({ module, mode, observedResult }: ReflectionBoxPro
     try {
       await navigator.clipboard.writeText(text);
     } catch {
-      // Clipboard API can fail on http or older browsers: fall back.
       const ta = document.createElement("textarea");
       ta.value = text;
       document.body.appendChild(ta);
@@ -51,34 +53,38 @@ export function ReflectionBox({ module, mode, observedResult }: ReflectionBoxPro
 
   return (
     <div className="panel tight reflectionBox">
-      <div className="panelTitle">Your reflection</div>
+      <div className="panelTitle">Discuss in your group</div>
       {module.reflectionQuestions.map((q, i) => (
         <p className="reflectionQuestion" key={i}>
           {i + 1}. {q}
         </p>
       ))}
-      <label htmlFor={`group-${module.id}`}>Group name or number</label>
-      <input
-        id={`group-${module.id}`}
-        type="text"
-        value={groupName}
-        placeholder="e.g. Group 7, The Lions"
-        onChange={(e) => setGroupName(e.target.value)}
-      />
-      <label htmlFor={`refl-${module.id}`}>Your answer</label>
+      <label htmlFor={`refl-${module.id}`}>Notes (stay on this device only)</label>
       <textarea
         id={`refl-${module.id}`}
         rows={3}
         value={reflection}
-        placeholder="Write your group's answer here..."
+        placeholder="Optional: jot down your group's thoughts..."
         onChange={(e) => setReflection(e.target.value)}
       />
-      <div className="controlRow" style={{ marginTop: 12 }}>
-        <button className="btn primary small" onClick={copy}>
-          📋 Copy reflection
-        </button>
-        {copied && <span className="copiedFlash">Copied! Paste it into the class form.</span>}
-      </div>
+      {labConfig.enableSubmissions && (
+        <>
+          <label htmlFor={`group-${module.id}`}>Group name or number</label>
+          <input
+            id={`group-${module.id}`}
+            type="text"
+            value={groupName}
+            placeholder="e.g. Group 7, The Lions"
+            onChange={(e) => setGroupName(e.target.value)}
+          />
+          <div className="controlRow" style={{ marginTop: 12 }}>
+            <button className="btn primary small" onClick={copy}>
+              📋 Copy reflection
+            </button>
+            {copied && <span className="copiedFlash">Copied! Paste it into the class form.</span>}
+          </div>
+        </>
+      )}
     </div>
   );
 }

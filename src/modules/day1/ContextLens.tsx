@@ -1,56 +1,49 @@
-import { useEffect, useState } from "react";
-import { contextPairs } from "../../content/day1-llm/contextExamples";
+import { useEffect, useMemo, useState } from "react";
+import generatedData from "../../content/generated/day1/m2_context_switch.json";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
+import type { GenM2 } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
-import type { ContextSide } from "../../content/day1-llm/contextExamples";
 
-function HighlightedPrompt({ side, showHighlights }: { side: ContextSide; showHighlights: boolean }) {
-  const words = side.prompt.split(" ");
-  return (
-    <p className="promptDisplay" style={{ fontSize: "clamp(18px, 2.4vw, 23px)" }}>
-      {words.map((w, i) => {
-        const clean = w.replace(/[.,]/g, "");
-        const isHl = showHighlights && side.highlight.includes(clean);
-        return (
-          <span key={i}>
-            {isHl ? <span className="hlWord">{w}</span> : w}
-            {i < words.length - 1 ? " " : ""}
-          </span>
-        );
-      })}{" "}
-      <span className="blank">____</span>
-    </p>
-  );
-}
+const data = generatedData as GenM2;
 
 /**
- * One prompt at a time. A big flip button swaps the few context words and
- * the probability bars animate between the two worlds.
+ * One prompt at a time. A big flip button swaps the context; the SAME
+ * candidate bars update in place, so the flip is impossible to miss.
+ * Probabilities come from the offline GPT-2 run (static JSON).
  */
 export default function ContextLens({ onResult, resetSignal }: ModuleComponentProps) {
   const [pairIndex, setPairIndex] = useState(0);
-  const [world, setWorld] = useState<"left" | "right">("left");
-  const [showHighlights, setShowHighlights] = useState(false);
+  const [side, setSide] = useState<"a" | "b">("a");
 
-  const pair = contextPairs[pairIndex];
-  const activeSide = pair[world];
-  const otherLabel = world === "left" ? pair.rightLabel : pair.leftLabel;
+  const pair = data.pairs[pairIndex];
+  const active = pair[side];
+  const otherLabel = side === "a" ? pair.labelB : pair.labelA;
+
+  // Stable candidate order across the flip: sort by the max of the two sides.
+  const order = useMemo(() => {
+    const maxP: Record<string, number> = {};
+    for (const c of pair.candidates) {
+      const pa = pair.a.options.find((o) => o.label === c)?.probability ?? 0;
+      const pb = pair.b.options.find((o) => o.label === c)?.probability ?? 0;
+      maxP[c] = Math.max(pa, pb);
+    }
+    return [...pair.candidates].sort((x, y) => maxP[y] - maxP[x]).concat("other");
+  }, [pair]);
+
+  const distribution = useMemo(() => {
+    const d: Record<string, number> = { other: active.other };
+    for (const o of active.options) d[o.label] = o.probability;
+    return d;
+  }, [active]);
 
   useEffect(() => {
     setPairIndex(0);
-    setWorld("left");
-    setShowHighlights(false);
+    setSide("a");
   }, [resetSignal]);
 
   useEffect(() => {
-    onResult(`pair '${pair.id}', world: ${world === "left" ? pair.leftLabel : pair.rightLabel}`);
-  }, [pair, world, onResult]);
-
-  const selectPair = (index: number) => {
-    setPairIndex(index);
-    setWorld("left");
-    setShowHighlights(false);
-  };
+    onResult(`pair '${pair.id}', context: ${side === "a" ? pair.labelA : pair.labelB}`);
+  }, [pair, side, onResult]);
 
   return (
     <div className="panel">
@@ -59,7 +52,10 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
           Case
           <select
             value={pairIndex}
-            onChange={(e) => selectPair(Number(e.target.value))}
+            onChange={(e) => {
+              setPairIndex(Number(e.target.value));
+              setSide("a");
+            }}
             aria-label="Choose a context pair"
             style={{
               border: "none",
@@ -71,14 +67,14 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
               cursor: "pointer"
             }}
           >
-            {contextPairs.map((p, i) => (
+            {data.pairs.map((p, i) => (
               <option key={p.id} value={i}>
                 {i + 1}. {p.title}
               </option>
             ))}
           </select>
         </label>
-        <button className="btn primary" onClick={() => setWorld(world === "left" ? "right" : "left")}>
+        <button className="btn primary" onClick={() => setSide(side === "a" ? "b" : "a")}>
           🔄 Flip to “{otherLabel}”
         </button>
       </div>
@@ -86,34 +82,30 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
       <div className="vizStage" style={{ padding: 18 }}>
         <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 8 }}>
           <span className="panelTitle" style={{ marginBottom: 0 }}>
-            World: {world === "left" ? pair.leftLabel : pair.rightLabel}
+            Context: {side === "a" ? pair.labelA : pair.labelB}
           </span>
-          <span className="hintText">The sentence is almost the same, but the world has changed.</span>
         </div>
-        <HighlightedPrompt side={activeSide} showHighlights={showHighlights} />
+        <p className="promptDisplay" style={{ fontSize: "clamp(18px, 2.4vw, 23px)" }}>
+          {active.prompt} <span className="blank">____</span>
+        </p>
         <div style={{ marginTop: 14 }}>
           <ProbabilityBars
-            distribution={activeSide.probabilities}
-            color={world === "left" ? "blue" : "amber"}
+            distribution={distribution}
+            order={order}
+            color={side === "a" ? "blue" : "amber"}
             maxBars={6}
           />
         </div>
       </div>
 
-      <div className="controlRow" style={{ marginTop: 14 }}>
-        <button className="btn accent small" onClick={() => setShowHighlights((s) => !s)}>
-          {showHighlights ? "Hide the changed words" : "🔍 Reveal the changed words"}
-        </button>
-        <span className="hintText">Flip a few times before revealing. Which word does the work?</span>
-      </div>
+      <p className="hintText" style={{ marginTop: 12 }}>
+        Same word, different context, different next-token distribution. Flip a few times and
+        watch which bars trade places. Probabilities from {data.model}, computed offline.
+      </p>
 
-      {showHighlights && (
-        <div className="revealBox" style={{ marginTop: 14 }}>
-          <strong>Why:</strong> {pair.explanation}
-          <br />
-          <strong>Idea:</strong> {pair.takeaway}
-        </div>
-      )}
+      <div className="revealBox" style={{ marginTop: 12 }}>
+        {pair.explanation}
+      </div>
     </div>
   );
 }

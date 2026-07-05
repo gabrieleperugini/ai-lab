@@ -1,0 +1,1034 @@
+{
+ "model": "gpt2",
+ "prompts": [
+  {
+   "id": "student_test",
+   "prompt": "The student opened the test and realized",
+   "firstStep": {
+    "options": [
+     {
+      "text": " that",
+      "probability": 0.339478
+     },
+     {
+      "text": " he",
+      "probability": 0.200347
+     },
+     {
+      "text": " she",
+      "probability": 0.093368
+     },
+     {
+      "text": " the",
+      "probability": 0.05397
+     },
+     {
+      "text": " it",
+      "probability": 0.049727
+     },
+     {
+      "text": " his",
+      "probability": 0.034235
+     },
+     {
+      "text": " what",
+      "probability": 0.025146
+     },
+     {
+      "text": " how",
+      "probability": 0.022208
+     }
+    ],
+    "other": 0.181522
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "that he was in the middle of a test.",
+      "that he had been given a \"blank check\" for $1,000.",
+      "that he was not a good student.",
+      "that he was not a student.",
+      "that he was not the only one.",
+      "that he had been tricked.",
+      "that he had been given a blank check.",
+      "that he was not the only one who was not."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "that he was an idiot.",
+      "they weren't taking the test, but rather, they were writing a test.",
+      "that he was not getting a fair deal for his money.",
+      "the class was not interested in his answers, but rather a series of questions about the various fields he was taking.",
+      "that she didn't know the answer.",
+      "that he was in fact a computer.",
+      "that she was the perfect candidate for her position.",
+      "that it was going to be much harder than the others.",
+      "that he had a huge gap between his and his classmates' opinions of him.",
+      "she was being tested by a stranger.",
+      "he wasn't going to get a pass.",
+      "she could handle a lot of physical training.",
+      "he was not going to be a good student.",
+      "that the student was not doing a good job."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "how good-looking the kid is.",
+      "he understood exactly how he wanted to interpret many of the following answers: I know about Trump; have not seen any of",
+      "it looked like homework.",
+      "he was cheating, so he just took the test.",
+      "that she was reading at a full chapter level and it was important to be able to write through its rules of reading aloud, the",
+      "she was wrong.",
+      "the school actually told him they only were able to enroll a few of them at school.",
+      "the test was negative and he had been cheating that test for many weeks on three more tests.",
+      "what he was looking at, and he looked at the desk.",
+      "that there wasn't a real number but a 'W' score or standard deviation number, which he did and ran with.",
+      "she also would get very drunk later in a later-stage.",
+      "how much her partner loved what she was putting there.",
+      "that it wasn't actually a test in the sense of seeing how much you put in.",
+      "that what he'd been taught was that some more mathematics methods would be required for the task of predicting the performance of your student,"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "quiet_lab",
+   "prompt": "In a quiet laboratory, the machine suddenly",
+   "firstStep": {
+    "options": [
+     {
+      "text": " began",
+      "probability": 0.055592
+     },
+     {
+      "text": " stopped",
+      "probability": 0.037014
+     },
+     {
+      "text": " started",
+      "probability": 0.0287
+     },
+     {
+      "text": " turned",
+      "probability": 0.028241
+     },
+     {
+      "text": " became",
+      "probability": 0.019834
+     },
+     {
+      "text": " vibr",
+      "probability": 0.012025
+     },
+     {
+      "text": " went",
+      "probability": 0.011127
+     },
+     {
+      "text": " felt",
+      "probability": 0.010754
+     }
+    ],
+    "other": 0.796712
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "began to move.",
+      "began to vibrate.",
+      "stopped, and the man who had been standing there, who had been standing there for a long time, suddenly turned around."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "began to shake.",
+      "went quiet, the lights turned on.",
+      "began spinning out of control.",
+      "stops and the screen shows the latest image: it's already over.",
+      "stopped and slowly started rotating.",
+      "exploded, and the creature flew from his arms.",
+      "started to do its thing.",
+      "stopped for a second.",
+      "stopped for a second, and a loud noise.",
+      "switched from a simple machine to an industrial application.",
+      "stops and begins to spin.",
+      "roared and made a loud noise.",
+      "moved, and the human body was taken to an isolated place on the outskirts of the city, where it was used for medical research"
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "turns up to reveal another humanoid, moving down an endless room without a single motion.",
+      "came to life, adding a tiny microdial to the mix.",
+      "jerked along into existence and produced the crystal – a large rectangle stretching all the way from the middle to the sides.",
+      "began to sound.",
+      "opens the front door, and there's no more time to stay in the workshop there.",
+      "halted as water ran down his lungs as if that were a firehose in her hand.",
+      "burst into flames.",
+      "vibrated and a massive wave appeared out of the box: an electric motor vibrated inside the box, and then out of one",
+      "opened its window and he saw a man with a long head.",
+      "lifted off the bed and leaned against me as I tried to open its legs.",
+      "appeared to start producing new data with minimal interference to anyone's consciousness, and an inchoate alarm bell rang up while the bell",
+      "turned from a green glass to the orange orange, and when it was done it exploded.",
+      "rumbled to life, drawing on the tiny circuit-hacking power generated by a computer system when its target was an inverter",
+      "vibrated with a loud rapping as the sound of the ball rolling past broke the walls."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pizza",
+   "prompt": "To make a perfect pizza, first",
+   "firstStep": {
+    "options": [
+     {
+      "text": " you",
+      "probability": 0.112598
+     },
+     {
+      "text": " make",
+      "probability": 0.076575
+     },
+     {
+      "text": " place",
+      "probability": 0.03271
+     },
+     {
+      "text": " of",
+      "probability": 0.026955
+     },
+     {
+      "text": " we",
+      "probability": 0.026889
+     },
+     {
+      "text": " get",
+      "probability": 0.025469
+     },
+     {
+      "text": " slice",
+      "probability": 0.02428
+     },
+     {
+      "text": " prepare",
+      "probability": 0.021466
+     }
+    ],
+    "other": 0.653057
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "you need to make sure you have a good crust.",
+      "make a few slices of pizza.",
+      "you need to make a few ingredients.",
+      "you need to make a few things.",
+      "you need to make sure you have a good pizza crust.",
+      "make sure you have a good pizza crust.",
+      "you need to make a pizza crust."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "make two slashes.",
+      "let's say you want to make a super deep crust pizza.",
+      "take out the pizza sauce.",
+      "you have to make sure you have the pizza before you order it.",
+      "make sure that you don't have any liquid left over from the pizza.",
+      "place is the most important ingredient.",
+      "you take a bite out of the oven and cover it with olive oil.",
+      "make a pie.",
+      "make sure you're not too tired.",
+      "cook the dough in a large pot and add the onions and garlic.",
+      "you need to make a few ingredients.",
+      "wash the dough.",
+      "get a pizza from a trusted pizza store.",
+      "start off with a base of white pizza dough."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "you start with a large or smaller pie bowl.",
+      "use the oven (you don't have to set up your dough and go out before you start making things!).",
+      "you should work your way up the ante.",
+      "get yourself cooked, especially breads and sauces.",
+      "go to a stand at a bar—well, for some this is all that is needed.",
+      "you wash your spaghetti on line?",
+      ", set aside the hot sauce (a real big and heavy bowl of spaghetti at any given instant) and get the mushrooms, garlic",
+      "come set me straight!",
+      "hand is no doubt as important as making healthy cuts.",
+      "make sure you can prepare these ingredients you need so that this works on your order.",
+      "go over it first before you taste it.",
+      "we have to prep it.",
+      "you have to top with a cheese crust that's in perfect oven condition for an hour.",
+      "set up a couple of pies."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "detective",
+   "prompt": "The detective found a single clue under the",
+   "firstStep": {
+    "options": [
+     {
+      "text": " door",
+      "probability": 0.083633
+     },
+     {
+      "text": " bed",
+      "probability": 0.039873
+     },
+     {
+      "text": " table",
+      "probability": 0.030854
+     },
+     {
+      "text": " car",
+      "probability": 0.026566
+     },
+     {
+      "text": " floor",
+      "probability": 0.021923
+     },
+     {
+      "text": " hood",
+      "probability": 0.017588
+     },
+     {
+      "text": " carpet",
+      "probability": 0.015212
+     },
+     {
+      "text": " house",
+      "probability": 0.015083
+     }
+    ],
+    "other": 0.749269
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "door, but it was too late.",
+      "door, and the man was arrested.",
+      "door, but the door was locked.",
+      "door, but the detective didn't find it."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "garage door that had led to the apartment building.",
+      "bed that led him to the missing boy's bedroom.",
+      "bed, he says: \"I think they didn't know what to do with it.",
+      "table, and the detective found a key: it was located in the closet of the house where the victim was raped and then murdered",
+      "floorboards, but he couldn't find the clue.",
+      "car, and the suspect was still there.",
+      "door that gave him the answer to the mystery that has made him the only person in the world to know this.",
+      "bed, with all of the clues missing.",
+      "door, but she couldn't find it.",
+      "mattress he had just slept on, and an object that resembled a hammer.",
+      "car's hood that he could see the sign.",
+      "bed: a note that read, \"The Police Department is not responsible for your welfare.\" The detective left the house when",
+      "floor and saw a man with a knife in the backseat of his car.",
+      "door on the street, the key to the bedroom was missing, and the house had been completely covered in graffiti."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "kitchen sink -- and more than 4,000 more inside the toilet.",
+      "rubble, but there is no trace of what was there.",
+      "cover of darkness of the room and turned it right back over to them.",
+      "carpet, containing a bullet-ridden notebook at the foot of the desk, under which a pistol which had no markings, was hidden",
+      "bed, and then set it on all 12 walls for the detective to be able to inspect.",
+      "desk, but that was too late.",
+      "table in the bathroom as the investigator got over all the noise.",
+      "bed covered in a package containing a \"spooky box,\" although no written note was inside the box,\" according to one report.",
+      "road after it made its way to the middle door of the vehicle in the pickup it had been plundered.",
+      "body of Mr Cajelan (pictured left in 2006 as he was a fugitive) but he found the full mystery hidden in",
+      "night sky that allowed police to trace the culprit to Brazil's Central Department for Human Rights.",
+      "top drawer at the back, on top of what sounded like a couple dozen letters, but not when the detective had reached the front",
+      "bedspread, with the first \"Cats,\" and took a closer look.",
+      "table as his eyes fluttered up, a flashlight in his hands."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lights_out",
+   "prompt": "When the lights went out, everyone",
+   "firstStep": {
+    "options": [
+     {
+      "text": " was",
+      "probability": 0.247356
+     },
+     {
+      "text": " started",
+      "probability": 0.059622
+     },
+     {
+      "text": " went",
+      "probability": 0.03712
+     },
+     {
+      "text": " in",
+      "probability": 0.03031
+     },
+     {
+      "text": " got",
+      "probability": 0.029697
+     },
+     {
+      "text": " had",
+      "probability": 0.024628
+     },
+     {
+      "text": " looked",
+      "probability": 0.021096
+     },
+     {
+      "text": " knew",
+      "probability": 0.018703
+     }
+    ],
+    "other": 0.531469
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "was in a panic.",
+      "was in their cars.",
+      "was in the dark.",
+      "was still asleep.",
+      "was just sitting there, waiting for the next one to come on.",
+      "was in their rooms.",
+      "was just sitting there, waiting for the next train.",
+      "was just standing there.",
+      "was looking at each other.",
+      "was just sitting there, waiting for the lights to go out."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "went to the bathroom.",
+      "was busy watching TV and waiting for the trains to come through.",
+      "was still inside their homes.",
+      "was just going to come home.",
+      "was still wearing their sunglasses, looking at each other, in awe.",
+      "stopped and went to a coffee shop for a drink.",
+      "started to get pretty pissed.",
+      "was in their seats.",
+      "was still asleep.",
+      "was busy with their smartphones.",
+      "was pretty quiet.",
+      "in the kitchen was stunned and stunned,\" she said.",
+      "went on their way, everyone went to the bathroom.",
+      "was standing there, so I'm sure they were all looking at me, but I wasn't in pain."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "went up to see the lights, but they haven't gone up.",
+      "came to my window.",
+      "who looked out of the window asked me where this was.",
+      "assumed The Avengers was finished and just waiting for them to win.",
+      "found up and ran.",
+      "went through the house.\" And this photo reveals more than a dozen people whose deaths were part of a massive search for a",
+      "was staring at the camera.\" All that while, many of America's more skeptical politicians were telling me about \"the secret",
+      "realized how bad light should have looked and looked at the street.",
+      "was covered and a group wandered away but then the radio ran out and no one was inside.",
+      "was getting fired on, so it wasn't like a riot.",
+      "was still listening in.",
+      "was quiet and away from the town in an all-out brawl, and we just sat all this to our knees while the policemen",
+      "would move back from the street.",
+      "around them were happy, even most of the staff, at least one or two, but not when the kids had an opportunity to"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recipe",
+   "prompt": "The recipe said to add sugar, but Maria added",
+   "firstStep": {
+    "options": [
+     {
+      "text": " it",
+      "probability": 0.135327
+     },
+     {
+      "text": " that",
+      "probability": 0.121353
+     },
+     {
+      "text": " a",
+      "probability": 0.065325
+     },
+     {
+      "text": " the",
+      "probability": 0.063012
+     },
+     {
+      "text": " sugar",
+      "probability": 0.034881
+     },
+     {
+      "text": " more",
+      "probability": 0.028878
+     },
+     {
+      "text": " to",
+      "probability": 0.016804
+     },
+     {
+      "text": " no",
+      "probability": 0.014714
+     }
+    ],
+    "other": 0.519705
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "that it was too much.",
+      "it to the sauce.",
+      "that it was not necessary.",
+      "it to the mix.",
+      "that she didn't know.",
+      "it to the recipe."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      ": \"The recipe didn't specify the time of the day or the time of day, because I'm not sure we need to",
+      "sugar instead, which left the dish in a deep amber color.",
+      "that adding sugar would not work because the sugar didn't add any more.",
+      "to it with pepper, onion, garlic and garlic cloves.",
+      "that it is also good for you.",
+      "sugar only if the recipe says the ingredients are high in fructose.",
+      "that it was simply to taste.",
+      "she couldn't because of a previous problem with her husband, who had a heart condition that prevented her from eating the ingredients.",
+      "more sugar, so I added a teaspoon of flour.",
+      "it to her salad.",
+      "that he would just add it to the batter.",
+      "more than 50g to her cup of coffee.",
+      "it as well.",
+      "a small pinch of salt and rose water to the recipe."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "only a few drops.",
+      "the \"optional\" one, which would mean that there was no way to add the powdered ingredients or simply add it over with one",
+      "it without mentioning adding the ingredients.",
+      "salt, soy sauce, and water and the fish sold under the street vending machine could cost as much as the water, according to",
+      "it to a thick slurry.",
+      "she would recommend that you make the sugar only if you go to a low-carb event you can definitely eat regular vegetables when doing",
+      "the necessary salt so it was easier.",
+      "the following: 1 teaspoon honey 2 teaspoons vanilla Grape juice and the vinegar About 2 tablespoons",
+      "this is no doubt as close to baking yeast.",
+      "it never reached a satisfactory consistency.",
+      "5 grams of fruit fruit (at about a half-an-ounce), and it turned out to be pretty.",
+      "it without understanding how it did it (and I already know as quickly as I knew how to do it I knew!).",
+      "that it wasn't actually she who chose that color in their new recipes for an unusual dark roast: he didn't think the word",
+      "at least 2 eggs."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gravity",
+   "prompt": "A good explanation of gravity is",
+   "firstStep": {
+    "options": [
+     {
+      "text": " that",
+      "probability": 0.1984
+     },
+     {
+      "text": " given",
+      "probability": 0.0776
+     },
+     {
+      "text": " the",
+      "probability": 0.057214
+     },
+     {
+      "text": " found",
+      "probability": 0.050394
+     },
+     {
+      "text": " by",
+      "probability": 0.026632
+     },
+     {
+      "text": " provided",
+      "probability": 0.026398
+     },
+     {
+      "text": " to",
+      "probability": 0.024143
+     },
+     {
+      "text": " this",
+      "probability": 0.021264
+     }
+    ],
+    "other": 0.517956
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "that it is a force that is proportional to the distance between two points.",
+      "that it is the same as the force of gravity.",
+      "that it is the same as the gravitational force of gravity.",
+      "that it is the force of gravity that is the most important.",
+      "that it is the force that is proportional to the distance between two points.",
+      "that it is the force that causes the earth to rotate."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      ": \"gravity is the sum of the relative forces.",
+      "given in the following paragraph: As the distance from the center of mass to the center of gravity increases, the amount of",
+      "that it is not a constant, but a system that can be fixed and maintained by means of some specific form of gravity.",
+      "the idea that we are able to see all objects, and that gravity is very much a function of size, time, and distance",
+      "given by Trenberth, in which he says: \"The forces that force the earth to move and to turn",
+      "that it is the simplest and most predictable of all systems, which is why we find it so important to understand them.",
+      "that the universe's mass is the sum of all possible universes.",
+      "that it acts as a very strong gravitational force, and can be very difficult to understand.",
+      "that it is a constant, and the force that has to be applied to it can only be taken into account if it is applied",
+      "found in the book Gravity and Mass: The Scientific Problems of Gravity, by William L.",
+      "given in the following text.",
+      "here, and I'll talk a bit about it later.",
+      "provided by the following simple example: In the first case, the initial distance between the center of the Earth and the outer",
+      "found in the following passage from Newton's Principia: [I]t is generally supposed that the most important thing"
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "found in a paper by Gail Auerbach, former chief scientist at the National Institute for Scientific Research and co-editor of",
+      "the \"force of gravity\".",
+      "simple: if your world and your galaxy are right now about three points all set it straight toward the center of the galaxy's habitable",
+      "discussed in Chapter V of this book and at the next volume.",
+      "below, or if you are curious about this we recommend go to Wikipedia.",
+      "the tendency toward turning around backwards (J.",
+      "this: \"Boredom\" is what our kids think.",
+      "provided by two books concerning these subjects by Löw: Lewis and Pippin, and their accompanying narrative in John O'",
+      "available at MRCL ( ).",
+      "that it's a measure of things in spacetime and is similar to that employed in math.",
+      "at large a mystery.",
+      "a \"fact\" we learn to believe to be true.",
+      "via the equation in our previous version of gravity equation, which suggests something similar, and not coincidental.",
+      ": There's also a problem that the Earth and moon come alive together too slowly, and both might be close when we arrive on"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "robot_help",
+   "prompt": "The robot wanted to help, so it",
+   "firstStep": {
+    "options": [
+     {
+      "text": " took",
+      "probability": 0.037421
+     },
+     {
+      "text": " started",
+      "probability": 0.032423
+     },
+     {
+      "text": " asked",
+      "probability": 0.027595
+     },
+     {
+      "text": " gave",
+      "probability": 0.021977
+     },
+     {
+      "text": " was",
+      "probability": 0.020477
+     },
+     {
+      "text": " went",
+      "probability": 0.019409
+     },
+     {
+      "text": " did",
+      "probability": 0.01923
+     },
+     {
+      "text": " decided",
+      "probability": 0.019092
+     }
+    ],
+    "other": 0.802375
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "asked for help from a robot that was in the middle of a fight.",
+      "gave him a hand to pull it out of the way.",
+      "asked for help from a friend.",
+      "was able to do so.",
+      "gave him a hand.",
+      "asked for a \"human\" to help it.",
+      "asked the robot to help it.",
+      "took a few minutes to get to the robot.",
+      "asked for a job.",
+      "started to talk to the robot.",
+      "was able to do it.",
+      "took a few minutes to get to the robot's location.",
+      "asked for a name."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "would help with a robot.",
+      "tried to move.",
+      "was ready to work.",
+      "decided to be helpful, helping me.",
+      "brought him into the home and placed him under restraint.",
+      "stopped and went to a different corner of the building.",
+      "started to fight.",
+      "gave it a few commands.",
+      "took him three hours to get it to the ground.",
+      "took a little while to get around the robot's small size, but when the robot tried to start fighting, it ran away.",
+      "set up its face.",
+      "stopped for a second, and then the robot realized that it was trying to help.",
+      "put its hands on his arm, and then gently guided the robot to the right.",
+      "came up with a solution."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "went up to join the team of astronauts from an Apollo 13 mission.",
+      "gave the robot a hug, which would mean that there was no way for it to know about my pain.",
+      "stole their work of painting and threw them down right beside me.",
+      "sent out an SMS message on Oct.",
+      "activated autonomously, and, on all fours for some reason, got something to the robot.",
+      "went through all that time and became very aggressive — she said.",
+      "helped the young female walk backwards by tapping her shoulder and pushing down again.",
+      "grabbed his shoulder and punched his groin as deeply that it can.",
+      "picked up some key words and looked toward Han.",
+      "ran across two workers trying to escape but then opened its own entrance and crashed through the front door, just before killing one and leaving",
+      "opened its belly to reveal what it could see inside of it.",
+      "took off after one of its wheels touched the toy's back as quickly as a roller roller coaster.",
+      "called a taxi.",
+      "grabbed what he held."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "teacher_email",
+   "prompt": "The email from the teacher said that tomorrow",
+   "firstStep": {
+    "options": [
+     {
+      "text": " she",
+      "probability": 0.098933
+     },
+     {
+      "text": " morning",
+      "probability": 0.070555
+     },
+     {
+      "text": " the",
+      "probability": 0.047896
+     },
+     {
+      "text": " he",
+      "probability": 0.039246
+     },
+     {
+      "text": " is",
+      "probability": 0.02859
+     },
+     {
+      "text": " they",
+      "probability": 0.02457
+     },
+     {
+      "text": " night",
+      "probability": 0.024469
+     },
+     {
+      "text": " afternoon",
+      "probability": 0.022125
+     }
+    ],
+    "other": 0.643617
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      ", she will be teaching at the school.",
+      ", the school will be closed for the day.",
+      ", she would be \"working with the school to find a way to make sure that the students are safe.\" The teacher",
+      ", she will be working with the school to find out what happened.",
+      ", the teacher will be working with the school to make sure that the students are safe.",
+      ", the teacher will be fired.",
+      ", she will be teaching in the classroom.",
+      ", she will be working with the school's principal to find out what happened."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "would be \"one of the best days\" of his life.",
+      "they will release the story \"in the coming weeks.\" \"We are still waiting for the final decision on the investigation and",
+      "'s lesson is scheduled to be scheduled.",
+      "the class would be called \"A Day With Love, a Day With Love.\"",
+      "morning, the school will announce that the school will no longer offer classes in English and that they will no longer accept students who don",
+      "morning, the student will get a letter from the school saying that the teacher has asked him not to teach the class.",
+      "morning she would be asking the student for a second chance.",
+      "'s lesson plan was to give the students a chance to try new things and get their confidence back.",
+      "afternoon, he will be meeting with the district officials to discuss the incident.",
+      "she will report back to the principal and the principal will tell her that there are no classes scheduled for Monday and the teacher will not",
+      "night, she will have a special performance to help raise money for her cause.",
+      "she would be \"extremely concerned\" if she was fired.",
+      "he will be going to a school near where he works and will be attending a different school.",
+      "'s class had a \"harsh\" experience."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "or on Sunday, \"we will address\" an email that was left at a charter office that students brought to school to try teach",
+      "he \"was told he had an important topic to talk about and that he was only interested in my reading.",
+      "you should work your butt and enjoy the morning – I think she must be really happy because her sister is pregnant… it's really",
+      "she received word that administrators will soon address the matter.",
+      "would run a single instruction, on all 12 districts for which this petition has gone to the government.",
+      "she would read from his story of losing this work to go to prison.",
+      "the school would reopen classes and there were no plans to replace the teachers.",
+      "'s ceremony will be held after her return.",
+      "this is no doubt due to President Obama returning.",
+      "is no different: \"Not knowing when is not okay or when it is okay isn't,\" and she made \"one",
+      "she'd write \"your best report (and I hope) on this class from 5 to 7.",
+      "'s lessons were supposed to be with kids ages 8 and 12.",
+      "teachers learned a lesson which they believed could possibly help her when questioned about it.",
+      "she didn't have any time to explain why she was at the school, and was only giving what the principal had given her."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "science_fair",
+   "prompt": "At the science fair, the strangest invention was",
+   "firstStep": {
+    "options": [
+     {
+      "text": " the",
+      "probability": 0.34529
+     },
+     {
+      "text": " a",
+      "probability": 0.192241
+     },
+     {
+      "text": " that",
+      "probability": 0.060059
+     },
+     {
+      "text": " an",
+      "probability": 0.035399
+     },
+     {
+      "text": " one",
+      "probability": 0.017274
+     },
+     {
+      "text": " to",
+      "probability": 0.011932
+     },
+     {
+      "text": " found",
+      "probability": 0.007985
+     },
+     {
+      "text": " this",
+      "probability": 0.006074
+     }
+    ],
+    "other": 0.323745
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "the \"smart\" computer.",
+      "the \"S-shaped\" \"S-shaped\" \"S-shaped\" \"S-shaped\" \"S-shaped\"",
+      "the \"bionic arm,\" a device that could be used to control a person's body.",
+      "the \"Honeycomb\" (a.k.a.",
+      "the \"tape recorder\" that was used to record the conversations between the two men.",
+      "the \"bionic\" device that would allow the wearer to control the speed of light.",
+      "the \"pumpkin\" that was supposed to be the basis of the \"Pumpkin\" that was supposed to be the",
+      "the idea that the moon was a giant, glowing, glowing, glowing, glowing, glowing, glowing, glowing.",
+      "the \"diamond-shaped\" diamond-shaped diamond-shaped diamond-shaped diamond-shaped diamond-shaped diamond-shaped diamond",
+      "the \"Giant\" (or \"Giant-Giant\") robot, which was designed to be a giant robot with a",
+      "the \"carpet-covered\" version of the \"carpet-covered\" version of the \"carpet-",
+      "the \"solar-powered\" solar-powered car.",
+      "the \"pumpkin\" that was supposed to be the basis for the invention of the \"pumpkin\" that is now",
+      "the \"pumpkin\" that was used to make the \"pumpkin\" that was used to make the \"pump"
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "the electric bicycle.",
+      "a remote sensing device that would allow the ground system to send a sensor on the ground.",
+      "the idea of a machine that could be programmed into a machine.",
+      "a pair of goggles, created by artist David R.",
+      "the ability of scientists to use light to study the effects of light.",
+      "a small satellite that carried the first live-streaming video feed of the first Earth Day.",
+      "a small box.",
+      "a new way to tell stories — stories with a twist — about the past and the future of humankind.",
+      "the \"Star Wars\" helmet.",
+      "the way that the robot's ears could pick up information of other robots.",
+      "the discovery that a \"shovel-bound\" water-filled container, called a \"flower box,\" could be put",
+      "a \"power\" called a \"battery\" that could be plugged into any cell phone.",
+      "a single molecule that would make a person's heart pump as small as one milliliters.",
+      "a small radio telescope that could detect a tiny amount of light in a tiny sample of air."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "how it worked.",
+      "the \"self-hling\" headset.",
+      "the machine which \"caught and turned down\" a rock with its wheel set.",
+      "produced, produced, produced\" just as the Soviets wanted it.",
+      "found to date, was, on all sides, an atom, an atomic sphere consisting of hydrogen.",
+      "a machine which could easily walk the halls.",
+      "the self-proclaimed Internet-enabled smartphone.",
+      "the idea that the space agency could use what has become a rare specimen of a supertonic engine instead of its normal engine for",
+      "this display: light poles, or reflective surfaces.",
+      "the idea that a group of NASA \"spursors\" might run across some asteroids, which they could orbit Earth with supervol",
+      "an attempt by a very old girl to test a new electric vehicle in the very first year we ever tried anything.",
+      "The Great Hall of Ideas.",
+      "that a man named George Smith who went through all 14 years of his pregnancy with his last known baby to learn that this woman had",
+      "the tiny version from which they're finding some new uses."
+     ]
+    }
+   ]
+  }
+ ],
+ "notes": "Continuations were sampled offline with the settings shown; the site replays them."
+}

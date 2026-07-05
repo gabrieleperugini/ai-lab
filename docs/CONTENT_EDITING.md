@@ -1,12 +1,18 @@
 # Content editing guide
 
-All teaching content lives in `src/content/`. You can change examples,
-probabilities, datasets, puzzles, and poll links without touching any
-component. After editing, run `npm run dev` to check, `npm run build` to
-publish.
+Content now comes in two kinds:
 
-All distributions are teaching distributions: keep them plausible, keep them
-labeled as such, and do not claim they are measured outputs of a real model.
+1. **Generated content** (M1-M4 probabilities/samples, M6 embeddings) lives in
+   `src/content/generated/day1/*.json`. Do NOT edit these by hand: change the
+   prompt/candidate lists inside `scripts/generate_day1_llm_content.py` (or the
+   vocabulary/puzzles in `scripts/generate_day1_embeddings.py`) and re-run the
+   script (see README, "Regenerating the Day 1 model content").
+2. **Curated content** (module metadata, M5 presets, M7 vectors, M8 cards,
+   Day 2/3) lives in `src/content/` TypeScript files and is edited directly.
+
+After editing, run `npm run dev` to check, `npm run build` to publish.
+Feature flags (polls, submissions, generated-vs-handmade M1) are in
+`src/content/config.ts`.
 
 ## Where things live
 

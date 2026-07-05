@@ -1,13 +1,15 @@
 import type { PollConfig } from "../../lib/types";
 import type { ClassroomMode } from "../../lib/classMode";
+import { labConfig } from "../../content/config";
 
 /**
  * Shows the external poll link (Slido/Mentimeter/Forms/any URL) for the
  * student's class. Falls back to a clean placeholder when unconfigured.
  * Poll URLs live in the module definitions (src/content/<day>/modules.ts).
+ * Hidden entirely while labConfig.enablePolls is false.
  */
 export function PollPanel({ poll, mode }: { poll?: PollConfig; mode: ClassroomMode }) {
-  if (!poll) return null;
+  if (!labConfig.enablePolls || !poll) return null;
 
   const url =
     mode.classId === "B" ? poll.classBUrl : mode.classId === "A" ? poll.classAUrl : undefined;

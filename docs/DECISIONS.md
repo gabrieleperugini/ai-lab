@@ -2,6 +2,40 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Round 2 (July 2026): real-model content
+
+- Pre-round-2 state preserved on branch `backup/day1-before-round2` and tag
+  `day1-v1-handmade-probs` (both pushed to origin).
+- New offline pipeline (`scripts/generate_day1_llm_content.py`, GPT-2 via
+  Hugging Face Transformers, CPU) produces static JSON consumed by the app;
+  no model runs in the browser and no backend was added.
+- Tokenization is handled explicitly: candidates are encoded with a leading
+  space; single-token candidates get exact next-token probabilities, and
+  multi-token candidates get chain-rule phrase probabilities (flagged in the
+  data and the report). Every probability display includes an 'other' bar.
+- M1 displays also include up to two of the model's OWN top word-tokens, so
+  the bars show where GPT-2 actually puts its mass ('the', 'now', ...). This
+  turns small-model quirks into the lesson: models continue text, they do not
+  answer quizzes.
+- Some M1 rounds intentionally show small-model failures (the World Cup 1998
+  chain, the algebra round); the explanations frame them as such.
+- M3 trees are 3 choices deep (4/3/3 options per level) with real
+  probabilities at every node and GPT-2-sampled endings at the leaves.
+- M4 replays cached GPT-2 samples at three fixed randomness settings
+  (0.2/20/0.90, 0.8/50/0.95, 1.2/100/0.98) with a no-immediate-repeat queue;
+  the low-randomness cache holding only a few distinct continuations is
+  itself the lesson. A 'first step' inspector shows the real first-token bars.
+- M6 uses real GloVe vectors (glove-wiki-gigaword-100): PCA to 3D for
+  display, full-dimension vectors for neighbors and puzzle answers; the three
+  analogy puzzles were verified against the vectors during generation. Zoom
+  (wheel and buttons) plus rotate and reset-camera; puzzles live in a side
+  panel so the map stays visible.
+- Polls and reflection submissions are hidden behind flags in
+  `src/content/config.ts` (`enablePolls`, `enableSubmissions`), not deleted.
+- M8: prompts asking a chatbot to report its own next-token probabilities
+  were rewritten to simple completions, and a 'plausible is not the same as
+  true' card was added.
+
 ## Revision pass (July 2026)
 
 - Title made explicit: "Machine Learning and Artificial Intelligence Lab",

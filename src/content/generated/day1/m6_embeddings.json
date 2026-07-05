@@ -1,0 +1,2180 @@
+{
+ "model": "glove-wiki-gigaword-100",
+ "projection": "PCA to 3D (display only; neighbors and puzzles use full 100-dim vectors)",
+ "points": [
+  {
+   "label": "king",
+   "x": 1.604,
+   "y": -2.672,
+   "z": 2.002,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "prince",
+     "similarity": 0.768
+    },
+    {
+     "label": "queen",
+     "similarity": 0.751
+    },
+    {
+     "label": "crown",
+     "similarity": 0.665
+    },
+    {
+     "label": "royal",
+     "similarity": 0.603
+    },
+    {
+     "label": "princess",
+     "similarity": 0.574
+    }
+   ]
+  },
+  {
+   "label": "queen",
+   "x": 1.837,
+   "y": -3.111,
+   "z": 2.118,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "princess",
+     "similarity": 0.795
+    },
+    {
+     "label": "king",
+     "similarity": 0.751
+    },
+    {
+     "label": "royal",
+     "similarity": 0.707
+    },
+    {
+     "label": "crown",
+     "similarity": 0.668
+    },
+    {
+     "label": "prince",
+     "similarity": 0.664
+    }
+   ]
+  },
+  {
+   "label": "man",
+   "x": 0.691,
+   "y": -0.316,
+   "z": 1.718,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "woman",
+     "similarity": 0.832
+    },
+    {
+     "label": "happy",
+     "similarity": 0.603
+    },
+    {
+     "label": "dog",
+     "similarity": 0.564
+    },
+    {
+     "label": "car",
+     "similarity": 0.553
+    },
+    {
+     "label": "cat",
+     "similarity": 0.526
+    }
+   ]
+  },
+  {
+   "label": "woman",
+   "x": 0.598,
+   "y": -0.172,
+   "z": 1.733,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "man",
+     "similarity": 0.832
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.579
+    },
+    {
+     "label": "princess",
+     "similarity": 0.534
+    },
+    {
+     "label": "student",
+     "similarity": 0.532
+    },
+    {
+     "label": "queen",
+     "similarity": 0.51
+    }
+   ]
+  },
+  {
+   "label": "prince",
+   "x": 2.538,
+   "y": -3.759,
+   "z": 1.695,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "king",
+     "similarity": 0.768
+    },
+    {
+     "label": "princess",
+     "similarity": 0.707
+    },
+    {
+     "label": "queen",
+     "similarity": 0.664
+    },
+    {
+     "label": "crown",
+     "similarity": 0.626
+    },
+    {
+     "label": "royal",
+     "similarity": 0.618
+    }
+   ]
+  },
+  {
+   "label": "princess",
+   "x": 1.563,
+   "y": -3.854,
+   "z": 2.096,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "queen",
+     "similarity": 0.795
+    },
+    {
+     "label": "prince",
+     "similarity": 0.707
+    },
+    {
+     "label": "royal",
+     "similarity": 0.585
+    },
+    {
+     "label": "crown",
+     "similarity": 0.576
+    },
+    {
+     "label": "king",
+     "similarity": 0.574
+    }
+   ]
+  },
+  {
+   "label": "royal",
+   "x": 3.52,
+   "y": -2.269,
+   "z": 1.741,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "queen",
+     "similarity": 0.707
+    },
+    {
+     "label": "prince",
+     "similarity": 0.618
+    },
+    {
+     "label": "crown",
+     "similarity": 0.609
+    },
+    {
+     "label": "London",
+     "similarity": 0.604
+    },
+    {
+     "label": "king",
+     "similarity": 0.603
+    }
+   ]
+  },
+  {
+   "label": "crown",
+   "x": 2.019,
+   "y": -3.744,
+   "z": 1.336,
+   "category": "royalty & people",
+   "neighbors": [
+    {
+     "label": "queen",
+     "similarity": 0.668
+    },
+    {
+     "label": "king",
+     "similarity": 0.665
+    },
+    {
+     "label": "prince",
+     "similarity": 0.626
+    },
+    {
+     "label": "royal",
+     "similarity": 0.609
+    },
+    {
+     "label": "princess",
+     "similarity": 0.576
+    }
+   ]
+  },
+  {
+   "label": "Paris",
+   "x": 5.818,
+   "y": -2.158,
+   "z": -1.254,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "France",
+     "similarity": 0.748
+    },
+    {
+     "label": "London",
+     "similarity": 0.734
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.688
+    },
+    {
+     "label": "Berlin",
+     "similarity": 0.659
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.628
+    }
+   ]
+  },
+  {
+   "label": "France",
+   "x": 5.309,
+   "y": -3.659,
+   "z": -1.832,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Spain",
+     "similarity": 0.756
+    },
+    {
+     "label": "Paris",
+     "similarity": 0.748
+    },
+    {
+     "label": "Germany",
+     "similarity": 0.729
+    },
+    {
+     "label": "Italy",
+     "similarity": 0.716
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.538
+    }
+   ]
+  },
+  {
+   "label": "Rome",
+   "x": 4.473,
+   "y": -1.687,
+   "z": -2.087,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Paris",
+     "similarity": 0.688
+    },
+    {
+     "label": "Italy",
+     "similarity": 0.653
+    },
+    {
+     "label": "Berlin",
+     "similarity": 0.634
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.575
+    },
+    {
+     "label": "London",
+     "similarity": 0.521
+    }
+   ]
+  },
+  {
+   "label": "Italy",
+   "x": 4.087,
+   "y": -2.797,
+   "z": -3.307,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Spain",
+     "similarity": 0.775
+    },
+    {
+     "label": "Germany",
+     "similarity": 0.74
+    },
+    {
+     "label": "France",
+     "similarity": 0.716
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.653
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.532
+    }
+   ]
+  },
+  {
+   "label": "Madrid",
+   "x": 5.855,
+   "y": -1.015,
+   "z": -2.384,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Spain",
+     "similarity": 0.708
+    },
+    {
+     "label": "Paris",
+     "similarity": 0.628
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.575
+    },
+    {
+     "label": "France",
+     "similarity": 0.538
+    },
+    {
+     "label": "Italy",
+     "similarity": 0.532
+    }
+   ]
+  },
+  {
+   "label": "Spain",
+   "x": 4.831,
+   "y": -3.13,
+   "z": -2.007,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Italy",
+     "similarity": 0.775
+    },
+    {
+     "label": "France",
+     "similarity": 0.756
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.708
+    },
+    {
+     "label": "Germany",
+     "similarity": 0.653
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.498
+    }
+   ]
+  },
+  {
+   "label": "Berlin",
+   "x": 4.881,
+   "y": -1.097,
+   "z": -1.937,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Germany",
+     "similarity": 0.729
+    },
+    {
+     "label": "Paris",
+     "similarity": 0.659
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.634
+    },
+    {
+     "label": "London",
+     "similarity": 0.613
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.507
+    }
+   ]
+  },
+  {
+   "label": "Germany",
+   "x": 5.149,
+   "y": -1.97,
+   "z": -2.833,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Italy",
+     "similarity": 0.74
+    },
+    {
+     "label": "France",
+     "similarity": 0.729
+    },
+    {
+     "label": "Berlin",
+     "similarity": 0.729
+    },
+    {
+     "label": "Spain",
+     "similarity": 0.653
+    },
+    {
+     "label": "Paris",
+     "similarity": 0.501
+    }
+   ]
+  },
+  {
+   "label": "London",
+   "x": 5.353,
+   "y": -1.162,
+   "z": 0.109,
+   "category": "places",
+   "neighbors": [
+    {
+     "label": "Paris",
+     "similarity": 0.734
+    },
+    {
+     "label": "Berlin",
+     "similarity": 0.613
+    },
+    {
+     "label": "royal",
+     "similarity": 0.604
+    },
+    {
+     "label": "airport",
+     "similarity": 0.529
+    },
+    {
+     "label": "Rome",
+     "similarity": 0.521
+    }
+   ]
+  },
+  {
+   "label": "pizza",
+   "x": -5.059,
+   "y": -1.667,
+   "z": -2.38,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "bread",
+     "similarity": 0.701
+    },
+    {
+     "label": "burger",
+     "similarity": 0.698
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.661
+    },
+    {
+     "label": "cheese",
+     "similarity": 0.64
+    },
+    {
+     "label": "sushi",
+     "similarity": 0.593
+    }
+   ]
+  },
+  {
+   "label": "pasta",
+   "x": -6.545,
+   "y": -2.838,
+   "z": -4.0,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "cheese",
+     "similarity": 0.716
+    },
+    {
+     "label": "tomato",
+     "similarity": 0.71
+    },
+    {
+     "label": "bread",
+     "similarity": 0.707
+    },
+    {
+     "label": "pizza",
+     "similarity": 0.661
+    },
+    {
+     "label": "sushi",
+     "similarity": 0.543
+    }
+   ]
+  },
+  {
+   "label": "sushi",
+   "x": -5.419,
+   "y": -0.676,
+   "z": -1.875,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "pizza",
+     "similarity": 0.593
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.543
+    },
+    {
+     "label": "cheese",
+     "similarity": 0.495
+    },
+    {
+     "label": "burger",
+     "similarity": 0.484
+    },
+    {
+     "label": "fish",
+     "similarity": 0.447
+    }
+   ]
+  },
+  {
+   "label": "burger",
+   "x": -3.915,
+   "y": -2.503,
+   "z": -1.375,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "pizza",
+     "similarity": 0.698
+    },
+    {
+     "label": "cheese",
+     "similarity": 0.508
+    },
+    {
+     "label": "sushi",
+     "similarity": 0.484
+    },
+    {
+     "label": "bread",
+     "similarity": 0.437
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.414
+    }
+   ]
+  },
+  {
+   "label": "bread",
+   "x": -5.747,
+   "y": -2.186,
+   "z": -3.283,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "cheese",
+     "similarity": 0.737
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.707
+    },
+    {
+     "label": "pizza",
+     "similarity": 0.701
+    },
+    {
+     "label": "coffee",
+     "similarity": 0.673
+    },
+    {
+     "label": "tomato",
+     "similarity": 0.632
+    }
+   ]
+  },
+  {
+   "label": "cheese",
+   "x": -6.398,
+   "y": -3.479,
+   "z": -3.594,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "bread",
+     "similarity": 0.737
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.716
+    },
+    {
+     "label": "tomato",
+     "similarity": 0.708
+    },
+    {
+     "label": "pizza",
+     "similarity": 0.64
+    },
+    {
+     "label": "coffee",
+     "similarity": 0.518
+    }
+   ]
+  },
+  {
+   "label": "tomato",
+   "x": -7.0,
+   "y": -2.094,
+   "z": -3.009,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "pasta",
+     "similarity": 0.71
+    },
+    {
+     "label": "cheese",
+     "similarity": 0.708
+    },
+    {
+     "label": "bread",
+     "similarity": 0.632
+    },
+    {
+     "label": "pizza",
+     "similarity": 0.571
+    },
+    {
+     "label": "fish",
+     "similarity": 0.52
+    }
+   ]
+  },
+  {
+   "label": "coffee",
+   "x": -3.873,
+   "y": -0.705,
+   "z": -2.592,
+   "category": "food & drink",
+   "neighbors": [
+    {
+     "label": "bread",
+     "similarity": 0.673
+    },
+    {
+     "label": "pizza",
+     "similarity": 0.591
+    },
+    {
+     "label": "cheese",
+     "similarity": 0.518
+    },
+    {
+     "label": "tomato",
+     "similarity": 0.511
+    },
+    {
+     "label": "pasta",
+     "similarity": 0.508
+    }
+   ]
+  },
+  {
+   "label": "cat",
+   "x": -3.768,
+   "y": -0.625,
+   "z": 2.307,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "dog",
+     "similarity": 0.88
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.692
+    },
+    {
+     "label": "horse",
+     "similarity": 0.625
+    },
+    {
+     "label": "snake",
+     "similarity": 0.623
+    },
+    {
+     "label": "duck",
+     "similarity": 0.616
+    }
+   ]
+  },
+  {
+   "label": "dog",
+   "x": -3.998,
+   "y": -1.025,
+   "z": 1.92,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.88
+    },
+    {
+     "label": "horse",
+     "similarity": 0.711
+    },
+    {
+     "label": "cow",
+     "similarity": 0.622
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.597
+    },
+    {
+     "label": "duck",
+     "similarity": 0.597
+    }
+   ]
+  },
+  {
+   "label": "mouse",
+   "x": -4.285,
+   "y": 1.804,
+   "z": 2.046,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.692
+    },
+    {
+     "label": "dog",
+     "similarity": 0.597
+    },
+    {
+     "label": "keyboard",
+     "similarity": 0.541
+    },
+    {
+     "label": "screen",
+     "similarity": 0.527
+    },
+    {
+     "label": "duck",
+     "similarity": 0.511
+    }
+   ]
+  },
+  {
+   "label": "lion",
+   "x": -1.564,
+   "y": -2.673,
+   "z": 2.953,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.596
+    },
+    {
+     "label": "tiger",
+     "similarity": 0.573
+    },
+    {
+     "label": "snake",
+     "similarity": 0.559
+    },
+    {
+     "label": "horse",
+     "similarity": 0.515
+    },
+    {
+     "label": "dog",
+     "similarity": 0.496
+    }
+   ]
+  },
+  {
+   "label": "tiger",
+   "x": -1.956,
+   "y": -0.293,
+   "z": 2.839,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "lion",
+     "similarity": 0.573
+    },
+    {
+     "label": "cat",
+     "similarity": 0.542
+    },
+    {
+     "label": "snake",
+     "similarity": 0.458
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.439
+    },
+    {
+     "label": "man",
+     "similarity": 0.428
+    }
+   ]
+  },
+  {
+   "label": "horse",
+   "x": -1.911,
+   "y": -2.506,
+   "z": 2.621,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "dog",
+     "similarity": 0.711
+    },
+    {
+     "label": "cat",
+     "similarity": 0.625
+    },
+    {
+     "label": "bicycle",
+     "similarity": 0.595
+    },
+    {
+     "label": "cow",
+     "similarity": 0.547
+    },
+    {
+     "label": "snake",
+     "similarity": 0.519
+    }
+   ]
+  },
+  {
+   "label": "cow",
+   "x": -3.508,
+   "y": -2.536,
+   "z": 1.068,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "dog",
+     "similarity": 0.622
+    },
+    {
+     "label": "cat",
+     "similarity": 0.566
+    },
+    {
+     "label": "horse",
+     "similarity": 0.547
+    },
+    {
+     "label": "duck",
+     "similarity": 0.547
+    },
+    {
+     "label": "snake",
+     "similarity": 0.483
+    }
+   ]
+  },
+  {
+   "label": "duck",
+   "x": -5.58,
+   "y": -1.333,
+   "z": 1.286,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.616
+    },
+    {
+     "label": "dog",
+     "similarity": 0.597
+    },
+    {
+     "label": "cow",
+     "similarity": 0.547
+    },
+    {
+     "label": "fish",
+     "similarity": 0.513
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.511
+    }
+   ]
+  },
+  {
+   "label": "snake",
+   "x": -4.716,
+   "y": -1.738,
+   "z": 2.794,
+   "category": "animals",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.623
+    },
+    {
+     "label": "fish",
+     "similarity": 0.607
+    },
+    {
+     "label": "dog",
+     "similarity": 0.588
+    },
+    {
+     "label": "lion",
+     "similarity": 0.559
+    },
+    {
+     "label": "horse",
+     "similarity": 0.519
+    }
+   ]
+  },
+  {
+   "label": "car",
+   "x": 1.85,
+   "y": 0.637,
+   "z": 0.87,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "bus",
+     "similarity": 0.737
+    },
+    {
+     "label": "bicycle",
+     "similarity": 0.686
+    },
+    {
+     "label": "train",
+     "similarity": 0.682
+    },
+    {
+     "label": "airplane",
+     "similarity": 0.646
+    },
+    {
+     "label": "man",
+     "similarity": 0.553
+    }
+   ]
+  },
+  {
+   "label": "train",
+   "x": 2.65,
+   "y": 0.612,
+   "z": 0.388,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "bus",
+     "similarity": 0.847
+    },
+    {
+     "label": "car",
+     "similarity": 0.682
+    },
+    {
+     "label": "station",
+     "similarity": 0.639
+    },
+    {
+     "label": "road",
+     "similarity": 0.636
+    },
+    {
+     "label": "bicycle",
+     "similarity": 0.628
+    }
+   ]
+  },
+  {
+   "label": "bicycle",
+   "x": 0.078,
+   "y": 0.394,
+   "z": 1.023,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "car",
+     "similarity": 0.686
+    },
+    {
+     "label": "train",
+     "similarity": 0.628
+    },
+    {
+     "label": "bus",
+     "similarity": 0.628
+    },
+    {
+     "label": "horse",
+     "similarity": 0.595
+    },
+    {
+     "label": "road",
+     "similarity": 0.527
+    }
+   ]
+  },
+  {
+   "label": "airplane",
+   "x": -0.213,
+   "y": 1.269,
+   "z": 0.647,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "car",
+     "similarity": 0.646
+    },
+    {
+     "label": "train",
+     "similarity": 0.573
+    },
+    {
+     "label": "airport",
+     "similarity": 0.551
+    },
+    {
+     "label": "bus",
+     "similarity": 0.548
+    },
+    {
+     "label": "bicycle",
+     "similarity": 0.43
+    }
+   ]
+  },
+  {
+   "label": "bus",
+   "x": 2.252,
+   "y": 1.285,
+   "z": 0.69,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "train",
+     "similarity": 0.847
+    },
+    {
+     "label": "car",
+     "similarity": 0.737
+    },
+    {
+     "label": "station",
+     "similarity": 0.678
+    },
+    {
+     "label": "road",
+     "similarity": 0.648
+    },
+    {
+     "label": "airport",
+     "similarity": 0.648
+    }
+   ]
+  },
+  {
+   "label": "road",
+   "x": 2.161,
+   "y": -0.443,
+   "z": 1.681,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "bus",
+     "similarity": 0.648
+    },
+    {
+     "label": "train",
+     "similarity": 0.636
+    },
+    {
+     "label": "river",
+     "similarity": 0.583
+    },
+    {
+     "label": "station",
+     "similarity": 0.56
+    },
+    {
+     "label": "car",
+     "similarity": 0.537
+    }
+   ]
+  },
+  {
+   "label": "station",
+   "x": 3.045,
+   "y": 0.976,
+   "z": 0.551,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "bus",
+     "similarity": 0.678
+    },
+    {
+     "label": "airport",
+     "similarity": 0.642
+    },
+    {
+     "label": "train",
+     "similarity": 0.639
+    },
+    {
+     "label": "road",
+     "similarity": 0.56
+    },
+    {
+     "label": "London",
+     "similarity": 0.515
+    }
+   ]
+  },
+  {
+   "label": "airport",
+   "x": 3.965,
+   "y": 0.336,
+   "z": 0.156,
+   "category": "transport",
+   "neighbors": [
+    {
+     "label": "bus",
+     "similarity": 0.648
+    },
+    {
+     "label": "station",
+     "similarity": 0.642
+    },
+    {
+     "label": "train",
+     "similarity": 0.609
+    },
+    {
+     "label": "airplane",
+     "similarity": 0.551
+    },
+    {
+     "label": "London",
+     "similarity": 0.529
+    }
+   ]
+  },
+  {
+   "label": "happy",
+   "x": -0.262,
+   "y": -0.314,
+   "z": 0.125,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "excited",
+     "similarity": 0.757
+    },
+    {
+     "label": "afraid",
+     "similarity": 0.729
+    },
+    {
+     "label": "tired",
+     "similarity": 0.719
+    },
+    {
+     "label": "sad",
+     "similarity": 0.68
+    },
+    {
+     "label": "man",
+     "similarity": 0.603
+    }
+   ]
+  },
+  {
+   "label": "sad",
+   "x": 0.341,
+   "y": -0.012,
+   "z": -0.252,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "happy",
+     "similarity": 0.68
+    },
+    {
+     "label": "tired",
+     "similarity": 0.607
+    },
+    {
+     "label": "afraid",
+     "similarity": 0.589
+    },
+    {
+     "label": "excited",
+     "similarity": 0.571
+    },
+    {
+     "label": "angry",
+     "similarity": 0.542
+    }
+   ]
+  },
+  {
+   "label": "angry",
+   "x": 0.809,
+   "y": 0.411,
+   "z": 0.081,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "afraid",
+     "similarity": 0.604
+    },
+    {
+     "label": "tired",
+     "similarity": 0.588
+    },
+    {
+     "label": "excited",
+     "similarity": 0.559
+    },
+    {
+     "label": "sad",
+     "similarity": 0.542
+    },
+    {
+     "label": "happy",
+     "similarity": 0.54
+    }
+   ]
+  },
+  {
+   "label": "excited",
+   "x": -0.314,
+   "y": 1.285,
+   "z": 0.186,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "happy",
+     "similarity": 0.757
+    },
+    {
+     "label": "tired",
+     "similarity": 0.672
+    },
+    {
+     "label": "afraid",
+     "similarity": 0.641
+    },
+    {
+     "label": "sad",
+     "similarity": 0.571
+    },
+    {
+     "label": "angry",
+     "similarity": 0.559
+    }
+   ]
+  },
+  {
+   "label": "afraid",
+   "x": -0.216,
+   "y": 0.645,
+   "z": -0.004,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "tired",
+     "similarity": 0.74
+    },
+    {
+     "label": "happy",
+     "similarity": 0.729
+    },
+    {
+     "label": "excited",
+     "similarity": 0.641
+    },
+    {
+     "label": "angry",
+     "similarity": 0.604
+    },
+    {
+     "label": "sad",
+     "similarity": 0.589
+    }
+   ]
+  },
+  {
+   "label": "calm",
+   "x": 1.046,
+   "y": 0.043,
+   "z": -0.125,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "happy",
+     "similarity": 0.519
+    },
+    {
+     "label": "angry",
+     "similarity": 0.48
+    },
+    {
+     "label": "tired",
+     "similarity": 0.462
+    },
+    {
+     "label": "afraid",
+     "similarity": 0.456
+    },
+    {
+     "label": "sad",
+     "similarity": 0.4
+    }
+   ]
+  },
+  {
+   "label": "tired",
+   "x": -1.145,
+   "y": 0.369,
+   "z": -0.429,
+   "category": "emotions",
+   "neighbors": [
+    {
+     "label": "afraid",
+     "similarity": 0.74
+    },
+    {
+     "label": "happy",
+     "similarity": 0.719
+    },
+    {
+     "label": "excited",
+     "similarity": 0.672
+    },
+    {
+     "label": "sad",
+     "similarity": 0.607
+    },
+    {
+     "label": "angry",
+     "similarity": 0.588
+    }
+   ]
+  },
+  {
+   "label": "school",
+   "x": 3.036,
+   "y": 3.469,
+   "z": 0.045,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "student",
+     "similarity": 0.781
+    },
+    {
+     "label": "university",
+     "similarity": 0.755
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.755
+    },
+    {
+     "label": "classroom",
+     "similarity": 0.633
+    },
+    {
+     "label": "exam",
+     "similarity": 0.49
+    }
+   ]
+  },
+  {
+   "label": "student",
+   "x": 2.791,
+   "y": 4.126,
+   "z": -0.152,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "teacher",
+     "similarity": 0.808
+    },
+    {
+     "label": "school",
+     "similarity": 0.781
+    },
+    {
+     "label": "university",
+     "similarity": 0.713
+    },
+    {
+     "label": "classroom",
+     "similarity": 0.594
+    },
+    {
+     "label": "woman",
+     "similarity": 0.532
+    }
+   ]
+  },
+  {
+   "label": "teacher",
+   "x": 1.369,
+   "y": 3.569,
+   "z": -0.296,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "student",
+     "similarity": 0.808
+    },
+    {
+     "label": "school",
+     "similarity": 0.755
+    },
+    {
+     "label": "classroom",
+     "similarity": 0.612
+    },
+    {
+     "label": "university",
+     "similarity": 0.588
+    },
+    {
+     "label": "woman",
+     "similarity": 0.579
+    }
+   ]
+  },
+  {
+   "label": "exam",
+   "x": 0.61,
+   "y": 4.501,
+   "z": -0.811,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "school",
+     "similarity": 0.49
+    },
+    {
+     "label": "homework",
+     "similarity": 0.476
+    },
+    {
+     "label": "classroom",
+     "similarity": 0.462
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.44
+    },
+    {
+     "label": "student",
+     "similarity": 0.438
+    }
+   ]
+  },
+  {
+   "label": "homework",
+   "x": -2.369,
+   "y": 4.117,
+   "z": -1.927,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "classroom",
+     "similarity": 0.587
+    },
+    {
+     "label": "exam",
+     "similarity": 0.476
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.467
+    },
+    {
+     "label": "school",
+     "similarity": 0.423
+    },
+    {
+     "label": "student",
+     "similarity": 0.341
+    }
+   ]
+  },
+  {
+   "label": "classroom",
+   "x": -0.501,
+   "y": 5.902,
+   "z": -0.662,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "school",
+     "similarity": 0.633
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.612
+    },
+    {
+     "label": "student",
+     "similarity": 0.594
+    },
+    {
+     "label": "homework",
+     "similarity": 0.587
+    },
+    {
+     "label": "computer",
+     "similarity": 0.528
+    }
+   ]
+  },
+  {
+   "label": "university",
+   "x": 4.673,
+   "y": 2.759,
+   "z": -0.369,
+   "category": "school",
+   "neighbors": [
+    {
+     "label": "school",
+     "similarity": 0.755
+    },
+    {
+     "label": "student",
+     "similarity": 0.713
+    },
+    {
+     "label": "teacher",
+     "similarity": 0.588
+    },
+    {
+     "label": "Berlin",
+     "similarity": 0.472
+    },
+    {
+     "label": "London",
+     "similarity": 0.465
+    }
+   ]
+  },
+  {
+   "label": "computer",
+   "x": -0.774,
+   "y": 6.5,
+   "z": -0.353,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "software",
+     "similarity": 0.837
+    },
+    {
+     "label": "internet",
+     "similarity": 0.729
+    },
+    {
+     "label": "screen",
+     "similarity": 0.593
+    },
+    {
+     "label": "keyboard",
+     "similarity": 0.542
+    },
+    {
+     "label": "classroom",
+     "similarity": 0.528
+    }
+   ]
+  },
+  {
+   "label": "keyboard",
+   "x": -2.388,
+   "y": 4.475,
+   "z": 0.327,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "screen",
+     "similarity": 0.542
+    },
+    {
+     "label": "computer",
+     "similarity": 0.542
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.541
+    },
+    {
+     "label": "software",
+     "similarity": 0.501
+    },
+    {
+     "label": "code",
+     "similarity": 0.376
+    }
+   ]
+  },
+  {
+   "label": "screen",
+   "x": -1.244,
+   "y": 2.839,
+   "z": 1.027,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "computer",
+     "similarity": 0.593
+    },
+    {
+     "label": "internet",
+     "similarity": 0.542
+    },
+    {
+     "label": "keyboard",
+     "similarity": 0.542
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.527
+    },
+    {
+     "label": "software",
+     "similarity": 0.473
+    }
+   ]
+  },
+  {
+   "label": "code",
+   "x": -0.267,
+   "y": 3.836,
+   "z": 0.247,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "software",
+     "similarity": 0.533
+    },
+    {
+     "label": "internet",
+     "similarity": 0.523
+    },
+    {
+     "label": "computer",
+     "similarity": 0.507
+    },
+    {
+     "label": "java",
+     "similarity": 0.386
+    },
+    {
+     "label": "keyboard",
+     "similarity": 0.376
+    }
+   ]
+  },
+  {
+   "label": "python",
+   "x": -3.275,
+   "y": 2.92,
+   "z": 1.605,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "cat",
+     "similarity": 0.419
+    },
+    {
+     "label": "java",
+     "similarity": 0.362
+    },
+    {
+     "label": "tiger",
+     "similarity": 0.354
+    },
+    {
+     "label": "snake",
+     "similarity": 0.353
+    },
+    {
+     "label": "mouse",
+     "similarity": 0.351
+    }
+   ]
+  },
+  {
+   "label": "java",
+   "x": -1.317,
+   "y": 4.472,
+   "z": -0.277,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "software",
+     "similarity": 0.479
+    },
+    {
+     "label": "computer",
+     "similarity": 0.405
+    },
+    {
+     "label": "code",
+     "similarity": 0.386
+    },
+    {
+     "label": "internet",
+     "similarity": 0.379
+    },
+    {
+     "label": "python",
+     "similarity": 0.362
+    }
+   ]
+  },
+  {
+   "label": "software",
+   "x": -1.416,
+   "y": 5.818,
+   "z": -0.557,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "computer",
+     "similarity": 0.837
+    },
+    {
+     "label": "internet",
+     "similarity": 0.718
+    },
+    {
+     "label": "code",
+     "similarity": 0.533
+    },
+    {
+     "label": "keyboard",
+     "similarity": 0.501
+    },
+    {
+     "label": "java",
+     "similarity": 0.479
+    }
+   ]
+  },
+  {
+   "label": "internet",
+   "x": 0.356,
+   "y": 4.344,
+   "z": -0.373,
+   "category": "technology",
+   "neighbors": [
+    {
+     "label": "computer",
+     "similarity": 0.729
+    },
+    {
+     "label": "software",
+     "similarity": 0.718
+    },
+    {
+     "label": "screen",
+     "similarity": 0.542
+    },
+    {
+     "label": "money",
+     "similarity": 0.527
+    },
+    {
+     "label": "code",
+     "similarity": 0.523
+    }
+   ]
+  },
+  {
+   "label": "river",
+   "x": 0.036,
+   "y": -2.527,
+   "z": 2.147,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "lake",
+     "similarity": 0.743
+    },
+    {
+     "label": "water",
+     "similarity": 0.631
+    },
+    {
+     "label": "road",
+     "similarity": 0.583
+    },
+    {
+     "label": "snake",
+     "similarity": 0.497
+    },
+    {
+     "label": "fish",
+     "similarity": 0.471
+    }
+   ]
+  },
+  {
+   "label": "bank",
+   "x": 3.667,
+   "y": -0.604,
+   "z": -0.449,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "money",
+     "similarity": 0.572
+    },
+    {
+     "label": "loan",
+     "similarity": 0.551
+    },
+    {
+     "label": "London",
+     "similarity": 0.473
+    },
+    {
+     "label": "Germany",
+     "similarity": 0.445
+    },
+    {
+     "label": "university",
+     "similarity": 0.392
+    }
+   ]
+  },
+  {
+   "label": "money",
+   "x": 0.909,
+   "y": 0.686,
+   "z": -0.572,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "loan",
+     "similarity": 0.599
+    },
+    {
+     "label": "bank",
+     "similarity": 0.572
+    },
+    {
+     "label": "internet",
+     "similarity": 0.527
+    },
+    {
+     "label": "man",
+     "similarity": 0.495
+    },
+    {
+     "label": "happy",
+     "similarity": 0.471
+    }
+   ]
+  },
+  {
+   "label": "loan",
+   "x": 2.202,
+   "y": 1.646,
+   "z": -1.464,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "money",
+     "similarity": 0.599
+    },
+    {
+     "label": "bank",
+     "similarity": 0.551
+    },
+    {
+     "label": "student",
+     "similarity": 0.372
+    },
+    {
+     "label": "Madrid",
+     "similarity": 0.369
+    },
+    {
+     "label": "school",
+     "similarity": 0.355
+    }
+   ]
+  },
+  {
+   "label": "water",
+   "x": -1.524,
+   "y": -1.027,
+   "z": 0.562,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "river",
+     "similarity": 0.631
+    },
+    {
+     "label": "lake",
+     "similarity": 0.629
+    },
+    {
+     "label": "fish",
+     "similarity": 0.594
+    },
+    {
+     "label": "money",
+     "similarity": 0.469
+    },
+    {
+     "label": "coffee",
+     "similarity": 0.464
+    }
+   ]
+  },
+  {
+   "label": "fish",
+   "x": -5.403,
+   "y": -1.904,
+   "z": 0.164,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "snake",
+     "similarity": 0.607
+    },
+    {
+     "label": "water",
+     "similarity": 0.594
+    },
+    {
+     "label": "tomato",
+     "similarity": 0.52
+    },
+    {
+     "label": "dog",
+     "similarity": 0.518
+    },
+    {
+     "label": "duck",
+     "similarity": 0.513
+    }
+   ]
+  },
+  {
+   "label": "lake",
+   "x": -0.105,
+   "y": -1.764,
+   "z": 1.916,
+   "category": "river & money",
+   "neighbors": [
+    {
+     "label": "river",
+     "similarity": 0.743
+    },
+    {
+     "label": "water",
+     "similarity": 0.629
+    },
+    {
+     "label": "road",
+     "similarity": 0.493
+    },
+    {
+     "label": "fish",
+     "similarity": 0.416
+    },
+    {
+     "label": "station",
+     "similarity": 0.393
+    }
+   ]
+  }
+ ],
+ "puzzles": [
+  {
+   "id": "analogy_queen",
+   "kind": "analogy",
+   "prompt": "king - man + woman is closest to...?",
+   "a": "king",
+   "b": "man",
+   "c": "woman",
+   "answer": "queen",
+   "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
+  },
+  {
+   "id": "analogy_rome",
+   "kind": "analogy",
+   "prompt": "Paris - France + Italy is closest to...?",
+   "a": "Paris",
+   "b": "France",
+   "c": "Italy",
+   "answer": "Rome",
+   "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
+  },
+  {
+   "id": "analogy_berlin",
+   "kind": "analogy",
+   "prompt": "Rome - Italy + Germany is closest to...?",
+   "a": "Rome",
+   "b": "Italy",
+   "c": "Germany",
+   "answer": "Berlin",
+   "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
+  },
+  {
+   "id": "odd_keyboard",
+   "kind": "odd-one-out",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    "cat",
+    "dog",
+    "horse",
+    "keyboard"
+   ],
+   "answer": "keyboard",
+   "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
+  },
+  {
+   "id": "odd_pizza",
+   "kind": "odd-one-out",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    "Paris",
+    "Rome",
+    "Berlin",
+    "pizza"
+   ],
+   "answer": "pizza",
+   "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
+  },
+  {
+   "id": "odd_python",
+   "kind": "odd-one-out",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    "python",
+    "java",
+    "code",
+    "snake"
+   ],
+   "answer": "snake",
+   "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
+  },
+  {
+   "id": "odd_bank",
+   "kind": "odd-one-out",
+   "prompt": "Which word is the odd one out?",
+   "options": [
+    "money",
+    "loan",
+    "bank",
+    "duck"
+   ],
+   "answer": "duck",
+   "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
+  },
+  {
+   "id": "ambiguity_bank",
+   "kind": "question",
+   "prompt": "GloVe gives 'bank' ONE point. Look at its neighbors: which meaning won?",
+   "options": [
+    "money and loans",
+    "rivers and water"
+   ],
+   "answer": "money and loans",
+   "explanation": "Classic word vectors give one point per word, so the most frequent meaning dominates. This is why modern models use context-dependent embeddings."
+  },
+  {
+   "id": "cluster_food",
+   "kind": "question",
+   "prompt": "One region contains pizza, pasta, sushi, burger, bread. What would you call it?",
+   "options": [
+    "food",
+    "Italy",
+    "restaurants",
+    "round things"
+   ],
+   "answer": "food",
+   "explanation": "Clusters in embedding space often correspond to human categories. Nobody labeled them: they emerge from how words are used."
+  },
+  {
+   "id": "surprise_neighbor",
+   "kind": "explore",
+   "prompt": "Click any word and find one neighbor that surprises you. Why might the model have put them together?",
+   "answer": "",
+   "explanation": "Vectors come from co-occurrence in text, which sometimes disagrees with our intuition. Surprises are discussion gold."
+  }
+ ]
+}
