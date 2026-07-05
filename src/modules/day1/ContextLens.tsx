@@ -1,18 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
-import generatedData from "../../content/generated/day1/m2_context_switch.json";
+import { m2Data, DEFAULT_MODEL } from "../../content/models";
+import type { ModelKey } from "../../content/models";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
-import type { GenM2 } from "../../lib/generated";
+import { ModelPicker } from "../../components/controls/ModelPicker";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
-
-const data = generatedData as GenM2;
 
 /**
  * One prompt at a time. A big flip button swaps the context; the SAME
  * candidate bars update in place, so the flip is impossible to miss.
- * Probabilities come from the offline GPT-2 run (static JSON).
+ * Probabilities come from the offline model runs (static JSON); the model
+ * dropdown compares them on the same pair. Deep link: #/day1/context-lens/<pairId>.
  */
-export default function ContextLens({ onResult, resetSignal }: ModuleComponentProps) {
-  const [pairIndex, setPairIndex] = useState(0);
+export default function ContextLens({ onResult, resetSignal, initialArg }: ModuleComponentProps) {
+  const [modelKey, setModelKey] = useState<ModelKey>(DEFAULT_MODEL);
+  const data = m2Data[modelKey];
+  const initialPair = useMemo(() => {
+    const i = data.pairs.findIndex((p) => p.id === initialArg);
+    return i >= 0 ? i : 0;
+    // pair ids and order are identical across models
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialArg]);
+  const [pairIndex, setPairIndex] = useState(initialPair);
   const [side, setSide] = useState<"a" | "b">("a");
 
   const pair = data.pairs[pairIndex];
@@ -37,9 +45,9 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
   }, [active]);
 
   useEffect(() => {
-    setPairIndex(0);
+    setPairIndex(initialPair);
     setSide("a");
-  }, [resetSignal]);
+  }, [resetSignal, initialPair]);
 
   useEffect(() => {
     onResult(`pair '${pair.id}', context: ${side === "a" ? pair.labelA : pair.labelB}`);
@@ -75,6 +83,7 @@ export default function ContextLens({ onResult, resetSignal }: ModuleComponentPr
           </select>
         </label>
         <div className="controlRow">
+          <ModelPicker value={modelKey} onChange={setModelKey} />
           <a className="btn subtle small" href="#/day1/next-token-arena/context">
             ← Back to the Arena
           </a>

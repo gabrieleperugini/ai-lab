@@ -1,5 +1,0 @@
-transformers
-torch
-numpy
-gensim
-scipy==1.12

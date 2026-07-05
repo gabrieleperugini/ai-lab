@@ -4,12 +4,15 @@ Total lab time: **150-180 min**, split into short sessions between slides.
 Two classes run in parallel (about 50 students each), students work in groups
 of 3-4 on laptops.
 
-A note worth repeating in class: **the probability bars in M1-M4 are real
-outputs of GPT-2**, a small open language model from 2019, computed offline
-and cached as static files. They are not meant to represent ChatGPT or any
-current frontier model exactly; GPT-2's failures (weak facts, no arithmetic)
-are part of the lesson. M6 shows real GloVe word embeddings. The M5 tokenizer
-is the real cl100k_base.
+A note worth repeating in class: **the probability bars are real outputs of
+two small open models**, computed offline and cached as static files:
+Qwen2.5-0.5B (2024, the default) and GPT-2 small (2019). A dropdown in M1,
+M2, M3, M8 and the Reasoning Demo switches between them on the same prompt.
+The killer comparison: Qwen answers 'The capital of France is Paris' with
+31.6% (GPT-2: 3.2%), but BOTH give Paris almost 0% on the World Cup 1998
+chain. Five years of progress improved the facts, not the chained reasoning.
+Neither represents ChatGPT or any frontier model exactly. M6 shows real GloVe
+word embeddings; the M5 tokenizer is the real cl100k_base.
 
 ## Links to hand out
 

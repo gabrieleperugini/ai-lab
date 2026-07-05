@@ -275,13 +275,17 @@ M1_EXAMPLES = [
      "Some blanks require reasoning over the whole prompt."),
 ]
 
-# Per-example bridge buttons to other modules (module id shown after reveal).
+# Per-example bridge buttons to other modules. Paths may include a section
+# segment (#/day1/<module>/<section>) that opens the matching pair/tree.
 M1_LINKS = {
-    "student_test": ("branching-stories", "Explore branching: see how this choice changes the future"),
+    "student_test": ("branching-stories/student_test", "Explore branching: see how this choice changes the future"),
     "proof_first": ("reasoning-demo", "Open the Reasoning Demo: walk the whole proof"),
     "algebra": ("reasoning-demo", "Open the Reasoning Demo: reasoning one token at a time"),
-    "trophy_big": ("context-lens", "Open the Context Lens: flip the suitcase sentence"),
-    "bank_money": ("context-lens", "Open the Context Lens: flip between the two banks"),
+    "trophy_big": ("context-lens", "Open the Context Lens: flip a context word"),
+    "bank_money": ("context-lens/bank", "Open the Context Lens: flip between the two banks"),
+    "oven": ("context-lens/ice_cream", "Open the Context Lens: oven versus freezer"),
+    "fire_water": ("context-lens/fire", "Open the Context Lens: water versus gasoline"),
+    "umbrella_tom": ("context-lens/umbrella", "Open the Context Lens: remembered versus forgot"),
 }
 
 
@@ -707,48 +711,55 @@ def gen_reasoning(lm: LM) -> dict:
         "root": REASONING_ROOT,
         "finalText": context_display,
         "steps": steps_out,
-        "notes": "Scores are GPT-2 chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability).",
+        "notes": f"Scores are {lm.name} chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability).",
     }
+
+
+def model_key(name: str) -> str:
+    """Filesystem/UI key for a model name, e.g. Qwen/Qwen2.5-0.5B -> qwen2.5-0.5b."""
+    return name.split("/")[-1].lower()
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model", default="gpt2")
-    ap.add_argument("--only", default="", help="comma list: m1,m2,m3,m4")
+    ap.add_argument("--models", default="gpt2",
+                    help="comma list of HF model names, e.g. gpt2,Qwen/Qwen2.5-0.5B")
+    ap.add_argument("--only", default="", help="comma list: m1,m2,m3,m4,reasoning")
     args = ap.parse_args()
 
-    try:
-        lm = LM(args.model)
-    except Exception as e:  # noqa: BLE001
-        print(f"failed to load {args.model} ({e}); falling back to distilgpt2")
-        lm = LM("distilgpt2")
-
-    report(f"# Day 1 generation report\n\nmodel: `{lm.name}`\n")
-
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     only = set(args.only.split(",")) if args.only else {"m1", "m2", "m3", "m4", "reasoning"}
 
-    if "m1" in only:
-        (OUT_DIR / "m1_next_token.json").write_text(
-            json.dumps(gen_m1(lm), indent=1, ensure_ascii=False))
-        print("m1 done")
-    if "m2" in only:
-        (OUT_DIR / "m2_context_switch.json").write_text(
-            json.dumps(gen_m2(lm), indent=1, ensure_ascii=False))
-        print("m2 done")
-    if "m3" in only:
-        (OUT_DIR / "m3_branching.json").write_text(
-            json.dumps(gen_m3(lm), indent=1, ensure_ascii=False))
-        print("m3 done")
-    if "m4" in only:
-        (OUT_DIR / "m4_sampling.json").write_text(
-            json.dumps(gen_m4(lm), indent=1, ensure_ascii=False))
-        print("m4 done")
-    if "reasoning" in only:
-        (OUT_DIR / "reasoning_demo.json").write_text(
-            json.dumps(gen_reasoning(lm), indent=1, ensure_ascii=False))
-        print("reasoning done")
+    report("# Day 1 generation report\n")
+    for model_name in args.models.split(","):
+        model_name = model_name.strip()
+        lm = LM(model_name)
+        key = model_key(lm.name)
+        out = OUT_DIR / key
+        out.mkdir(parents=True, exist_ok=True)
+        report(f"\n\n# ===== model: `{lm.name}` (key `{key}`) =====\n")
+
+        if "m1" in only:
+            (out / "m1_next_token.json").write_text(
+                json.dumps(gen_m1(lm), indent=1, ensure_ascii=False))
+            print(f"[{key}] m1 done")
+        if "m2" in only:
+            (out / "m2_context_switch.json").write_text(
+                json.dumps(gen_m2(lm), indent=1, ensure_ascii=False))
+            print(f"[{key}] m2 done")
+        if "m3" in only:
+            (out / "m3_branching.json").write_text(
+                json.dumps(gen_m3(lm), indent=1, ensure_ascii=False))
+            print(f"[{key}] m3 done")
+        if "m4" in only:
+            (out / "m4_sampling.json").write_text(
+                json.dumps(gen_m4(lm), indent=1, ensure_ascii=False))
+            print(f"[{key}] m4 done")
+        if "reasoning" in only:
+            (out / "reasoning_demo.json").write_text(
+                json.dumps(gen_reasoning(lm), indent=1, ensure_ascii=False))
+            print(f"[{key}] reasoning done")
+        del lm  # free memory before loading the next model
 
     (REPORT_DIR / "day1_generation_report.md").write_text("\n".join(REPORT_LINES))
     print(f"report written to {REPORT_DIR / 'day1_generation_report.md'}")

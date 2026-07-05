@@ -1,18 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
-import generatedData from "../../content/generated/day1/reasoning_demo.json";
-import type { GenReasoning, GenReasoningOption } from "../../lib/generated";
+import { reasoningData, DEFAULT_MODEL, modelLabel } from "../../content/models";
+import type { ModelKey } from "../../content/models";
+import { ModelPicker } from "../../components/controls/ModelPicker";
+import type { GenReasoningOption } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
-
-const data = generatedData as GenReasoning;
 
 /**
  * The odd-square proof from the slides ("NTP part 5 - intelligence") as a
  * ladder of commitments. At every step only ONE option keeps the proof
  * alive; picking a dead end reveals why the road leads nowhere and forces a
- * restart. GPT-2's own preference is shown per step; the small model often
- * picks a dead end, which is exactly the point: reasoning needs look-ahead.
+ * restart. The selected model's preference is shown per step; the proof
+ * steps are fixed by the slides, so switching models just swaps the scores.
  */
 export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponentProps) {
+  const [modelKey, setModelKey] = useState<ModelKey>(DEFAULT_MODEL);
+  const data = reasoningData[modelKey];
   const [step, setStep] = useState(0);
   const [path, setPath] = useState<string[]>([]);
   const [deadEnd, setDeadEnd] = useState<GenReasoningOption | null>(null);
@@ -40,6 +42,8 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
     if (!current) return null;
     return current.options.reduce((a, b) => (b.relativeScore > a.relativeScore ? b : a));
   }, [current]);
+
+  const label = modelLabel(modelKey);
 
   const choose = (opt: GenReasoningOption) => {
     if (deadEnd) return;
@@ -72,6 +76,7 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
               💥 dead ends hit: <span className="statValue">{crashes}</span>
             </span>
           )}
+          <ModelPicker value={modelKey} onChange={setModelKey} />
           <a className="btn subtle small" href="#/day1/next-token-arena/reasoning">
             ← Back to the Arena
           </a>
@@ -146,7 +151,7 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
               >
                 {o.display}
                 {showModelPick && modelPick?.display === o.display && (
-                  <span style={{ marginLeft: 8, fontSize: 12 }} title="GPT-2's preferred option">
+                  <span style={{ marginLeft: 8, fontSize: 12 }} title={label + "'s preferred option"}>
                     🤖
                   </span>
                 )}
@@ -174,11 +179,11 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
           <hr className="divider" />
           <div className="controlRow" style={{ justifyContent: "space-between" }}>
             <button className="btn subtle small" onClick={() => setShowModelPick((s) => !s)}>
-              {showModelPick ? "Hide GPT-2's picks" : "🤖 Show what GPT-2 would pick"}
+              {showModelPick ? "Hide the model's picks" : "🤖 Show what " + label + " would pick"}
             </button>
             {showModelPick && modelPick && (
               <span className="hintText">
-                GPT-2 prefers “{modelPick.display}” here ({(modelPick.relativeScore * 100).toFixed(0)}%
+                {label} prefers “{modelPick.display}” here ({(modelPick.relativeScore * 100).toFixed(0)}%
                 among these options){modelPick.deadEnd ? ": a dead end! Small models lack look-ahead." : "."}
               </span>
             )}
@@ -193,8 +198,8 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
             You reached QED{crashes > 0 ? ` after ${crashes} dead end${crashes > 1 ? "s" : ""}` : " without a single dead end"}.
             Every step was one committed token, and at every step most roads led nowhere. Producing
             a proof by next-token prediction means the probabilities must encode planning: the model
-            has to prefer tokens whose FUTURE works out. Toggle “Show what GPT-2 would pick” and
-            restart: the small model crashes almost immediately.
+            has to prefer tokens whose FUTURE works out. Toggle the 🤖 button, restart, and try
+            both models: which one survives longer before picking a dead end?
           </p>
           <div className="controlRow" style={{ marginTop: 10 }}>
             <button className="btn primary small" onClick={restart}>
@@ -208,7 +213,7 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
       )}
 
       <p className="hintText" style={{ marginTop: 12 }}>
-        The percentages behind the 🤖 marker are GPT-2 chain-rule scores, normalized among the
+        The percentages behind the 🤖 marker are {label} chain-rule scores, normalized among the
         shown options. Dead-end explanations are curated; the math is checked.
       </p>
     </div>

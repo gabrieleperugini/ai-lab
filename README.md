@@ -9,12 +9,15 @@ no accounts, no API keys.
 - **Day 2: How neural networks learn** (scaffolded placeholders)
 - **Day 3: Unsupervised learning and RL** (scaffolded placeholders)
 
-**The probabilities are real.** Day 1 modules M1 to M4 show next-token
-probabilities and sampled continuations computed offline from **GPT-2** (a small
-open language model), and M6 shows **real GloVe word embeddings**. A note for
-instructors: these come from a small open model used for teaching; they are not
-meant to represent ChatGPT or any current frontier model exactly. The M5
-tokenizer (cl100k_base) and the sampling settings shown are also real.
+**The probabilities are real, from two models.** Day 1 modules M1-M4 and the
+Reasoning Demo show next-token probabilities and sampled continuations computed
+offline from **Qwen2.5-0.5B (2024, default)** and **GPT-2 small (2019,
+fallback)**; a dropdown in each of those modules switches between them on the
+same prompt, which makes model progress (and shared failures) visible. M6 shows
+**real GloVe word embeddings**. A note for instructors: these are small open
+models used for teaching; they are not meant to represent ChatGPT or any
+current frontier model exactly. The M5 tokenizer (cl100k_base) and the sampling
+settings shown are also real.
 
 ## Regenerating the Day 1 model content
 
@@ -24,14 +27,19 @@ JSON into `src/content/generated/day1/`, and the app imports it at build time.
 ```bash
 python3 -m venv --system-site-packages scripts/.venv
 scripts/.venv/bin/pip install -r scripts/requirements.txt
-scripts/.venv/bin/python scripts/generate_day1_llm_content.py    # M1-M4 (GPT-2)
+scripts/.venv/bin/python scripts/generate_day1_llm_content.py --models "gpt2,Qwen/Qwen2.5-0.5B"
 scripts/.venv/bin/python scripts/generate_day1_embeddings.py     # M6 (GloVe)
 ```
 
 - `generate_day1_llm_content.py` computes next-token probabilities (single-token
   candidates use exact probabilities; multi-token candidates use chain-rule
-  phrase probabilities), 3-level branching trees, and cached sampled
-  continuations at three randomness settings. `--only m1,m3` regenerates a subset.
+  phrase probabilities), 3-level branching trees, cached sampled continuations
+  at three randomness settings, and the Reasoning Demo scores, for EACH model
+  in `--models`. Output goes to `src/content/generated/day1/<model-key>/`.
+  `--only m1,m3` regenerates a subset.
+- To add a model to the site's compare dropdown: run the script with its
+  Hugging Face name, then register it in `src/content/models.ts` (imports plus
+  one entry in `MODELS`; the first entry is the default).
 - `generate_day1_embeddings.py` loads glove-wiki-gigaword-100, projects a curated
   vocabulary to 3D with PCA, and computes neighbors and puzzle answers from the
   full vectors.

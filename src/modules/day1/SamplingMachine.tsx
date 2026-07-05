@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import generatedData from "../../content/generated/day1/m4_sampling.json";
+import { m4Data, DEFAULT_MODEL } from "../../content/models";
+import type { ModelKey } from "../../content/models";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
 import { Segmented } from "../../components/controls/Segmented";
-import type { GenM4 } from "../../lib/generated";
+import { ModelPicker } from "../../components/controls/ModelPicker";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
-
-const data = generatedData as GenM4;
 
 /**
  * Sampling Machine, real-model edition. Continuations were sampled OFFLINE
- * from GPT-2 at three randomness settings and cached as JSON; the classroom
- * site only replays them. A "recently shown" queue avoids immediate repeats.
+ * at three randomness settings and cached as JSON; the classroom site only
+ * replays them. A "recently shown" queue avoids immediate repeats. The model
+ * dropdown compares the precomputed models on the same prompt.
  */
 export default function SamplingMachine({ onResult, resetSignal }: ModuleComponentProps) {
+  const [modelKey, setModelKey] = useState<ModelKey>(DEFAULT_MODEL);
+  const data = m4Data[modelKey];
   const [promptIndex, setPromptIndex] = useState(0);
   const [setIndex, setSetIndex] = useState(1); // start at medium randomness
   const [current, setCurrent] = useState<string | null>(null);
@@ -42,7 +44,7 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
   const drawSample = useCallback(
     (pIdx: number, sIdx: number): string => {
       const samples = data.prompts[pIdx].sampleSets[sIdx].samples;
-      const key = `${pIdx}-${sIdx}`;
+      const key = `${modelKey}-${pIdx}-${sIdx}`;
       const recent = recentRef.current[key] ?? [];
       let pool = samples.filter((s) => !recent.includes(s));
       if (pool.length === 0) {
@@ -112,19 +114,30 @@ export default function SamplingMachine({ onResult, resetSignal }: ModuleCompone
             ))}
           </select>
         </label>
-        <button
-          className="btn ghost small"
-          onClick={() => {
-            let i = promptIndex;
-            while (i === promptIndex && data.prompts.length > 1) {
-              i = Math.floor(Math.random() * data.prompts.length);
-            }
-            setPromptIndex(i);
-            reset();
-          }}
-        >
-          🎰 New prompt
-        </button>
+        <div className="controlRow">
+          <ModelPicker
+            value={modelKey}
+            onChange={(k) => {
+              setModelKey(k);
+              setCurrent(null);
+              setCompare(null);
+              setHistory([]);
+            }}
+          />
+          <button
+            className="btn ghost small"
+            onClick={() => {
+              let i = promptIndex;
+              while (i === promptIndex && data.prompts.length > 1) {
+                i = Math.floor(Math.random() * data.prompts.length);
+              }
+              setPromptIndex(i);
+              reset();
+            }}
+          >
+            🎰 New prompt
+          </button>
+        </div>
       </div>
 
       <div className="controlRow" style={{ marginBottom: 6 }}>

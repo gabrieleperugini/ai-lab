@@ -31,7 +31,7 @@ export const day1Modules: LabModule[] = [
     ],
     noticePoints: [
       "Sometimes one token is almost certain; sometimes many are plausible.",
-      "The bars are REAL probabilities from GPT-2, a small open model, computed offline.",
+      "The bars are REAL probabilities from a small open model (Qwen2.5 by default; switch to GPT-2 to compare), computed offline.",
       "'other' is all the rest of the vocabulary; a model can prefer tokens nobody offered.",
       "Small models fail some knowledge and reasoning rounds; that failure is part of the lesson."
     ],
@@ -40,8 +40,8 @@ export const day1Modules: LabModule[] = [
     teacherNotes: [
       "Run the first two rounds as a full-class warm-up before letting groups continue.",
       "Ask groups to shout their token before revealing; it makes the distribution feel earned.",
-      "Probabilities are real GPT-2 outputs. GPT-2 is from 2019 and small: it nails 'Once upon a time' but fumbles the World Cup chain. Contrast with modern chatbots.",
-      "Options marked as added by the model show where GPT-2 actually puts its mass (often 'the' or 'now'): models continue text, they do not answer quizzes.",
+      "Probabilities are real model outputs. The dropdown compares Qwen2.5-0.5B (2024) and GPT-2 (2019). Killer demo: Qwen gets Paris at 31.6% on the capital of France (GPT-2: 3.2%), yet BOTH give Paris almost 0% on the World Cup chain.",
+      "Options added by the model show where it actually puts its mass (often 'the' or 'now'): models continue text, they do not answer quizzes.",
       "Timing: about 2 min per round; 30 rounds in 6 categories matching the slide stops (Arena 1-6). Categories can be deep-linked from the slides: #/day1/next-token-arena/basics, /context, /suitcase, /world-knowledge, /probability, /reasoning.",
       "Bridge buttons follow the slides: context and suitcase rounds open Context Lens, probability opens Branching Stories, reasoning opens the Reasoning Demo."
     ],
@@ -72,7 +72,7 @@ export const day1Modules: LabModule[] = [
     noticePoints: [
       "The sentence is almost the same, but the world it describes has changed.",
       "The SAME candidate words get very different probabilities in the two contexts.",
-      "These are real GPT-2 probabilities, computed offline; small numbers are normal, the flip is the point."
+      "These are real model probabilities, computed offline; small numbers are normal, the flip is the point. Try both models with the dropdown."
     ],
     takeaway: "Same word, different context, different next-token distribution.",
     teacherNotes: [
@@ -108,7 +108,7 @@ export const day1Modules: LabModule[] = [
     ],
     noticePoints: [
       "Each token commits the text to a branch; the next distribution depends on the path so far.",
-      "The percentages are real GPT-2 probabilities recomputed at every step.",
+      "The percentages are real model probabilities recomputed at every step; the dropdown switches model (and resets the path).",
       "The grey 'other' chip is everything we did not display; the model could go there too."
     ],
     takeaway:
@@ -116,7 +116,7 @@ export const day1Modules: LabModule[] = [
     teacherNotes: [
       "Demo one full path on the projector, then free exploration.",
       "Five stories: the test, the robot, the detective, the meeting, the dragon.",
-      "The endings after the third choice were also written by GPT-2 (sampled offline); some are charmingly weird.",
+      "The endings after the third choice were also written by the models (sampled offline); some are charmingly weird.",
       "Discussion: why can't the model go back once a token is emitted? Compare with how students write essays."
     ],
     poll: {
@@ -136,25 +136,25 @@ export const day1Modules: LabModule[] = [
       "Read the statement: the square of an odd number is odd.",
       "Choose the next step of the proof from the options.",
       "Hit a dead end? Read why the road dies, then start again.",
-      "Reach QED, then press 'Show what GPT-2 would pick' and compare.",
+      "Reach QED, then toggle the model's picks and compare Qwen2.5 with GPT-2.",
       "Ask yourselves: what would happen to a model that cannot look ahead?"
     ],
     component: "ReasoningDemo",
     reflectionQuestions: [
       "Which dead end was the most tempting, and why?",
-      "GPT-2 often prefers a dead end. What is missing in the way it chooses tokens?"
+      "GPT-2 crashes at step 1; Qwen2.5 survives to the last step. What changed in five years, and what is still missing?"
     ],
     noticePoints: [
       "The options at each step come from the lecture slides; only one keeps the proof alive.",
       "A proof is a chain of commitments: one wrong token and the future is ruined.",
-      "GPT-2's preferences (chain-rule scores) show that a small model lacks the look-ahead reasoning needs."
+      "The models' preferences (chain-rule scores) differ: GPT-2 (2019) picks a dead end almost immediately, Qwen2.5 (2024) walks nearly the whole proof."
     ],
     takeaway:
       "To produce structured reasoning by next-token prediction, the probabilities must encode planning: the model has to prefer tokens whose future works out.",
     teacherNotes: [
       "This is the slides' 'NTP part 5 - intelligence' proof, turned into a game.",
       "Let students crash into dead ends; the restart is the lesson, not a punishment.",
-      "The 🤖 toggle is the punchline: GPT-2 picks 'The' at step 1 (92%), a wrong expansion at step 4, and a premature QED at step 5. Small models do not plan.",
+      "The 🤖 toggle is the punchline, now in two acts: GPT-2 picks 'The' at step 1 (92%) and premature QEDs; Qwen2.5 makes the RIGHT choice at steps 1-5 (96-98%!) and only stumbles on the final QED. Progress is visible, planning is still fragile.",
       "Bridge to the slides' discussion: probabilities must encode a form of look-ahead for reasoning to work.",
       "Fast groups: ask them to design their own 4-option step where only one road survives."
     ]
