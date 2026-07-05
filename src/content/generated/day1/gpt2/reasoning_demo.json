@@ -184,5 +184,5 @@
    ]
   }
  ],
- "notes": "Scores are GPT-2 chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability)."
+ "notes": "Scores are gpt2 chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability)."
 }

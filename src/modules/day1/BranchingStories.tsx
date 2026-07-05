@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
-import generatedData from "../../content/generated/day1/m3_branching.json";
+import { m3Data, DEFAULT_MODEL } from "../../content/models";
+import type { ModelKey } from "../../content/models";
 import { Segmented } from "../../components/controls/Segmented";
-import type { GenM3, GenBranchOption } from "../../lib/generated";
+import { ModelPicker } from "../../components/controls/ModelPicker";
+import type { GenBranchOption } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
-const data = generatedData as GenM3;
-
 /**
- * Three-step branching on real GPT-2 probabilities. Students pick a token,
+ * Three-step branching on real model probabilities. Students pick a token,
  * the text grows, new probabilities appear; after the third pick a short
  * model-written ending is revealed. All content is precomputed JSON.
+ * Switching model resets the path (the branch tokens differ per model).
+ * Deep link: #/day1/branching-stories/<treeId>.
  */
-export default function BranchingStories({ onResult, resetSignal }: ModuleComponentProps) {
-  const [treeId, setTreeId] = useState(data.trees[0].id);
+export default function BranchingStories({ onResult, resetSignal, initialArg }: ModuleComponentProps) {
+  const [modelKey, setModelKey] = useState<ModelKey>(DEFAULT_MODEL);
+  const data = m3Data[modelKey];
+  const initialTree =
+    data.trees.find((t) => t.id === initialArg)?.id ?? data.trees[0].id;
+  const [treeId, setTreeId] = useState(initialTree);
   const [nodeId, setNodeId] = useState("root");
   const [picked, setPicked] = useState<GenBranchOption[]>([]);
   const [explored, setExplored] = useState<string[]>([]);
+
+  const switchModel = (k: ModelKey) => {
+    setModelKey(k);
+    setNodeId("root");
+    setPicked([]);
+  };
 
   const tree = data.trees.find((t) => t.id === treeId)!;
   const node = tree.nodes[nodeId];
@@ -23,11 +35,12 @@ export default function BranchingStories({ onResult, resetSignal }: ModuleCompon
   const ended = last !== null && last.ending !== undefined && last.next === null;
 
   useEffect(() => {
-    setTreeId(data.trees[0].id);
+    setTreeId(initialTree);
     setNodeId("root");
     setPicked([]);
     setExplored([]);
-  }, [resetSignal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetSignal, initialTree]);
 
   const fullText = () => {
     const tokens = picked.map((p) => p.text).join("");
@@ -72,6 +85,7 @@ export default function BranchingStories({ onResult, resetSignal }: ModuleCompon
           }}
         />
         <div className="controlRow">
+          <ModelPicker value={modelKey} onChange={switchModel} />
           <a className="btn subtle small" href="#/day1/next-token-arena/probability">
             ← Back to the Arena
           </a>

@@ -1106,7 +1106,7 @@
    "explanation": "Entering 'my bank' selects the financial meaning, so office things and people rise.",
    "takeaway": "Context words activate one meaning of an ambiguous word.",
    "link": {
-    "module": "context-lens",
+    "module": "context-lens/bank",
     "label": "Open the Context Lens: flip between the two banks"
    }
   },
@@ -1894,7 +1894,7 @@
    "takeaway": "This is a famous linguists' sentence, designed to need common sense.",
    "link": {
     "module": "context-lens",
-    "label": "Open the Context Lens: flip the suitcase sentence"
+    "label": "Open the Context Lens: flip a context word"
    }
   },
   {
@@ -2143,7 +2143,10 @@
    "other": 0.54624,
    "explanation": "The continuation depends on knowing what heat does to ice cream.",
    "takeaway": "Physics shows up as language statistics.",
-   "link": null
+   "link": {
+    "module": "context-lens/ice_cream",
+    "label": "Open the Context Lens: oven versus freezer"
+   }
   },
   {
    "id": "freezer",
@@ -2363,7 +2366,10 @@
    "other": 0.701731,
    "explanation": "Different causes imply different likely effects.",
    "takeaway": "Prediction can require causal expectations.",
-   "link": null
+   "link": {
+    "module": "context-lens/fire",
+    "label": "Open the Context Lens: water versus gasoline"
+   }
   },
   {
    "id": "fire_gasoline",
@@ -2583,7 +2589,10 @@
    "other": 0.818345,
    "explanation": "The consequence of forgetting the umbrella is never stated, but it is easy to infer.",
    "takeaway": "The model must often use information that is implied rather than written.",
-   "link": null
+   "link": {
+    "module": "context-lens/umbrella",
+    "label": "Open the Context Lens: remembered versus forgot"
+   }
   },
   {
    "id": "umbrella_sky",
@@ -3224,7 +3233,7 @@
    "explanation": "The next token is probably a humble function word, and the probability is spread out among several of them.",
    "takeaway": "Tiny words control large futures. Explore this one in Branching Stories!",
    "link": {
-    "module": "branching-stories",
+    "module": "branching-stories/student_test",
     "label": "Explore branching: see how this choice changes the future"
    }
   },

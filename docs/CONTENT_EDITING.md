@@ -2,11 +2,14 @@
 
 Content now comes in two kinds:
 
-1. **Generated content** (M1-M4 probabilities/samples, M6 embeddings) lives in
-   `src/content/generated/day1/*.json`. Do NOT edit these by hand: change the
-   prompt/candidate lists inside `scripts/generate_day1_llm_content.py` (or the
-   vocabulary/puzzles in `scripts/generate_day1_embeddings.py`) and re-run the
-   script (see README, "Regenerating the Day 1 model content").
+1. **Generated content** (M1-M4 probabilities/samples, Reasoning Demo, M6
+   embeddings) lives in `src/content/generated/day1/<model-key>/*.json`, one
+   directory per model (currently qwen2.5-0.5b and gpt2). Do NOT edit these by
+   hand: change the prompt/candidate lists inside
+   `scripts/generate_day1_llm_content.py` (or the vocabulary/puzzles in
+   `scripts/generate_day1_embeddings.py`) and re-run with
+   `--models "gpt2,Qwen/Qwen2.5-0.5B"` (see README). The model registry for
+   the compare dropdown is `src/content/models.ts`.
 2. **Curated content** (module metadata, M5 presets, M7 vectors, M8 cards,
    Day 2/3) lives in `src/content/` TypeScript files and is edited directly.
 

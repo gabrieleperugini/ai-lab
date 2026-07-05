@@ -2,6 +2,30 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Round 4 (July 2026): Qwen2.5-0.5B and model comparison
+
+- Pre-round-4 state preserved on branch `backup/day1-before-round4` and tag
+  `day1-v3-slides-sync` (pushed to origin).
+- The offline pipeline now takes `--models` and writes one JSON set per model
+  under `src/content/generated/day1/<model-key>/`. Current models:
+  Qwen2.5-0.5B (2024, site default) and GPT-2 small (2019, kept as fallback
+  and comparison).
+- M1, M2, M3, M8 Sampling Machine, and the Reasoning Demo have a model
+  dropdown; example ids/order are identical across models, so switching
+  compares the two models on the same prompt. M3 resets the current path on
+  switch (branch tokens differ per model); the Reasoning Demo steps are fixed
+  by the slides, so only the scores swap.
+- Pedagogical payoff spotted during generation: Qwen gets 'The capital of
+  France is Paris' at 31.6% (GPT-2: 3.2%) but STILL fails the World Cup 1998
+  chain (Paris 0.0%): progress on facts, no progress on chained reasoning.
+- Bridges now deep-link to the relevant section of the target module:
+  Context Lens pairs (#/day1/context-lens/<pairId>) and Branching trees
+  (#/day1/branching-stories/<treeId>); Arena categories were already
+  deep-linkable. Companion modules keep their back-links to Arena categories.
+- The scripts venv is disposable and rebuilt from scripts/requirements.txt;
+  it was destroyed once by a branch merge (tracked-to-untracked transition)
+  and sync artifacts (`* 2.py`) were removed.
+
 ## Round 3 (July 2026): consistency with the v2 slides
 
 - Pre-round-3 state preserved on branch `backup/day1-before-round3` and tag

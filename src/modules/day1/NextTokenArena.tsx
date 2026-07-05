@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import generatedData from "../../content/generated/day1/m1_next_token.json";
+import { m1Data, DEFAULT_MODEL } from "../../content/models";
+import type { ModelKey } from "../../content/models";
 import { nextTokenRounds } from "../../content/day1-llm/nextTokenExamples";
 import { labConfig } from "../../content/config";
 import { ProbabilityBars } from "../../components/viz/ProbabilityBars";
+import { ModelPicker } from "../../components/controls/ModelPicker";
 import type { GenM1 } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
 
@@ -48,8 +50,7 @@ const CATEGORY_BRIDGES: Record<string, { href: string; label: string }> = {
   }
 };
 
-function generatedRounds(): Round[] {
-  const data = generatedData as GenM1;
+function generatedRounds(data: GenM1): Round[] {
   return data.examples.map((ex) => ({
     id: ex.id,
     category: ex.category,
@@ -86,9 +87,6 @@ function handmadeRounds(): Round[] {
     });
 }
 
-const rounds: Round[] = labConfig.useGeneratedProbabilities ? generatedRounds() : handmadeRounds();
-const modelName = labConfig.useGeneratedProbabilities ? (generatedData as GenM1).model : "teaching distribution";
-
 export default function NextTokenArena({ onResult, resetSignal, initialArg }: ModuleComponentProps) {
   const initialCategory = useMemo(() => {
     if (!initialArg) return "all";
@@ -96,18 +94,30 @@ export default function NextTokenArena({ onResult, resetSignal, initialArg }: Mo
     return hit ? hit[0] : "all";
   }, [initialArg]);
 
+  const [modelKey, setModelKey] = useState<ModelKey>(DEFAULT_MODEL);
   const [category, setCategory] = useState<string>(initialCategory);
   const [roundIndex, setRoundIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
 
+  // Example ids and order are identical across models, so switching the
+  // model keeps the same round on screen and just swaps the numbers.
+  const rounds = useMemo(
+    () =>
+      labConfig.useGeneratedProbabilities ? generatedRounds(m1Data[modelKey]) : handmadeRounds(),
+    [modelKey]
+  );
+  const modelName = labConfig.useGeneratedProbabilities
+    ? m1Data[modelKey].model
+    : "teaching distribution";
+
   const categories = useMemo(
     () => ["all", ...Array.from(new Set(rounds.map((r) => r.category)))],
-    []
+    [rounds]
   );
   const filtered = useMemo(
     () => (category === "all" ? rounds : rounds.filter((r) => r.category === category)),
-    [category]
+    [category, rounds]
   );
   const round = filtered[Math.min(roundIndex, filtered.length - 1)];
 
@@ -171,7 +181,9 @@ export default function NextTokenArena({ onResult, resetSignal, initialArg }: Mo
             ))}
           </select>
         </label>
-        <span className="statPill">🏷 {round.category}</span>
+        {labConfig.useGeneratedProbabilities && (
+          <ModelPicker value={modelKey} onChange={setModelKey} />
+        )}
       </div>
 
       <p className="promptDisplay">

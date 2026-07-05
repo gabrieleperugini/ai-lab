@@ -1,0 +1,1000 @@
+{
+ "model": "Qwen/Qwen2.5-0.5B",
+ "prompts": [
+  {
+   "id": "student_test",
+   "prompt": "The student opened the test and realized",
+   "firstStep": {
+    "options": [
+     {
+      "text": " that",
+      "probability": 0.52828
+     },
+     {
+      "text": " it",
+      "probability": 0.087478
+     },
+     {
+      "text": " he",
+      "probability": 0.080055
+     },
+     {
+      "text": " the",
+      "probability": 0.068353
+     },
+     {
+      "text": " there",
+      "probability": 0.032381
+     },
+     {
+      "text": " she",
+      "probability": 0.023931
+     },
+     {
+      "text": " they",
+      "probability": 0.019147
+     },
+     {
+      "text": " what",
+      "probability": 0.011495
+     }
+    ],
+    "other": 0.14888
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "that the test was very difficult.",
+      "that it was a test for the final exam.",
+      "that the test was not very difficult.",
+      "that the test was a _______ of the exam.",
+      "that the answer was not in the book.",
+      "that the test was not as difficult as he had expected.",
+      "that the answer was wrong.",
+      "that it was a very difficult test.",
+      "that the answer was not correct.",
+      "that the test was a test of his knowledge of the history of the United States."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "that it was a game, so he decided to increase the difficulty.",
+      "the question is about ____.",
+      "that they had no time to finish all the problems.",
+      "that he had left it in the locker, but the lock was too strong for him to lift.",
+      "that they had to answer 4 true/false questions.",
+      "that it was a ____.(4.0) A.",
+      "that the question was _______.",
+      "that it was in the same format as the exam.",
+      "that the score was lower than the expected one.",
+      "there were 100 questions on it.",
+      "that it had to do with the question I had been trying to solve for a long time.",
+      "that it is ______.",
+      "that the answer to the question was wrong, but he did not know which question was wrong.",
+      "that he was answering questions about the new policy."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "his answer was just right.",
+      "that his test was of questionable (aberration) authenticity.",
+      "it was just as hard as the exam.",
+      "she had answered almost all of the questions from the question bank.",
+      "that he was working on solving some kind of exam.",
+      "that two of the six numbers on the test are two consecutive even numbers.",
+      "that I did not believe that you had ____ already told that exam again.",
+      "that the question was about ____ you ____ read.",
+      "it should contain the answer to the question.",
+      "he wanted to do at ____ A.",
+      "he hadn’t finished yet?I have a problem which requires lots of thinking You’re trying to test your ability in something called",
+      "there were a number of different types of test answers that were being examined on the entire course: single choice questions, multiple choice questions",
+      "that 12 of them had been passed, but that 2 were stuck at the second subtopic, and for another",
+      "that he had cheated since the first ___ questions have already been _____ all the people in the test room."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "quiet_lab",
+   "prompt": "In a quiet laboratory, the machine suddenly",
+   "firstStep": {
+    "options": [
+     {
+      "text": " starts",
+      "probability": 0.207017
+     },
+     {
+      "text": " emits",
+      "probability": 0.07083
+     },
+     {
+      "text": " begins",
+      "probability": 0.042188
+     },
+     {
+      "text": " stops",
+      "probability": 0.042181
+     },
+     {
+      "text": " vibr",
+      "probability": 0.034425
+     },
+     {
+      "text": " overhe",
+      "probability": 0.031911
+     },
+     {
+      "text": " started",
+      "probability": 0.025783
+     },
+     {
+      "text": " activates",
+      "probability": 0.023212
+     }
+    ],
+    "other": 0.522453
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "starts to hum.",
+      "starts to hum, and the sound becomes louder.",
+      "starts to vibrate.",
+      "starts to hum, and the sound level increases from 60 decibels to 120 decibels.",
+      "starts to hum, and the sound level meter shows a reading of 80 dB.",
+      "starts to hum, and the sound is so loud that it can be heard from outside.",
+      "starts to hum, and the sound level increases from 80 dB to 100 dB.",
+      "starts to hum, and the sound level meter shows that the sound intensity is 100 decibels."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "crashes, causing a loud bang.",
+      "starts to emit a strange, pulsating sound.",
+      "starts to rotate.",
+      "starts to work, and the researchers are wondering about the probability that the machine will start working again after a certain number of hours,",
+      "sparks due to an electric short circuit, and the power supply suddenly disconnects.",
+      "emits a humming sound.",
+      "begins to hum with an increasing frequency.",
+      "hums with a peculiar, rhythmic sound.",
+      "emits a loud noise that disrupts the peaceful environment.",
+      "fires up, and the 11th hour is the moment when the experiment is done.",
+      "starts emitting a strange humming sound.",
+      "emits a crackling sound that increases in intensity over time, eventually reaching a level that can be detected by a high-sensitivity radar",
+      "started to vibrate.",
+      "fails, and the operator must decide whether to continue or stop the experiment based on the data collected."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "catches fire due to power issues.",
+      "emits a sudden sound of a metal fork.",
+      "malfunctions, causing an alarm to sound.",
+      "snotters as a computer engineer tries to resolve an issue during a power-reducing test.",
+      "lights up unexpectedly, displaying an alarm.",
+      "starts and emits a sound that is measured by an engineer using a special equipment which can precisely measure the pitch and intensity of musical notes",
+      "starts making some abnormal noise.",
+      "started producing loud, menacing noises as if something would happen soon, causing the entire university to sit up and look at me (who",
+      "starts to kick up water mist that spreads 1 millimeters every second.",
+      "sparks and sends red and blue sparks into the sky, with sounds coming from all directions.",
+      "starts running faster without mechanical trigger, its speed is _______ .",
+      "gives off so much noise that the temperature inside increases $60F\\?$ (a) How much did the temperature of the",
+      "\"hissed\" in a very high-pitched tone followed by an abrupt stop, making noise similar to breaking an eraser",
+      "vibrates with constant acceleration, traveling at a constant speed $v$ on a line in the laboratory."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "pizza",
+   "prompt": "To make a perfect pizza, first",
+   "firstStep": {
+    "options": [
+     {
+      "text": " the",
+      "probability": 0.23189
+     },
+     {
+      "text": " you",
+      "probability": 0.227627
+     },
+     {
+      "text": " it",
+      "probability": 0.132977
+     },
+     {
+      "text": " a",
+      "probability": 0.064131
+     },
+     {
+      "text": " we",
+      "probability": 0.023542
+     },
+     {
+      "text": " I",
+      "probability": 0.015557
+     },
+     {
+      "text": " she",
+      "probability": 0.006332
+     },
+     {
+      "text": " Paul",
+      "probability": 0.004577
+     }
+    ],
+    "other": 0.293367
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      ", the dough needs to be shaped into a certain shape.",
+      "you need to know how many slices it should have.",
+      "the dough needs to be _____.",
+      "you need to know how many slices it will have.",
+      "the dough needs to be kneaded.",
+      "the dough needs to be shaped into a circle.",
+      ", the pizza dough needs to be shaped into a certain shape."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "the dough must be shaped, then the sauce and finally the toppings should be added.",
+      "the crust is needed.",
+      "the dough needs to be shaped into a circle, then it needs to be baked in the oven to get a nice golden crust.",
+      "you need to measure 2 cups of flour, 1 cup of sugar, and 1/2 cup of milk.",
+      ", the pizza dough needs to be made according to the recipe, which consists of the following ingredients: - $3$ cups of",
+      "you need to measure out the dough.",
+      ", the dough needs to be kneaded, and then the toppings are added.",
+      "you need to decide how many slices you want and then figure out how many flour pizzas to make.\\nWe start with a pizza",
+      "you need to know how many slices it will have.",
+      "you need to know how many slices to make.",
+      ", you need to know the size of the pizza.",
+      ", you need to decide on the number of crust slices.",
+      "you need to roll out the dough and then you need to cut it.",
+      "the pizza dough needs to be kneaded for 5 minutes at 180 degrees."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "you need to estimate how many ounces of milk to use.",
+      "you have to find the best dough and then arrange your fantastic crust which is now we will come to the calculation.",
+      "the dough must rise, secondly, the peppers must be filled, after that, to perfect the pizza, the crust should be",
+      "it needs to be baked at the correct temperature for a certain amount of time.",
+      "you need to know how many flour plumes will get created due to cross elasticity of elasticity and distribution of water in glassware when",
+      "he needs to prepare pizza dough, which costs $4.5 for all the ingredients, and yeast, which costs a certain amount",
+      "we need to gather 3 different kind of tomatoes.",
+      "it needs to be baked.",
+      "the pizza maker needs the right size pizza dough.",
+      "the diameter of the pizza must be ____ 108.408 in.",
+      "it should be sliced and then dusted with flour.",
+      ", you need to prepare its base of dough.",
+      "the dough needs to be __ted to release the adhesive moisture and then placed in the refrigerator.",
+      ", a tomato sprout mixture must be added."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "detective",
+   "prompt": "The detective found a single clue under the",
+   "firstStep": {
+    "options": [
+     {
+      "text": " table",
+      "probability": 0.133761
+     },
+     {
+      "text": " bed",
+      "probability": 0.042364
+     },
+     {
+      "text": " desk",
+      "probability": 0.039851
+     },
+     {
+      "text": " sofa",
+      "probability": 0.037025
+     },
+     {
+      "text": " carpet",
+      "probability": 0.033383
+     },
+     {
+      "text": " couch",
+      "probability": 0.032603
+     },
+     {
+      "text": " chair",
+      "probability": 0.032409
+     },
+     {
+      "text": " tree",
+      "probability": 0.026779
+     }
+    ],
+    "other": 0.621825
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": []
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "book that made him believe they were the same.",
+      "tree, and it was a 100-character message.",
+      "table, which said that the murderer was a boy.",
+      "broken glass, which led to the missing person's identity.",
+      "couch that would help solve the case.",
+      "victim's bed, but the information was not clear.",
+      "tree that led to the secret passage.",
+      "table, and he noticed that the two letters in each word were not the same.",
+      "couch, and he needs to figure out the correct sequence of actions.",
+      "table in the room.",
+      "table that led to the case’s solution."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "garbage can, located on a piece of discarded luggage with five tags.",
+      "table and analyzed all the matches left to determine if it was probable or almost certain when used alone.",
+      "defendant’s pillow, which matched the defendant’s signature.",
+      "victim's name on the bathroom.",
+      "table and noticed that the entire row of candles would light up if two extra wax balls were added.",
+      "desk, written in one of his own handwriting.",
+      "bed with two notes next to it.",
+      "carpets but there were a hundred of them.",
+      "stairs leading to a famous ancient ruin.",
+      "wall that said ''There have been at least seven sightings of me from past century.",
+      "chair on one side.",
+      "torn letterhead which led them to the answer, his eyes getting smaller as he said again the word \"answer\" after having said"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "lights_out",
+   "prompt": "When the lights went out, everyone",
+   "firstStep": {
+    "options": [
+     {
+      "text": " was",
+      "probability": 0.123579
+     },
+     {
+      "text": " in",
+      "probability": 0.058312
+     },
+     {
+      "text": " knew",
+      "probability": 0.051275
+     },
+     {
+      "text": " became",
+      "probability": 0.035357
+     },
+     {
+      "text": " went",
+      "probability": 0.034094
+     },
+     {
+      "text": " had",
+      "probability": 0.030753
+     },
+     {
+      "text": " thought",
+      "probability": 0.021642
+     },
+     {
+      "text": " ran",
+      "probability": 0.020243
+     }
+    ],
+    "other": 0.624746
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "was in a state of shock.",
+      "was in a panic.",
+      "was in a state of panic.",
+      "was in a state of ____."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "went out to look for them.",
+      "looked around, hoping that the lights were out.",
+      "fell into a deep sleep.",
+      "was wondering ____ they would come back.",
+      "thought that it was ______, but in fact it wasn't.",
+      "thought that he______the accident on that street A.",
+      "_______ out to see the dark world.",
+      "knew that the rainstorm had stopped.",
+      "in the house suddenly ______.",
+      "who had to leave his house would ____.",
+      "forgot the time.",
+      "gathered around the dining room table, waiting for the lights to _______.",
+      "who had bought tickets for that evening's concert went to the theater to watch the performance.",
+      "in the hall had to look at the blackboard."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "in the house shook hands as they watched.",
+      "thought it must be something wrong with her camera.",
+      "on the way to the theater screamed.",
+      "________ hurried to work in order to find a way to get back home.",
+      "saw two stars up high.",
+      "'s hands grew _ quickly.",
+      "thought ____ A person Died people ____B.",
+      "stood in __ hope and fear.",
+      "was running their cars past the park...",
+      "in the village rushed out of the house and ran to __________ to look for them.",
+      "screamed as they all felt as if they had gone crazy that night in the park at Christmas time and even the man with the ear",
+      "stopped all their work to have a word with Mr.",
+      "gathered on the boat.",
+      "in the room heard footsteps."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recipe",
+   "prompt": "The recipe said to add sugar, but Maria added",
+   "firstStep": {
+    "options": [
+     {
+      "text": " honey",
+      "probability": 0.061058
+     },
+     {
+      "text": " chocolate",
+      "probability": 0.059292
+     },
+     {
+      "text": " flour",
+      "probability": 0.058582
+     },
+     {
+      "text": " water",
+      "probability": 0.057656
+     },
+     {
+      "text": " milk",
+      "probability": 0.044652
+     },
+     {
+      "text": " butter",
+      "probability": 0.043596
+     },
+     {
+      "text": " salt",
+      "probability": 0.036772
+     },
+     {
+      "text": " a",
+      "probability": 0.034002
+     }
+    ],
+    "other": 0.60439
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "1/2 cup of sugar."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "water to make lemonade.",
+      "sugar to the soup.",
+      "200 grams of sugar.",
+      "milk to the recipe.",
+      "chocolate, and now her recipe makes 10 dozen cookies.",
+      "water, and now she has 250 g of sugar.",
+      "a 10% sugar mixture, which she mixed in first with 1 part cream of tartar, and then added the",
+      "the sugar and the flour."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "baking soda and vinegar.",
+      "another 4 tablespoons of sugar altogether.",
+      "flour too much!",
+      "5 cups of flour.",
+      "butter, lemon juice, and cinnamon.",
+      "it before pouring the water.",
+      "extra lemon juice instead.",
+      "cream of tartar which is also very thick.",
+      "salt as well.",
+      "milk and some sugar to make everything the right size.",
+      "some sugar, and since that is too much sugar and it looked nasty, she set aside half the recipe.",
+      "cinnamon and brown sugar in a 2:1 ratio."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gravity",
+   "prompt": "A good explanation of gravity is",
+   "firstStep": {
+    "options": [
+     {
+      "text": " that",
+      "probability": 0.118093
+     },
+     {
+      "text": " given",
+      "probability": 0.081497
+     },
+     {
+      "text": " the",
+      "probability": 0.05192
+     },
+     {
+      "text": " provided",
+      "probability": 0.047167
+     },
+     {
+      "text": " this",
+      "probability": 0.044672
+     },
+     {
+      "text": " a",
+      "probability": 0.035249
+     },
+     {
+      "text": " in",
+      "probability": 0.029938
+     },
+     {
+      "text": " to",
+      "probability": 0.022395
+     }
+    ],
+    "other": 0.569069
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "that it is the force that keeps the planets in orbit around the sun.",
+      "that it is the force that pulls objects towards the center of the Earth.",
+      "that it is the force that attracts two objects with mass towards each other.",
+      "that it is the force that causes objects to fall to the ground.",
+      "that it is the force that keeps the planets in their orbits around the sun.",
+      "given in the following video.",
+      "that it is the force that pulls objects towards each other.",
+      "given in this article: https://www.youtube.com/watch?v=048JZ23801Q I"
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "what you ask for.",
+      "the motion of an object due to the force of gravity between two objects.",
+      "that it is the force that attracts all masses to each other.",
+      "that it’s like a magnet.",
+      "given in a book by a physicist.\\nI want to know what is the difference between gravity and electromagnetism.",
+      "one that makes the concepts more than just a list of facts, but actually a well-reasoned explanation of gravity.",
+      "this: If you drop a rock from a fixed height, it will travel a certain distance before it stops.",
+      "to say that it is the force that pulls all objects towards the center of the sun or earth.\\nWe can define the force",
+      "that it is the force that causes objects to attract each other, which is responsible for the reason that we can lift our chairs up",
+      "in the last paragraph of the introduction to that same article.",
+      "this: When you drop something, it falls toward the Earth's center.",
+      "that it is the force that causes two objects to attract each other, whether they are in a close proximity or at a distance.",
+      "that it is the force of attraction between any two masses.",
+      "that you can bend a wire with the help of a hammer."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "at a place called YouTube's explainer course https://www.youtube.com/watch?v=l9cHwF0fUo",
+      "provided in the Wikipedia article on gravitational force.",
+      "provided here: <https://theoryofrelativity.com/gravitation.html> Gravitational potential energy is the difference between the",
+      "to ask where does the earth feel least of a fall?",
+      "presented in [this paper](https://en.m.wikipedia.org/wiki/Stefanson%27s%20definition).",
+      "that Newton discovered this force that is acting between two objects and holds them together which can be used as a force in a lever system",
+      "available [here](https://physics.stackexchange.com/a/118820/9634), but I",
+      ": I keep that I understand gravity but now would want that more for the purpose of myself.",
+      "usually too complex.",
+      "why is matter gravitating, has gravity in zero or not .A lot of examples will give you what you are saying about gravity",
+      "the title - \"Gravity A-Beneficiary's Guide\".",
+      "in a blog post by Michael Penn on Gravity: If It Seems to Be the Same to You, It Really Is.",
+      "one where you can grasp different objects (or situations that arise and do physical or imaginary activities such as going up hill or racing in",
+      "that as planets are constantly falling through space, the downward pull between them increases."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "robot_help",
+   "prompt": "The robot wanted to help, so it",
+   "firstStep": {
+    "options": [
+     {
+      "text": " decided",
+      "probability": 0.039528
+     },
+     {
+      "text": " went",
+      "probability": 0.036
+     },
+     {
+      "text": " asked",
+      "probability": 0.033009
+     },
+     {
+      "text": " started",
+      "probability": 0.023215
+     },
+     {
+      "text": " was",
+      "probability": 0.022887
+     },
+     {
+      "text": " began",
+      "probability": 0.018174
+     },
+     {
+      "text": " took",
+      "probability": 0.01661
+     },
+     {
+      "text": " made",
+      "probability": 0.01638
+     }
+    ],
+    "other": 0.794197
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "________ the problem.",
+      "________ a lot of information about the problem.",
+      "________ the problem to the teacher.",
+      "________ the old man.",
+      "________ a lot of money to help the poor people.",
+      "________ the problem to the experts."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "decided to ask the following question: > > What is the sum of 4+4?",
+      "created a blueprint of the room and a map of the city.",
+      "looked for the right place, and found out that the right place is right!",
+      "had to find an audience.",
+      "made it's way to the beach.",
+      "helped the girl.",
+      "put it on the ground and brought it to his own.",
+      "walked over to the customer, gave him a smile and said, \"Why don't you try this new robot?",
+      "________ to the library to borrow some books.",
+      "________ the whole work to the people there.",
+      "built a robot that could make decisions and solve problems.",
+      "helped me and you Answer: helped The robot wants to help, so it helps me and you Answer: helped",
+      "did all the right things.",
+      "started to ________ all the things.____ A."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "created a model of three-dimensional architecture 1m by 1m using paper, foam, and plastic.",
+      "said his name was: ____.",
+      "told Puffy to _________ (settle down) this well by listening.",
+      "thought about the following situation.",
+      "_________ the people in hiding.",
+      "used the software to ___ that person to their position.",
+      "________ it how to work.",
+      "________ some information about the situation.",
+      "started helping.\\nRobots assist the teacher in cleaning the classrooms for the purpose of developing strong brainpower.",
+      "used ____ to make its movement smooth and coordinated.",
+      "connected with __ the network to check in with us.",
+      "taught the two to grow strong, so it can create good structures.",
+      "started a dialogue using which of the following functions of speech recognition tools to solve the problem?",
+      "decided 12 cats and 14 dogs should move on in one single unit into a garden to help clean for another month"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "teacher_email",
+   "prompt": "The email from the teacher said that tomorrow",
+   "firstStep": {
+    "options": [
+     {
+      "text": " is",
+      "probability": 0.181023
+     },
+     {
+      "text": " we",
+      "probability": 0.137523
+     },
+     {
+      "text": " I",
+      "probability": 0.071015
+     },
+     {
+      "text": " was",
+      "probability": 0.069836
+     },
+     {
+      "text": " he",
+      "probability": 0.062348
+     },
+     {
+      "text": " the",
+      "probability": 0.047335
+     },
+     {
+      "text": " morning",
+      "probability": 0.038068
+     },
+     {
+      "text": " there",
+      "probability": 0.033449
+     }
+    ],
+    "other": 0.359403
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "is the last day of the exam.",
+      "we will have a test.",
+      "is a holiday."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "I will ask you to come to the meeting.",
+      "the students should come in a line of people to the dining hall for the meal.",
+      "we will have a lesson on statistics.",
+      "is a holiday.",
+      "is a test.",
+      "I'll have a meeting with the students.",
+      "is the birthday of Miss Li.",
+      "we were going to go to the supermarket to buy some milk.",
+      "'s class will be about how to play the violin.",
+      "there would be no class.",
+      "is a test on trigonometry.",
+      "afternoon I'd like to make a little quiz about the new words that we're going to learn.",
+      "is the end of the term for him and his class.",
+      "morning they will discuss a problem to be worked on."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "at 7:05 will be raining or sunny?",
+      "his students would learn about functions.The students at school decided to see which people could be their friends using functions.",
+      "there was going to be a class test.",
+      "we will do as many as 5 exercises a day.",
+      "we will have math problems.",
+      "we will review how to format our essay using Harvard-style Essay paper and how to cite sources.",
+      "there will be a basketball game.",
+      "'s English lesson is the beginning of the high school reform that needs our attention.____ A.",
+      "would be his final exam period which would last for 8 hours.",
+      "will be Thursday the nineteenth.",
+      "will be their birthday party, so they __________ something good for their house.",
+      "he wanted to see us in the class meeting.",
+      ", there shall be a meeting from 9:30 am to 10:30 am.",
+      "there will be a Math Quiz at 5 PM."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "science_fair",
+   "prompt": "At the science fair, the strangest invention was",
+   "firstStep": {
+    "options": [
+     {
+      "text": " a",
+      "probability": 0.676393
+     },
+     {
+      "text": " the",
+      "probability": 0.057342
+     },
+     {
+      "text": " created",
+      "probability": 0.051231
+     },
+     {
+      "text": " made",
+      "probability": 0.046828
+     },
+     {
+      "text": " an",
+      "probability": 0.023699
+     },
+     {
+      "text": " to",
+      "probability": 0.008844
+     },
+     {
+      "text": " invented",
+      "probability": 0.008453
+     },
+     {
+      "text": " built",
+      "probability": 0.007799
+     }
+    ],
+    "other": 0.119412
+   },
+   "sampleSets": [
+    {
+     "label": "Low randomness",
+     "temperature": 0.2,
+     "top_k": 20,
+     "top_p": 0.9,
+     "samples": [
+      "a robot that could create a new type of energy.",
+      "a special machine that could change the temperature of a room.",
+      "a machine that could turn any number of apples into a delicious apple pie.",
+      "a special machine that could turn any number of apples into a special kind of fruit.",
+      "a special machine that could change the shape of a cube into a sphere.",
+      "a machine that could double the number of apples in a basket.",
+      "a robot that could make people laugh.",
+      "a machine that could make any shape out of any material.",
+      "a special machine that could change the speed of a toy car.",
+      "a special machine that could make any number of objects move in a straight line.",
+      "a machine that could turn any number of apples into a pile of oranges."
+     ]
+    },
+    {
+     "label": "Medium randomness",
+     "temperature": 0.8,
+     "top_k": 50,
+     "top_p": 0.95,
+     "samples": [
+      "a \"Quantum Pulsar.\" This invention uses a special kind of computer that can only process data in binary form.",
+      "created using a magical formula.",
+      "a special machine that could change the temperature of any object it touched into any other temperature.",
+      "a new type of robot that could walk, jump, and talk to humans!",
+      "a special machine that could only work on a certain substance called \"magic.\" The magic substance has a unique property: it changes color",
+      "made by three students.",
+      "a model of the solar system.",
+      "a machine that could double the size of a square box.",
+      "a tiny camera that could see through paper.",
+      "a device that could make any sound disappear.",
+      "a special machine that could make objects float in the air.",
+      "a special type of light bulb.",
+      "a device that could split atoms into smaller ones.",
+      "a tiny machine that could change the temperature of a small toy car."
+     ]
+    },
+    {
+     "label": "High randomness",
+     "temperature": 1.2,
+     "top_k": 100,
+     "top_p": 0.98,
+     "samples": [
+      "a mysterious robot that could transform metal objects.",
+      "a $45$ second countdown clock.",
+      "a \"Simple Soma Stomach.\" It was supposed to be taken into space because of its magic power to treat any kind",
+      "an \"O-METER.\" This invention would release smoke every time it blew an order like 100101 or",
+      "made by Bob, which demonstrated how to create an \"optical string\" where an electric current can affect the wave patterns of light",
+      "to use a supercharged microwave oven.",
+      "invented by one of the project groups, making it the next oldest invention known.",
+      "a machine that could hold water and store it like liquid water, for all the time.",
+      "used to describe the shape of leaves.",
+      "a battery invented by James R.",
+      "a 12-inch by 10-inch rug that you could cover with tiny square tiles, placed everywhere on the carpeting",
+      "twice as unique as the normal project idea.",
+      "a \"Ripple Control Amplifier Robot.\" It could create noises using water and air to make noise on the spot.",
+      "a robot with 6 different functions: \"Open KitchenDoor\", \"LightUpWall\", \"CloseWindow\", \"PressDoorB"
+     ]
+    }
+   ]
+  }
+ ],
+ "notes": "Continuations were sampled offline with the settings shown; the site replays them."
+}
