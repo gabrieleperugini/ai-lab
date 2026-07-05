@@ -10,4 +10,7 @@ export type ModuleComponentProps = {
   onResult: (result: string) => void;
   /** Increments every time the user presses the module Reset button. */
   resetSignal: number;
+  /** Optional deep-link segment from the URL (#/day1/<module>/<extra>),
+   * e.g. an Arena category slug used by the slide QR codes. */
+  initialArg?: string;
 };

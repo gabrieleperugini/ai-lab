@@ -71,9 +71,14 @@ export default function BranchingStories({ onResult, resetSignal }: ModuleCompon
             setExplored([]);
           }}
         />
-        <button className="btn subtle small" onClick={restart} disabled={picked.length === 0}>
-          ↺ Restart this branch
-        </button>
+        <div className="controlRow">
+          <a className="btn subtle small" href="#/day1/next-token-arena/probability">
+            ← Back to the Arena
+          </a>
+          <button className="btn subtle small" onClick={restart} disabled={picked.length === 0}>
+            ↺ Restart this branch
+          </button>
+        </div>
       </div>
 
       {/* the growing text, with the committed path as chips */}

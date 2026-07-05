@@ -3,7 +3,7 @@
  "examples": [
   {
    "id": "once_upon",
-   "category": "Familiar phrases",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "Once upon a",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -78,16 +78,16 @@
      "fromModel": false
     },
     {
-     "label": "place",
-     "tokenText": " place",
+     "label": "space",
+     "tokenText": " space",
      "tokenIds": [
-      1295
+      2272
      ],
      "tokenStrings": [
-      " place"
+      " space"
      ],
-     "probability": 0.000958,
-     "rank": 111,
+     "probability": 0.000845,
+     "rank": 121,
      "multiToken": false,
      "fromModel": false
     },
@@ -104,16 +104,348 @@
      "rank": 424,
      "multiToken": false,
      "fromModel": false
+    },
+    {
+     "label": "the",
+     "tokenText": " the",
+     "tokenIds": [
+      262
+     ],
+     "tokenStrings": [
+      " the"
+     ],
+     "probability": 0.000169,
+     "rank": 606,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "crime",
+     "tokenText": " crime",
+     "tokenIds": [
+      4065
+     ],
+     "tokenStrings": [
+      " crime"
+     ],
+     "probability": 3.7e-05,
+     "rank": 2129,
+     "multiToken": false,
+     "fromModel": false
     }
    ],
-   "other": 0.701919,
-   "explanation": "A very familiar phrase makes one continuation dominate.",
+   "other": 0.701826,
+   "explanation": "A very familiar phrase makes one continuation dominate; 'crime' is rare but real (it is even a TV series title).",
    "takeaway": "Even an 'obvious' answer is a probability, not a certainty.",
-   "branchingLink": true
+   "link": null
+  },
+  {
+   "id": "capital_france",
+   "category": "Basics: familiar phrases and facts",
+   "prompt": "The capital of France is",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "the",
+     "tokenText": " the",
+     "tokenIds": [
+      262
+     ],
+     "tokenStrings": [
+      " the"
+     ],
+     "probability": 0.084591,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "now",
+     "tokenText": " now",
+     "tokenIds": [
+      783
+     ],
+     "tokenStrings": [
+      " now"
+     ],
+     "probability": 0.047949,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "Paris",
+     "tokenText": " Paris",
+     "tokenIds": [
+      6342
+     ],
+     "tokenStrings": [
+      " Paris"
+     ],
+     "probability": 0.032243,
+     "rank": 5,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "also",
+     "tokenText": " also",
+     "tokenIds": [
+      635
+     ],
+     "tokenStrings": [
+      " also"
+     ],
+     "probability": 0.026406,
+     "rank": 7,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Rome",
+     "tokenText": " Rome",
+     "tokenIds": [
+      10598
+     ],
+     "tokenStrings": [
+      " Rome"
+     ],
+     "probability": 0.002763,
+     "rank": 37,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "London",
+     "tokenText": " London",
+     "tokenIds": [
+      3576
+     ],
+     "tokenStrings": [
+      " London"
+     ],
+     "probability": 0.002118,
+     "rank": 49,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Berlin",
+     "tokenText": " Berlin",
+     "tokenIds": [
+      11307
+     ],
+     "tokenStrings": [
+      " Berlin"
+     ],
+     "probability": 0.001585,
+     "rank": 68,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "is",
+     "tokenText": " is",
+     "tokenIds": [
+      318
+     ],
+     "tokenStrings": [
+      " is"
+     ],
+     "probability": 0.000208,
+     "rank": 491,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Seoul",
+     "tokenText": " Seoul",
+     "tokenIds": [
+      22372
+     ],
+     "tokenStrings": [
+      " Seoul"
+     ],
+     "probability": 8e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.802129,
+   "explanation": "The most likely continuation matches a fact about the world, but continuations like 'also known as...' stay possible.",
+   "takeaway": "Next-token prediction can require knowledge, not just grammar.",
+   "link": null
+  },
+  {
+   "id": "world_cup",
+   "category": "Basics: familiar phrases and facts",
+   "prompt": "The capital of the country that hosted the World Cup in 1998 is",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "now",
+     "tokenText": " now",
+     "tokenIds": [
+      783
+     ],
+     "tokenStrings": [
+      " now"
+     ],
+     "probability": 0.15966,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "the",
+     "tokenText": " the",
+     "tokenIds": [
+      262
+     ],
+     "tokenStrings": [
+      " the"
+     ],
+     "probability": 0.067177,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "also",
+     "tokenText": " also",
+     "tokenIds": [
+      635
+     ],
+     "tokenStrings": [
+      " also"
+     ],
+     "probability": 0.031832,
+     "rank": 4,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "London",
+     "tokenText": " London",
+     "tokenIds": [
+      3576
+     ],
+     "tokenStrings": [
+      " London"
+     ],
+     "probability": 0.002866,
+     "rank": 37,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Rome",
+     "tokenText": " Rome",
+     "tokenIds": [
+      10598
+     ],
+     "tokenStrings": [
+      " Rome"
+     ],
+     "probability": 0.002727,
+     "rank": 39,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Seoul",
+     "tokenText": " Seoul",
+     "tokenIds": [
+      22372
+     ],
+     "tokenStrings": [
+      " Seoul"
+     ],
+     "probability": 0.001201,
+     "rank": 102,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Berlin",
+     "tokenText": " Berlin",
+     "tokenIds": [
+      11307
+     ],
+     "tokenStrings": [
+      " Berlin"
+     ],
+     "probability": 0.001176,
+     "rank": 106,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Paris",
+     "tokenText": " Paris",
+     "tokenIds": [
+      6342
+     ],
+     "tokenStrings": [
+      " Paris"
+     ],
+     "probability": 0.000909,
+     "rank": 140,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "is",
+     "tokenText": " is",
+     "tokenIds": [
+      318
+     ],
+     "tokenStrings": [
+      " is"
+     ],
+     "probability": 0.000209,
+     "rank": 534,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.732243,
+   "explanation": "Answering needs a chain: World Cup 1998 to France, France to Paris. Watch where the small model actually puts its mass.",
+   "takeaway": "A chain of knowledge can hide inside one blank. Small models often fail here!",
+   "link": null
   },
   {
    "id": "happy_birthday",
-   "category": "Familiar phrases",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "Happy birthday to",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -219,11 +551,11 @@
    "other": 0.534031,
    "explanation": "The song makes 'you' by far the most expected next token.",
    "takeaway": "Common phrases create sharp distributions.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "end_of_day",
-   "category": "Familiar phrases",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "At the end of the day,",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -329,11 +661,11 @@
    "other": 0.556179,
    "explanation": "After a common idiom, many small function words are plausible.",
    "takeaway": "Sometimes no single token dominates.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "better_late",
-   "category": "Familiar phrases",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "Better late than",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -439,121 +771,11 @@
    "other": 0.496116,
    "explanation": "Proverbs are strong patterns in training text.",
    "takeaway": "The model has read this sentence many times.",
-   "branchingLink": false
-  },
-  {
-   "id": "capital_france",
-   "category": "Facts and knowledge",
-   "prompt": "The capital of France is",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "the",
-     "tokenText": " the",
-     "tokenIds": [
-      262
-     ],
-     "tokenStrings": [
-      " the"
-     ],
-     "probability": 0.084591,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "now",
-     "tokenText": " now",
-     "tokenIds": [
-      783
-     ],
-     "tokenStrings": [
-      " now"
-     ],
-     "probability": 0.047949,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "Paris",
-     "tokenText": " Paris",
-     "tokenIds": [
-      6342
-     ],
-     "tokenStrings": [
-      " Paris"
-     ],
-     "probability": 0.032243,
-     "rank": 5,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "Rome",
-     "tokenText": " Rome",
-     "tokenIds": [
-      10598
-     ],
-     "tokenStrings": [
-      " Rome"
-     ],
-     "probability": 0.002763,
-     "rank": 37,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "London",
-     "tokenText": " London",
-     "tokenIds": [
-      3576
-     ],
-     "tokenStrings": [
-      " London"
-     ],
-     "probability": 0.002118,
-     "rank": 49,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "Madrid",
-     "tokenText": " Madrid",
-     "tokenIds": [
-      14708
-     ],
-     "tokenStrings": [
-      " Madrid"
-     ],
-     "probability": 0.001614,
-     "rank": 67,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "Berlin",
-     "tokenText": " Berlin",
-     "tokenIds": [
-      11307
-     ],
-     "tokenStrings": [
-      " Berlin"
-     ],
-     "probability": 0.001585,
-     "rank": 68,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.827137,
-   "explanation": "The most likely continuation matches a fact about the world.",
-   "takeaway": "Next-token prediction can require knowledge, not just grammar.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "largest_planet",
-   "category": "Facts and knowledge",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "The largest planet in the Solar System is",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -659,11 +881,11 @@
    "other": 0.746342,
    "explanation": "Astronomy facts appear in the training text often enough to shape the bars.",
    "takeaway": "Facts become statistics over tokens.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "water_freezes",
-   "category": "Facts and knowledge",
+   "category": "Basics: familiar phrases and facts",
    "prompt": "Water freezes at zero degrees",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -773,121 +995,234 @@
    "other": 0.567393,
    "explanation": "The model must pick the unit that makes the sentence true.",
    "takeaway": "Small models know some facts better than others.",
-   "branchingLink": false
+   "link": null
   },
   {
-   "id": "world_cup",
-   "category": "Facts and knowledge",
-   "prompt": "The capital of the country that hosted the World Cup in 1998 is",
+   "id": "bank_money",
+   "category": "Context: one word, two worlds",
+   "prompt": "The other day I entered my bank and saw some",
    "displayMode": "next-token-probabilities",
    "options": [
     {
-     "label": "now",
-     "tokenText": " now",
+     "label": "people",
+     "tokenText": " people",
      "tokenIds": [
-      783
+      661
      ],
      "tokenStrings": [
-      " now"
+      " people"
      ],
-     "probability": 0.15966,
+     "probability": 0.049417,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "money",
+     "tokenText": " money",
+     "tokenIds": [
+      1637
+     ],
+     "tokenStrings": [
+      " money"
+     ],
+     "probability": 0.048141,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "of",
+     "tokenText": " of",
+     "tokenIds": [
+      286
+     ],
+     "tokenStrings": [
+      " of"
+     ],
+     "probability": 0.039576,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "guys",
+     "tokenText": " guys",
+     "tokenIds": [
+      3730
+     ],
+     "tokenStrings": [
+      " guys"
+     ],
+     "probability": 0.021022,
+     "rank": 4,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "ducks",
+     "tokenText": " ducks",
+     "tokenIds": [
+      39694
+     ],
+     "tokenStrings": [
+      " ducks"
+     ],
+     "probability": 0.000165,
+     "rank": 729,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "desks",
+     "tokenText": " desks",
+     "tokenIds": [
+      44301
+     ],
+     "tokenStrings": [
+      " desks"
+     ],
+     "probability": 5.1e-05,
+     "rank": 1932,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 9e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.841619,
+   "explanation": "Entering 'my bank' selects the financial meaning, so office things and people rise.",
+   "takeaway": "Context words activate one meaning of an ambiguous word.",
+   "link": {
+    "module": "context-lens",
+    "label": "Open the Context Lens: flip between the two banks"
+   }
+  },
+  {
+   "id": "bank_river",
+   "category": "Context: one word, two worlds",
+   "prompt": "The other day I went sitting by the bank and saw some",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "people",
+     "tokenText": " people",
+     "tokenIds": [
+      661
+     ],
+     "tokenStrings": [
+      " people"
+     ],
+     "probability": 0.077963,
      "rank": 1,
      "multiToken": false,
      "fromModel": true
     },
     {
-     "label": "the",
-     "tokenText": " the",
+     "label": "of",
+     "tokenText": " of",
      "tokenIds": [
-      262
+      286
      ],
      "tokenStrings": [
-      " the"
+      " of"
      ],
-     "probability": 0.067177,
+     "probability": 0.070911,
      "rank": 2,
      "multiToken": false,
      "fromModel": true
     },
     {
-     "label": "London",
-     "tokenText": " London",
+     "label": "birds",
+     "tokenText": " birds",
      "tokenIds": [
-      3576
+      10087
      ],
      "tokenStrings": [
-      " London"
+      " birds"
      ],
-     "probability": 0.002866,
-     "rank": 37,
+     "probability": 0.000351,
+     "rank": 317,
      "multiToken": false,
      "fromModel": false
     },
     {
-     "label": "Rome",
-     "tokenText": " Rome",
+     "label": "ducks",
+     "tokenText": " ducks",
      "tokenIds": [
-      10598
+      39694
      ],
      "tokenStrings": [
-      " Rome"
+      " ducks"
      ],
-     "probability": 0.002727,
-     "rank": 39,
+     "probability": 0.00035,
+     "rank": 318,
      "multiToken": false,
      "fromModel": false
     },
     {
-     "label": "Madrid",
-     "tokenText": " Madrid",
+     "label": "water",
+     "tokenText": " water",
      "tokenIds": [
-      14708
+      1660
      ],
      "tokenStrings": [
-      " Madrid"
+      " water"
      ],
-     "probability": 0.001571,
-     "rank": 73,
+     "probability": 0.000245,
+     "rank": 464,
      "multiToken": false,
      "fromModel": false
     },
     {
-     "label": "Berlin",
-     "tokenText": " Berlin",
+     "label": "desks",
+     "tokenText": " desks",
      "tokenIds": [
-      11307
+      44301
      ],
      "tokenStrings": [
-      " Berlin"
+      " desks"
      ],
-     "probability": 0.001176,
-     "rank": 106,
+     "probability": 8.3e-05,
+     "rank": 1224,
      "multiToken": false,
      "fromModel": false
     },
     {
-     "label": "Paris",
-     "tokenText": " Paris",
+     "label": "lions",
+     "tokenText": " lions",
      "tokenIds": [
-      6342
+      31420
      ],
      "tokenStrings": [
-      " Paris"
+      " lions"
      ],
-     "probability": 0.000909,
-     "rank": 140,
+     "probability": 1.9e-05,
+     "rank": 3579,
      "multiToken": false,
      "fromModel": false
     }
    ],
-   "other": 0.763914,
-   "explanation": "Answering needs a chain: World Cup 1998 to France, France to Paris.",
-   "takeaway": "A chain of knowledge can hide inside one blank. Small models often fail here!",
-   "branchingLink": false
+   "other": 0.850078,
+   "explanation": "'Sitting by' points to the river bank, so nature answers rise.",
+   "takeaway": "Same word, different world.",
+   "link": null
   },
   {
-   "id": "bank_money",
-   "category": "Context changes meaning",
+   "id": "bank_deposit",
+   "category": "Context: one word, two worlds",
    "prompt": "I walked to the bank and deposited some",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -991,13 +1326,13 @@
     }
    ],
    "other": 0.326567,
-   "explanation": "The verb 'deposited' selects the financial meaning of bank.",
-   "takeaway": "Context words activate one meaning of an ambiguous word.",
-   "branchingLink": false
+   "explanation": "The verb 'deposited' selects the financial meaning of bank very strongly.",
+   "takeaway": "A single verb can settle the ambiguity.",
+   "link": null
   },
   {
-   "id": "bank_river",
-   "category": "Context changes meaning",
+   "id": "bank_fisherman",
+   "category": "Context: one word, two worlds",
    "prompt": "The fisherman stood on the bank of the",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -1074,12 +1409,12 @@
    ],
    "other": 0.810083,
    "explanation": "The fisherman puts us on a river bank, so nature words rise.",
-   "takeaway": "Same word, different world.",
-   "branchingLink": false
+   "takeaway": "The company a word keeps decides what it means.",
+   "link": null
   },
   {
    "id": "bat_baseball",
-   "category": "Context changes meaning",
+   "category": "Context: one word, two worlds",
    "prompt": "The baseball player swung the bat and hit the",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -1185,11 +1520,11 @@
    "other": 0.577178,
    "explanation": "The sports frame makes 'ball' the star.",
    "takeaway": "A scenario is a probability magnet.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "bat_cave",
-   "category": "Context changes meaning",
+   "category": "Context: one word, two worlds",
    "prompt": "At sunset, the bat flew out of the",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -1295,121 +1630,11 @@
    "other": 0.616712,
    "explanation": "'Flew' turns the bat into an animal.",
    "takeaway": "One verb can flip the meaning.",
-   "branchingLink": false
-  },
-  {
-   "id": "umbrella",
-   "category": "Context changes meaning",
-   "prompt": "The sky became dark and full of clouds, so I took my",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "hat",
-     "tokenText": " hat",
-     "tokenIds": [
-      6877
-     ],
-     "tokenStrings": [
-      " hat"
-     ],
-     "probability": 0.032461,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "clothes",
-     "tokenText": " clothes",
-     "tokenIds": [
-      8242
-     ],
-     "tokenStrings": [
-      " clothes"
-     ],
-     "probability": 0.023683,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "coat",
-     "tokenText": " coat",
-     "tokenIds": [
-      13209
-     ],
-     "tokenStrings": [
-      " coat"
-     ],
-     "probability": 0.00898,
-     "rank": 18,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "umbrella",
-     "tokenText": " umbrella",
-     "tokenIds": [
-      25510
-     ],
-     "tokenStrings": [
-      " umbrella"
-     ],
-     "probability": 0.004473,
-     "rank": 33,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "camera",
-     "tokenText": " camera",
-     "tokenIds": [
-      4676
-     ],
-     "tokenStrings": [
-      " camera"
-     ],
-     "probability": 0.004306,
-     "rank": 37,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "jacket",
-     "tokenText": " jacket",
-     "tokenIds": [
-      15224
-     ],
-     "tokenStrings": [
-      " jacket"
-     ],
-     "probability": 0.001324,
-     "rank": 121,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "keys",
-     "tokenText": " keys",
-     "tokenIds": [
-      8251
-     ],
-     "tokenStrings": [
-      " keys"
-     ],
-     "probability": 0.000743,
-     "rank": 209,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.92403,
-   "explanation": "Rain is never mentioned, yet the model expects it.",
-   "takeaway": "Prediction often uses implied information.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "restaurant",
-   "category": "Context changes meaning",
+   "category": "Context: one word, two worlds",
    "prompt": "The waiter handed us the menu and asked what we wanted to",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -1515,537 +1740,11 @@
    "other": 0.295962,
    "explanation": "The restaurant scene makes 'order' and 'eat' likely.",
    "takeaway": "Context narrows the space of plausible tokens.",
-   "branchingLink": false
+   "link": null
   },
   {
-   "id": "breakfast_federico",
-   "category": "Ambiguity and probability",
-   "prompt": "For breakfast, Federico usually eats",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "a",
-     "tokenText": " a",
-     "tokenIds": [
-      257
-     ],
-     "tokenStrings": [
-      " a"
-     ],
-     "probability": 0.191447,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "two",
-     "tokenText": " two",
-     "tokenIds": [
-      734
-     ],
-     "tokenStrings": [
-      " two"
-     ],
-     "probability": 0.049119,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "pasta",
-     "tokenText": " pasta",
-     "tokenIds": [
-      26296
-     ],
-     "tokenStrings": [
-      " pasta"
-     ],
-     "probability": 0.00374,
-     "rank": 38,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "eggs",
-     "tokenText": " eggs",
-     "tokenIds": [
-      9653
-     ],
-     "tokenStrings": [
-      " eggs"
-     ],
-     "probability": 0.003391,
-     "rank": 42,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "toast",
-     "tokenText": " toast",
-     "tokenIds": [
-      27805
-     ],
-     "tokenStrings": [
-      " toast"
-     ],
-     "probability": 0.001507,
-     "rank": 73,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "cereal",
-     "tokenText": " cereal",
-     "tokenIds": [
-      33158
-     ],
-     "tokenStrings": [
-      " cereal"
-     ],
-     "probability": 0.000882,
-     "rank": 113,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "croissants",
-     "tokenText": " croissants",
-     "tokenIds": [
-      6763,
-      747,
-      1187
-     ],
-     "tokenStrings": [
-      " cro",
-      "iss",
-      "ants"
-     ],
-     "probability": 1.7e-05,
-     "rank": null,
-     "multiToken": true,
-     "fromModel": false
-    }
-   ],
-   "other": 0.749897,
-   "explanation": "Many answers are plausible; the name may shift expectations slightly.",
-   "takeaway": "Probabilities reflect patterns and assumptions, not facts about Federico.",
-   "branchingLink": false
-  },
-  {
-   "id": "breakfast_friedrich",
-   "category": "Ambiguity and probability",
-   "prompt": "For breakfast, Friedrich usually eats",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "a",
-     "tokenText": " a",
-     "tokenIds": [
-      257
-     ],
-     "tokenStrings": [
-      " a"
-     ],
-     "probability": 0.180089,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "two",
-     "tokenText": " two",
-     "tokenIds": [
-      734
-     ],
-     "tokenStrings": [
-      " two"
-     ],
-     "probability": 0.053148,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "bread",
-     "tokenText": " bread",
-     "tokenIds": [
-      8509
-     ],
-     "tokenStrings": [
-      " bread"
-     ],
-     "probability": 0.005765,
-     "rank": 27,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "eggs",
-     "tokenText": " eggs",
-     "tokenIds": [
-      9653
-     ],
-     "tokenStrings": [
-      " eggs"
-     ],
-     "probability": 0.004519,
-     "rank": 35,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "toast",
-     "tokenText": " toast",
-     "tokenIds": [
-      27805
-     ],
-     "tokenStrings": [
-      " toast"
-     ],
-     "probability": 0.001732,
-     "rank": 67,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "cereal",
-     "tokenText": " cereal",
-     "tokenIds": [
-      33158
-     ],
-     "tokenStrings": [
-      " cereal"
-     ],
-     "probability": 0.000982,
-     "rank": 102,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "sausage",
-     "tokenText": " sausage",
-     "tokenIds": [
-      31889
-     ],
-     "tokenStrings": [
-      " sausage"
-     ],
-     "probability": 0.000254,
-     "rank": 315,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.753511,
-   "explanation": "Compare with Federico: does the name change the bars?",
-   "takeaway": "A model predicts plausible text, not personal truth.",
-   "branchingLink": false
-  },
-  {
-   "id": "student_test",
-   "category": "Ambiguity and probability",
-   "prompt": "The student opened the test and realized",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "that",
-     "tokenText": " that",
-     "tokenIds": [
-      326
-     ],
-     "tokenStrings": [
-      " that"
-     ],
-     "probability": 0.339478,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "he",
-     "tokenText": " he",
-     "tokenIds": [
-      339
-     ],
-     "tokenStrings": [
-      " he"
-     ],
-     "probability": 0.200347,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "she",
-     "tokenText": " she",
-     "tokenIds": [
-      673
-     ],
-     "tokenStrings": [
-      " she"
-     ],
-     "probability": 0.093368,
-     "rank": 3,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "the",
-     "tokenText": " the",
-     "tokenIds": [
-      262
-     ],
-     "tokenStrings": [
-      " the"
-     ],
-     "probability": 0.05397,
-     "rank": 4,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "it",
-     "tokenText": " it",
-     "tokenIds": [
-      340
-     ],
-     "tokenStrings": [
-      " it"
-     ],
-     "probability": 0.049727,
-     "rank": 5,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "his",
-     "tokenText": " his",
-     "tokenIds": [
-      465
-     ],
-     "tokenStrings": [
-      " his"
-     ],
-     "probability": 0.034235,
-     "rank": 6,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "what",
-     "tokenText": " what",
-     "tokenIds": [
-      644
-     ],
-     "tokenStrings": [
-      " what"
-     ],
-     "probability": 0.025146,
-     "rank": 7,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.203729,
-   "explanation": "The next token is probably a humble function word, and the probability is spread out.",
-   "takeaway": "Tiny words control large futures. Explore this one in Branching Stories!",
-   "branchingLink": true
-  },
-  {
-   "id": "library",
-   "category": "Ambiguity and probability",
-   "prompt": "In the library, everyone started to",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "get",
-     "tokenText": " get",
-     "tokenIds": [
-      651
-     ],
-     "tokenStrings": [
-      " get"
-     ],
-     "probability": 0.050283,
-     "rank": 1,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "see",
-     "tokenText": " see",
-     "tokenIds": [
-      766
-     ],
-     "tokenStrings": [
-      " see"
-     ],
-     "probability": 0.043795,
-     "rank": 2,
-     "multiToken": false,
-     "fromModel": true
-    },
-    {
-     "label": "talk",
-     "tokenText": " talk",
-     "tokenIds": [
-      1561
-     ],
-     "tokenStrings": [
-      " talk"
-     ],
-     "probability": 0.03119,
-     "rank": 3,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "read",
-     "tokenText": " read",
-     "tokenIds": [
-      1100
-     ],
-     "tokenStrings": [
-      " read"
-     ],
-     "probability": 0.011593,
-     "rank": 16,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "study",
-     "tokenText": " study",
-     "tokenIds": [
-      2050
-     ],
-     "tokenStrings": [
-      " study"
-     ],
-     "probability": 0.001389,
-     "rank": 103,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "laugh",
-     "tokenText": " laugh",
-     "tokenIds": [
-      6487
-     ],
-     "tokenStrings": [
-      " laugh"
-     ],
-     "probability": 0.000915,
-     "rank": 146,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "whisper",
-     "tokenText": " whisper",
-     "tokenIds": [
-      31992
-     ],
-     "tokenStrings": [
-      " whisper"
-     ],
-     "probability": 0.000114,
-     "rank": 717,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.860721,
-   "explanation": "Social norms make quiet activities more likely, but not certain.",
-   "takeaway": "Language models absorb social patterns from text.",
-   "branchingLink": false
-  },
-  {
-   "id": "algebra",
-   "category": "Reasoning-like steps",
-   "prompt": "A number is multiplied by 5. Then 10 is added. The result is 20. Therefore, the original number was",
-   "displayMode": "next-token-probabilities",
-   "options": [
-    {
-     "label": "5",
-     "tokenText": " 5",
-     "tokenIds": [
-      642
-     ],
-     "tokenStrings": [
-      " 5"
-     ],
-     "probability": 0.038187,
-     "rank": 3,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "1",
-     "tokenText": " 1",
-     "tokenIds": [
-      352
-     ],
-     "tokenStrings": [
-      " 1"
-     ],
-     "probability": 0.036946,
-     "rank": 4,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "2",
-     "tokenText": " 2",
-     "tokenIds": [
-      362
-     ],
-     "tokenStrings": [
-      " 2"
-     ],
-     "probability": 0.021286,
-     "rank": 8,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "3",
-     "tokenText": " 3",
-     "tokenIds": [
-      513
-     ],
-     "tokenStrings": [
-      " 3"
-     ],
-     "probability": 0.020918,
-     "rank": 9,
-     "multiToken": false,
-     "fromModel": false
-    },
-    {
-     "label": "4",
-     "tokenText": " 4",
-     "tokenIds": [
-      604
-     ],
-     "tokenStrings": [
-      " 4"
-     ],
-     "probability": 0.018706,
-     "rank": 11,
-     "multiToken": false,
-     "fromModel": false
-    }
-   ],
-   "other": 0.863957,
-   "explanation": "The right answer needs a small inverse calculation: (20 - 10) / 5 = 2.",
-   "takeaway": "Small models often get this wrong; check where the mass actually goes!",
-   "branchingLink": false
-  },
-  {
-   "id": "trophy",
-   "category": "Reasoning-like steps",
+   "id": "trophy_big",
+   "category": "The suitcase problem",
    "prompt": "The trophy would not fit into the suitcase because it was too",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -2146,16 +1845,199 @@
      "rank": 22,
      "multiToken": false,
      "fromModel": false
+    },
+    {
+     "label": "tiny",
+     "tokenText": " tiny",
+     "tokenIds": [
+      7009
+     ],
+     "tokenStrings": [
+      " tiny"
+     ],
+     "probability": 0.001879,
+     "rank": 33,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "new",
+     "tokenText": " new",
+     "tokenIds": [
+      649
+     ],
+     "tokenStrings": [
+      " new"
+     ],
+     "probability": 0.000196,
+     "rank": 134,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "sharp",
+     "tokenText": " sharp",
+     "tokenIds": [
+      7786
+     ],
+     "tokenStrings": [
+      " sharp"
+     ],
+     "probability": 0.000139,
+     "rank": 160,
+     "multiToken": false,
+     "fromModel": false
     }
    ],
-   "other": 0.236988,
-   "explanation": "The pronoun 'it' is ambiguous; world knowledge is needed to resolve it.",
-   "takeaway": "Common sense hides inside next-token prediction.",
-   "branchingLink": true
+   "other": 0.234774,
+   "explanation": "The pronoun 'it' is ambiguous: a too-big trophy or a too-small suitcase? Only world knowledge resolves it.",
+   "takeaway": "This is a famous linguists' sentence, designed to need common sense.",
+   "link": {
+    "module": "context-lens",
+    "label": "Open the Context Lens: flip the suitcase sentence"
+   }
+  },
+  {
+   "id": "trophy_change",
+   "category": "The suitcase problem",
+   "prompt": "The trophy would not fit into the suitcase because it was too small, so I changed the",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "size",
+     "tokenText": " size",
+     "tokenIds": [
+      2546
+     ],
+     "tokenStrings": [
+      " size"
+     ],
+     "probability": 0.105439,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "bag",
+     "tokenText": " bag",
+     "tokenIds": [
+      6131
+     ],
+     "tokenStrings": [
+      " bag"
+     ],
+     "probability": 0.10077,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "suitcase",
+     "tokenText": " suitcase",
+     "tokenIds": [
+      45391
+     ],
+     "tokenStrings": [
+      " suitcase"
+     ],
+     "probability": 0.019968,
+     "rank": 7,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lock",
+     "tokenText": " lock",
+     "tokenIds": [
+      5793
+     ],
+     "tokenStrings": [
+      " lock"
+     ],
+     "probability": 0.005317,
+     "rank": 23,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "trophy",
+     "tokenText": " trophy",
+     "tokenIds": [
+      16383
+     ],
+     "tokenStrings": [
+      " trophy"
+     ],
+     "probability": 0.001763,
+     "rank": 67,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "room",
+     "tokenText": " room",
+     "tokenIds": [
+      2119
+     ],
+     "tokenStrings": [
+      " room"
+     ],
+     "probability": 0.001667,
+     "rank": 70,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "time",
+     "tokenText": " time",
+     "tokenIds": [
+      640
+     ],
+     "tokenStrings": [
+      " time"
+     ],
+     "probability": 0.000705,
+     "rank": 167,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "big",
+     "tokenText": " big",
+     "tokenIds": [
+      1263
+     ],
+     "tokenStrings": [
+      " big"
+     ],
+     "probability": 0.000105,
+     "rank": 876,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 1e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.764265,
+   "explanation": "'Too small' pins 'it' to the suitcase, so the suitcase is what gets changed.",
+   "takeaway": "One extra word retroactively resolves the pronoun.",
+   "link": null
   },
   {
    "id": "oven",
-   "category": "Reasoning-like steps",
+   "category": "World knowledge",
    "prompt": "He put the ice cream in the oven and it",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -2261,11 +2143,11 @@
    "other": 0.54624,
    "explanation": "The continuation depends on knowing what heat does to ice cream.",
    "takeaway": "Physics shows up as language statistics.",
-   "branchingLink": false
+   "link": null
   },
   {
    "id": "freezer",
-   "category": "Reasoning-like steps",
+   "category": "World knowledge",
    "prompt": "He put the ice cream in the freezer and it",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -2371,11 +2253,1278 @@
    "other": 0.5829,
    "explanation": "A one-word change in context reverses the physical outcome.",
    "takeaway": "World knowledge is encoded indirectly through examples.",
-   "branchingLink": false
+   "link": null
+  },
+  {
+   "id": "fire_water",
+   "category": "World knowledge",
+   "prompt": "He poured water on the fire, and the flames",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "were",
+     "tokenText": " were",
+     "tokenIds": [
+      547
+     ],
+     "tokenStrings": [
+      " were"
+     ],
+     "probability": 0.105285,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "spread",
+     "tokenText": " spread",
+     "tokenIds": [
+      4104
+     ],
+     "tokenStrings": [
+      " spread"
+     ],
+     "probability": 0.084865,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "went",
+     "tokenText": " went",
+     "tokenIds": [
+      1816
+     ],
+     "tokenStrings": [
+      " went"
+     ],
+     "probability": 0.034519,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "grew",
+     "tokenText": " grew",
+     "tokenIds": [
+      6348
+     ],
+     "tokenStrings": [
+      " grew"
+     ],
+     "probability": 0.031463,
+     "rank": 4,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "began",
+     "tokenText": " began",
+     "tokenIds": [
+      2540
+     ],
+     "tokenStrings": [
+      " began"
+     ],
+     "probability": 0.02994,
+     "rank": 5,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "died",
+     "tokenText": " died",
+     "tokenIds": [
+      3724
+     ],
+     "tokenStrings": [
+      " died"
+     ],
+     "probability": 0.007413,
+     "rank": 21,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "exploded",
+     "tokenText": " exploded",
+     "tokenIds": [
+      18750
+     ],
+     "tokenStrings": [
+      " exploded"
+     ],
+     "probability": 0.004784,
+     "rank": 35,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.701731,
+   "explanation": "Different causes imply different likely effects.",
+   "takeaway": "Prediction can require causal expectations.",
+   "link": null
+  },
+  {
+   "id": "fire_gasoline",
+   "category": "World knowledge",
+   "prompt": "He poured gasoline on the fire, and the flames",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "spread",
+     "tokenText": " spread",
+     "tokenIds": [
+      4104
+     ],
+     "tokenStrings": [
+      " spread"
+     ],
+     "probability": 0.144089,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "were",
+     "tokenText": " were",
+     "tokenIds": [
+      547
+     ],
+     "tokenStrings": [
+      " were"
+     ],
+     "probability": 0.093043,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "started",
+     "tokenText": " started",
+     "tokenIds": [
+      2067
+     ],
+     "tokenStrings": [
+      " started"
+     ],
+     "probability": 0.031601,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "went",
+     "tokenText": " went",
+     "tokenIds": [
+      1816
+     ],
+     "tokenStrings": [
+      " went"
+     ],
+     "probability": 0.021301,
+     "rank": 6,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "grew",
+     "tokenText": " grew",
+     "tokenIds": [
+      6348
+     ],
+     "tokenStrings": [
+      " grew"
+     ],
+     "probability": 0.015444,
+     "rank": 10,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "exploded",
+     "tokenText": " exploded",
+     "tokenIds": [
+      18750
+     ],
+     "tokenStrings": [
+      " exploded"
+     ],
+     "probability": 0.0053,
+     "rank": 32,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "died",
+     "tokenText": " died",
+     "tokenIds": [
+      3724
+     ],
+     "tokenStrings": [
+      " died"
+     ],
+     "probability": 0.004045,
+     "rank": 42,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.685177,
+   "explanation": "Swap one liquid and the likely effect reverses.",
+   "takeaway": "The model has read many cause-and-effect patterns.",
+   "link": null
+  },
+  {
+   "id": "umbrella_tom",
+   "category": "World knowledge",
+   "prompt": "Tom forgot his umbrella. When he arrived at school, his clothes were",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "all",
+     "tokenText": " all",
+     "tokenIds": [
+      477
+     ],
+     "tokenStrings": [
+      " all"
+     ],
+     "probability": 0.078439,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "still",
+     "tokenText": " still",
+     "tokenIds": [
+      991
+     ],
+     "tokenStrings": [
+      " still"
+     ],
+     "probability": 0.050633,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "soaked",
+     "tokenText": " soaked",
+     "tokenIds": [
+      33657
+     ],
+     "tokenStrings": [
+      " soaked"
+     ],
+     "probability": 0.029517,
+     "rank": 5,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "wet",
+     "tokenText": " wet",
+     "tokenIds": [
+      9583
+     ],
+     "tokenStrings": [
+      " wet"
+     ],
+     "probability": 0.01133,
+     "rank": 16,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "clean",
+     "tokenText": " clean",
+     "tokenIds": [
+      3424
+     ],
+     "tokenStrings": [
+      " clean"
+     ],
+     "probability": 0.005031,
+     "rank": 30,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "ruined",
+     "tokenText": " ruined",
+     "tokenIds": [
+      20484
+     ],
+     "tokenStrings": [
+      " ruined"
+     ],
+     "probability": 0.004147,
+     "rank": 38,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "dry",
+     "tokenText": " dry",
+     "tokenIds": [
+      5894
+     ],
+     "tokenStrings": [
+      " dry"
+     ],
+     "probability": 0.002558,
+     "rank": 62,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.818345,
+   "explanation": "The consequence of forgetting the umbrella is never stated, but it is easy to infer.",
+   "takeaway": "The model must often use information that is implied rather than written.",
+   "link": null
+  },
+  {
+   "id": "umbrella_sky",
+   "category": "World knowledge",
+   "prompt": "The sky became dark and full of clouds, so I took my",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "hat",
+     "tokenText": " hat",
+     "tokenIds": [
+      6877
+     ],
+     "tokenStrings": [
+      " hat"
+     ],
+     "probability": 0.032461,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "clothes",
+     "tokenText": " clothes",
+     "tokenIds": [
+      8242
+     ],
+     "tokenStrings": [
+      " clothes"
+     ],
+     "probability": 0.023683,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "coat",
+     "tokenText": " coat",
+     "tokenIds": [
+      13209
+     ],
+     "tokenStrings": [
+      " coat"
+     ],
+     "probability": 0.00898,
+     "rank": 18,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "umbrella",
+     "tokenText": " umbrella",
+     "tokenIds": [
+      25510
+     ],
+     "tokenStrings": [
+      " umbrella"
+     ],
+     "probability": 0.004473,
+     "rank": 33,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "camera",
+     "tokenText": " camera",
+     "tokenIds": [
+      4676
+     ],
+     "tokenStrings": [
+      " camera"
+     ],
+     "probability": 0.004306,
+     "rank": 37,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "jacket",
+     "tokenText": " jacket",
+     "tokenIds": [
+      15224
+     ],
+     "tokenStrings": [
+      " jacket"
+     ],
+     "probability": 0.001324,
+     "rank": 121,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "keys",
+     "tokenText": " keys",
+     "tokenIds": [
+      8251
+     ],
+     "tokenStrings": [
+      " keys"
+     ],
+     "probability": 0.000743,
+     "rank": 209,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.92403,
+   "explanation": "Rain is never mentioned, yet the model expects it.",
+   "takeaway": "Prediction often uses implied information.",
+   "link": null
+  },
+  {
+   "id": "breakfast_friedrich",
+   "category": "Probability and branching",
+   "prompt": "For breakfast, Friedrich usually eats",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "a",
+     "tokenText": " a",
+     "tokenIds": [
+      257
+     ],
+     "tokenStrings": [
+      " a"
+     ],
+     "probability": 0.180089,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "two",
+     "tokenText": " two",
+     "tokenIds": [
+      734
+     ],
+     "tokenStrings": [
+      " two"
+     ],
+     "probability": 0.053148,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "eggs",
+     "tokenText": " eggs",
+     "tokenIds": [
+      9653
+     ],
+     "tokenStrings": [
+      " eggs"
+     ],
+     "probability": 0.004519,
+     "rank": 35,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "cereal",
+     "tokenText": " cereal",
+     "tokenIds": [
+      33158
+     ],
+     "tokenStrings": [
+      " cereal"
+     ],
+     "probability": 0.000982,
+     "rank": 102,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "coffee",
+     "tokenText": " coffee",
+     "tokenIds": [
+      6891
+     ],
+     "tokenStrings": [
+      " coffee"
+     ],
+     "probability": 0.000778,
+     "rank": 121,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "cookies",
+     "tokenText": " cookies",
+     "tokenIds": [
+      14746
+     ],
+     "tokenStrings": [
+      " cookies"
+     ],
+     "probability": 0.00046,
+     "rank": 197,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "bratwurst",
+     "tokenText": " bratwurst",
+     "tokenIds": [
+      865,
+      265,
+      86,
+      24962
+     ],
+     "tokenStrings": [
+      " br",
+      "at",
+      "w",
+      "urst"
+     ],
+     "probability": 2.2e-05,
+     "rank": null,
+     "multiToken": true,
+     "fromModel": false
+    },
+    {
+     "label": "croissants",
+     "tokenText": " croissants",
+     "tokenIds": [
+      6763,
+      747,
+      1187
+     ],
+     "tokenStrings": [
+      " cro",
+      "iss",
+      "ants"
+     ],
+     "probability": 2e-05,
+     "rank": null,
+     "multiToken": true,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 2e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Schwarzwälderkirschtorte",
+     "tokenText": " Schwarzwälderkirschtorte",
+     "tokenIds": [
+      34835,
+      86,
+      11033,
+      6499,
+      74,
+      17062,
+      21474,
+      419,
+      68
+     ],
+     "tokenStrings": [
+      " Schwarz",
+      "w",
+      "ä",
+      "lder",
+      "k",
+      "irs",
+      "cht",
+      "ort",
+      "e"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": true,
+     "fromModel": false
+    },
+    {
+     "label": "thorium",
+     "tokenText": " thorium",
+     "tokenIds": [
+      41899,
+      1505
+     ],
+     "tokenStrings": [
+      " thor",
+      "ium"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": true,
+     "fromModel": false
+    }
+   ],
+   "other": 0.75998,
+   "explanation": "Many answers are plausible; the name may shift expectations, but there is no single truth.",
+   "takeaway": "Probabilities are not facts. They reflect patterns and assumptions.",
+   "link": null
+  },
+  {
+   "id": "breakfast_federico",
+   "category": "Probability and branching",
+   "prompt": "For breakfast, Federico usually eats",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "a",
+     "tokenText": " a",
+     "tokenIds": [
+      257
+     ],
+     "tokenStrings": [
+      " a"
+     ],
+     "probability": 0.191447,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "two",
+     "tokenText": " two",
+     "tokenIds": [
+      734
+     ],
+     "tokenStrings": [
+      " two"
+     ],
+     "probability": 0.049119,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "pasta",
+     "tokenText": " pasta",
+     "tokenIds": [
+      26296
+     ],
+     "tokenStrings": [
+      " pasta"
+     ],
+     "probability": 0.00374,
+     "rank": 38,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "eggs",
+     "tokenText": " eggs",
+     "tokenIds": [
+      9653
+     ],
+     "tokenStrings": [
+      " eggs"
+     ],
+     "probability": 0.003391,
+     "rank": 42,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "cereal",
+     "tokenText": " cereal",
+     "tokenIds": [
+      33158
+     ],
+     "tokenStrings": [
+      " cereal"
+     ],
+     "probability": 0.000882,
+     "rank": 113,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "coffee",
+     "tokenText": " coffee",
+     "tokenIds": [
+      6891
+     ],
+     "tokenStrings": [
+      " coffee"
+     ],
+     "probability": 0.000829,
+     "rank": 118,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "cookies",
+     "tokenText": " cookies",
+     "tokenIds": [
+      14746
+     ],
+     "tokenStrings": [
+      " cookies"
+     ],
+     "probability": 0.000509,
+     "rank": 168,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "croissants",
+     "tokenText": " croissants",
+     "tokenIds": [
+      6763,
+      747,
+      1187
+     ],
+     "tokenStrings": [
+      " cro",
+      "iss",
+      "ants"
+     ],
+     "probability": 1.7e-05,
+     "rank": null,
+     "multiToken": true,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 2e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "diamonds",
+     "tokenText": " diamonds",
+     "tokenIds": [
+      30984
+     ],
+     "tokenStrings": [
+      " diamonds"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.750064,
+   "explanation": "Compare with Friedrich: does the name change the bars?",
+   "takeaway": "A model predicts plausible text, not personal truth.",
+   "link": null
+  },
+  {
+   "id": "student_test",
+   "category": "Probability and branching",
+   "prompt": "The student opened the test and realized",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "that",
+     "tokenText": " that",
+     "tokenIds": [
+      326
+     ],
+     "tokenStrings": [
+      " that"
+     ],
+     "probability": 0.339478,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "he",
+     "tokenText": " he",
+     "tokenIds": [
+      339
+     ],
+     "tokenStrings": [
+      " he"
+     ],
+     "probability": 0.200347,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "she",
+     "tokenText": " she",
+     "tokenIds": [
+      673
+     ],
+     "tokenStrings": [
+      " she"
+     ],
+     "probability": 0.093368,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "the",
+     "tokenText": " the",
+     "tokenIds": [
+      262
+     ],
+     "tokenStrings": [
+      " the"
+     ],
+     "probability": 0.05397,
+     "rank": 4,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "it",
+     "tokenText": " it",
+     "tokenIds": [
+      340
+     ],
+     "tokenStrings": [
+      " it"
+     ],
+     "probability": 0.049727,
+     "rank": 5,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "his",
+     "tokenText": " his",
+     "tokenIds": [
+      465
+     ],
+     "tokenStrings": [
+      " his"
+     ],
+     "probability": 0.034235,
+     "rank": 6,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "what",
+     "tokenText": " what",
+     "tokenIds": [
+      644
+     ],
+     "tokenStrings": [
+      " what"
+     ],
+     "probability": 0.025146,
+     "rank": 7,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "how",
+     "tokenText": " how",
+     "tokenIds": [
+      703
+     ],
+     "tokenStrings": [
+      " how"
+     ],
+     "probability": 0.022208,
+     "rank": 8,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "they",
+     "tokenText": " they",
+     "tokenIds": [
+      484
+     ],
+     "tokenStrings": [
+      " they"
+     ],
+     "probability": 0.021268,
+     "rank": 9,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "all",
+     "tokenText": " all",
+     "tokenIds": [
+      477
+     ],
+     "tokenStrings": [
+      " all"
+     ],
+     "probability": 0.003011,
+     "rank": 16,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "for",
+     "tokenText": " for",
+     "tokenIds": [
+      329
+     ],
+     "tokenStrings": [
+      " for"
+     ],
+     "probability": 0.000769,
+     "rank": 42,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "lions",
+     "tokenText": " lions",
+     "tokenIds": [
+      31420
+     ],
+     "tokenStrings": [
+      " lions"
+     ],
+     "probability": 0.0,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.156473,
+   "explanation": "The next token is probably a humble function word, and the probability is spread out among several of them.",
+   "takeaway": "Tiny words control large futures. Explore this one in Branching Stories!",
+   "link": {
+    "module": "branching-stories",
+    "label": "Explore branching: see how this choice changes the future"
+   }
+  },
+  {
+   "id": "library",
+   "category": "Probability and branching",
+   "prompt": "In the library, everyone started to",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "get",
+     "tokenText": " get",
+     "tokenIds": [
+      651
+     ],
+     "tokenStrings": [
+      " get"
+     ],
+     "probability": 0.050283,
+     "rank": 1,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "see",
+     "tokenText": " see",
+     "tokenIds": [
+      766
+     ],
+     "tokenStrings": [
+      " see"
+     ],
+     "probability": 0.043795,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "talk",
+     "tokenText": " talk",
+     "tokenIds": [
+      1561
+     ],
+     "tokenStrings": [
+      " talk"
+     ],
+     "probability": 0.03119,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "read",
+     "tokenText": " read",
+     "tokenIds": [
+      1100
+     ],
+     "tokenStrings": [
+      " read"
+     ],
+     "probability": 0.011593,
+     "rank": 16,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "study",
+     "tokenText": " study",
+     "tokenIds": [
+      2050
+     ],
+     "tokenStrings": [
+      " study"
+     ],
+     "probability": 0.001389,
+     "rank": 103,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "laugh",
+     "tokenText": " laugh",
+     "tokenIds": [
+      6487
+     ],
+     "tokenStrings": [
+      " laugh"
+     ],
+     "probability": 0.000915,
+     "rank": 146,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "whisper",
+     "tokenText": " whisper",
+     "tokenIds": [
+      31992
+     ],
+     "tokenStrings": [
+      " whisper"
+     ],
+     "probability": 0.000114,
+     "rank": 717,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.860721,
+   "explanation": "Social norms make quiet activities more likely, but not certain.",
+   "takeaway": "Language models absorb social patterns from text.",
+   "link": null
+  },
+  {
+   "id": "algebra",
+   "category": "Reasoning steps",
+   "prompt": "A number is multiplied by 5. Then 10 is added. The result is 20. Therefore, the original number was",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "5",
+     "tokenText": " 5",
+     "tokenIds": [
+      642
+     ],
+     "tokenStrings": [
+      " 5"
+     ],
+     "probability": 0.038187,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "1",
+     "tokenText": " 1",
+     "tokenIds": [
+      352
+     ],
+     "tokenStrings": [
+      " 1"
+     ],
+     "probability": 0.036946,
+     "rank": 4,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "2",
+     "tokenText": " 2",
+     "tokenIds": [
+      362
+     ],
+     "tokenStrings": [
+      " 2"
+     ],
+     "probability": 0.021286,
+     "rank": 8,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "3",
+     "tokenText": " 3",
+     "tokenIds": [
+      513
+     ],
+     "tokenStrings": [
+      " 3"
+     ],
+     "probability": 0.020918,
+     "rank": 9,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "4",
+     "tokenText": " 4",
+     "tokenIds": [
+      604
+     ],
+     "tokenStrings": [
+      " 4"
+     ],
+     "probability": 0.018706,
+     "rank": 11,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.863957,
+   "explanation": "The right answer needs a small inverse calculation: (20 - 10) / 5 = 2.",
+   "takeaway": "Small models often get this wrong; check where the mass actually goes!",
+   "link": {
+    "module": "reasoning-demo",
+    "label": "Open the Reasoning Demo: reasoning one token at a time"
+   }
+  },
+  {
+   "id": "proof_first",
+   "category": "Reasoning steps",
+   "prompt": "The square of an odd number is odd. Proof:",
+   "displayMode": "next-token-probabilities",
+   "options": [
+    {
+     "label": "The",
+     "tokenText": " The",
+     "tokenIds": [
+      383
+     ],
+     "tokenStrings": [
+      " The"
+     ],
+     "probability": 0.058678,
+     "rank": 2,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "If",
+     "tokenText": " If",
+     "tokenIds": [
+      1002
+     ],
+     "tokenStrings": [
+      " If"
+     ],
+     "probability": 0.035032,
+     "rank": 3,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "A",
+     "tokenText": " A",
+     "tokenIds": [
+      317
+     ],
+     "tokenStrings": [
+      " A"
+     ],
+     "probability": 0.020277,
+     "rank": 6,
+     "multiToken": false,
+     "fromModel": true
+    },
+    {
+     "label": "Let",
+     "tokenText": " Let",
+     "tokenIds": [
+      3914
+     ],
+     "tokenStrings": [
+      " Let"
+     ],
+     "probability": 0.003758,
+     "rank": 35,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "By",
+     "tokenText": " By",
+     "tokenIds": [
+      2750
+     ],
+     "tokenStrings": [
+      " By"
+     ],
+     "probability": 0.001165,
+     "rank": 92,
+     "multiToken": false,
+     "fromModel": false
+    },
+    {
+     "label": "Pizza",
+     "tokenText": " Pizza",
+     "tokenIds": [
+      20952
+     ],
+     "tokenStrings": [
+      " Pizza"
+     ],
+     "probability": 6e-06,
+     "rank": null,
+     "multiToken": false,
+     "fromModel": false
+    }
+   ],
+   "other": 0.881084,
+   "explanation": "Only one of these opens a road that actually reaches the proof. Try walking the whole road in the Reasoning Demo!",
+   "takeaway": "Producing structured reasoning means committing to the right tokens, step after step.",
+   "link": {
+    "module": "reasoning-demo",
+    "label": "Open the Reasoning Demo: walk the whole proof"
+   }
   },
   {
    "id": "syllogism",
-   "category": "Reasoning-like steps",
+   "category": "Reasoning steps",
    "prompt": "All cats are mammals. Luna is a cat. Therefore, Luna is a",
    "displayMode": "next-token-probabilities",
    "options": [
@@ -2481,7 +3630,7 @@
    "other": 0.660522,
    "explanation": "A tiny logical inference decides the likely token.",
    "takeaway": "Some blanks require reasoning over the whole prompt.",
-   "branchingLink": false
+   "link": null
   }
  ],
  "notes": "Probabilities from a small open GPT-style model; they do not represent current frontier chatbots exactly."

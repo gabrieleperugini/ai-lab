@@ -15,7 +15,12 @@ function Pages() {
       {route.page === "home" && <HomePage />}
       {route.page === "day" && <DayPage dayId={route.dayId} mode={mode} />}
       {route.page === "module" && (
-        <ModulePage dayId={route.dayId} moduleId={route.moduleId} mode={mode} />
+        <ModulePage
+          dayId={route.dayId}
+          moduleId={route.moduleId}
+          extra={route.extra}
+          mode={mode}
+        />
       )}
     </AppShell>
   );

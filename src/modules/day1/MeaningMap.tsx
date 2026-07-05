@@ -7,9 +7,9 @@ const data = generatedData as GenM6;
 const points = data.points;
 const puzzles = data.puzzles;
 
-const W = 880;
-const H = 540;
-const BASE_SCALE = 46;
+const W = 1100;
+const H = 620;
+const BASE_SCALE = 56;
 const FOCAL = 30;
 const START_YAW = -0.5;
 const START_PITCH = 0.3;
@@ -226,14 +226,29 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
               const dx = e.clientX - d.x;
               const dy = e.clientY - d.y;
               if (Math.abs(dx) + Math.abs(dy) > 3) d.moved = true;
-              setYaw((v) => v + dx * 0.008);
-              setPitch((v) => Math.max(-1.3, Math.min(1.3, v + dy * 0.008)));
+              if (d.moved) {
+                setYaw((v) => v + dx * 0.008);
+                setPitch((v) => Math.max(-1.3, Math.min(1.3, v + dy * 0.008)));
+              }
               d.x = e.clientX;
               d.y = e.clientY;
             }}
-            onPointerUp={() => {
-              // cleared on the next tick so point onClick can still read `moved`
-              setTimeout(() => (dragRef.current = null), 0);
+            onPointerUp={(e) => {
+              // Pointer capture retargets click events to the svg, so point
+              // selection is done here by hit-testing the projected points.
+              const wasDrag = dragRef.current?.moved;
+              dragRef.current = null;
+              if (wasDrag) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const px = ((e.clientX - rect.left) / rect.width) * W;
+              const py = ((e.clientY - rect.top) / rect.height) * H;
+              let best: { p: GenEmbeddingPoint; d: number } | null = null;
+              for (const pr of projected) {
+                const d = Math.hypot(pr.px - px, pr.py - py);
+                if (d < 26 && (!best || d < best.d)) best = { p: pr.p, d };
+              }
+              if (best) clickPoint(best.p);
+              else if (!puzzle) setSelected(null);
             }}
             onPointerLeave={() => (dragRef.current = null)}
           >
@@ -291,14 +306,9 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
               return (
                 <g
                   key={p.label}
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", pointerEvents: "none" }}
                   opacity={dim ? 0.15 : Math.min(0.55 + scale * 0.45, 1)}
-                  onClick={() => {
-                    if (dragRef.current?.moved) return;
-                    clickPoint(p);
-                  }}
                 >
-                  <circle cx={px} cy={py} r={r + 7} fill="transparent" />
                   <circle
                     cx={px} cy={py} r={r}
                     fill={CATEGORY_COLORS[p.category] ?? "var(--ink-soft)"}

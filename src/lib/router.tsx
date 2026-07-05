@@ -3,7 +3,9 @@ import type { ReactNode } from "react";
 
 /**
  * Tiny hash-based router, safe for GitHub Pages (no server rewrites needed).
- * Routes look like:  #/            #/day1          #/day1/next-token-arena
+ * Routes look like:  #/    #/day1    #/day1/next-token-arena
+ *                    #/day1/next-token-arena/context   (deep link into a module
+ *                    section, e.g. an Arena category; used by the slide QR codes)
  * Class/teacher settings travel in the normal query string (?class=A&teacher=1)
  * so they survive hash navigation and page refreshes.
  */
@@ -11,14 +13,14 @@ import type { ReactNode } from "react";
 export type Route =
   | { page: "home" }
   | { page: "day"; dayId: string }
-  | { page: "module"; dayId: string; moduleId: string };
+  | { page: "module"; dayId: string; moduleId: string; extra?: string };
 
 function parseHash(hash: string): Route {
   const clean = hash.replace(/^#\/?/, "").replace(/\/+$/, "");
   if (!clean) return { page: "home" };
   const parts = clean.split("/").filter(Boolean);
   if (parts.length === 1) return { page: "day", dayId: parts[0] };
-  return { page: "module", dayId: parts[0], moduleId: parts[1] };
+  return { page: "module", dayId: parts[0], moduleId: parts[1], extra: parts[2] };
 }
 
 const RouteContext = createContext<Route>({ page: "home" });

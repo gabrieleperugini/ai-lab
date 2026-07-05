@@ -142,147 +142,107 @@ def report(line: str = ""):
 # ---------------------------------------------------------------------------
 
 M1_EXAMPLES = [
-    # ---- 1. Basics (slides: NTP part 1, Arena 1) ----
-    ("once_upon", "Basics: familiar phrases and facts", "Once upon a",
-     ["time", "space", "crime", "the", "day", "night", "story"],
-     "A very familiar phrase makes one continuation dominate; 'crime' is rare but real (it is even a TV series title).",
+    # Familiar phrases
+    ("once_upon", "Familiar phrases", "Once upon a",
+     ["time", "day", "night", "place", "story"],
+     "A very familiar phrase makes one continuation dominate.",
      "Even an 'obvious' answer is a probability, not a certainty."),
-    ("capital_france", "Basics: familiar phrases and facts", "The capital of France is",
-     ["Paris", "Berlin", "Seoul", "Rome", "London", "also", "is", "lions"],
-     "The most likely continuation matches a fact about the world, but continuations like 'also known as...' stay possible.",
-     "Next-token prediction can require knowledge, not just grammar."),
-    ("world_cup", "Basics: familiar phrases and facts", "The capital of the country that hosted the World Cup in 1998 is",
-     ["Paris", "Berlin", "Seoul", "Rome", "London", "also", "is", "lions"],
-     "Answering needs a chain: World Cup 1998 to France, France to Paris. Watch where the small model actually puts its mass.",
-     "A chain of knowledge can hide inside one blank. Small models often fail here!"),
-    ("happy_birthday", "Basics: familiar phrases and facts", "Happy birthday to",
+    ("happy_birthday", "Familiar phrases", "Happy birthday to",
      ["you", "me", "her", "him", "everyone"],
      "The song makes 'you' by far the most expected next token.",
      "Common phrases create sharp distributions."),
-    ("end_of_day", "Basics: familiar phrases and facts", "At the end of the day,",
+    ("end_of_day", "Familiar phrases", "At the end of the day,",
      ["the", "I", "it", "we", "everything"],
      "After a common idiom, many small function words are plausible.",
      "Sometimes no single token dominates."),
-    ("better_late", "Basics: familiar phrases and facts", "Better late than",
+    ("better_late", "Familiar phrases", "Better late than",
      ["never", "sorry", "late", "early", "nothing"],
      "Proverbs are strong patterns in training text.",
      "The model has read this sentence many times."),
-    ("largest_planet", "Basics: familiar phrases and facts", "The largest planet in the Solar System is",
+    # Facts and knowledge
+    ("capital_france", "Facts and knowledge", "The capital of France is",
+     ["Paris", "Berlin", "Rome", "London", "Madrid"],
+     "The most likely continuation matches a fact about the world.",
+     "Next-token prediction can require knowledge, not just grammar."),
+    ("largest_planet", "Facts and knowledge", "The largest planet in the Solar System is",
      ["Jupiter", "Saturn", "Earth", "Mars", "Venus"],
      "Astronomy facts appear in the training text often enough to shape the bars.",
      "Facts become statistics over tokens."),
-    ("water_freezes", "Basics: familiar phrases and facts", "Water freezes at zero degrees",
+    ("water_freezes", "Facts and knowledge", "Water freezes at zero degrees",
      ["Celsius", "Fahrenheit", "Kelvin", "centigrade", "below"],
      "The model must pick the unit that makes the sentence true.",
      "Small models know some facts better than others."),
-
-    # ---- 2. Context (slides: NTP part 2, Arena 2) ----
-    ("bank_money", "Context: one word, two worlds", "The other day I entered my bank and saw some",
-     ["ducks", "desks", "lions", "people", "money"],
-     "Entering 'my bank' selects the financial meaning, so office things and people rise.",
-     "Context words activate one meaning of an ambiguous word."),
-    ("bank_river", "Context: one word, two worlds", "The other day I went sitting by the bank and saw some",
-     ["ducks", "desks", "lions", "water", "birds"],
-     "'Sitting by' points to the river bank, so nature answers rise.",
-     "Same word, different world."),
-    ("bank_deposit", "Context: one word, two worlds", "I walked to the bank and deposited some",
+    ("world_cup", "Facts and knowledge", "The capital of the country that hosted the World Cup in 1998 is",
+     ["Paris", "Berlin", "London", "Rome", "Madrid"],
+     "Answering needs a chain: World Cup 1998 to France, France to Paris.",
+     "A chain of knowledge can hide inside one blank. Small models often fail here!"),
+    # Context changes meaning
+    ("bank_money", "Context changes meaning", "I walked to the bank and deposited some",
      ["money", "cash", "checks", "coins", "documents"],
-     "The verb 'deposited' selects the financial meaning of bank very strongly.",
-     "A single verb can settle the ambiguity."),
-    ("bank_fisherman", "Context: one word, two worlds", "The fisherman stood on the bank of the",
+     "The verb 'deposited' selects the financial meaning of bank.",
+     "Context words activate one meaning of an ambiguous word."),
+    ("bank_river", "Context changes meaning", "The fisherman stood on the bank of the",
      ["river", "lake", "stream", "water", "sea"],
      "The fisherman puts us on a river bank, so nature words rise.",
-     "The company a word keeps decides what it means."),
-    ("bat_baseball", "Context: one word, two worlds", "The baseball player swung the bat and hit the",
+     "Same word, different world."),
+    ("bat_baseball", "Context changes meaning", "The baseball player swung the bat and hit the",
      ["ball", "pitch", "fence", "ground", "catcher"],
      "The sports frame makes 'ball' the star.",
      "A scenario is a probability magnet."),
-    ("bat_cave", "Context: one word, two worlds", "At sunset, the bat flew out of the",
+    ("bat_cave", "Context changes meaning", "At sunset, the bat flew out of the",
      ["cave", "tree", "attic", "darkness", "shadows"],
      "'Flew' turns the bat into an animal.",
      "One verb can flip the meaning."),
-    ("restaurant", "Context: one word, two worlds", "The waiter handed us the menu and asked what we wanted to",
-     ["order", "eat", "drink", "try", "have"],
-     "The restaurant scene makes 'order' and 'eat' likely.",
-     "Context narrows the space of plausible tokens."),
-
-    # ---- 3. The suitcase problem (slides: NTP part 3, Arena 3) ----
-    ("trophy_big", "The suitcase problem", "The trophy would not fit into the suitcase because it was too",
-     ["big", "small", "large", "old", "new", "sharp", "tiny", "heavy"],
-     "The pronoun 'it' is ambiguous: a too-big trophy or a too-small suitcase? Only world knowledge resolves it.",
-     "This is a famous linguists' sentence, designed to need common sense."),
-    ("trophy_change", "The suitcase problem", "The trophy would not fit into the suitcase because it was too small, so I changed the",
-     ["suitcase", "trophy", "room", "time", "lock", "big", "lions"],
-     "'Too small' pins 'it' to the suitcase, so the suitcase is what gets changed.",
-     "One extra word retroactively resolves the pronoun."),
-
-    # ---- 4. World knowledge (slides: NTP part 3 continued, Arena 4) ----
-    ("oven", "World knowledge", "He put the ice cream in the oven and it",
-     ["melted", "burned", "froze", "disappeared", "cooled"],
-     "The continuation depends on knowing what heat does to ice cream.",
-     "Physics shows up as language statistics."),
-    ("freezer", "World knowledge", "He put the ice cream in the freezer and it",
-     ["froze", "melted", "cooled", "hardened", "disappeared"],
-     "A one-word change in context reverses the physical outcome.",
-     "World knowledge is encoded indirectly through examples."),
-    ("fire_water", "World knowledge", "He poured water on the fire, and the flames",
-     ["died", "grew", "exploded", "spread", "went"],
-     "Different causes imply different likely effects.",
-     "Prediction can require causal expectations."),
-    ("fire_gasoline", "World knowledge", "He poured gasoline on the fire, and the flames",
-     ["grew", "exploded", "spread", "died", "went"],
-     "Swap one liquid and the likely effect reverses.",
-     "The model has read many cause-and-effect patterns."),
-    ("umbrella_tom", "World knowledge", "Tom forgot his umbrella. When he arrived at school, his clothes were",
-     ["wet", "dry", "clean", "soaked", "ruined"],
-     "The consequence of forgetting the umbrella is never stated, but it is easy to infer.",
-     "The model must often use information that is implied rather than written."),
-    ("umbrella_sky", "World knowledge", "The sky became dark and full of clouds, so I took my",
+    ("umbrella", "Context changes meaning", "The sky became dark and full of clouds, so I took my",
      ["umbrella", "coat", "jacket", "camera", "keys"],
      "Rain is never mentioned, yet the model expects it.",
      "Prediction often uses implied information."),
-
-    # ---- 5. Probability and branching (slides: NTP part 4, Arena 5) ----
-    ("breakfast_friedrich", "Probability and branching", "For breakfast, Friedrich usually eats",
-     ["cereal", "eggs", "croissants", "bratwurst", "Schwarzwälderkirschtorte", "cookies", "coffee", "thorium", "lions"],
-     "Many answers are plausible; the name may shift expectations, but there is no single truth.",
-     "Probabilities are not facts. They reflect patterns and assumptions."),
-    ("breakfast_federico", "Probability and branching", "For breakfast, Federico usually eats",
-     ["cereal", "eggs", "croissants", "coffee", "cookies", "pasta", "diamonds", "lions"],
-     "Compare with Friedrich: does the name change the bars?",
+    ("restaurant", "Context changes meaning", "The waiter handed us the menu and asked what we wanted to",
+     ["order", "eat", "drink", "try", "have"],
+     "The restaurant scene makes 'order' and 'eat' likely.",
+     "Context narrows the space of plausible tokens."),
+    # Ambiguity and probability
+    ("breakfast_federico", "Ambiguity and probability", "For breakfast, Federico usually eats",
+     ["cereal", "eggs", "toast", "croissants", "pasta"],
+     "Many answers are plausible; the name may shift expectations slightly.",
+     "Probabilities reflect patterns and assumptions, not facts about Federico."),
+    ("breakfast_friedrich", "Ambiguity and probability", "For breakfast, Friedrich usually eats",
+     ["cereal", "eggs", "toast", "bread", "sausage"],
+     "Compare with Federico: does the name change the bars?",
      "A model predicts plausible text, not personal truth."),
-    ("student_test", "Probability and branching", "The student opened the test and realized",
-     ["that", "what", "the", "it", "for", "she", "how", "all", "he", "lions"],
-     "The next token is probably a humble function word, and the probability is spread out among several of them.",
+    ("student_test", "Ambiguity and probability", "The student opened the test and realized",
+     ["that", "she", "he", "it", "what"],
+     "The next token is probably a humble function word, and the probability is spread out.",
      "Tiny words control large futures. Explore this one in Branching Stories!"),
-    ("library", "Probability and branching", "In the library, everyone started to",
+    ("library", "Ambiguity and probability", "In the library, everyone started to",
      ["whisper", "read", "study", "talk", "laugh"],
      "Social norms make quiet activities more likely, but not certain.",
      "Language models absorb social patterns from text."),
-
-    # ---- 6. Reasoning steps (slides: NTP part 5, Arena 6) ----
-    ("algebra", "Reasoning steps", "A number is multiplied by 5. Then 10 is added. The result is 20. Therefore, the original number was",
+    # Reasoning-like steps
+    ("algebra", "Reasoning-like steps", "A number is multiplied by 5. Then 10 is added. The result is 20. Therefore, the original number was",
      ["1", "2", "3", "4", "5"],
      "The right answer needs a small inverse calculation: (20 - 10) / 5 = 2.",
      "Small models often get this wrong; check where the mass actually goes!"),
-    ("proof_first", "Reasoning steps", "The square of an odd number is odd. Proof:",
-     ["Let", "The", "Pizza", "By"],
-     "Only one of these opens a road that actually reaches the proof. Try walking the whole road in the Reasoning Demo!",
-     "Producing structured reasoning means committing to the right tokens, step after step."),
-    ("syllogism", "Reasoning steps", "All cats are mammals. Luna is a cat. Therefore, Luna is a",
+    ("trophy", "Reasoning-like steps", "The trophy would not fit into the suitcase because it was too",
+     ["big", "large", "small", "heavy", "old"],
+     "The pronoun 'it' is ambiguous; world knowledge is needed to resolve it.",
+     "Common sense hides inside next-token prediction."),
+    ("oven", "Reasoning-like steps", "He put the ice cream in the oven and it",
+     ["melted", "burned", "froze", "disappeared", "cooled"],
+     "The continuation depends on knowing what heat does to ice cream.",
+     "Physics shows up as language statistics."),
+    ("freezer", "Reasoning-like steps", "He put the ice cream in the freezer and it",
+     ["froze", "melted", "cooled", "hardened", "disappeared"],
+     "A one-word change in context reverses the physical outcome.",
+     "World knowledge is encoded indirectly through examples."),
+    ("syllogism", "Reasoning-like steps", "All cats are mammals. Luna is a cat. Therefore, Luna is a",
      ["mammal", "cat", "dog", "planet", "person"],
      "A tiny logical inference decides the likely token.",
      "Some blanks require reasoning over the whole prompt."),
 ]
 
-# Per-example bridge buttons to other modules (module id shown after reveal).
-M1_LINKS = {
-    "student_test": ("branching-stories", "Explore branching: see how this choice changes the future"),
-    "proof_first": ("reasoning-demo", "Open the Reasoning Demo: walk the whole proof"),
-    "algebra": ("reasoning-demo", "Open the Reasoning Demo: reasoning one token at a time"),
-    "trophy_big": ("context-lens", "Open the Context Lens: flip the suitcase sentence"),
-    "bank_money": ("context-lens", "Open the Context Lens: flip between the two banks"),
-}
+# Examples that should show a link into M3 Branching Stories.
+M1_BRANCHING_LINKS = {"student_test", "trophy", "once_upon"}
 
 
 def gen_m1(lm: LM) -> dict:
@@ -343,10 +303,7 @@ def gen_m1(lm: LM) -> dict:
             "other": round(other, 6),
             "explanation": explanation,
             "takeaway": takeaway,
-            "link": (
-                {"module": M1_LINKS[ex_id][0], "label": M1_LINKS[ex_id][1]}
-                if ex_id in M1_LINKS else None
-            ),
+            "branchingLink": ex_id in M1_BRANCHING_LINKS,
         })
     return {"model": lm.name, "examples": examples,
             "notes": "Probabilities from a small open GPT-style model; they do not represent current frontier chatbots exactly."}
@@ -356,24 +313,7 @@ def gen_m1(lm: LM) -> dict:
 # M2: context switch pairs
 # ---------------------------------------------------------------------------
 
-# Note: a trophy/suitcase pair was tried and removed: GPT-2 cannot resolve the
-# Winograd pronoun, so the bars did not flip (see day1_generation_report.md).
 M2_PAIRS = [
-    ("ice_cream", "Physics from language", "Oven", "Freezer",
-     "He put the ice cream in the oven and it",
-     "He put the ice cream in the freezer and it",
-     ["melted", "froze", "burned", "cooled", "hardened"],
-     "The model has seen many patterns linking heat to melting and cold to freezing."),
-    ("fire", "Cause and effect", "Water", "Gasoline",
-     "He poured water on the fire, and the flames",
-     "He poured gasoline on the fire, and the flames",
-     ["died", "grew", "exploded", "spread", "went"],
-     "Different causes imply different likely effects."),
-    ("umbrella", "An implied outcome", "Remembered", "Forgot",
-     "Tom remembered his umbrella. When he arrived at school, his clothes were",
-     "Tom forgot his umbrella. When he arrived at school, his clothes were",
-     ["dry", "wet", "clean", "soaked", "fine"],
-     "The consequence is never stated; the model must use what is implied."),
     ("bank", "Finance or river?", "Financial bank", "River bank",
      "I walked into the bank and asked for a",
      "We had a picnic on the grassy bank of the",
@@ -577,140 +517,6 @@ def gen_m4(lm: LM) -> dict:
 # ---------------------------------------------------------------------------
 
 
-# ---------------------------------------------------------------------------
-# Reasoning Demo: the odd-square proof as a ladder of commitments (slides
-# "NTP part 5 - intelligence"). At every step only ONE option keeps the proof
-# alive; the others are dead ends with an explanation. GPT-2 scores each
-# option (chain-rule log-probability, softmax-normalized among the shown
-# options) so students can compare their choice with the model's preference.
-# Options keep the exact order used in the v1 slides.
-# ---------------------------------------------------------------------------
-
-REASONING_STEPS = [
-    {
-        "options": [
-            ("Let", "Let", False, ""),
-            ("The", "The", True,
-             "'The result follows...' might work in prose, but it produces no algebra to build on."),
-            ("Pizza", "Pizza", True,
-             "The proof derails instantly. Very unlikely tokens can break the task."),
-            ("By", "By", True,
-             "'By...' promises a justification that has not been established yet."),
-        ],
-        "correct": "Let",
-        "why": "The standard move: introduce a variable to work with.",
-    },
-    {
-        "options": [
-            ("n = 2k + 2.", "n = 2k + 2.", True,
-             "2k + 2 is EVEN. This road can never end at 'odd'."),
-            ("n = 2k + 1.", "n = 2k + 1.", False, ""),
-            ("n = 2k.", "n = 2k.", True,
-             "2k is even; a dead end for proving oddness."),
-            ("n = k + 1.", "n = k + 1.", True,
-             "k + 1 could be even or odd; too weak to finish the proof."),
-        ],
-        "correct": "n = 2k + 1.",
-        "why": "Every odd number can be written as 2k + 1. Now the algebra can start.",
-    },
-    {
-        "options": [
-            ("Then,", "Then,", False, ""),
-            ("Indeed,", "Indeed,", True,
-             "Grammatical, but it stalls: nothing new gets derived."),
-            ("By", "By", True,
-             "'By...' needs a lemma we do not have."),
-            ("QED.", "QED.", True,
-             "Nothing has been proven yet. Declaring victory is not a proof."),
-        ],
-        "correct": "Then,",
-        "why": "'Then,' commits us to deriving the next line.",
-    },
-    {
-        "options": [
-            ("nk = 2k² + 2k", "nk = 2k^2 + 2k", True,
-             "True, but nk is not what we are studying. A road to nowhere."),
-            ("n + 1 = 2k + 2", "n + 1 = 2k + 2", True,
-             "True, but it describes the NEXT number, not n squared."),
-            ("n² = 4k² + 1", "n^2 = 4k^2 + 1", True,
-             "False: (2k + 1)² = 4k² + 4k + 1. One wrong expansion poisons everything after it."),
-            ("n² = 4k² + 4k + 1", "n^2 = 4k^2 + 4k + 1", False, ""),
-        ],
-        "correct": "n² = 4k² + 4k + 1",
-        "why": "The correct expansion of (2k + 1)².",
-    },
-    {
-        "options": [
-            ("= 4(k² + k) + 1.", "= 4(k^2 + k) + 1.", True,
-             "True, but the goal is the odd form 2·(integer) + 1; this detour does not show it directly."),
-            ("= 2(2k² + 2k) + 1.", "= 2(2k^2 + 2k) + 1.", False, ""),
-            ("= k(4k + 4) + 1.", "= k(4k + 4) + 1.", True,
-             "True but shapeless; it does not exhibit 2·(integer) + 1."),
-            ("QED.", "QED.", True,
-             "Not yet: we still need to show the odd form 2·(integer) + 1."),
-        ],
-        "correct": "= 2(2k² + 2k) + 1.",
-        "why": "This exhibits n² as 2·(integer) + 1: the definition of odd.",
-    },
-    {
-        "options": [
-            ("For", "For", True, "The proof is complete; opening a new clause leads nowhere."),
-            ("If", "If", True, "No new hypothesis is needed; the argument is finished."),
-            ("But", "But", True, "There is nothing to object to; the argument is finished."),
-            ("QED.", "QED.", False, ""),
-        ],
-        "correct": "QED.",
-        "why": "Now the claim is proven, and we can say so.",
-    },
-]
-
-REASONING_ROOT = "The square of an odd number is odd. Proof:"
-
-
-def gen_reasoning(lm: LM) -> dict:
-    report("## Reasoning Demo scores\n")
-    context_ascii = REASONING_ROOT
-    context_display = REASONING_ROOT
-    steps_out = []
-    for i, step in enumerate(REASONING_STEPS):
-        logps = []
-        for display, ascii_text, dead, note in step["options"]:
-            lp, ids = lm.phrase_logprob(context_ascii, " " + ascii_text)
-            logps.append(lp)
-        # softmax over the shown options: relative preference among them
-        mx = max(logps)
-        exps = [math.exp(lp - mx) for lp in logps]
-        total = sum(exps)
-        rel = [e / total for e in exps]
-        options_out = []
-        report(f"### step {i + 1}: `{context_display}`")
-        for (display, ascii_text, dead, note), score in zip(step["options"], rel):
-            options_out.append({
-                "display": display,
-                "deadEnd": dead,
-                "note": note,
-                "relativeScore": round(score, 4),
-            })
-            marker = "DEAD" if dead else "OK  "
-            report(f"- [{marker}] {display}: {score:.3f}")
-        report("")
-        steps_out.append({
-            "context": context_display,
-            "why": step["why"],
-            "options": options_out,
-        })
-        correct_ascii = next(a for d, a, dead, n in step["options"] if d == step["correct"])
-        context_ascii += " " + correct_ascii
-        context_display += " " + step["correct"]
-    return {
-        "model": lm.name,
-        "root": REASONING_ROOT,
-        "finalText": context_display,
-        "steps": steps_out,
-        "notes": "Scores are GPT-2 chain-rule log-probabilities, softmax-normalized among the shown options (relative preference, not absolute probability).",
-    }
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gpt2")
@@ -727,7 +533,7 @@ def main():
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    only = set(args.only.split(",")) if args.only else {"m1", "m2", "m3", "m4", "reasoning"}
+    only = set(args.only.split(",")) if args.only else {"m1", "m2", "m3", "m4"}
 
     if "m1" in only:
         (OUT_DIR / "m1_next_token.json").write_text(
@@ -745,10 +551,6 @@ def main():
         (OUT_DIR / "m4_sampling.json").write_text(
             json.dumps(gen_m4(lm), indent=1, ensure_ascii=False))
         print("m4 done")
-    if "reasoning" in only:
-        (OUT_DIR / "reasoning_demo.json").write_text(
-            json.dumps(gen_reasoning(lm), indent=1, ensure_ascii=False))
-        print("reasoning done")
 
     (REPORT_DIR / "day1_generation_report.md").write_text("\n".join(REPORT_LINES))
     print(f"report written to {REPORT_DIR / 'day1_generation_report.md'}")

@@ -22,8 +22,7 @@ export type GenM1Example = {
   other: number;
   explanation: string;
   takeaway: string;
-  /** Bridge button to a related module, shown after reveal. */
-  link?: { module: string; label: string } | null;
+  branchingLink?: boolean;
 };
 
 export type GenM1 = { model: string; examples: GenM1Example[]; notes: string };
@@ -77,27 +76,6 @@ export type GenM4Prompt = {
 };
 
 export type GenM4 = { model: string; prompts: GenM4Prompt[]; notes: string };
-
-export type GenReasoningOption = {
-  display: string;
-  deadEnd: boolean;
-  note: string;
-  relativeScore: number;
-};
-
-export type GenReasoningStep = {
-  context: string;
-  why: string;
-  options: GenReasoningOption[];
-};
-
-export type GenReasoning = {
-  model: string;
-  root: string;
-  finalText: string;
-  steps: GenReasoningStep[];
-  notes: string;
-};
 
 export type GenEmbeddingPoint = {
   label: string;
