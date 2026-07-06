@@ -1,6 +1,6 @@
 import type { LabDay, LabModule } from "../lib/types";
 import { day1Modules } from "./day1-llm/modules";
-import { day2Modules } from "./day2-nn/modules";
+import { learningMachinesModules } from "./learning-machines/modules";
 import { day3Modules } from "./day3-unsupervised-rl/modules";
 
 export const days: LabDay[] = [
@@ -15,14 +15,14 @@ export const days: LabDay[] = [
     modules: day1Modules
   },
   {
-    id: "day2",
+    id: "learning-machines",
     index: 2,
-    title: "How neural networks learn: loss and gradient descent",
-    tagline: "Error landscapes, downhill walks, and boundary-bending machines",
+    title: "Learning Machines",
+    tagline: "Parameters, loss, gradient descent, and neural networks",
     narrative:
-      "Yesterday we saw WHAT a language model does. Today we open the machine that learns: a network of simple units, a landscape of mistakes, and a walk downhill called gradient descent.",
-    available: false,
-    modules: day2Modules
+      "In the LLM section, we saw a model producing tokens. Now we look at how models learn. We start with the simplest possible trainable model, a line, then climb toward neural networks.",
+    available: true,
+    modules: learningMachinesModules
   },
   {
     id: "day3",

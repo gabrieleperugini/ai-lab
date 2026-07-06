@@ -5,8 +5,8 @@ An interactive, **no-code** lab platform for the Bocconi Summer School
 questions; they never see code. Everything runs client-side in the browser: no backend,
 no accounts, no API keys.
 
-- **Day 1: How chatbots speak, next-token prediction** (fully implemented, 8 modules)
-- **Day 2: How neural networks learn** (scaffolded placeholders)
+- **Day 1: How chatbots speak, next-token prediction** (fully implemented, 9 modules)
+- **Day 2: Learning Machines** (fully implemented, 6 modules)
 - **Day 3: Unsupervised learning and RL** (scaffolded placeholders)
 
 **The probabilities are real, from two models.** Day 1 modules M1-M4 and the
@@ -141,6 +141,38 @@ poll: {
 If no URL is configured, students see a clean placeholder. Groups can always use the
 **Copy reflection** button, which copies a formatted submission card (class, group,
 module, result, reflection) to paste into any form or chat.
+
+## Learning Machines section
+
+The second block (route `#/learning-machines`, shown as "Day 2: Learning
+Machines") covers parameters, loss, gradient descent, generalization, and
+neural networks with six modules:
+
+1. What does the computer see? (pixels and vectors)
+2. Fit the line (slope, intercept, MSE)
+3. The loss landscape (draggable parameter space)
+4. Gradient descent race (learning-rate game with trajectory)
+5. Generalization challenge (train vs test, overfitting)
+6. Neural network playground (tiny MLP with live decision boundary)
+
+Everything runs in the browser with plain TypeScript (no new dependencies, no
+TensorFlow.js): seeded datasets, exact regression gradients, Chebyshev
+polynomial fits, and a small hand-written MLP with backpropagation.
+
+Where things live:
+
+- module metadata and teacher notes: `src/content/learning-machines/modules.ts`
+- datasets/presets: `src/content/learning-machines/*.ts` (regression,
+  generalization, classification, pixel examples). To add a dataset, append a
+  seeded entry there; the selectors pick it up automatically.
+- simulation math: `src/lib/learning/` (rng, regression, tinyNN)
+- visual components: `src/components/learning/` and `src/modules/learning/`
+
+Challenge cards are defined inline in each module component next to their
+live completion checks. Reflection prompts are local-only (no submission), as
+in the rest of the site. To verify Day 1 after changes here: open any Day 1
+module; nothing under `src/content/day1-llm/`, `src/content/generated/` or
+`src/modules/day1/` is touched by this section.
 
 ## Collaborator workflow
 
