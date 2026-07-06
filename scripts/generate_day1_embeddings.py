@@ -101,6 +101,7 @@ def main():
                 "id": pid, "kind": "analogy", "prompt": prompt,
                 "a": VOCAB[a][0], "b": VOCAB[b][0], "c": VOCAB[c][0],
                 "answer": VOCAB[expected][0],
+                "highlight": [VOCAB[a][0], VOCAB[b][0], VOCAB[c][0]],
                 "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
             })
 
@@ -111,14 +112,16 @@ def main():
         puzzles.append({
             "id": pid, "kind": "odd-one-out", "prompt": "Which word is the odd one out?",
             "options": [VOCAB[w][0] for w in group], "answer": VOCAB[odd][0],
+            "highlight": [VOCAB[w][0] for w in group],
             "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
         })
 
     puzzles.append({
         "id": "ambiguity_bank", "kind": "question",
-        "prompt": "GloVe gives 'bank' ONE point. Look at its neighbors: which meaning won?",
+        "prompt": "GloVe gives 'bank' ONE point. Click it, read its true neighbors, then answer: which meaning won?",
         "options": ["money and loans", "rivers and water"],
         "answer": "money and loans",
+        "highlight": ["bank", "money", "loan", "river", "water", "lake", "fish"],
         "explanation": "Classic word vectors give one point per word, so the most frequent meaning dominates. This is why modern models use context-dependent embeddings."
     })
     puzzles.append({
@@ -126,6 +129,7 @@ def main():
         "prompt": "One region contains pizza, pasta, sushi, burger, bread. What would you call it?",
         "options": ["food", "Italy", "restaurants", "round things"],
         "answer": "food",
+        "highlight": ["pizza", "pasta", "sushi", "burger", "bread", "cheese", "tomato"],
         "explanation": "Clusters in embedding space often correspond to human categories. Nobody labeled them: they emerge from how words are used."
     })
     puzzles.append({

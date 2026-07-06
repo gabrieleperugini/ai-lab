@@ -1326,3 +1326,15 @@ nodes: 17
 - [DEAD] If: 0.576
 - [DEAD] But: 0.335
 - [OK  ] QED.: 0.011
+
+## M6 embeddings (glove-wiki-gigaword-100)
+
+vocabulary: 71 words; missing from GloVe: none
+
+- king - man + woman is closest to...? -> `queen` (expected `queen`) OK
+- Paris - France + Italy is closest to...? -> `rome` (expected `rome`) OK
+- Rome - Italy + Germany is closest to...? -> `berlin` (expected `berlin`) OK
+- odd one out ['cat', 'dog', 'horse', 'keyboard'] -> `keyboard`
+- odd one out ['paris', 'rome', 'berlin', 'pizza'] -> `pizza`
+- odd one out ['python', 'java', 'code', 'snake'] -> `snake`
+- odd one out ['money', 'loan', 'bank', 'duck'] -> `duck`

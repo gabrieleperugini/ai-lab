@@ -96,15 +96,9 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
 
   const relevant = useMemo(() => {
     if (!puzzle) return null;
-    const set = new Set<string>();
-    if (puzzle.kind === "analogy") {
+    const set = new Set<string>(puzzle.highlight?.filter((l) => byLabel.has(l)) ?? []);
+    if (set.size === 0 && puzzle.kind === "analogy") {
       [puzzle.a, puzzle.b, puzzle.c].forEach((l) => l && set.add(l));
-    } else if (puzzle.options) {
-      puzzle.options.forEach((o) => byLabel.has(o) && set.add(o));
-      // include words the prompt mentions
-      for (const p of points) {
-        if (puzzle.prompt.toLowerCase().includes(p.label.toLowerCase())) set.add(p.label);
-      }
     }
     if (guess && byLabel.has(guess)) set.add(guess);
     return set.size > 0 ? set : null;
@@ -143,7 +137,14 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
   };
 
   const clickPoint = (p: GenEmbeddingPoint) => {
-    if (puzzle && puzzle.kind !== "explore") {
+    // Analogy: any clicked point is the student's answer. Question puzzles:
+    // only clicking an actual option answers; other clicks open the neighbor
+    // card (needed e.g. to inspect 'bank' in the ambiguity puzzle).
+    if (puzzle && puzzle.kind === "analogy") {
+      answerWith(p.label);
+      return;
+    }
+    if (puzzle && puzzle.kind !== "explore" && puzzle.options?.includes(p.label)) {
       answerWith(p.label);
       return;
     }
@@ -151,17 +152,19 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
     onResult(`explored '${p.label}' (neighbors: ${p.neighbors.map((n) => n.label).join(", ")})`);
   };
 
-  // Analogy arrows: a -> b solid; c -> c + (b - a) dashed ghost.
+  // Analogy "X - Y + Z": the relation is (X - Y), so the solid arrow runs
+  // Y -> X, and the dashed ghost reuses that displacement from Z, landing on
+  // Z + (X - Y), which is exactly the analogy target.
   const arrows = useMemo(() => {
     if (!puzzle || puzzle.kind !== "analogy") return null;
     const a = byLabel.get(puzzle.a!);
     const b = byLabel.get(puzzle.b!);
     const c = byLabel.get(puzzle.c!);
     if (!a || !b || !c) return null;
-    const ghost: XYZ = { x: c.x + (b.x - a.x), y: c.y + (b.y - a.y), z: c.z + (b.z - a.z) };
+    const ghost: XYZ = { x: c.x + (a.x - b.x), y: c.y + (a.y - b.y), z: c.z + (a.z - b.z) };
     return {
-      a1: project(a, yaw, pitch, zoom),
-      a2: project(b, yaw, pitch, zoom),
+      a1: project(b, yaw, pitch, zoom),
+      a2: project(a, yaw, pitch, zoom),
       b1: project(c, yaw, pitch, zoom),
       b2: project(ghost, yaw, pitch, zoom)
     };
@@ -275,9 +278,9 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
               </>
             )}
 
-            {/* neighbor links */}
+            {/* neighbor links (selection is possible outside puzzles and
+                during question/explore puzzles) */}
             {selectedPoint &&
-              !puzzle &&
               selectedPoint.neighbors.map((n) => {
                 const a = projByLabel.get(selectedPoint.label);
                 const b = projByLabel.get(n.label);
@@ -297,8 +300,10 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
               const isHit = searchHits.some((h) => h.label === p.label);
               const isNb = selectedPoint?.neighbors.some((n) => n.label === p.label) ?? false;
               const isRel = relevant ? relevant.has(p.label) : true;
-              const dim =
-                (puzzle && relevant && !isRel) ||
+              // Puzzles dim mildly (0.45) so every point stays visible and
+              // clickable, including the answer; search/selection dim harder.
+              const puzzleDim = puzzle && relevant && !isRel;
+              const hardDim =
                 (searchLower && !isHit) ||
                 (selectedPoint && !isSel && !isNb && !searchLower && !puzzle);
               const r = (isSel || isHit ? 8 : 5) * scale;
@@ -307,7 +312,7 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
                 <g
                   key={p.label}
                   style={{ cursor: "pointer", pointerEvents: "none" }}
-                  opacity={dim ? 0.15 : Math.min(0.55 + scale * 0.45, 1)}
+                  opacity={hardDim ? 0.15 : puzzleDim ? 0.45 : Math.min(0.55 + scale * 0.45, 1)}
                 >
                   <circle
                     cx={px} cy={py} r={r}
@@ -330,7 +335,7 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
           </svg>
 
           {/* floating neighbor card */}
-          {selectedPoint && !puzzle && (
+          {selectedPoint && (
             <div
               className="fadeIn"
               style={{
@@ -414,8 +419,8 @@ export default function MeaningMap({ onResult, resetSignal }: ModuleComponentPro
               <p style={{ fontWeight: 700, fontSize: 15.5 }}>{puzzle.prompt}</p>
               {puzzle.kind === "analogy" && (
                 <p className="hintText" style={{ marginTop: 6 }}>
-                  The solid arrow shows {puzzle.b} − {puzzle.a}. Follow the dashed copy from{" "}
-                  {puzzle.c} and click where it lands.
+                  The solid arrow shows {puzzle.a} − {puzzle.b}. Follow the dashed copy from{" "}
+                  {puzzle.c} and click the point where it lands.
                 </p>
               )}
               {puzzle.options && (

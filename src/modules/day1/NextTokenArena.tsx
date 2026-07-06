@@ -271,9 +271,16 @@ export default function NextTokenArena({ onResult, resetSignal, initialArg }: Mo
             🎰 Random example
           </button>
         </div>
-        {CATEGORY_BRIDGES[round.category] && (
-          <a className="btn accent small" href={CATEGORY_BRIDGES[round.category].href}>
-            {CATEGORY_BRIDGES[round.category].label} →
+        {(round.link || CATEGORY_BRIDGES[round.category]) && (
+          // Prefer the current example's section link (e.g. the exact Context
+          // Lens pair); fall back to the category-level bridge.
+          <a
+            className="btn accent small"
+            href={round.link ? `#/day1/${round.link.module}` : CATEGORY_BRIDGES[round.category].href}
+          >
+            {(round.link
+              ? round.link.label.split(":")[0]
+              : CATEGORY_BRIDGES[round.category].label) + " →"}
           </a>
         )}
       </div>

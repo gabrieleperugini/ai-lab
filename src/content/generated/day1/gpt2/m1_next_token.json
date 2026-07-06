@@ -1218,7 +1218,10 @@
    "other": 0.850078,
    "explanation": "'Sitting by' points to the river bank, so nature answers rise.",
    "takeaway": "Same word, different world.",
-   "link": null
+   "link": {
+    "module": "context-lens/bank",
+    "label": "Open the Context Lens: flip between the two banks"
+   }
   },
   {
    "id": "bank_deposit",
@@ -1328,7 +1331,10 @@
    "other": 0.326567,
    "explanation": "The verb 'deposited' selects the financial meaning of bank very strongly.",
    "takeaway": "A single verb can settle the ambiguity.",
-   "link": null
+   "link": {
+    "module": "context-lens/bank",
+    "label": "Open the Context Lens: flip between the two banks"
+   }
   },
   {
    "id": "bank_fisherman",
@@ -1410,7 +1416,10 @@
    "other": 0.810083,
    "explanation": "The fisherman puts us on a river bank, so nature words rise.",
    "takeaway": "The company a word keeps decides what it means.",
-   "link": null
+   "link": {
+    "module": "context-lens/bank",
+    "label": "Open the Context Lens: flip between the two banks"
+   }
   },
   {
    "id": "bat_baseball",
@@ -1520,7 +1529,10 @@
    "other": 0.577178,
    "explanation": "The sports frame makes 'ball' the star.",
    "takeaway": "A scenario is a probability magnet.",
-   "link": null
+   "link": {
+    "module": "context-lens/bat",
+    "label": "Open the Context Lens: baseball bat versus night animal"
+   }
   },
   {
    "id": "bat_cave",
@@ -1630,7 +1642,10 @@
    "other": 0.616712,
    "explanation": "'Flew' turns the bat into an animal.",
    "takeaway": "One verb can flip the meaning.",
-   "link": null
+   "link": {
+    "module": "context-lens/bat",
+    "label": "Open the Context Lens: baseball bat versus night animal"
+   }
   },
   {
    "id": "restaurant",
@@ -1740,7 +1755,10 @@
    "other": 0.295962,
    "explanation": "The restaurant scene makes 'order' and 'eat' likely.",
    "takeaway": "Context narrows the space of plausible tokens.",
-   "link": null
+   "link": {
+    "module": "context-lens",
+    "label": "Open the Context Lens: flip a context word"
+   }
   },
   {
    "id": "trophy_big",
@@ -2033,7 +2051,10 @@
    "other": 0.764265,
    "explanation": "'Too small' pins 'it' to the suitcase, so the suitcase is what gets changed.",
    "takeaway": "One extra word retroactively resolves the pronoun.",
-   "link": null
+   "link": {
+    "module": "context-lens",
+    "label": "Open the Context Lens: flip a context word"
+   }
   },
   {
    "id": "oven",
@@ -2256,7 +2277,10 @@
    "other": 0.5829,
    "explanation": "A one-word change in context reverses the physical outcome.",
    "takeaway": "World knowledge is encoded indirectly through examples.",
-   "link": null
+   "link": {
+    "module": "context-lens/ice_cream",
+    "label": "Open the Context Lens: oven versus freezer"
+   }
   },
   {
    "id": "fire_water",
@@ -2479,7 +2503,10 @@
    "other": 0.685177,
    "explanation": "Swap one liquid and the likely effect reverses.",
    "takeaway": "The model has read many cause-and-effect patterns.",
-   "link": null
+   "link": {
+    "module": "context-lens/fire",
+    "label": "Open the Context Lens: water versus gasoline"
+   }
   },
   {
    "id": "umbrella_tom",
@@ -2896,7 +2923,10 @@
    "other": 0.75998,
    "explanation": "Many answers are plausible; the name may shift expectations, but there is no single truth.",
    "takeaway": "Probabilities are not facts. They reflect patterns and assumptions.",
-   "link": null
+   "link": {
+    "module": "branching-stories",
+    "label": "Open Branching Stories: build a future token by token"
+   }
   },
   {
    "id": "breakfast_federico",
@@ -3052,7 +3082,10 @@
    "other": 0.750064,
    "explanation": "Compare with Friedrich: does the name change the bars?",
    "takeaway": "A model predicts plausible text, not personal truth.",
-   "link": null
+   "link": {
+    "module": "branching-stories",
+    "label": "Open Branching Stories: build a future token by token"
+   }
   },
   {
    "id": "student_test",
@@ -3639,7 +3672,10 @@
    "other": 0.660522,
    "explanation": "A tiny logical inference decides the likely token.",
    "takeaway": "Some blanks require reasoning over the whole prompt.",
-   "link": null
+   "link": {
+    "module": "reasoning-demo",
+    "label": "Open the Reasoning Demo: reasoning one token at a time"
+   }
   }
  ],
  "notes": "Probabilities from a small open GPT-style model; they do not represent current frontier chatbots exactly."

@@ -117,6 +117,8 @@ export type GenEmbeddingPuzzle = {
   c?: string;
   options?: string[];
   answer: string;
+  /** Point labels to emphasize on the map while this puzzle is active. */
+  highlight?: string[];
   explanation: string;
 };
 

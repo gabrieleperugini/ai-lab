@@ -2071,6 +2071,11 @@
    "b": "man",
    "c": "woman",
    "answer": "queen",
+   "highlight": [
+    "king",
+    "man",
+    "woman"
+   ],
    "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
   },
   {
@@ -2081,6 +2086,11 @@
    "b": "France",
    "c": "Italy",
    "answer": "Rome",
+   "highlight": [
+    "Paris",
+    "France",
+    "Italy"
+   ],
    "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
   },
   {
@@ -2091,6 +2101,11 @@
    "b": "Italy",
    "c": "Germany",
    "answer": "Berlin",
+   "highlight": [
+    "Rome",
+    "Italy",
+    "Germany"
+   ],
    "explanation": "Computed with the real word vectors: the direction between the first two words, applied to the third, lands nearest to this word."
   },
   {
@@ -2104,6 +2119,12 @@
     "keyboard"
    ],
    "answer": "keyboard",
+   "highlight": [
+    "cat",
+    "dog",
+    "horse",
+    "keyboard"
+   ],
    "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
   },
   {
@@ -2117,6 +2138,12 @@
     "pizza"
    ],
    "answer": "pizza",
+   "highlight": [
+    "Paris",
+    "Rome",
+    "Berlin",
+    "pizza"
+   ],
    "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
   },
   {
@@ -2130,6 +2157,12 @@
     "snake"
    ],
    "answer": "snake",
+   "highlight": [
+    "python",
+    "java",
+    "code",
+    "snake"
+   ],
    "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
   },
   {
@@ -2143,17 +2176,32 @@
     "duck"
    ],
    "answer": "duck",
+   "highlight": [
+    "money",
+    "loan",
+    "bank",
+    "duck"
+   ],
    "explanation": "The odd word has the lowest average similarity to the others in the real vector space."
   },
   {
    "id": "ambiguity_bank",
    "kind": "question",
-   "prompt": "GloVe gives 'bank' ONE point. Look at its neighbors: which meaning won?",
+   "prompt": "GloVe gives 'bank' ONE point. Click it, read its true neighbors, then answer: which meaning won?",
    "options": [
     "money and loans",
     "rivers and water"
    ],
    "answer": "money and loans",
+   "highlight": [
+    "bank",
+    "money",
+    "loan",
+    "river",
+    "water",
+    "lake",
+    "fish"
+   ],
    "explanation": "Classic word vectors give one point per word, so the most frequent meaning dominates. This is why modern models use context-dependent embeddings."
   },
   {
@@ -2167,6 +2215,15 @@
     "round things"
    ],
    "answer": "food",
+   "highlight": [
+    "pizza",
+    "pasta",
+    "sushi",
+    "burger",
+    "bread",
+    "cheese",
+    "tomato"
+   ],
    "explanation": "Clusters in embedding space often correspond to human categories. Nobody labeled them: they emerge from how words are used."
   },
   {

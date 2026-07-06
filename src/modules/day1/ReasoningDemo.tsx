@@ -4,6 +4,7 @@ import type { ModelKey } from "../../content/models";
 import { ModelPicker } from "../../components/controls/ModelPicker";
 import type { GenReasoningOption } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
+import { formatPercent } from "../../lib/format";
 
 /**
  * The odd-square proof from the slides ("NTP part 5 - intelligence") as a
@@ -183,8 +184,8 @@ export default function ReasoningDemo({ onResult, resetSignal }: ModuleComponent
             </button>
             {showModelPick && modelPick && (
               <span className="hintText">
-                {label} prefers “{modelPick.display}” here ({(modelPick.relativeScore * 100).toFixed(0)}%
-                among these options){modelPick.deadEnd ? ": a dead end! Small models lack look-ahead." : "."}
+                {label} prefers “{modelPick.display}” here ({formatPercent(modelPick.relativeScore)}
+                {" "}among these options){modelPick.deadEnd ? ": a dead end! Small models lack look-ahead." : "."}
               </span>
             )}
           </div>

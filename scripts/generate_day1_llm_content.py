@@ -282,10 +282,22 @@ M1_LINKS = {
     "proof_first": ("reasoning-demo", "Open the Reasoning Demo: walk the whole proof"),
     "algebra": ("reasoning-demo", "Open the Reasoning Demo: reasoning one token at a time"),
     "trophy_big": ("context-lens", "Open the Context Lens: flip a context word"),
+    "trophy_change": ("context-lens", "Open the Context Lens: flip a context word"),
     "bank_money": ("context-lens/bank", "Open the Context Lens: flip between the two banks"),
+    "bank_river": ("context-lens/bank", "Open the Context Lens: flip between the two banks"),
+    "bank_deposit": ("context-lens/bank", "Open the Context Lens: flip between the two banks"),
+    "bank_fisherman": ("context-lens/bank", "Open the Context Lens: flip between the two banks"),
+    "bat_baseball": ("context-lens/bat", "Open the Context Lens: baseball bat versus night animal"),
+    "bat_cave": ("context-lens/bat", "Open the Context Lens: baseball bat versus night animal"),
+    "restaurant": ("context-lens", "Open the Context Lens: flip a context word"),
     "oven": ("context-lens/ice_cream", "Open the Context Lens: oven versus freezer"),
+    "freezer": ("context-lens/ice_cream", "Open the Context Lens: oven versus freezer"),
     "fire_water": ("context-lens/fire", "Open the Context Lens: water versus gasoline"),
+    "fire_gasoline": ("context-lens/fire", "Open the Context Lens: water versus gasoline"),
     "umbrella_tom": ("context-lens/umbrella", "Open the Context Lens: remembered versus forgot"),
+    "breakfast_friedrich": ("branching-stories", "Open Branching Stories: build a future token by token"),
+    "breakfast_federico": ("branching-stories", "Open Branching Stories: build a future token by token"),
+    "syllogism": ("reasoning-demo", "Open the Reasoning Demo: reasoning one token at a time"),
 }
 
 

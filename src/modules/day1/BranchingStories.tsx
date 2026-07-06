@@ -5,6 +5,7 @@ import { Segmented } from "../../components/controls/Segmented";
 import { ModelPicker } from "../../components/controls/ModelPicker";
 import type { GenBranchOption } from "../../lib/generated";
 import type { ModuleComponentProps } from "../../lib/moduleProps";
+import { formatPercent } from "../../lib/format";
 
 /**
  * Three-step branching on real model probabilities. Students pick a token,
@@ -164,7 +165,7 @@ export default function BranchingStories({ onResult, resetSignal, initialArg }: 
                     fontFamily: "var(--font-mono)"
                   }}
                 >
-                  {(o.probability * 100).toFixed(0)}%
+                  {formatPercent(o.probability)}
                 </span>
               </button>
             ))}
@@ -178,7 +179,7 @@ export default function BranchingStories({ onResult, resetSignal, initialArg }: 
               }}
               title="All the other tokens in the vocabulary"
             >
-              other {(node.other * 100).toFixed(0)}%
+              other {formatPercent(node.other)}
             </span>
           </div>
           <p className="hintText" style={{ marginTop: 12 }}>

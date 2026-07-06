@@ -1,5 +1,6 @@
 import { sortedEntries } from "../../lib/sampling";
 import type { Distribution } from "../../lib/sampling";
+import { formatPercent } from "../../lib/format";
 
 type ProbabilityBarsProps = {
   distribution: Distribution;
@@ -65,7 +66,7 @@ export function ProbabilityBars({
               />
               {highlight === token && revealed && <span className="youBadge">YOU</span>}
             </div>
-            <span className="probValue">{revealed ? `${(p * 100).toFixed(0)}%` : "?"}</span>
+            <span className="probValue">{revealed ? formatPercent(p) : "?"}</span>
           </div>
         );
       })}
