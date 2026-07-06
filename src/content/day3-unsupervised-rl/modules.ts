@@ -1,51 +1,13 @@
 import type { LabModule } from "../../lib/types";
 
-/** Day 3 — scaffolded placeholders. */
+/** Learning by Consequences (reinforcement learning): scaffolded
+ * placeholders. Clustering and recommendations moved to the Hidden
+ * Structure section, which is fully implemented. */
 
-export const day3Modules: LabModule[] = [
-  {
-    id: "clustering-detective",
-    dayId: "day3",
-    title: "Clustering Detective",
-    subtitle: "Find groups nobody labeled",
-    durationMin: 25,
-    level: "intro",
-    mission: "Watch K-means discover groups in unlabeled points, then make it fail.",
-    studentInstructions: [
-      "Scatter points on the canvas.",
-      "Choose k and step through the K-means iterations.",
-      "Design a dataset where K-means gets it wrong."
-    ],
-    component: "Placeholder",
-    dataKey: "clustering-detective",
-    reflectionQuestions: ["What does the algorithm 'see' that you don't, and vice versa?"],
-    noticePoints: ["No labels were given: structure emerged from distances alone."],
-    takeaway: "Unsupervised learning finds structure without answers, but its idea of structure is geometric.",
-    placeholder: true
-  },
-  {
-    id: "recommender",
-    dayId: "day3",
-    title: "Similarity and Recommendation",
-    subtitle: "You are a vector",
-    durationMin: 25,
-    level: "core",
-    mission: "Like and dislike items, watch your taste vector move, and see what gets recommended.",
-    studentInstructions: [
-      "Rate a few items with 👍 / 👎.",
-      "Watch your user vector move on the map.",
-      "Check the recommendations. Do they fit? Can you trap yourself in a bubble?"
-    ],
-    component: "Placeholder",
-    dataKey: "recommender",
-    reflectionQuestions: ["How could a recommender lock you into a bubble?"],
-    noticePoints: ["Recommendation = nearest neighbors in taste space: geometry again!"],
-    takeaway: "Recommendations are geometry: you are a point, and the system suggests what is nearby.",
-    placeholder: true
-  },
+export const learningConsequencesModules: LabModule[] = [
   {
     id: "gridworld-rl",
-    dayId: "day3",
+    dayId: "learning-consequences",
     title: "Gridworld RL",
     subtitle: "Learning by trial and error",
     durationMin: 35,
@@ -65,7 +27,7 @@ export const day3Modules: LabModule[] = [
   },
   {
     id: "reward-hacking",
-    dayId: "day3",
+    dayId: "learning-consequences",
     title: "Reward Hacking Challenge",
     subtitle: "Did it do what we wanted, or what we rewarded?",
     durationMin: 25,

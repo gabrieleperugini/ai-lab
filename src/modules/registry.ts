@@ -29,5 +29,10 @@ export const moduleRegistry: Record<
   DataDetective: lazy(() => import("./learning/DataDetective")),
   FeatureDetectorLab: lazy(() => import("./learning/FeatureDetectorLab")),
   FoolTheNetwork: lazy(() => import("./learning/FoolTheNetwork")),
+  SimilarityLenses: lazy(() => import("./hidden/SimilarityLenses")),
+  KMeansGame: lazy(() => import("./hidden/KMeansGame")),
+  BlobsBreak: lazy(() => import("./hidden/BlobsBreak")),
+  SpectralSprings: lazy(() => import("./hidden/SpectralSprings")),
+  Recommender: lazy(() => import("./hidden/Recommender")),
   Placeholder: lazy(() => import("./PlaceholderModule"))
 };
