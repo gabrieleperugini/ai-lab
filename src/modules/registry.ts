@@ -20,5 +20,11 @@ export const moduleRegistry: Record<
   MeaningMap: lazy(() => import("./day1/MeaningMap")),
   DeembeddingLens: lazy(() => import("./day1/DeembeddingLens")),
   ChatbotBridge: lazy(() => import("./day1/ChatbotBridge")),
+  WhatComputerSees: lazy(() => import("./learning/WhatComputerSees")),
+  FitTheLine: lazy(() => import("./learning/FitTheLine")),
+  LossLandscape: lazy(() => import("./learning/LossLandscape")),
+  GradientDescentRace: lazy(() => import("./learning/GradientDescentRace")),
+  Generalization: lazy(() => import("./learning/Generalization")),
+  NNPlayground: lazy(() => import("./learning/NNPlayground")),
   Placeholder: lazy(() => import("./PlaceholderModule"))
 };

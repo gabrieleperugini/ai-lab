@@ -2,6 +2,32 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Learning Machines section (July 2026)
+
+- New section replacing the Day 2 placeholders: semantic id
+  `learning-machines` (route `#/learning-machines`), shown as "Day 2:
+  Learning Machines". Day 1 untouched (only additive changes: registry
+  entries, days.ts day-2 entry, new files).
+- Six modules: what-computer-sees, fit-the-line, loss-landscape,
+  gradient-descent-race, generalization, neural-network-playground. The
+  optional digits module (LM7) was deliberately skipped to keep the six
+  required modules polished.
+- All computation is plain TypeScript in the browser: seeded datasets
+  (mulberry32), exact MSE gradients, closed-form least squares, Chebyshev
+  basis polynomial fits (well-conditioned to degree 12), and a hand-written
+  MLP (tanh/ReLU, sigmoid + BCE, full-batch backprop). No TensorFlow.js: the
+  tiny nets train at hundreds of epochs per second without it and the bundle
+  stays small.
+- The loss landscape is a 48x48 banded heatmap (sqrt-scaled for valley
+  contrast) rendered as SVG; 3D was skipped in favor of a polished 2D view,
+  as the prompt allows.
+- Divergence is handled visibly: LM4 clamps runaway parameters and shows
+  'the model jumped out of the landscape'; LM6 detects NaN weights and
+  pauses with a warning.
+- Challenge cards live next to their completion checks in each module
+  component; XOR reaches ~95% test accuracy with the default 1x4 tanh
+  network in about 200 epochs (verified), the spiral needs 2-3 layers.
+
 ## Round 4 (July 2026): Qwen2.5-0.5B and model comparison
 
 - Pre-round-4 state preserved on branch `backup/day1-before-round4` and tag
