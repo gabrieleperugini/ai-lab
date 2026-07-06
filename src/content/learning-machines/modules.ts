@@ -182,6 +182,41 @@ export const learningMachinesModules: LabModule[] = [
     ]
   },
   {
+    id: "data-detective",
+    dayId: "learning-machines",
+    title: "Data Detective",
+    subtitle: "What did the model really learn?",
+    durationMin: 20,
+    level: "core",
+    mission:
+      "Train a classifier that should learn the true rule. But beware: the training data may contain a tempting shortcut. Can you make the model learn the right idea?",
+    studentInstructions: [
+      "The true rule: Class A = round objects. But look at the colors...",
+      "With a strong shortcut, train the model and read the reliance bars.",
+      "Now switch the test world to 'shortcut broken'. Ouch.",
+      "Fix the DATA (lower the bias, add examples) until the broken test passes 80%.",
+      "Try the linear model too, and add label noise to see reliability drop."
+    ],
+    component: "DataDetective",
+    reflectionQuestions: [
+      "What did the model rely on at first? What changed when you fixed the dataset?"
+    ],
+    noticePoints: [
+      "The model never hears our intentions; it only sees statistics in the training data.",
+      "High training accuracy can hide a shortcut that fails on new worlds.",
+      "Fixing the DATA fixed the model, without touching the learner."
+    ],
+    takeaway:
+      "A model learns from the data it sees. If the data contains shortcuts, the model may learn the shortcut instead of the idea we had in mind. Good training data is part of the algorithm.",
+    teacherNotes: [
+      "Place after the generalization challenge: this is generalization failing for a reason students can SEE. 15 to 25 minutes.",
+      "The lazy learner is deliberately simplified (it picks one feature) so shortcut learning is vivid; say so.",
+      "Discussion: did the model learn the real rule or the shortcut? Why did high training accuracy not mean the model was good?",
+      "Discussion: how could this happen in real systems? (Wolves vs huskies with snowy backgrounds is the classic story.)",
+      "Do not over-explain logistic regression; the reliance bars carry the idea."
+    ]
+  },
+  {
     id: "neural-network-playground",
     dayId: "learning-machines",
     title: "Neural network playground",
@@ -218,5 +253,75 @@ export const learningMachinesModules: LabModule[] = [
       "Discussion question: this network has ~100 parameters. GPT-2 has 124 million. Same principles."
     ],
     wide: true
+  },
+  {
+    id: "feature-detector-lab",
+    dayId: "learning-machines",
+    title: "Feature Detector Lab",
+    subtitle: "From pixels to parts",
+    durationMin: 20,
+    level: "core",
+    mission:
+      "A digit is just a grid of pixels to the computer. Build a small team of detectors that recognizes what matters.",
+    studentInstructions: [
+      "Pick a digit and hover the detectors: each one watches a zone of the image.",
+      "Read the activation score: how strongly does the zone light up?",
+      "Click detectors to build a team; the digit scores use only your team.",
+      "Budget mode: classify all the variants with at most 3 detectors.",
+      "Switch to shifted or noisy variants and watch detectors fail."
+    ],
+    component: "FeatureDetectorLab",
+    reflectionQuestions: [
+      "Which detector was most useful? Which digit pair was hardest to distinguish?"
+    ],
+    noticePoints: [
+      "A hidden unit can act like a detector for a simple pattern: a stroke, a corner, a loop.",
+      "No single detector recognizes a digit; teams of simple detectors do.",
+      "These detectors are hand-made and fixed; real networks LEARN theirs from data."
+    ],
+    takeaway:
+      "Neural networks can build useful intermediate representations. Early units may detect simple patterns. Later units can combine them into more complex concepts.",
+    teacherNotes: [
+      "Connects the NN playground to the digit-recognition story in the slides: pixels, strokes, parts, digits. 15 to 25 minutes.",
+      "Discussion: which simple patterns helped recognize the digit? Why are several detectors better than one?",
+      "Discussion: what might deeper layers detect? (Combinations of these: loops plus strokes make an 8.)",
+      "The classifier is a nearest-signature match over detector activations, fully transparent, no training.",
+      "Do not over-explain convolution; 'a unit watching a zone' is enough today."
+    ]
+  },
+  {
+    id: "fool-the-network",
+    dayId: "learning-machines",
+    title: "Fool the Network",
+    subtitle: "Does it really understand?",
+    durationMin: 20,
+    level: "challenge",
+    mission: "The model recognizes digits pretty well. Can you fool it with the smallest possible change?",
+    studentInstructions: [
+      "Pick a starting digit; the model's opinion updates live as you click pixels.",
+      "Turn the 7 into a 1 with at most 6 pixel edits.",
+      "Close the loops: make the 3 read as an 8.",
+      "Try the noise and shift buttons: how fragile is the model?",
+      "Draw something that is not a digit. The model still answers!"
+    ],
+    component: "FoolTheNetwork",
+    reflectionQuestions: [
+      "What was the smallest change that fooled the model? Did the changed image still look like the original digit to you?"
+    ],
+    noticePoints: [
+      "Accuracy on familiar examples does not guarantee robustness on unusual ones.",
+      "The model has no 'none of the above': it always picks some digit.",
+      "Humans and models can disagree about images that look identical to us."
+    ],
+    takeaway:
+      "A model does not see the world exactly like we do. It can be accurate on familiar examples and fragile on unusual ones. Testing failures is part of understanding a model.",
+    teacherNotes: [
+      "The fun finale of the section; also the bridge to real adversarial examples and model testing. 15 to 20 minutes.",
+      "Discussion: did the model and humans disagree? Was the image still recognizable to us?",
+      "Discussion: what does this tell us about testing models before trusting them?",
+      "Uses the same simplified detector classifier as the Feature Detector Lab, so behavior is explainable in its terms.",
+      "Do not over-explain adversarial attacks; the pixel game carries the idea."
+    ]
   }
+
 ];

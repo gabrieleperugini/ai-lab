@@ -2,6 +2,27 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Learning Machines enrichment (July 2026)
+
+- Backup: branch `backup/learning-machines-before-enrichment` (on origin);
+  work merged from `feature/learning-machines-enrichment`.
+- Three new modules (Data Detective, Feature Detector Lab, Fool the Network)
+  plus a Parameter Budget Challenge panel inside the existing NN playground.
+  Existing modules and the LLM section untouched (verified).
+- Data Detective's "lazy learner" is deliberately simplified and labeled as
+  such: it scans features in salience order (color, background, shape) and
+  stops at the first one that reaches 85% training accuracy, so a strong
+  color bias produces vivid shortcut learning; a logistic-regression learner
+  is offered alongside. Reliance bars show the model's own feature weights.
+- The digit modules share a transparent detector classifier: activations are
+  overlap scores of 10 hand-made 8x8 stroke/corner/loop templates, and
+  classification is nearest clean-digit signature. All 6 clean digits and
+  the tested shifted/noisy variants classify correctly; turning the 7 into a
+  1 takes exactly 6 pixel edits (the challenge limit).
+- Budget challenge thresholds were tuned live: Tiny XOR is solvable with the
+  default 17-parameter network (verified in-browser, '✅ solved with 17
+  parameters'); spiral and noisy presets have looser caps.
+
 ## Learning Machines section (July 2026)
 
 - New section replacing the Day 2 placeholders: semantic id

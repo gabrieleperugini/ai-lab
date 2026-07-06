@@ -26,5 +26,8 @@ export const moduleRegistry: Record<
   GradientDescentRace: lazy(() => import("./learning/GradientDescentRace")),
   Generalization: lazy(() => import("./learning/Generalization")),
   NNPlayground: lazy(() => import("./learning/NNPlayground")),
+  DataDetective: lazy(() => import("./learning/DataDetective")),
+  FeatureDetectorLab: lazy(() => import("./learning/FeatureDetectorLab")),
+  FoolTheNetwork: lazy(() => import("./learning/FoolTheNetwork")),
   Placeholder: lazy(() => import("./PlaceholderModule"))
 };

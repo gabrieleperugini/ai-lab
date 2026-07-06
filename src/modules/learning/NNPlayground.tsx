@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { classificationDatasets } from "../../content/learning-machines/classificationDatasets";
+import { budgetChallenges } from "../../content/learning-machines/nnBudgetChallenges";
 import { TinyNN, bceLoss, accuracy } from "../../lib/learning/tinyNN";
 import type { Activation } from "../../lib/learning/tinyNN";
 import { MiniChart } from "../../components/learning/MiniChart";
@@ -40,6 +41,8 @@ export default function NNPlayground({ onResult, resetSignal }: ModuleComponentP
   const [history, setHistory] = useState<{ trainLoss: number[]; testLoss: number[] }>({ trainLoss: [], testLoss: [] });
   const [diverged, setDiverged] = useState(false);
   const [bestByDataset, setBestByDataset] = useState<Record<string, number>>({});
+  /** Budget challenge wins: challenge id -> parameter count of the winning net. */
+  const [budgetWins, setBudgetWins] = useState<Record<string, number>>({});
 
   const nnRef = useRef<TinyNN | null>(null);
   const seedRef = useRef(1);
@@ -150,6 +153,26 @@ export default function NNPlayground({ onResult, resetSignal }: ModuleComponentP
 
   const params = nnRef.current?.paramCount() ?? 0;
   const sizes = [2, ...layerSizes, 1];
+
+  // Latch budget-challenge wins: right dataset, within budget, target reached.
+  useEffect(() => {
+    for (const c of budgetChallenges) {
+      if (datasetId === c.datasetId && params <= c.budget && metrics.testAcc >= c.accTarget && epoch > 0) {
+        setBudgetWins((prev) =>
+          prev[c.id] === undefined || params < prev[c.id] ? { ...prev, [c.id]: params } : prev
+        );
+      }
+    }
+  }, [datasetId, params, metrics.testAcc, epoch]);
+
+  const budgetStatus = (c: (typeof budgetChallenges)[number]): { text: string; tone: "ok" | "warn" | "idle" } => {
+    if (budgetWins[c.id] !== undefined) return { text: `✅ solved with ${budgetWins[c.id]} parameters`, tone: "ok" };
+    if (datasetId !== c.datasetId) return { text: "switch to this dataset to attempt", tone: "idle" };
+    if (params > c.budget) return { text: `too large: ${params} > ${c.budget} parameters`, tone: "warn" };
+    if (running) return { text: `training… test ${(metrics.testAcc * 100).toFixed(0)}% of ${(c.accTarget * 100).toFixed(0)}%`, tone: "idle" };
+    if (epoch === 0) return { text: "within budget, not attempted yet", tone: "idle" };
+    return { text: `not accurate yet: test ${(metrics.testAcc * 100).toFixed(0)}% of ${(c.accTarget * 100).toFixed(0)}%`, tone: "idle" };
+  };
 
   return (
     <div className="panel">
@@ -296,6 +319,54 @@ export default function NNPlayground({ onResult, resetSignal }: ModuleComponentP
           { id: "noisy", title: "Noisy data", goal: "On the noisy spiral, find a model that generalizes instead of memorizing noise. Watch the gap between train and test." }
         ]}
       />
+
+      <hr className="divider" />
+      <div className="panelTitle">💰 Parameter Budget Challenge</div>
+      <p className="hintText" style={{ marginBottom: 10 }}>
+        Your goal is not to build the biggest network. Your goal is to solve the task with a small
+        enough network. Can you do more with less? Current architecture:{" "}
+        <strong>{params} parameters</strong>.
+      </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 10 }}>
+        {budgetChallenges.map((c) => {
+          const st = budgetStatus(c);
+          const ds = classificationDatasets.find((d) => d.id === c.datasetId)!;
+          return (
+            <div
+              key={c.id}
+              style={{
+                background: st.tone === "ok" ? "var(--green-soft)" : "var(--paper-2)",
+                border: `1.5px solid ${st.tone === "ok" ? "var(--green)" : st.tone === "warn" ? "var(--red)" : "var(--line)"}`,
+                borderRadius: 12,
+                padding: "10px 14px"
+              }}
+            >
+              <div style={{ fontWeight: 800, fontSize: 14 }}>
+                {ds.emoji} {c.label}
+              </div>
+              <div style={{ fontSize: 13, color: "var(--ink-soft)", marginTop: 4 }}>
+                {ds.label} · test accuracy ≥ {(c.accTarget * 100).toFixed(0)}% · budget ≤ {c.budget}{" "}
+                parameters
+              </div>
+              <div
+                style={{
+                  fontSize: 12.5,
+                  marginTop: 6,
+                  fontWeight: 700,
+                  color: st.tone === "ok" ? "var(--green)" : st.tone === "warn" ? "var(--red)" : "var(--ink-faint)"
+                }}
+              >
+                {st.text}
+              </div>
+              <div style={{ fontSize: 12, color: "var(--ink-faint)", marginTop: 4 }}>💡 {c.hint}</div>
+            </div>
+          );
+        })}
+      </div>
+      <p className="hintText" style={{ marginTop: 10 }}>
+        Parameters are adjustable knobs inside the model. More knobs can make the model more
+        flexible, but the best model is often the smallest one that generalizes well.
+      </p>
 
       <p className="hintText" style={{ marginTop: 12 }}>
         A hidden layer lets the network combine simple boundaries into more complex shapes. The
