@@ -22,11 +22,17 @@ export function PixelGrid({
   return (
     <svg
       viewBox={`0 0 ${size} ${size}`}
-      width={size}
-      height={size}
       role="img"
       aria-label="Pixel grid"
-      style={{ display: "block", borderRadius: 8, cursor: editable ? "pointer" : "default" }}
+      style={{
+        display: "block",
+        width: "100%",
+        maxWidth: size,
+        height: "auto",
+        margin: "0 auto",
+        borderRadius: 8,
+        cursor: editable ? "pointer" : "default"
+      }}
     >
       {grid.map((row, r) =>
         row.map((v, c) => (

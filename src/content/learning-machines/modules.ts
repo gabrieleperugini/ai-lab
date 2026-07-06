@@ -292,6 +292,7 @@ export const learningMachinesModules: LabModule[] = [
   {
     id: "fool-the-network",
     dayId: "learning-machines",
+    wide: true,
     title: "Fool the Network",
     subtitle: "Does it really understand?",
     durationMin: 20,

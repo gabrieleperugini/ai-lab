@@ -83,13 +83,15 @@ export default function FoolTheNetwork({ onResult, resetSignal }: ModuleComponen
         </div>
       </div>
 
-      <div className="ctxGrid" style={{ gridTemplateColumns: "auto auto 1fr", alignItems: "start" }}>
-        <div className="vizStage" style={{ padding: 14, textAlign: "center" }}>
+      {/* flex-wrap keeps the prediction panel readable at any width: it takes
+          the remaining space and wraps below the grids when things get tight */}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-start" }}>
+        <div className="vizStage" style={{ padding: 14, textAlign: "center", flex: "0 0 200px", width: "auto" }}>
           <div className="panelTitle">Original: a {startLabel}</div>
           <PixelGrid grid={original} size={170} />
         </div>
 
-        <div className="vizStage" style={{ padding: 14, textAlign: "center" }}>
+        <div className="vizStage" style={{ padding: 14, textAlign: "center", flex: "0 0 262px", width: "auto" }}>
           <div className="panelTitle">Your version · click pixels to edit</div>
           <PixelGrid grid={grid} editable onToggle={toggle} size={232} />
           <p className="hintText" style={{ marginTop: 8 }}>
@@ -97,7 +99,7 @@ export default function FoolTheNetwork({ onResult, resetSignal }: ModuleComponen
           </p>
         </div>
 
-        <div className="vizStage" style={{ padding: 14 }}>
+        <div className="vizStage" style={{ padding: 14, flex: "1 1 280px", minWidth: 280, width: "auto" }}>
           <div className="panelTitle">The model's opinion</div>
           {scores.map((s) => (
             <div key={s.label} className="probRow" style={{ gridTemplateColumns: "40px 1fr 56px" }}>
