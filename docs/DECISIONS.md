@@ -2,6 +2,30 @@
 
 Assumptions and implementation decisions for the AI Lab platform (v1, July 2026).
 
+## Hidden Structure section (July 2026)
+
+- Checkpoint tag `checkpoint-before-hidden-structure` (on origin); work
+  merged from `feature/hidden-structure`.
+- Navigation moved to semantic titles: Language Models (route stays `day1`
+  because printed slide QR codes deep-link into it), Learning Machines,
+  Hidden Structure (new, route `hidden-structure`), Learning by Consequences
+  (coming soon, RL placeholders; the old `day3` route was replaced since it
+  only ever held placeholders).
+- Five modules, all plain TypeScript, no new dependencies. Spectral Springs
+  runs REAL spectral clustering in the browser: symmetrized kNN Gaussian
+  graph, normalized Laplacian, cyclic Jacobi eigendecomposition (N ≤ 120,
+  ~20ms), Ng-Jordan-Weiss row-normalized first-k eigenvectors, k-means with
+  farthest-point seeding. An earlier version clustered on the 2nd/3rd
+  eigenvectors only and broke on disconnected graphs; the NJW form fixes it.
+- Datasets were tuned against the actual pipeline (see the kNN sweep in the
+  repo history): moons/circles/density solvable at default springs, spiral
+  requires kNN=3 (teaches locality), bridge intentionally caps at ~93%.
+- U1 lenses are hand-weighted feature axes, not PCA: positions are
+  explainable ('land to water') and the whale/bat stories land exactly.
+- The recommender is transparent on purpose: taste vector = mean(liked) -
+  mean(disliked), cosine scores, greedy diversity, seeded explore swaps, and
+  a heuristic filter-bubble detector.
+
 ## Learning Machines enrichment (July 2026)
 
 - Backup: branch `backup/learning-machines-before-enrichment` (on origin);

@@ -5,9 +5,10 @@ An interactive, **no-code** lab platform for the Bocconi Summer School
 questions; they never see code. Everything runs client-side in the browser: no backend,
 no accounts, no API keys.
 
-- **Day 1: How chatbots speak, next-token prediction** (fully implemented, 9 modules)
-- **Day 2: Learning Machines** (fully implemented, 6 modules)
-- **Day 3: Unsupervised learning and RL** (scaffolded placeholders)
+- **Language Models** (route `#/day1`, fully implemented, 9 modules)
+- **Learning Machines** (route `#/learning-machines`, fully implemented, 9 modules)
+- **Hidden Structure** (route `#/hidden-structure`, fully implemented, 5 modules)
+- **Learning by Consequences** (RL, coming soon: scaffolded placeholders)
 
 **The probabilities are real, from two models.** Day 1 modules M1-M4 and the
 Reasoning Demo show next-token probabilities and sampled continuations computed
@@ -185,6 +186,32 @@ live completion checks. Reflection prompts are local-only (no submission), as
 in the rest of the site. To verify Day 1 after changes here: open any Day 1
 module; nothing under `src/content/day1-llm/`, `src/content/generated/` or
 `src/modules/day1/` is touched by this section.
+
+## Hidden Structure section
+
+The unsupervised-learning block (route `#/hidden-structure`) has five modules:
+
+1. What Makes Things Similar? (feature lenses over an animal map)
+2. K-Means: The Centroid Game (draggable centers, live cluster cost)
+3. When Blobs Break (predict-then-run k-means on moons, rings, spirals)
+4. Spectral Springs (real spectral clustering: kNN Gaussian graph, normalized
+   Laplacian, Jacobi eigenvectors, k-means in the embedding; all plain
+   TypeScript, no numerical dependency)
+5. Recommendation Engine (fictional catalog, taste vectors, filter bubbles)
+
+Where things live:
+
+- module metadata and teacher notes: `src/content/hidden-structure/modules.ts`
+- animal features and lenses: `src/content/hidden-structure/animals.ts`
+- seeded 2D cluster datasets: `src/content/hidden-structure/clusterDatasets.ts`
+- the fictional movie catalog: `src/content/hidden-structure/movies.ts`
+- algorithms: `src/lib/hidden/` (kmeans, spectral)
+- visuals: `src/components/hidden/ClusterPlot.tsx` and `src/modules/hidden/`
+
+Each spectral dataset is solvable: moons/circles/density at the default
+springs, the spiral needs very local springs (kNN 3), and the bridge tops out
+around 93% on purpose (the springs walk across the bridge: good discussion).
+The optional Outlier Detective module was not implemented in this pass.
 
 ## Collaborator workflow
 

@@ -1,14 +1,16 @@
 import type { LabDay, LabModule } from "../lib/types";
 import { day1Modules } from "./day1-llm/modules";
 import { learningMachinesModules } from "./learning-machines/modules";
-import { day3Modules } from "./day3-unsupervised-rl/modules";
+import { hiddenStructureModules } from "./hidden-structure/modules";
+import { learningConsequencesModules } from "./day3-unsupervised-rl/modules";
 
 export const days: LabDay[] = [
   {
+    // Route stays "day1": the printed slide QR codes deep-link into it.
     id: "day1",
     index: 1,
-    title: "How chatbots speak: next-token prediction",
-    tagline: "Tokens, context, probability, sampling, and a look inside the brain",
+    title: "Language Models",
+    tagline: "Tokens, probabilities, meaning: how chatbots speak",
     narrative:
       "How does mineral matter talk to us through a chatbot? A machine does not receive grammar rules and human understanding directly. Instead, it learns a task: predict the next token. That simple task becomes powerful when repeated, conditioned on context, represented in vectors, and scaled up.",
     available: true,
@@ -25,14 +27,24 @@ export const days: LabDay[] = [
     modules: learningMachinesModules
   },
   {
-    id: "day3",
+    id: "hidden-structure",
     index: 3,
-    title: "How AI discovers and acts: unsupervised learning and RL",
-    tagline: "Finding structure without labels, and learning from rewards",
+    title: "Hidden Structure",
+    tagline: "Clustering, similarity, recommendations",
     narrative:
-      "Not all learning comes with answers. Today machines find groups nobody labeled, recommend what you might like, and learn to act by trial, error, and reward (including rewards that backfire).",
+      "In supervised learning, every example came with an answer. Here, the answers are missing. Can we still discover groups, similarities, strange points, or recommendations? Yes, but only after we decide what 'similar' means.",
+    available: true,
+    modules: hiddenStructureModules
+  },
+  {
+    id: "learning-consequences",
+    index: 4,
+    title: "Learning by Consequences",
+    tagline: "Rewards, agents, policies",
+    narrative:
+      "The last kind of learning: no labels and no fixed dataset, just an agent acting in a world and learning from rewards (including rewards that backfire).",
     available: false,
-    modules: day3Modules
+    modules: learningConsequencesModules
   }
 ];
 
