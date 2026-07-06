@@ -153,7 +153,19 @@ neural networks with six modules:
 3. The loss landscape (draggable parameter space)
 4. Gradient descent race (learning-rate game with trajectory)
 5. Generalization challenge (train vs test, overfitting)
-6. Neural network playground (tiny MLP with live decision boundary)
+6. Data Detective (shortcut learning and biased data)
+7. Neural network playground (tiny MLP with live decision boundary, plus a
+   Parameter Budget Challenge panel: solve each dataset within a parameter cap)
+8. Feature Detector Lab (hand-made stroke/loop detectors over 8x8 digits)
+9. Fool the Network (edit pixels to flip the detector classifier's prediction)
+
+The enrichment modules share content and utilities: digit templates and
+detector templates live in `src/content/learning-machines/digitTemplates.ts`
+and `featureDetectors.ts`, the transparent detector classifier in
+`src/lib/learning/detectorClassifier.ts`, the Data Detective toy world in
+`src/content/learning-machines/dataDetective.ts` (learners in
+`src/lib/learning/toyClassifier.ts`), and the budget presets in
+`src/content/learning-machines/nnBudgetChallenges.ts`.
 
 Everything runs in the browser with plain TypeScript (no new dependencies, no
 TensorFlow.js): seeded datasets, exact regression gradients, Chebyshev
