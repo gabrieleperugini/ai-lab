@@ -21,6 +21,10 @@ export type LabModule = {
   reflectionQuestions: string[];
   noticePoints: string[];
   takeaway: string;
+  /** 1-2 lines of technical honesty for curious students and teachers:
+   * what model, what data, how it is trained/computed. Rendered by
+   * ModulePage behind an "Under the hood" toggle. */
+  underTheHood?: string;
   teacherNotes?: string[];
   poll?: PollConfig;
   /** True for Day 2/3 scaffolded modules that are not yet implemented. */

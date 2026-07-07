@@ -107,7 +107,6 @@ const OPT_MAX_STEPS = 450;
 
 export default function OneDNeuralNets({ onResult, resetSignal }: ModuleComponentProps) {
   const [tab, setTab] = useState<"one" | "five">("one");
-  const [showHood, setShowHood] = useState(false);
 
   // Activity A: one neuron
   const [b, setB] = useState(-4);
@@ -190,7 +189,6 @@ export default function OneDNeuralNets({ onResult, resetSignal }: ModuleComponen
     setB(-4);
     loadPreset(ALMOST);
     setShowHidden(false);
-    setShowHood(false);
   }, [resetSignal]);
 
   // Track the best loss reached WITHOUT the optimizer (for the hand-fit challenge).
@@ -353,18 +351,6 @@ export default function OneDNeuralNets({ onResult, resetSignal }: ModuleComponen
         />
       )}
 
-      <hr className="divider" />
-      <button className="btn subtle small" onClick={() => setShowHood((s) => !s)}>
-        {showHood ? "Close" : "🔧 Under the hood"}
-      </button>
-      {showHood && (
-        <p className="hintText fadeIn" style={{ marginTop: 8, fontFamily: "var(--font-mono)", fontSize: 13.5 }}>
-          neuron(x, b) = σ(x − b) with σ(z) = 1/(1+e⁻ᶻ) &nbsp;·&nbsp; network: σ(w1·σ(x−b1) +
-          w2·σ(x−b2) − b3) &nbsp;·&nbsp; loss: MSE against the target curve &nbsp;·&nbsp; the
-          optimizer is gradient descent with finite-difference gradients. Formulas from the course
-          notebook slopes.nb.
-        </p>
-      )}
     </div>
   );
 }

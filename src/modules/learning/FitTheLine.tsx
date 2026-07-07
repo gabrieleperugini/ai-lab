@@ -12,7 +12,6 @@ export default function FitTheLine({ onResult, resetSignal }: ModuleComponentPro
   const [m, setM] = useState(0);
   const [b, setB] = useState(0);
   const [showErrors, setShowErrors] = useState(true);
-  const [showHood, setShowHood] = useState(false);
   const [bestLoss, setBestLoss] = useState<number | null>(null);
 
   const dataset = regressionDatasets.find((d) => d.id === datasetId)!;
@@ -119,16 +118,6 @@ export default function FitTheLine({ onResult, resetSignal }: ModuleComponentPro
         ]}
       />
 
-      <hr className="divider" />
-      <button className="btn subtle small" onClick={() => setShowHood((s) => !s)}>
-        {showHood ? "Close" : "🔧 Under the hood"}
-      </button>
-      {showHood && (
-        <p className="hintText fadeIn" style={{ marginTop: 8, fontFamily: "var(--font-mono)", fontSize: 13.5 }}>
-          model: y_hat = m·x + b &nbsp;·&nbsp; loss: MSE = mean((y - y_hat)²) &nbsp;·&nbsp; the
-          computer's answer is the least-squares solution.
-        </p>
-      )}
     </div>
   );
 }

@@ -39,6 +39,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "A machine learning model receives numbers, not meanings. Learning starts when we use examples to discover patterns in those numbers.",
+    underTheHood:
+      "No model here: the images and the waveform are hand-made arrays of numbers, downsampled live. The point is the input format: every image or sound becomes a vector of numbers before any learning starts.",
     teacherNotes: [
       "Fits right after the classical-algorithms slides, before introducing parameters. 10 to 15 minutes.",
       "Push on challenge 2: let a group actually try to state a pixel rule for the 3, watch it collapse.",
@@ -73,6 +75,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "Training means changing parameters until the model makes smaller errors on the examples.",
+    underTheHood:
+      "Model: y = m·x + b. Loss: MSE, the mean of (y − prediction)² over ~20 seeded synthetic points. 'Let the computer find it' is the exact least-squares solution, computed in closed form with no iteration.",
     teacherNotes: [
       "This is the parameters-and-loss anchor for everything that follows. 15 to 20 minutes.",
       "Make students fit by hand FIRST, so the computer's instant answer feels meaningful.",
@@ -109,6 +113,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "Learning is an optimization problem. The model moves through parameter space looking for lower loss.",
+    underTheHood:
+      "The map is the MSE of y = m·x + b evaluated on a 48×48 grid of (m, b) pairs for the current dataset; colors are banded loss levels (square-root scaled so the valley gets more resolution). No training happens, the loss is just computed everywhere.",
     teacherNotes: [
       "The key conceptual jump of the day: from 'moving a line' to 'moving through parameter space'. 15 to 20 minutes.",
       "Ask: where is the line y = 2x - 1 on this map? (One exact point.)",
@@ -132,6 +138,7 @@ export const learningMachinesModules: LabModule[] = [
       "Read the slope. Which way is downhill when the slope is positive?",
       "Press 'One descent step' a few times. Where does the point settle?",
       "Switch to the 2D map: the red arrow (gradient) points uphill, descent goes against it.",
+      "Try the 3D surface view: the orange tangent plane tilts with the gradient.",
       "Play with the learning rate: land smoothly, then cause an overshoot."
     ],
     component: "GradientExplorer",
@@ -146,12 +153,14 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "The gradient is a local guide, not a magic map. Gradient descent follows it downhill one step at a time, and the learning rate decides how far each step goes.",
+    underTheHood:
+      "The landscapes are fixed closed-form functions (a tanh ridge plus rational dips), not fitted models. Slopes and gradients are numerical central differences, (f(x+ε) − f(x−ε))/2ε with ε = 0.001, and a descent step is x ← x − η·slope. The 3D view is the same function drawn as a height surface with its tangent plane.",
     teacherNotes: [
       "Place between the loss landscape and the gradient descent race: this is WHERE the descent direction comes from. 15 to 20 minutes.",
       "The 1D tangent is the blackboard definition of derivative made draggable; no limits notation needed.",
       "On the 2D map, emphasize: red arrow uphill, blue arrow downhill, arrow length = steepness.",
       "The overshoot challenge previews the learning-rate lesson of the race module.",
-      "Landscape functions translated from the course Mathematica notebook (slopes.nb).",
+      "The 3D surface view shows the tangent plane tilting with the gradient; use it after the flat map, not instead of it.",
       "Common confusion: the gradient points uphill, not downhill; descent NEGATES it."
     ],
     wide: true
@@ -184,6 +193,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "Gradient descent is simple but sensitive. A step that is too small wastes time. A step that is too large can miss the valley.",
+    underTheHood:
+      "Gradient descent on the same two-parameter MSE map as the loss landscape, using EXACT analytic gradients (∂MSE/∂m and ∂MSE/∂b have closed forms for a line). The only knob is the learning rate; every trajectory you see is genuinely computed, not scripted.",
     teacherNotes: [
       "Suggested timing: 20 to 30 minutes. Students should see that gradient descent is iterative and sensitive to the learning rate.",
       "Ask them to intentionally make it fail, then rescue it with a smaller step size.",
@@ -218,6 +229,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "A model that memorizes the training examples may fail on new data. Good learning means generalizing.",
+    underTheHood:
+      "Model family: polynomials of degree k, fit by exact least squares (on a Chebyshev basis for numerical stability). Data: a fixed smooth curve plus seeded Gaussian noise, split into training and test points. Train and test losses are both plain MSE.",
     teacherNotes: [
       "The train/test distinction from the slides made tangible. 15 to 25 minutes.",
       "The wiggly degree-12 curve through 8 points is the money shot; let every group produce it.",
@@ -254,12 +267,13 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "Five parameters already create a space that is hard to search by hand. Optimization becomes necessary very quickly, and that is exactly what training does.",
+    underTheHood:
+      "Model: one neuron is σ(x − b) with σ(z) = 1/(1+e⁻ᶻ); the network is σ(w1·σ(x−b1) + w2·σ(x−b2) − b3). Loss: MSE against the target curve on a fixed x grid; the dots are binary samples drawn from the target probability. 'Run optimization' is gradient descent with finite-difference gradients (η = 3, up to 450 steps).",
     teacherNotes: [
       "The bridge from curve fitting to the neural network playground: same loss-and-descent story, now with neurons. 20 to 25 minutes.",
       "Let students struggle with the five knobs BEFORE showing the optimization button; the frustration is the lesson.",
       "The hidden-neuron overlay shows the construction: one step up, one step down, weighted and thresholded.",
       "The flat start is a symmetric saddle: both hidden neurons stay identical, so the optimizer stalls. Real training breaks symmetry with random initialization.",
-      "Formulas (neuron, targets, 5-parameter network) translated from the course Mathematica notebook (slopes.nb).",
       "Common confusion: the dots are SAMPLED from the target probability, so even the perfect curve keeps a nonzero distance to the dots; the loss is measured against the dashed target curve."
     ],
     wide: true
@@ -292,6 +306,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "A neural network is a flexible function with many parameters. Training changes those parameters to reduce loss. Architecture, data, and learning rate all change what the model can learn.",
+    underTheHood:
+      "A real multilayer perceptron written in plain TypeScript: tanh (or ReLU) hidden units, sigmoid output, cross-entropy loss, trained live in your browser by backpropagation and mini-batch gradient descent on seeded 2D datasets. Nothing is precomputed or faked.",
     teacherNotes: [
       "The finale: 30 to 40 minutes, mostly free exploration around the challenge cards.",
       "Force the zero-hidden-layers start: seeing one boundary fail on XOR is the whole lesson of hidden layers.",
@@ -331,6 +347,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "The model is not seeing the digit the way we do. It reacts to the numerical pattern it learned: accurate on familiar examples, sometimes fragile on unusual ones. Testing failures is part of understanding a model.",
+    underTheHood:
+      "The 'network' is 10 fixed detectors (strokes, corners, loops), each firing on the inked fraction of its zone. A digit is scored by the distance between its activation pattern and stored prototypes (the clean, shifted, and thick variants of each digit), turned into probabilities by a softmax. No training: the prototypes play the role of training data, which is why the model resists exactly those perturbations.",
     teacherNotes: [
       "The fun finale of the section; also the bridge to real adversarial examples and model testing. 15 to 20 minutes.",
       "The classifier matches against clean, shifted, and thickened prototypes of each digit, so shift-right and thicken are RESISTED, while shift-left, occlusion, and noise can flip it. Ask students to find this asymmetry: it mirrors 'the model is robust to what it saw in training'.",
@@ -374,6 +392,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "A model learns from the data it sees. If the data contains shortcuts, the model may learn the shortcut instead of the idea we had in mind. Good training data is part of the algorithm.",
+    underTheHood:
+      "Two toy learners on hand-designed shape/color features: a 'lazy' one-feature picker (chooses the single most predictive feature) and a tiny logistic regression trained by gradient descent. The datasets are generated with a shortcut correlation you control; reliance bars show each feature's learned weight.",
     teacherNotes: [
       "Place after the generalization challenge: this is generalization failing for a reason students can SEE. 15 to 25 minutes.",
       "The lazy learner is deliberately simplified (it picks one feature) so shortcut learning is vivid; say so.",
@@ -410,6 +430,8 @@ export const learningMachinesModules: LabModule[] = [
     ],
     takeaway:
       "Neural networks can build useful intermediate representations. Early units may detect simple patterns. Later units can combine them into more complex concepts.",
+    underTheHood:
+      "Each detector fires on the fraction of its 8×8 zone that is inked; classification is nearest-prototype over the activation patterns of stored digit variants, restricted to the detectors you selected. Everything is hand-made and fixed: real networks LEARN their detectors from data.",
     teacherNotes: [
       "Connects the NN playground to the digit-recognition story in the slides: pixels, strokes, parts, digits. 15 to 25 minutes.",
       "Discussion: which simple patterns helped recognize the digit? Why are several detectors better than one?",

@@ -291,3 +291,26 @@ Assumptions and implementation decisions for the AI Lab platform (v1, July 2026)
   scripts/qa_onednets.ts (run with npx tsx).
 - Day numbering: Learning by Consequences now shows "Day 3" (second
   thematic section of Day 3; there is no Day 4).
+
+## Math revision round 2 (July 2026)
+
+- "Under the hood" is now a content field (`underTheHood` in LabModule),
+  rendered by ModulePage behind a toggle under the takeaway. ALL modules in
+  Day 1, Learning Machines, and Hidden Structure have 1-3 lines stating what
+  model/data/training is really behind the activity. The three old inline
+  hood sections (Fit the Line, Gradient Explorer, 1D Neural Nets) were
+  migrated there; slopes.nb references removed from student-facing text and
+  teacher notes (obsolete reference).
+- Gradient Explorer challenge audit (scripts/qa_challenges.ts): three
+  challenges were mathematically unsolvable and are now fixed. 1D
+  walk-into-valley: |slope| threshold 0.05 -> 0.15 (the dip's curvature
+  makes lr >= 0.2 oscillate above 0.1). 1D overshoot: needs lr >= 1.5 near
+  the x = 1 dip on the FULL landscape, so the lr slider max went 1 -> 2, the
+  challenge names the spot, and it now has a real done flag. 2D overshoot:
+  needs lr ~8 from the reset corner (the gradient shrinks near the trough),
+  so the lr slider max went 3 -> 10 and the challenge says "8 or more".
+  2D smooth landing verified solvable at lr 0.8-1.5.
+- Gradient Explorer 2D got a "3D surface" toggle: oblique-projection quad
+  mesh of f3easy (painter's algorithm, same color bands as the contour),
+  with the tangent plane drawn from the numerical gradient at the draggable
+  point. No 3D library; plain SVG.

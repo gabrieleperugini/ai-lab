@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getAdjacentModules, getDay, getModule, visibleModules } from "../../content/days";
 import { moduleRegistry } from "../../modules/registry";
 import { labConfig } from "../../content/config";
@@ -23,6 +23,13 @@ export function ModulePage({
   const [observedResult, setObservedResult] = useState<string>("");
   const [resetSignal, setResetSignal] = useState(0);
   const [showNotice, setShowNotice] = useState(false);
+  const [showHood, setShowHood] = useState(false);
+
+  // Collapse the notice/hood panels when navigating between modules.
+  useEffect(() => {
+    setShowNotice(false);
+    setShowHood(false);
+  }, [moduleId]);
 
   if (labConfig.lockedDayIds.includes(dayId) && !mode.isTeacher) {
     return <SectionLocked />;
@@ -63,10 +70,27 @@ export function ModulePage({
   );
 
   const takeawayPanel = (
-    <div className="panel takeawayPanel">
-      <div className="panelTitle">Takeaway</div>
-      <p className="takeawayText">{module.takeaway}</p>
-    </div>
+    <>
+      <div className="panel takeawayPanel">
+        <div className="panelTitle">Takeaway</div>
+        <p className="takeawayText">{module.takeaway}</p>
+      </div>
+      {module.underTheHood && (
+        <div style={{ marginTop: 10 }}>
+          <button className="btn subtle small" onClick={() => setShowHood((s) => !s)}>
+            {showHood ? "Close" : "🔧 Under the hood"}
+          </button>
+          {showHood && (
+            <p
+              className="hintText fadeIn"
+              style={{ marginTop: 8, fontFamily: "var(--font-mono)", fontSize: 13.5 }}
+            >
+              {module.underTheHood}
+            </p>
+          )}
+        </div>
+      )}
+    </>
   );
 
   const sidePanels = (

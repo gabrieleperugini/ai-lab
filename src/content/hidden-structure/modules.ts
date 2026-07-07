@@ -30,6 +30,8 @@ export const hiddenStructureModules: LabModule[] = [
     ],
     takeaway:
       "Clustering starts before the algorithm. The representation decides what 'similar' means.",
+    underTheHood:
+      "Each animal is a hand-made feature vector (size, speed, habitat, danger, legs...). A lens is just a pair of weighted feature sums used as x and y axes, normalized to the plot. Nothing is learned; the lesson is that WE choose the representation.",
     teacherNotes: [
       "Open the section with this one: it sets up everything that follows. 15 to 20 minutes.",
       "The whale is the star: fish-shaped mammal. Let the groups argue about which lens is 'right' before revealing that none is.",
@@ -64,6 +66,8 @@ export const hiddenStructureModules: LabModule[] = [
       "Bad starting positions can trap the centers in a bad arrangement."
     ],
     takeaway: "K-means is simple and useful, but it looks for compact groups around centers.",
+    underTheHood:
+      "Real k-means (Lloyd's algorithm) running live: assign every point to its nearest centroid, move each centroid to the mean of its points, repeat until nothing moves. Data are seeded 2D blobs; the only inputs are k and the starting centroids.",
     teacherNotes: [
       "The mechanism module: make every group step through slowly at least once. 20 to 25 minutes.",
       "The dance has exactly two moves: assign (points pick centers) and update (centers move to averages). Name them.",
@@ -99,6 +103,8 @@ export const hiddenStructureModules: LabModule[] = [
       "Failure here is not a bug: the algorithm answers a different question."
     ],
     takeaway: "Different algorithms make different assumptions about what a cluster should look like.",
+    underTheHood:
+      "The same k-means as the previous module, run on datasets that violate its assumption of round, compact blobs (moons, rings, spirals). The failures are genuine algorithm output, not staged.",
     teacherNotes: [
       "The predict-first flow is the point: make groups commit before running. 15 to 20 minutes.",
       "The match percentage quantifies the failure; moons typically land near 50 to 75%.",
@@ -135,6 +141,8 @@ export const hiddenStructureModules: LabModule[] = [
     ],
     takeaway:
       "Some structure is local. If we build a graph of nearby points, clusters can appear even when they are not round blobs.",
+    underTheHood:
+      "Real spectral clustering computed in your browser: connect each point to its nearest neighbors with Gaussian edge weights, build the normalized graph Laplacian, compute its first eigenvectors (Jacobi rotations), then run k-means on the rows of that embedding (the Ng-Jordan-Weiss recipe).",
     teacherNotes: [
       "The wow module. Give it time: 25 to 35 minutes.",
       "This is REAL spectral clustering (kNN Gaussian graph, normalized Laplacian, Jacobi eigenvectors, k-means in the embedding), not a canned animation.",
@@ -172,6 +180,8 @@ export const hiddenStructureModules: LabModule[] = [
     ],
     takeaway:
       "Recommendation systems often turn people and items into vectors. Then they search for nearby things. The choice of features and scoring rule shapes what you see.",
+    underTheHood:
+      "No neural network: each movie is a hand-made feature vector, your ratings build a taste vector, and recommendations rank movies by cosine similarity to it, plus a small popularity boost and a diversity penalty you can toggle.",
     teacherNotes: [
       "The everyday-life payoff of the section. 20 to 25 minutes.",
       "The catalog is fictional on purpose; the mechanism is the real lesson.",
