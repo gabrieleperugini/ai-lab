@@ -1,4 +1,4 @@
-import { getDay } from "../../content/days";
+import { getDay, visibleModules } from "../../content/days";
 import { day1Timeline } from "../../content/day1-llm/modules";
 import { labConfig } from "../../content/config";
 import type { ClassroomMode } from "../../lib/classMode";
@@ -45,11 +45,16 @@ export function DayPage({ dayId, mode }: { dayId: string; mode: ClassroomMode })
       </div>
 
       <div className="moduleGrid">
-        {day.modules.map((m, i) => (
-          <a className="moduleCard" key={m.id} href={`#/${day.id}/${m.id}`}>
+        {(mode.isTeacher ? day.modules : visibleModules(day)).map((m, i) => (
+          <a
+            className="moduleCard"
+            key={m.id}
+            href={`#/${day.id}/${m.id}`}
+            style={m.hidden ? { opacity: 0.55 } : undefined}
+          >
             <div className="modTop">
-              <span className="modId">M{i + 1}</span>
-              <span className={`levelTag ${m.level}`}>{m.level}</span>
+              <span className="modId">{m.hidden ? "—" : `M${i + 1}`}</span>
+              <span className={`levelTag ${m.level}`}>{m.hidden ? "hidden" : m.level}</span>
             </div>
             <h3>{m.title}</h3>
             <p className="modSub">{m.subtitle}</p>

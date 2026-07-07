@@ -254,3 +254,40 @@ Assumptions and implementation decisions for the AI Lab platform (v1, July 2026)
 - Day 2/3 interactive modules (placeholders show the plan + preview art).
 - Real embedding projections for M6.
 - Optional backend proxy for live LLM calls (explicitly out of scope for v1).
+
+## Learning Machines math revision (July 2026, from day2_math_revision_prompt.md)
+
+- Checkpoint tag `checkpoint-before-learning-machines-math-revision`; work on
+  branch `learning-machines-math-revision`.
+- Added a `hidden: true` module flag (src/lib/types.ts): hidden modules keep
+  their code, content, and direct route, disappear from student cards and
+  prev/next navigation, and appear with a "hidden" tag in teacher mode.
+  Data Detective and Feature Detector Lab are hidden this way; delete the
+  flag line in src/content/learning-machines/modules.ts to restore them.
+- Two new modules translated from the course Mathematica notebook slopes.nb
+  (Mathematica -> TypeScript, documented in the lib file headers):
+  - Gradient Explorer (src/lib/learning/gradients.ts): feasy/f/f3easy
+    landscapes, central-difference derivatives, 1D tangent + descent arrow,
+    2D banded contour map with uphill gradient and descent arrows.
+  - One-Dimensional Neural Nets (src/lib/learning/oneDNets.ts): sigmoid
+    neuron sigmoid(x-b), step target sigmoid(x-2.1), bump target
+    sigmoid(x+2.1)*sigmoid(5-x), five-parameter network
+    sigmoid(w1*h1 + w2*h2 - b3), MSE against the target curve, animated
+    finite-difference gradient-descent optimizer (lr 3, up to 450 steps).
+    The "Flat (trap)" preset demonstrates a symmetric saddle where the
+    optimizer stalls.
+- Section reordered to: see numbers -> fit line -> loss landscape ->
+  Gradient Explorer -> descent race -> generalization -> 1D neural nets ->
+  NN playground -> Fool the Network.
+- Fool the Network made less trivial: the classifier is now
+  nearest-prototype over the clean, SHIFTED, and THICK variants of each
+  digit (noisy variants deliberately excluded), so shift-right/thicken are
+  resisted while shift-left, occlusion, and noise still fool it; softmax
+  T=0.08. Added digits 4 and 9 (ambiguous with 9 and 3/8), four-direction
+  shift, thicken, cover-top/bottom perturbations, and challenges: smallest
+  flip (<=4 px), 3->8, 4->9, confidently wrong (>=60%), maximum doubt
+  (<30%), flip-and-restore.
+- Numeric QA scripts kept in scripts/qa_classifier.ts and
+  scripts/qa_onednets.ts (run with npx tsx).
+- Day numbering: Learning by Consequences now shows "Day 3" (second
+  thematic section of Day 3; there is no Day 4).

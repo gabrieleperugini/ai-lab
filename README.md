@@ -146,26 +146,43 @@ module, result, reflection) to paste into any form or chat.
 ## Learning Machines section
 
 The second block (route `#/learning-machines`, shown as "Day 2: Learning
-Machines") covers parameters, loss, gradient descent, generalization, and
-neural networks with six modules:
+Machines") covers parameters, loss, gradients, gradient descent,
+generalization, and neural networks with nine visible modules:
 
 1. What does the computer see? (pixels and vectors)
 2. Fit the line (slope, intercept, MSE)
 3. The loss landscape (draggable parameter space)
-4. Gradient descent race (learning-rate game with trajectory)
-5. Generalization challenge (train vs test, overfitting)
-6. Data Detective (shortcut learning and biased data)
-7. Neural network playground (tiny MLP with live decision boundary, plus a
+4. Gradient Explorer (1D tangent line and 2D gradient arrows on a contour map)
+5. Gradient descent race (learning-rate game with trajectory)
+6. Generalization challenge (train vs test, overfitting)
+7. One-Dimensional Neural Nets (one sigmoid neuron, then a five-parameter
+   two-hidden-neuron network, with an animated finite-difference optimizer)
+8. Neural network playground (tiny MLP with live decision boundary, plus a
    Parameter Budget Challenge panel: solve each dataset within a parameter cap)
-8. Feature Detector Lab (hand-made stroke/loop detectors over 8x8 digits)
 9. Fool the Network (edit pixels to flip the detector classifier's prediction)
+
+**Temporarily hidden modules:** Data Detective (shortcut learning) and
+Feature Detector Lab (stroke/loop detectors) are hidden from the student
+navigation via `hidden: true` in
+`src/content/learning-machines/modules.ts`. Their code, content, and direct
+routes are intact, and teacher mode still lists them with a "hidden" tag.
+To restore one, delete its `hidden: true` line.
+
+The two notebook-inspired modules (Gradient Explorer, One-Dimensional Neural
+Nets) use formulas translated from Mathematica to TypeScript from the course
+notebook `slopes.nb`: the sigmoid neuron and step/bump targets plus the
+five-parameter network in `src/lib/learning/oneDNets.ts`, and the 1D/2D
+landscape functions (`feasy`, `f`, `f3easy`) in
+`src/lib/learning/gradients.ts`. Derivatives are numerical central
+differences.
 
 The enrichment modules share content and utilities: digit templates and
 detector templates live in `src/content/learning-machines/digitTemplates.ts`
 and `featureDetectors.ts`, the transparent detector classifier in
-`src/lib/learning/detectorClassifier.ts`, the Data Detective toy world in
-`src/content/learning-machines/dataDetective.ts` (learners in
-`src/lib/learning/toyClassifier.ts`), and the budget presets in
+`src/lib/learning/detectorClassifier.ts` (nearest-prototype over clean,
+shifted, and thickened digit variants, softmax confidences), the Data
+Detective toy world in `src/content/learning-machines/dataDetective.ts`
+(learners in `src/lib/learning/toyClassifier.ts`), and the budget presets in
 `src/content/learning-machines/nnBudgetChallenges.ts`.
 
 Everything runs in the browser with plain TypeScript (no new dependencies, no

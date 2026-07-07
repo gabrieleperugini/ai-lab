@@ -1,5 +1,5 @@
 import { Suspense, useState } from "react";
-import { getAdjacentModules, getDay, getModule } from "../../content/days";
+import { getAdjacentModules, getDay, getModule, visibleModules } from "../../content/days";
 import { moduleRegistry } from "../../modules/registry";
 import { labConfig } from "../../content/config";
 import type { ClassroomMode } from "../../lib/classMode";
@@ -40,7 +40,7 @@ export function ModulePage({
 
   const Component = moduleRegistry[module.component];
   const { prev, next } = getAdjacentModules(dayId, moduleId);
-  const moduleIndex = day.modules.findIndex((m) => m.id === moduleId) + 1;
+  const moduleIndex = visibleModules(day).findIndex((m) => m.id === moduleId) + 1;
 
   const componentNode = Component ? (
     <Suspense
@@ -104,7 +104,8 @@ export function ModulePage({
           <a href={`#/${day.id}`} style={{ color: "inherit", textDecoration: "none" }}>
             Day {day.index}
           </a>{" "}
-          · Module {moduleIndex} · ~{module.durationMin} min
+          · {moduleIndex > 0 ? `Module ${moduleIndex}` : "Hidden module"} · ~
+          {module.durationMin} min
         </span>
         <div className="moduleHeader">
           <div>
