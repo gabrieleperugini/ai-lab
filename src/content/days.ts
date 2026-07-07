@@ -37,8 +37,9 @@ export const days: LabDay[] = [
     modules: hiddenStructureModules
   },
   {
+    // Second thematic section of Day 3 (there is no Day 4).
     id: "learning-consequences",
-    index: 4,
+    index: 3,
     title: "Learning by Consequences",
     tagline: "Rewards, agents, policies",
     narrative:

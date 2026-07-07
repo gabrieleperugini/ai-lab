@@ -19,5 +19,5 @@ export const labConfig = {
    * ?teacher=1). Used during class to keep everyone on today's section.
    * Set back to [] to reopen everything.
    */
-  lockedDayIds: ["learning-machines", "hidden-structure", "learning-consequences"]
+  lockedDayIds: ["hidden-structure", "learning-consequences"]
 };
