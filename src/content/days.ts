@@ -57,15 +57,21 @@ export function getModule(dayId: string, moduleId: string): LabModule | undefine
   return getDay(dayId)?.modules.find((m) => m.id === moduleId);
 }
 
+/** Modules shown on the section page and in prev/next navigation. */
+export function visibleModules(day: LabDay): LabModule[] {
+  return day.modules.filter((m) => !m.hidden);
+}
+
 export function getAdjacentModules(dayId: string, moduleId: string): {
   prev: LabModule | null;
   next: LabModule | null;
 } {
   const day = getDay(dayId);
   if (!day) return { prev: null, next: null };
-  const i = day.modules.findIndex((m) => m.id === moduleId);
+  const mods = visibleModules(day);
+  const i = mods.findIndex((m) => m.id === moduleId);
   return {
-    prev: i > 0 ? day.modules[i - 1] : null,
-    next: i >= 0 && i < day.modules.length - 1 ? day.modules[i + 1] : null
+    prev: i > 0 ? mods[i - 1] : null,
+    next: i >= 0 && i < mods.length - 1 ? mods[i + 1] : null
   };
 }

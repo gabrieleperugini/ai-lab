@@ -25,6 +25,8 @@ export const moduleRegistry: Record<
   LossLandscape: lazy(() => import("./learning/LossLandscape")),
   GradientDescentRace: lazy(() => import("./learning/GradientDescentRace")),
   Generalization: lazy(() => import("./learning/Generalization")),
+  GradientExplorer: lazy(() => import("./learning/GradientExplorer")),
+  OneDNeuralNets: lazy(() => import("./learning/OneDNeuralNets")),
   NNPlayground: lazy(() => import("./learning/NNPlayground")),
   DataDetective: lazy(() => import("./learning/DataDetective")),
   FeatureDetectorLab: lazy(() => import("./learning/FeatureDetectorLab")),

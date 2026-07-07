@@ -46,6 +46,16 @@ const ART: Record<string, string[]> = {
     "      ##",
     " ###### "
   ],
+  "4": [
+    "##   ## ",
+    "##   ## ",
+    "##   ## ",
+    "####### ",
+    "     ## ",
+    "     ## ",
+    "     ## ",
+    "     ## "
+  ],
   "5": [
     " #######",
     "##      ",
@@ -75,6 +85,16 @@ const ART: Record<string, string[]> = {
     "##    ##",
     "##    ##",
     " ###### "
+  ],
+  "9": [
+    " ###### ",
+    "##    ##",
+    "##    ##",
+    " #######",
+    "      ##",
+    "      ##",
+    "      ##",
+    " ###### "
   ]
 };
 
@@ -94,7 +114,7 @@ export function shiftGrid(g: DigitGrid, dr: number, dc: number): DigitGrid {
   return out;
 }
 
-function thicken(g: DigitGrid): DigitGrid {
+export function thicken(g: DigitGrid): DigitGrid {
   const out: DigitGrid = g.map((row) => [...row]);
   for (let r = 0; r < 8; r++) {
     for (let c = 0; c < 8; c++) {
@@ -104,6 +124,14 @@ function thicken(g: DigitGrid): DigitGrid {
       }
     }
   }
+  return out;
+}
+
+/** Occlusion: erase all ink in the top or bottom half of the grid. */
+export function coverHalf(g: DigitGrid, half: "top" | "bottom"): DigitGrid {
+  const out: DigitGrid = g.map((row) => [...row]);
+  const rows = half === "top" ? [0, 1, 2, 3] : [4, 5, 6, 7];
+  for (const r of rows) for (let c = 0; c < 8; c++) out[r][c] = 0;
   return out;
 }
 

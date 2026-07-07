@@ -25,6 +25,10 @@ export type LabModule = {
   poll?: PollConfig;
   /** True for Day 2/3 scaffolded modules that are not yet implemented. */
   placeholder?: boolean;
+  /** Temporarily hidden from the section cards and prev/next navigation.
+   * The module code and its direct route keep working; teacher mode still
+   * lists it with a "hidden" tag. Restore by removing the flag. */
+  hidden?: boolean;
   /** Wide modules render the interactive panel at full width, with the
    * instructions/reflection panels below (used by visual modules). */
   wide?: boolean;
