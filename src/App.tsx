@@ -12,7 +12,7 @@ function Pages() {
 
   return (
     <AppShell mode={mode}>
-      {route.page === "home" && <HomePage />}
+      {route.page === "home" && <HomePage mode={mode} />}
       {route.page === "day" && <DayPage dayId={route.dayId} mode={mode} />}
       {route.page === "module" && (
         <ModulePage

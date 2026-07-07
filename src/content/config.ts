@@ -13,5 +13,11 @@
 export const labConfig = {
   enablePolls: false,
   enableSubmissions: false,
-  useGeneratedProbabilities: true
+  useGeneratedProbabilities: true,
+  /**
+   * Sections locked for students (still fully accessible in teacher mode,
+   * ?teacher=1). Used during class to keep everyone on today's section.
+   * Set back to [] to reopen everything.
+   */
+  lockedDayIds: ["learning-machines", "hidden-structure", "learning-consequences"]
 };

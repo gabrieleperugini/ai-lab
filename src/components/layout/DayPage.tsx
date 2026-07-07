@@ -1,9 +1,30 @@
 import { getDay } from "../../content/days";
 import { day1Timeline } from "../../content/day1-llm/modules";
+import { labConfig } from "../../content/config";
 import type { ClassroomMode } from "../../lib/classMode";
+
+export function SectionLocked() {
+  return (
+    <div className="fadeIn" style={{ textAlign: "center", padding: "60px 0" }}>
+      <div className="bigEmoji">🔒</div>
+      <h1 style={{ marginTop: 12, color: "var(--blue)" }}>This section opens later</h1>
+      <p style={{ marginTop: 10, color: "var(--ink-soft)" }}>
+        Today we are working on another part of the lab. Ask your instructor!
+      </p>
+      <p style={{ marginTop: 18 }}>
+        <a className="btn primary" href="#/">
+          ← Back to the lab home
+        </a>
+      </p>
+    </div>
+  );
+}
 
 export function DayPage({ dayId, mode }: { dayId: string; mode: ClassroomMode }) {
   const day = getDay(dayId);
+  if (labConfig.lockedDayIds.includes(dayId) && !mode.isTeacher) {
+    return <SectionLocked />;
+  }
   if (!day) {
     return (
       <div className="fadeIn">

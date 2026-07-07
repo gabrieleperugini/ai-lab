@@ -1,9 +1,11 @@
 import { Suspense, useState } from "react";
 import { getAdjacentModules, getDay, getModule } from "../../content/days";
 import { moduleRegistry } from "../../modules/registry";
+import { labConfig } from "../../content/config";
 import type { ClassroomMode } from "../../lib/classMode";
 import { ReflectionBox } from "../classroom/ReflectionBox";
 import { PollPanel } from "../classroom/PollPanel";
+import { SectionLocked } from "./DayPage";
 
 export function ModulePage({
   dayId,
@@ -22,6 +24,9 @@ export function ModulePage({
   const [resetSignal, setResetSignal] = useState(0);
   const [showNotice, setShowNotice] = useState(false);
 
+  if (labConfig.lockedDayIds.includes(dayId) && !mode.isTeacher) {
+    return <SectionLocked />;
+  }
   if (!day || !module) {
     return (
       <div className="fadeIn">
