@@ -106,10 +106,8 @@ function OneDPlot({
   );
 }
 
-/* ---------------- 2D panel ---------------- */
+/* ---------------- shared 2D data ---------------- */
 
-const W2 = 420;
-const H2 = 420;
 const R2 = 3.5; // x1, x2 in [-R2, R2]
 const GRID = 48;
 const BANDS = 14;
@@ -119,7 +117,31 @@ const COLORS = [
   "#e98a33", "#df6b28", "#c94f24", "#a83a20"
 ];
 
-function TwoDPlot({
+/** Value range of f2d over the visible domain (for consistent coloring). */
+function useF2dRange() {
+  return useMemo(() => {
+    let lo = Infinity;
+    let hi = -Infinity;
+    for (let i = 0; i <= 40; i++) {
+      for (let j = 0; j <= 40; j++) {
+        const v = f2d(-R2 + (2 * R2 * i) / 40, -R2 + (2 * R2 * j) / 40);
+        if (v < lo) lo = v;
+        if (v > hi) hi = v;
+      }
+    }
+    return { lo, hi };
+  }, []);
+}
+
+const bandOf = (v: number, lo: number, hi: number) =>
+  Math.min(BANDS - 1, Math.max(0, Math.floor(((v - lo) / (hi - lo + 1e-9)) * BANDS)));
+
+/* ---------------- 2D contour panel ---------------- */
+
+const W2 = 420;
+const H2 = 420;
+
+function ContourPlot({
   x1,
   x2,
   trajectory,
@@ -131,33 +153,21 @@ function TwoDPlot({
   onDrag: (x1: number, x2: number) => void;
 }) {
   const dragRef = useRef(false);
+  const { lo, hi } = useF2dRange();
   const sx = (v: number) => ((v + R2) / (2 * R2)) * W2;
   const sy = (v: number) => H2 - ((v + R2) / (2 * R2)) * H2;
 
   const cells = useMemo(() => {
-    const vals: number[][] = [];
-    let lo = Infinity;
-    let hi = -Infinity;
+    const out: { i: number; j: number; band: number }[] = [];
     for (let i = 0; i < GRID; i++) {
-      const row: number[] = [];
       for (let j = 0; j < GRID; j++) {
         const a = -R2 + (2 * R2 * (i + 0.5)) / GRID;
         const b = -R2 + (2 * R2 * (j + 0.5)) / GRID;
-        const v = f2d(a, b);
-        row.push(v);
-        if (v < lo) lo = v;
-        if (v > hi) hi = v;
+        out.push({ i, j, band: bandOf(f2d(a, b), lo, hi) });
       }
-      vals.push(row);
     }
-    return vals.map((row, i) =>
-      row.map((v, j) => ({
-        i,
-        j,
-        band: Math.min(BANDS - 1, Math.floor(((v - lo) / (hi - lo + 1e-9)) * BANDS))
-      }))
-    );
-  }, []);
+    return out;
+  }, [lo, hi]);
 
   const g = grad2(f2d, x1, x2);
   const gnorm = Math.hypot(g.d1, g.d2);
@@ -212,7 +222,7 @@ function TwoDPlot({
       onPointerUp={() => (dragRef.current = false)}
       onPointerLeave={() => (dragRef.current = false)}
     >
-      {cells.flat().map((c) => (
+      {cells.map((c) => (
         <rect
           key={`${c.i}-${c.j}`}
           x={c.i * cw}
@@ -267,11 +277,144 @@ function TwoDPlot({
   );
 }
 
+/* ---------------- 3D surface panel ---------------- */
+
+const W3 = 620;
+const H3 = 430;
+const GRID3 = 26;
+// oblique projection: u = x1 - x2 (screen right), v = x1 + x2 (screen down),
+// z lifts the point up the screen
+const SU = 40;
+const SV = 21;
+const SZ = 62;
+const CX = W3 / 2;
+const CY = 292;
+const proj = (x1: number, x2: number, z: number) => ({
+  X: CX + (x1 - x2) * SU,
+  Y: CY + (x1 + x2) * SV - z * SZ
+});
+
+function SurfacePlot({
+  x1,
+  x2,
+  onDrag
+}: {
+  x1: number;
+  x2: number;
+  onDrag: (x1: number, x2: number) => void;
+}) {
+  const dragRef = useRef(false);
+  const { lo, hi } = useF2dRange();
+
+  const quads = useMemo(() => {
+    const pts: { X: number; Y: number }[][] = [];
+    for (let i = 0; i <= GRID3; i++) {
+      const row: { X: number; Y: number }[] = [];
+      for (let j = 0; j <= GRID3; j++) {
+        const a = -R2 + (2 * R2 * i) / GRID3;
+        const b = -R2 + (2 * R2 * j) / GRID3;
+        row.push(proj(a, b, f2d(a, b)));
+      }
+      pts.push(row);
+    }
+    const out: { path: string; band: number; depth: number }[] = [];
+    for (let i = 0; i < GRID3; i++) {
+      for (let j = 0; j < GRID3; j++) {
+        const a = -R2 + (2 * R2 * (i + 0.5)) / GRID3;
+        const b = -R2 + (2 * R2 * (j + 0.5)) / GRID3;
+        const p00 = pts[i][j];
+        const p10 = pts[i + 1][j];
+        const p11 = pts[i + 1][j + 1];
+        const p01 = pts[i][j + 1];
+        out.push({
+          path: `${p00.X},${p00.Y} ${p10.X},${p10.Y} ${p11.X},${p11.Y} ${p01.X},${p01.Y}`,
+          band: bandOf(f2d(a, b), lo, hi),
+          depth: a + b
+        });
+      }
+    }
+    // painter's algorithm: far (small x1+x2) first, near last
+    return out.sort((q, r) => q.depth - r.depth);
+  }, [lo, hi]);
+
+  // tangent plane patch at the current point
+  const g = grad2(f2d, x1, x2);
+  const z0 = f2d(x1, x2);
+  const h = 0.85;
+  const planeCorners = (
+    [
+      [x1 - h, x2 - h],
+      [x1 + h, x2 - h],
+      [x1 + h, x2 + h],
+      [x1 - h, x2 + h]
+    ] as const
+  ).map(([a, b]) => proj(a, b, z0 + g.d1 * (a - x1) + g.d2 * (b - x2)));
+  const pt = proj(x1, x2, z0);
+  const base = proj(x1, x2, lo - 0.08);
+
+  // invert the projection for dragging: u is exact, v needs z, so iterate
+  const move = (e: React.PointerEvent<SVGSVGElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const X = ((e.clientX - rect.left) / rect.width) * W3;
+    const Y = ((e.clientY - rect.top) / rect.height) * H3;
+    const u = (X - CX) / SU;
+    let z = z0;
+    let a = x1;
+    let b = x2;
+    for (let it = 0; it < 3; it++) {
+      const v = (Y - CY + z * SZ) / SV;
+      a = Math.max(-R2, Math.min(R2, (u + v) / 2));
+      b = Math.max(-R2, Math.min(R2, (v - u) / 2));
+      z = f2d(a, b);
+    }
+    onDrag(a, b);
+  };
+
+  return (
+    <svg
+      viewBox={`0 0 ${W3} ${H3}`}
+      width="100%"
+      role="img"
+      aria-label="3D surface with tangent plane"
+      style={{ touchAction: "none", cursor: "crosshair", display: "block" }}
+      onPointerDown={(e) => {
+        dragRef.current = true;
+        e.currentTarget.setPointerCapture?.(e.pointerId);
+        move(e);
+      }}
+      onPointerMove={(e) => dragRef.current && move(e)}
+      onPointerUp={() => (dragRef.current = false)}
+      onPointerLeave={() => (dragRef.current = false)}
+    >
+      <rect x={0} y={0} width={W3} height={H3} fill="var(--paper-2)" rx={10} />
+      {quads.map((q, i) => (
+        <polygon key={i} points={q.path} fill={COLORS[q.band]} stroke="rgba(255,255,255,0.28)" strokeWidth={0.7} />
+      ))}
+      {/* drop line from the point to below the surface, for depth reading */}
+      <line x1={pt.X} y1={pt.Y} x2={base.X} y2={base.Y} stroke="var(--ink-faint)" strokeWidth={1.4} strokeDasharray="3 3" />
+      {/* tangent plane */}
+      <polygon
+        points={planeCorners.map((p) => `${p.X},${p.Y}`).join(" ")}
+        fill="var(--amber)"
+        opacity={0.42}
+        stroke="var(--amber-deep)"
+        strokeWidth={2}
+      />
+      <circle cx={pt.X} cy={pt.Y} r={8} fill="var(--amber-deep)" stroke="#fff" strokeWidth={2.4} />
+      <text x={12} y={20} fontSize={12} fontWeight={700} fill="var(--ink)">
+        the orange patch is the tangent plane: its tilt IS the gradient
+      </text>
+      <text x={12} y={H3 - 10} fontSize={11} fill="var(--ink-faint)">
+        drag the point; the plane is flat where the gradient vanishes
+      </text>
+    </svg>
+  );
+}
+
 /* ---------------- module ---------------- */
 
 export default function GradientExplorer({ onResult, resetSignal }: ModuleComponentProps) {
   const [tab, setTab] = useState<"1d" | "2d">("1d");
-  const [showHood, setShowHood] = useState(false);
 
   // 1D state
   const [fnId, setFnId] = useState<"easy" | "full">("full");
@@ -279,14 +422,22 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
   const [x0, setX0] = useState(4);
   const [lr1, setLr1] = useState(0.3);
   const [steps1, setSteps1] = useState(0);
+  const [overshoot1, setOvershoot1] = useState(false);
 
   // 2D state
+  const [view2, setView2] = useState<"map" | "3d">("map");
   const [p2, setP2] = useState({ x1: 2.6, x2: 2.2 });
   const [lr2, setLr2] = useState(0.3);
   const [traj, setTraj] = useState<{ x1: number; x2: number }[]>([{ x1: 2.6, x2: 2.2 }]);
   const [overshoot2, setOvershoot2] = useState(false);
   const [smooth2, setSmooth2] = useState(false);
   const runRef = useRef<number | null>(null);
+
+  // refs so interval/step handlers always see the latest values
+  const posRef = useRef(p2);
+  posRef.current = p2;
+  const lr2Ref = useRef(lr2);
+  lr2Ref.current = lr2;
 
   const slope = deriv(f, x0);
   const g = grad2(f2d, p2.x1, p2.x2);
@@ -305,10 +456,9 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
   };
 
   const step1 = () => {
-    setX0((x) => {
-      const nx = Math.max(-X_RANGE, Math.min(X_RANGE, x - lr1 * deriv(f, x)));
-      return nx;
-    });
+    const nx = Math.max(-X_RANGE, Math.min(X_RANGE, x0 - lr1 * deriv(f, x0)));
+    if (f(nx) > f(x0) + 1e-9) setOvershoot1(true);
+    setX0(nx);
     setSteps1((s) => s + 1);
   };
 
@@ -319,23 +469,26 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
     setSmooth2(false);
   };
 
-  const step2 = (cur: { x1: number; x2: number }) => {
+  /** One descent step from the ref'd position; returns whether f increased. */
+  const advance2 = (): boolean => {
+    const cur = posRef.current;
     const gg = grad2(f2d, cur.x1, cur.x2);
+    const lr = lr2Ref.current;
     const nx = {
-      x1: Math.max(-R2, Math.min(R2, cur.x1 - lr2 * gg.d1)),
-      x2: Math.max(-R2, Math.min(R2, cur.x2 - lr2 * gg.d2))
+      x1: Math.max(-R2, Math.min(R2, cur.x1 - lr * gg.d1)),
+      x2: Math.max(-R2, Math.min(R2, cur.x2 - lr * gg.d2))
     };
-    if (f2d(nx.x1, nx.x2) > f2d(cur.x1, cur.x2) + 1e-9) setOvershoot2(true);
-    return nx;
+    const increased = f2d(nx.x1, nx.x2) > f2d(cur.x1, cur.x2) + 1e-9;
+    if (increased) setOvershoot2(true);
+    posRef.current = nx;
+    setP2(nx);
+    setTraj((t) => [...t.slice(-40), nx]);
+    return increased;
   };
 
   const oneStep2 = () => {
     stopRun();
-    setP2((cur) => {
-      const nx = step2(cur);
-      setTraj((t) => [...t.slice(-40), nx]);
-      return nx;
-    });
+    advance2();
   };
 
   const run20 = () => {
@@ -343,19 +496,14 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
     let n = 0;
     let increased = false;
     runRef.current = window.setInterval(() => {
-      setP2((cur) => {
-        const before = f2d(cur.x1, cur.x2);
-        const nx = step2(cur);
-        if (f2d(nx.x1, nx.x2) > before + 1e-9) increased = true;
-        setTraj((t) => [...t.slice(-40), nx]);
-        n++;
-        if (n >= 20) {
-          stopRun();
-          const gEnd = grad2(f2d, nx.x1, nx.x2);
-          if (!increased && Math.hypot(gEnd.d1, gEnd.d2) < 0.05) setSmooth2(true);
-        }
-        return nx;
-      });
+      if (advance2()) increased = true;
+      n++;
+      if (n >= 20) {
+        stopRun();
+        const cur = posRef.current;
+        const gEnd = grad2(f2d, cur.x1, cur.x2);
+        if (!increased && Math.hypot(gEnd.d1, gEnd.d2) < 0.05) setSmooth2(true);
+      }
     }, 90);
   };
 
@@ -367,10 +515,11 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
     setX0(4);
     setLr1(0.3);
     setSteps1(0);
+    setOvershoot1(false);
     setLr2(0.3);
+    setView2("map");
     place2(2.6, 2.2);
     setOvershoot2(false);
-    setShowHood(false);
   }, [resetSignal]);
 
   useEffect(() => {
@@ -396,7 +545,7 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
         <span className="hintText">
           {tab === "1d"
             ? "Drag the orange point along the curve."
-            : "Drag the orange point anywhere on the map."}
+            : "Drag the orange point; switch between the flat map and the 3D surface."}
         </span>
       </div>
 
@@ -424,7 +573,7 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
                 label="learning rate"
                 value={lr1}
                 min={0.01}
-                max={1}
+                max={2}
                 step={0.01}
                 onChange={setLr1}
                 format={(v) => v.toFixed(2)}
@@ -452,8 +601,23 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
         </div>
       ) : (
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, alignItems: "flex-start" }}>
-          <div className="vizStage" style={{ padding: 12, flex: "1 1 380px", width: "auto", maxWidth: 520 }}>
-            <TwoDPlot x1={p2.x1} x2={p2.x2} trajectory={traj} onDrag={place2} />
+          <div style={{ flex: view2 === "map" ? "1 1 380px" : "1 1 460px", width: "auto", maxWidth: view2 === "map" ? 520 : 660 }}>
+            <Segmented
+              ariaLabel="Surface view"
+              options={[
+                { value: "map", label: "🗺 Flat map" },
+                { value: "3d", label: "⛰ 3D surface" }
+              ]}
+              value={view2}
+              onChange={(v) => setView2(v as "map" | "3d")}
+            />
+            <div className="vizStage" style={{ padding: 12, marginTop: 8 }}>
+              {view2 === "map" ? (
+                <ContourPlot x1={p2.x1} x2={p2.x2} trajectory={traj} onDrag={place2} />
+              ) : (
+                <SurfacePlot x1={p2.x1} x2={p2.x2} onDrag={place2} />
+              )}
+            </div>
           </div>
           <div style={{ flex: "1 1 260px", minWidth: 260 }}>
             <div className="controlRow">
@@ -477,7 +641,7 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
                 label="learning rate"
                 value={lr2}
                 min={0.01}
-                max={3}
+                max={10}
                 step={0.01}
                 onChange={setLr2}
                 format={(v) => v.toFixed(2)}
@@ -491,8 +655,9 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
               <button className="btn subtle small" onClick={() => place2(2.6, 2.2)}>↺ Reset</button>
             </div>
             <p className="hintText" style={{ marginTop: 10 }}>
-              The red arrow is the gradient: it points uphill, and it is long where the landscape
-              is steep. Gradient descent moves against it, into the green valley.
+              {view2 === "map"
+                ? "The red arrow is the gradient: it points uphill, and it is long where the landscape is steep. Gradient descent moves against it, into the green valley."
+                : "Same landscape in 3D: the surface height is f(x₁, x₂), and the orange patch is the tangent plane at the current point. It tilts with the gradient and lies flat at minima."}
             </p>
           </div>
         </div>
@@ -517,13 +682,14 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
             {
               id: "walk-down",
               title: "Walk into a valley",
-              goal: "From the reset position, use only descent steps to reach a flat point (at least 3 steps, final slope near zero).",
-              done: steps1 >= 3 && Math.abs(slope) < 0.05
+              goal: "From the reset position, use only descent steps to settle in a valley (at least 3 steps, slope between -0.15 and 0.15). Tip: a smaller learning rate settles deeper.",
+              done: steps1 >= 3 && Math.abs(slope) < 0.15
             },
             {
               id: "overshoot-1d",
               title: "Overshoot!",
-              goal: "Set the learning rate near 1 on the warm-up hill and take steps near the steep part. Does the point ever jump across the valley?"
+              goal: "On the full landscape, put the point near x = 1, set the learning rate above 1.5, and take steps: make the function value INCREASE on a step.",
+              done: overshoot1
             }
           ]}
         />
@@ -545,29 +711,17 @@ export default function GradientExplorer({ onResult, resetSignal }: ModuleCompon
             {
               id: "smooth-descent",
               title: "Smooth landing",
-              goal: "Pick a learning rate that reaches a flat valley point in 20 steps without the loss ever going up.",
+              goal: "From the reset corner, pick a learning rate (try around 1) that reaches a flat valley point in 20 steps without the height ever going up.",
               done: smooth2
             },
             {
               id: "overshoot-2d",
               title: "Cause an overshoot",
-              goal: "Crank the learning rate up and take steps: make the function value INCREASE on a step.",
+              goal: "From the reset corner, crank the learning rate up (8 or more) and run: make the height INCREASE on a step.",
               done: overshoot2
             }
           ]}
         />
-      )}
-
-      <hr className="divider" />
-      <button className="btn subtle small" onClick={() => setShowHood((s) => !s)}>
-        {showHood ? "Close" : "🔧 Under the hood"}
-      </button>
-      {showHood && (
-        <p className="hintText fadeIn" style={{ marginTop: 8, fontFamily: "var(--font-mono)", fontSize: 13.5 }}>
-          slope(x) ≈ (f(x+ε) − f(x−ε)) / 2ε with ε = 0.001 &nbsp;·&nbsp; descent step: x ← x − η·slope
-          &nbsp;·&nbsp; in 2D the gradient is the vector of both partial slopes and descent moves
-          against it. Landscapes from the course notebook slopes.nb.
-        </p>
       )}
     </div>
   );

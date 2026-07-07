@@ -37,6 +37,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "Predicting the next token is a probabilistic task. Behind one blank there can be grammar, knowledge, context, or reasoning.",
+    underTheHood:
+      "The percentages are real next-token probabilities, precomputed offline from GPT-2 (124M parameters) and Qwen2.5-0.5B: each model's softmax distribution over its vocabulary, with multi-token words scored by the chain rule and 'other' holding the remaining probability mass. Nothing is computed live.",
     teacherNotes: [
       "Run the first two rounds as a full-class warm-up before letting groups continue.",
       "Ask groups to shout their token before revealing; it makes the distribution feel earned.",
@@ -75,6 +77,8 @@ export const day1Modules: LabModule[] = [
       "These are real model probabilities, computed offline; small numbers are normal, the flip is the point. Try both models with the dropdown."
     ],
     takeaway: "Same word, different context, different next-token distribution.",
+    underTheHood:
+      "Same offline pipeline as the Arena: for each context we store the model's true next-token distribution, so flipping the context swaps in the distribution the real model produced for the other prompt.",
     teacherNotes: [
       "Start with the bank pair; loan and deposit trade places with river and lake.",
       "The percentages look small because the model spreads mass over 50k tokens; focus on the RATIOS between the two contexts.",
@@ -113,6 +117,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "Generation is a sequence of commitments. Small early choices can force very different futures.",
+    underTheHood:
+      "Each branch shows the model's real conditional distribution given everything chosen so far: the whole story tree was precomputed offline with GPT-2 / Qwen2.5-0.5B, one next-token query per node.",
     teacherNotes: [
       "Demo one full path on the projector, then free exploration.",
       "Five stories: the test, the robot, the detective, the meeting, the dragon.",
@@ -151,6 +157,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "To produce structured reasoning by next-token prediction, the probabilities must encode planning: the model has to prefer tokens whose future works out.",
+    underTheHood:
+      "Each candidate continuation is scored by its real chain-rule log-probability under the model (the product of its tokens' probabilities), then the shown options are softmax-normalized against each other. Precomputed offline.",
     teacherNotes: [
       "This is the slides' 'NTP part 5 - intelligence' proof, turned into a game.",
       "Let students crash into dead ends; the restart is the lesson, not a punishment.",
@@ -185,6 +193,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "A chatbot does not see text exactly like we do. Before prediction, text is chopped into tokens.",
+    underTheHood:
+      "This module runs GPT-2's actual byte-pair-encoding tokenizer live in your browser, with the same ~50k-token vocabulary the real model uses (that download is why this module loads slowly).",
     teacherNotes: [
       "This module uses the REAL GPT-4 tokenizer (cl100k_base), bundled in the page; it is not a toy.",
       "Nice reveals: 'BocconiSummerSchool2026' explodes into pieces; ' bank' vs 'bank' differ; the emoji is several tokens.",
@@ -224,6 +234,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "Inside a model, words can be represented by numbers. Similar meanings become nearby points, and language becomes geometry.",
+    underTheHood:
+      "Real 100-dimensional GloVe word vectors, learned from word co-occurrence statistics on large text corpora, projected to 3D with PCA for display. Neighbors and analogies are computed in the full 100 dimensions, not in the projection.",
     teacherNotes: [
       "The vectors are real (GloVe, trained on Wikipedia+news). PCA squeezes 100 dimensions into 3, so on-screen distances are approximate; neighbor lists use the true vectors.",
       "The analogy puzzles were verified against the real vectors: king-man+woman = queen, Paris-France+Italy = Rome, Rome-Italy+Germany = Berlin.",
@@ -265,6 +277,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "At the end of a step, the model has an internal state. De-embedding turns that state into scores for possible next tokens. The highest-scoring token is not always the one we sample.",
+    underTheHood:
+      "A hand-made 2D miniature of the real mechanism: each token has a fixed 2D vector, the score is the dot product with the hidden state you drag, and a live softmax turns scores into probabilities. Real models do exactly this with thousands of dimensions.",
     teacherNotes: [
       "This is the lighthouse metaphor: the thought vector shines toward some words and leaves others dark.",
       "Real models do exactly this at every step, but in thousands of dimensions with about 100k output tokens.",
@@ -306,6 +320,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "The model does not always pick the most likely next token. Sampling controls how predictable or surprising the continuation becomes.",
+    underTheHood:
+      "The continuations were sampled offline from the real models at different temperatures; temperature rescales the log-probabilities before the softmax, so low T sharpens the same underlying distribution and high T flattens it.",
     teacherNotes: [
       "All continuations are genuine GPT-2 samples generated offline (temperature/top-k/top-p as displayed). Nothing is generated live in class.",
       "At low randomness the cache holds only a handful of distinct continuations; repeats ARE the lesson.",
@@ -344,6 +360,8 @@ export const day1Modules: LabModule[] = [
     ],
     takeaway:
       "Our simulator is not a real chatbot, but it exposes mechanisms that real chatbots use: tokens, context, probabilities, sampling, vectors, and next-token repetition.",
+    underTheHood:
+      "No model runs here: this is a guided comparison. The mechanisms you touched all day (tokenization, context-conditioned probabilities, sampling, embeddings) are the same ones production chatbots use, scaled from 124M to hundreds of billions of parameters and trained on far more text.",
     teacherNotes: [
       "Run this teacher-led on the projector if student access to chatbots is limited or blocked.",
       "The hallucination cards are the key ones: fluency without truth. Give them time.",
