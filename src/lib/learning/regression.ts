@@ -42,6 +42,69 @@ export function bestFitLine(points: Point[]): { m: number; b: number } {
 }
 
 // ---------------------------------------------------------------------------
+// Bump model for the "Two hills" landscape: y_hat = m * exp(-(x-b)^2 / 2s^2)
+// with amplitude m and center b. Fitting two-bump data with a one-bump model
+// makes the MSE over (m, b) genuinely non-convex: one valley per hill, the
+// deeper hill giving the global minimum. Used by the Loss Landscape and
+// Gradient Descent Race modules; the line modules are untouched.
+// ---------------------------------------------------------------------------
+
+export const BUMP_SIGMA = 0.25;
+
+export function bumpPredict(m: number, b: number, x: number): number {
+  const d = (x - b) / BUMP_SIGMA;
+  return m * Math.exp(-0.5 * d * d);
+}
+
+export function bumpMse(points: Point[], m: number, b: number): number {
+  if (points.length === 0) return 0;
+  let s = 0;
+  for (const p of points) {
+    const e = p.y - bumpPredict(m, b, p.x);
+    s += e * e;
+  }
+  return s / points.length;
+}
+
+/** Exact MSE gradients for the bump model. */
+export function bumpMseGradient(
+  points: Point[],
+  m: number,
+  b: number
+): { dm: number; db: number } {
+  let dm = 0;
+  let db = 0;
+  const s2 = BUMP_SIGMA * BUMP_SIGMA;
+  for (const p of points) {
+    const g = Math.exp(-0.5 * ((p.x - b) * (p.x - b)) / s2);
+    const e = m * g - p.y;
+    dm += 2 * e * g;
+    db += 2 * e * m * g * ((p.x - b) / s2);
+  }
+  return { dm: dm / points.length, db: db / points.length };
+}
+
+/** Global best bump fit by grid search plus local refinement. */
+export function bestBumpFit(points: Point[]): { m: number; b: number } {
+  let best = { m: 0, b: 0, loss: Infinity };
+  for (let i = 0; i <= 60; i++) {
+    for (let j = 0; j <= 60; j++) {
+      const m = -3 + (6 * i) / 60;
+      const b = -3 + (6 * j) / 60;
+      const l = bumpMse(points, m, b);
+      if (l < best.loss) best = { m, b, loss: l };
+    }
+  }
+  let { m, b } = best;
+  for (let it = 0; it < 200; it++) {
+    const { dm, db } = bumpMseGradient(points, m, b);
+    m -= 0.05 * dm;
+    b -= 0.05 * db;
+  }
+  return { m, b };
+}
+
+// ---------------------------------------------------------------------------
 // Polynomial fit on a Chebyshev basis (well conditioned on x in [-1, 1]),
 // solved with ridge-stabilized normal equations. Small systems only.
 // ---------------------------------------------------------------------------

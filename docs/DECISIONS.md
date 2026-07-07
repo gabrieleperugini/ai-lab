@@ -314,3 +314,33 @@ Assumptions and implementation decisions for the AI Lab platform (v1, July 2026)
   mesh of f3easy (painter's algorithm, same color bands as the contour),
   with the tangent plane drawn from the numerical gradient at the draggable
   point. No 3D library; plain SVG.
+
+## Math revision round 3 (July 2026)
+
+- Module order: One-Dimensional Neural Nets moved to position 3, right after
+  Fit the Line (same fit-the-data story, new model family); everything else
+  keeps its relative order.
+- 1D Neural Nets is now data-first: the dashed target curves are gone, the
+  loss is MSE against the sampled 0/1 points (floors ~0.077 and ~0.098, see
+  scripts/qa_onednets.ts), red error bars show per-point mistakes, and
+  activity A gains a 1D loss-landscape plot (loss vs b, draggable) that
+  foreshadows the loss landscape module. Activity B always starts random
+  (good/almost-good presets removed) and the optimizer is behind a
+  "reveal" button so students hand-tune first.
+- Non-convexity: new "Two hills" dataset (two Gaussian bumps, heights 2 and
+  1, centers ±0.7, sigma 0.25) shown ONLY in Loss Landscape and GD Race.
+  There the model family switches to a movable bump
+  y = m·exp(-(x-b)²/2σ²) (σ = 0.25, exact analytic gradients in
+  src/lib/learning/regression.ts), because a linear model's MSE is always
+  convex. The landscape has the global valley at (2.0, -0.7), loss 0.215,
+  and a TRUE local minimum at (1.0, 0.7), loss 0.844, verified by
+  simulation: descent from the trap start (1.2, 0.9) settles in the local
+  valley at every lr up to ~0.95; the easy start (2.2, -1.2) reaches the
+  global valley at the Good preset lr (larger rates overshoot the narrow
+  valley and can strand on the zero-gradient plateau, which is honest).
+- GD Race targets are now per-dataset (clean 0.05, noisy 0.3, outlier 0.75,
+  curved 0.75, two-hills 0.28) because the old global "below 0.15" was only
+  reachable on the clean dataset. New challenges: "The trap valley" (settle
+  in the local min) and "Escape the trap".
+- LossContour accepts lossFn/bestPoint/axis-label props; line modules are
+  unchanged (FitTheLine never sees the two-hills dataset).

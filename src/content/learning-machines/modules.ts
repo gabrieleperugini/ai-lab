@@ -86,6 +86,47 @@ export const learningMachinesModules: LabModule[] = [
     ]
   },
   {
+    id: "one-d-neural-nets",
+    dayId: "learning-machines",
+    title: "One-Dimensional Neural Nets",
+    subtitle: "One neuron is simple. Five parameters are already hard to tune by hand.",
+    durationMin: 25,
+    level: "core",
+    mission:
+      "Fit real data points using sigmoid neurons: first one knob, then five. How long before you want the machine to take over?",
+    studentInstructions: [
+      "Activity 1: slide the threshold b until the soft step fits the blue data points.",
+      "Watch the lower plot: it is this model's whole loss landscape, and the orange dot is you.",
+      "Activity 2: the data forms a bump. Tune the five knobs by hand from a random start.",
+      "Turn on 'show the two hidden neurons' to see the trick: two steps make a bump.",
+      "Only after your best hand attempt, reveal the optimizer and let it refine YOUR settings."
+    ],
+    component: "OneDNeuralNets",
+    reflectionQuestions: [
+      "Why can one neuron never make a bump, no matter how you set b?",
+      "Tuning five knobs was already hard. What about a million?"
+    ],
+    noticePoints: [
+      "A neuron is just a parameterized function; a sigmoid neuron makes a soft step.",
+      "Two hidden neurons plus an output neuron can combine two steps into a bump.",
+      "The data is noisy, so the loss has a floor: even the best model keeps some error.",
+      "With five parameters, hand-tuning is already painful. Training is the automatic search for good parameters."
+    ],
+    takeaway:
+      "Five parameters already create a space that is hard to search by hand. Optimization becomes necessary very quickly, and that is exactly what training does.",
+    underTheHood:
+      "Model: one neuron is σ(x − b) with σ(z) = 1/(1+e⁻ᶻ); the network is σ(w1·σ(x−b1) + w2·σ(x−b2) − b3). Loss: MSE against the data points, whose y (0 or 1) is sampled from a hidden probability curve, so the loss floor is nonzero (about 0.08 and 0.10 here). The optimizer is gradient descent with finite-difference gradients (η = 3, up to 450 steps).",
+    teacherNotes: [
+      "Placed right after Fit the Line: same fit-the-data story with a new model family. 20 to 25 minutes.",
+      "Activity 1's lower plot is the section's FIRST loss landscape (one knob, one axis); the loss landscape module scales the same picture to two knobs.",
+      "The optimizer is deliberately hidden behind a reveal button: let students struggle with the five knobs first, the frustration is the lesson.",
+      "The hidden-neuron overlay shows the construction: one step up, one step down, weighted and thresholded.",
+      "The flat start is a symmetric saddle: both hidden neurons stay identical, so the optimizer stalls. Real training breaks symmetry with random initialization.",
+      "Common confusion: the loss floor is not zero (about 0.08 and 0.10 here). The y values are noisy 0/1 samples, so even the best curve keeps errors: that IS the lesson about noise."
+    ],
+    wide: true
+  },
+  {
     id: "loss-landscape",
     dayId: "learning-machines",
     title: "The loss landscape",
@@ -99,7 +140,8 @@ export const learningMachinesModules: LabModule[] = [
       "Green regions are good models, orange regions are bad ones.",
       "Watch the line on the left change as you move.",
       "Find the valley in as few drags as you can.",
-      "Switch datasets and see how the valley moves."
+      "Switch datasets and see how the valley moves.",
+      "End with Two hills: a bump model on two-hill data gives TWO valleys. Find both."
     ],
     component: "LossLandscape",
     reflectionQuestions: [
@@ -109,16 +151,18 @@ export const learningMachinesModules: LabModule[] = [
     noticePoints: [
       "Slope and intercept form a 2D parameter space; the color is the loss.",
       "One dot on the map = one complete model on the left.",
+      "The landscape's shape comes from the data AND the model family: on Two hills the map has a deep valley and a shallow one.",
       "Training is a search on this landscape. Real networks have millions of dimensions, same idea."
     ],
     takeaway:
       "Learning is an optimization problem. The model moves through parameter space looking for lower loss.",
     underTheHood:
-      "The map is the MSE of y = m·x + b evaluated on a 48×48 grid of (m, b) pairs for the current dataset; colors are banded loss levels (square-root scaled so the valley gets more resolution). No training happens, the loss is just computed everywhere.",
+      "The map is the MSE evaluated on a 48×48 grid of (m, b) pairs; colors are banded loss levels (square-root scaled so valleys get more resolution). Line datasets use y = m·x + b (always one valley: least squares is convex). Two hills uses y = m·exp(-(x-b)²/2σ²), a movable bump, which is what creates the second valley.",
     teacherNotes: [
       "The key conceptual jump of the day: from 'moving a line' to 'moving through parameter space'. 15 to 20 minutes.",
       "Ask: where is the line y = 2x - 1 on this map? (One exact point.)",
       "The outlier dataset visibly drags the valley: the data shapes the landscape.",
+      "Two hills switches the model family to a movable bump (height m, center b): the deep valley fits the tall hill, the shallow valley is a TRUE local minimum on the short hill. This is the first non-convex landscape students meet; the race module exploits it next.",
       "Common confusion: students mix up data space (left) and parameter space (right). Keep naming them.",
       "Discussion question: what would this map look like with three parameters? A million?"
     ],
@@ -179,7 +223,8 @@ export const learningMachinesModules: LabModule[] = [
       "Press 'Run' and watch the line learn, the dot roll, and the loss fall.",
       "Try the 'Too small' preset. How patient are you?",
       "Try 'Too large' and 'Extreme'. What happens to the loss curve?",
-      "Race: reach loss below 0.15 in as few steps as possible."
+      "Race: reach the target loss in as few steps as possible.",
+      "Finish with Two hills: start from the 😈 start and watch the ball settle in the WRONG valley."
     ],
     component: "GradientDescentRace",
     reflectionQuestions: [
@@ -189,17 +234,19 @@ export const learningMachinesModules: LabModule[] = [
     noticePoints: [
       "Gradient descent repeatedly moves the parameters a little bit downhill.",
       "The learning rate controls the step size. Too small is slow. Too large can jump past the valley.",
+      "On a landscape with several valleys, the starting point decides where descent ends: it can settle in a local minimum.",
       "Nobody tells the model the answer; the slope of the landscape is enough."
     ],
     takeaway:
       "Gradient descent is simple but sensitive. A step that is too small wastes time. A step that is too large can miss the valley.",
     underTheHood:
-      "Gradient descent on the same two-parameter MSE map as the loss landscape, using EXACT analytic gradients (∂MSE/∂m and ∂MSE/∂b have closed forms for a line). The only knob is the learning rate; every trajectory you see is genuinely computed, not scripted.",
+      "Gradient descent on the same two-parameter MSE landscapes as the previous module, with EXACT analytic gradients (closed forms exist for both the line and the bump model). Each dataset has its own honest target loss, slightly above the best reachable value. Every trajectory is genuinely computed, not scripted.",
     teacherNotes: [
       "Suggested timing: 20 to 30 minutes. Students should see that gradient descent is iterative and sensitive to the learning rate.",
       "Ask them to intentionally make it fail, then rescue it with a smaller step size.",
       "The trajectory dots fade from old to new; bouncing across the valley is clearly visible at high learning rates.",
       "Common confusion: 'the computer knows where the valley is'. It only ever feels the local slope.",
+      "Two hills is the local-minimum finale: the 😈 start rolls into the shallow valley and STAYS there (loss stalls near 0.84 while the star sits at 0.21). Ask: did the algorithm fail? No: it did exactly what it promises. Escaping needs a different start, a lucky big step, or (in real training) stochastic noise.",
       "Discussion question: why do we not just try every point on the map? (Two knobs: maybe. A million knobs: never.)"
     ],
     wide: true
@@ -238,45 +285,6 @@ export const learningMachinesModules: LabModule[] = [
       "Common confusion: 'test loss is bad because the model did not see those points' - exactly, that is the point of the exam.",
       "Discussion question: what is the equivalent of memorizing for a student preparing an exam?"
     ]
-  },
-  {
-    id: "one-d-neural-nets",
-    dayId: "learning-machines",
-    title: "One-Dimensional Neural Nets",
-    subtitle: "One neuron is simple. Five parameters are already hard to tune by hand.",
-    durationMin: 25,
-    level: "core",
-    mission:
-      "Fit a target curve using sigmoid neurons: first one knob, then five. How long before you want the machine to take over?",
-    studentInstructions: [
-      "Activity 1: slide the threshold b until the orange step matches the data.",
-      "Activity 2: the target is a bump. Tune the five knobs by hand.",
-      "Turn on 'show the two hidden neurons' to see the trick: two steps make a bump.",
-      "Press 'Run optimization' and watch gradient descent beat you.",
-      "Try the 'Flat (trap)' start: even the machine can get stuck."
-    ],
-    component: "OneDNeuralNets",
-    reflectionQuestions: [
-      "Why can one neuron never make a bump, no matter how you set b?",
-      "Tuning five knobs was already hard. What about a million?"
-    ],
-    noticePoints: [
-      "A neuron is just a parameterized function; a sigmoid neuron makes a soft step.",
-      "Two hidden neurons plus an output neuron can combine two steps into a bump.",
-      "With five parameters, hand-tuning is already painful. Training is the automatic search for good parameters."
-    ],
-    takeaway:
-      "Five parameters already create a space that is hard to search by hand. Optimization becomes necessary very quickly, and that is exactly what training does.",
-    underTheHood:
-      "Model: one neuron is σ(x − b) with σ(z) = 1/(1+e⁻ᶻ); the network is σ(w1·σ(x−b1) + w2·σ(x−b2) − b3). Loss: MSE against the target curve on a fixed x grid; the dots are binary samples drawn from the target probability. 'Run optimization' is gradient descent with finite-difference gradients (η = 3, up to 450 steps).",
-    teacherNotes: [
-      "The bridge from curve fitting to the neural network playground: same loss-and-descent story, now with neurons. 20 to 25 minutes.",
-      "Let students struggle with the five knobs BEFORE showing the optimization button; the frustration is the lesson.",
-      "The hidden-neuron overlay shows the construction: one step up, one step down, weighted and thresholded.",
-      "The flat start is a symmetric saddle: both hidden neurons stay identical, so the optimizer stalls. Real training breaks symmetry with random initialization.",
-      "Common confusion: the dots are SAMPLED from the target probability, so even the perfect curve keeps a nonzero distance to the dots; the loss is measured against the dashed target curve."
-    ],
-    wide: true
   },
   {
     id: "neural-network-playground",

@@ -151,12 +151,17 @@ generalization, and neural networks with nine visible modules:
 
 1. What does the computer see? (pixels and vectors)
 2. Fit the line (slope, intercept, MSE)
-3. The loss landscape (draggable parameter space)
-4. Gradient Explorer (1D tangent line and 2D gradient arrows on a contour map)
-5. Gradient descent race (learning-rate game with trajectory)
-6. Generalization challenge (train vs test, overfitting)
-7. One-Dimensional Neural Nets (one sigmoid neuron, then a five-parameter
-   two-hidden-neuron network, with an animated finite-difference optimizer)
+3. One-Dimensional Neural Nets (fit noisy 0/1 data points with one sigmoid
+   neuron, reading a live 1D loss landscape, then with a five-parameter
+   two-hidden-neuron network from a random start; the finite-difference
+   optimizer is hidden behind a reveal button so students tune by hand first)
+4. The loss landscape (draggable parameter space; the "Two hills" dataset
+   switches the model to a movable bump, giving a genuinely non-convex
+   landscape with a global valley and a true local minimum)
+5. Gradient Explorer (1D tangent line and 2D gradient arrows on a contour map)
+6. Gradient descent race (learning-rate game with trajectory; on "Two hills"
+   the 😈 start rolls into the local minimum and stays there)
+7. Generalization challenge (train vs test, overfitting)
 8. Neural network playground (tiny MLP with live decision boundary, plus a
    Parameter Budget Challenge panel: solve each dataset within a parameter cap)
 9. Fool the Network (edit pixels to flip the detector classifier's prediction)

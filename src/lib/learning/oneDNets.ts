@@ -66,6 +66,31 @@ export function curveMse(model: (x: number) => number, target: (x: number) => nu
   return s / xs.length;
 }
 
+/** MSE between a model curve and sampled data points. This is the loss the
+ * module shows: the student fits DATA, not a revealed target curve. */
+export function pointsMse(
+  model: (x: number) => number,
+  pts: { x: number; y: number }[]
+): number {
+  if (pts.length === 0) return 0;
+  let s = 0;
+  for (const p of pts) {
+    const d = model(p.x) - p.y;
+    s += d * d;
+  }
+  return s / pts.length;
+}
+
+/** Best threshold for the one-neuron model on a dataset (grid search). */
+export function bestNeuronB(pts: { x: number; y: number }[]): { b: number; loss: number } {
+  let best = { b: 0, loss: Infinity };
+  for (let b = X_MIN; b <= X_MAX + 1e-9; b += 0.05) {
+    const l = pointsMse((x) => neuron(x, b), pts);
+    if (l < best.loss) best = { b: Math.round(b * 100) / 100, loss: l };
+  }
+  return best;
+}
+
 /** Binary sample points drawn from the target probability (y = 1 with
  * probability target(x)), like the notebook's generated datasets.
  * Deterministic for a given seed. */
@@ -84,14 +109,14 @@ export function sampleBinaryPoints(
 const PARAM_KEYS: (keyof NetParams)[] = ["w1", "w2", "b1", "b2", "b3"];
 
 /** One gradient-descent step on the five parameters, with finite-difference
- * gradients of the curve MSE. Returns the new parameters and their loss. */
+ * gradients of the data MSE. Returns the new parameters and their loss. */
 export function descentStep(
   p: NetParams,
-  target: (x: number) => number,
+  pts: { x: number; y: number }[],
   lr: number
 ): { params: NetParams; loss: number } {
   const eps = 1e-3;
-  const lossAt = (q: NetParams) => curveMse((x) => neuralnet(x, q), target);
+  const lossAt = (q: NetParams) => pointsMse((x) => neuralnet(x, q), pts);
   const out: NetParams = { ...p };
   for (const k of PARAM_KEYS) {
     const plus = { ...p, [k]: p[k] + eps };

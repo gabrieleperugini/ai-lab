@@ -25,7 +25,11 @@ export function LossContour({
   b,
   onChange,
   trajectory,
-  showBest = false
+  showBest = false,
+  lossFn,
+  bestPoint,
+  mLabel = "slope m",
+  bLabel = "intercept b"
 }: {
   points: Point[];
   m: number;
@@ -33,6 +37,12 @@ export function LossContour({
   onChange?: (m: number, b: number) => void;
   trajectory?: { m: number; b: number }[];
   showBest?: boolean;
+  /** Loss over (m, b); defaults to the line-model MSE on `points`. */
+  lossFn?: (m: number, b: number) => number;
+  /** Best-solution marker; defaults to the least-squares line. */
+  bestPoint?: { m: number; b: number };
+  mLabel?: string;
+  bLabel?: string;
 }) {
   const dragRef = useRef(false);
 
@@ -44,6 +54,7 @@ export function LossContour({
   });
 
   const { cells, best } = useMemo(() => {
+    const loss = lossFn ?? ((mm: number, bb: number) => mse(points, mm, bb));
     const losses: number[][] = [];
     let lo = Infinity;
     let hi = -Infinity;
@@ -52,7 +63,7 @@ export function LossContour({
       for (let j = 0; j < GRID; j++) {
         const mm = -RANGE + (2 * RANGE * (i + 0.5)) / GRID;
         const bb = -RANGE + (2 * RANGE * (j + 0.5)) / GRID;
-        const l = mse(points, mm, bb);
+        const l = loss(mm, bb);
         row.push(l);
         if (l < lo) lo = l;
         if (l > hi) hi = l;
@@ -68,8 +79,8 @@ export function LossContour({
         band: Math.min(BANDS - 1, Math.floor(scale(l) * BANDS))
       }))
     );
-    return { cells, best: bestFitLine(points) };
-  }, [points]);
+    return { cells, best: bestPoint ?? bestFitLine(points) };
+  }, [points, lossFn, bestPoint]);
 
   const move = (e: React.PointerEvent<SVGSVGElement>) => {
     if (!onChange) return;
@@ -111,10 +122,10 @@ export function LossContour({
 
       {/* axes labels */}
       <text x={W / 2} y={H - 6} textAnchor="middle" fontSize={12} fontWeight={700} fill="var(--ink)">
-        slope m →
+        {mLabel} →
       </text>
       <text x={12} y={H / 2} fontSize={12} fontWeight={700} fill="var(--ink)" transform={`rotate(-90 12 ${H / 2})`} textAnchor="middle">
-        intercept b →
+        {bLabel} →
       </text>
 
       {/* trajectory */}

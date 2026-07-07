@@ -14,6 +14,10 @@ export type RegressionDataset = {
   points: Point[];
   /** True when a straight line is the wrong model on purpose. */
   curved?: boolean;
+  /** Model family the landscape modules should fit on this dataset.
+   * "line" (default): y = m·x + b. "bump": y = m·exp(-(x-b)²/2σ²), which
+   * makes the loss landscape non-convex on two-hill data. */
+  model?: "line" | "bump";
 };
 
 function generate(
@@ -43,6 +47,28 @@ const outlierTrap: Point[] = [
 ];
 
 const notALine = generate(44, 26, (x) => 2.2 * x * x - 1.0, 0.15);
+
+// Two hills of different heights: fit with a single movable bump and the
+// loss landscape gets a global valley (tall hill) plus a genuine local
+// valley (short hill), separated by a ridge.
+const twoHills: Point[] = generate(
+  55,
+  36,
+  (x) =>
+    2.0 * Math.exp(-0.5 * Math.pow((x + 0.7) / 0.25, 2)) +
+    1.0 * Math.exp(-0.5 * Math.pow((x - 0.7) / 0.25, 2)),
+  0.08
+);
+
+/** The dataset that makes the landscape non-convex; only the landscape
+ * modules (Loss Landscape, Gradient Descent Race) include it. */
+export const twoHillsDataset: RegressionDataset = {
+  id: "two-hills",
+  label: "Two hills",
+  description: "Two bumps, one taller. The model is a single movable bump: which hill will it grab?",
+  points: twoHills,
+  model: "bump"
+};
 
 export const regressionDatasets: RegressionDataset[] = [
   {

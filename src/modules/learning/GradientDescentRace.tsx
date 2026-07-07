@@ -1,6 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { regressionDatasets } from "../../content/learning-machines/regressionDatasets";
-import { mse, mseGradient } from "../../lib/learning/regression";
+import {
+  regressionDatasets,
+  twoHillsDataset
+} from "../../content/learning-machines/regressionDatasets";
+import {
+  mse,
+  mseGradient,
+  bumpMse,
+  bumpMseGradient,
+  bumpPredict,
+  bestBumpFit
+} from "../../lib/learning/regression";
 import { RegressionPlot } from "../../components/learning/RegressionPlot";
 import { LossContour } from "../../components/learning/LossContour";
 import { MiniChart } from "../../components/learning/MiniChart";
@@ -17,25 +27,50 @@ const LR_PRESETS = [
   { label: "Extreme", value: 2.2 }
 ];
 
-const STARTS: Record<string, { m: number; b: number }> = {
-  easy: { m: 0.4, b: 1.4 },
-  bad: { m: -2.8, b: -2.8 }
+const datasets = [...regressionDatasets, twoHillsDataset];
+
+// The two-hills starts are chosen so "bad" rolls into the shallow valley
+// (the local minimum) and "easy" rolls into the deep one.
+const STARTS_LINE = { easy: { m: 0.4, b: 1.4 }, bad: { m: -2.8, b: -2.8 } };
+// (easy reaches the deep valley at the "Good" preset lr; larger rates
+// overshoot the narrow valley, which is honest learning-rate behavior)
+const STARTS_BUMP = { easy: { m: 2.2, b: -1.2 }, bad: { m: 1.2, b: 0.9 } };
+
+/** Loss the race flag is set at: a bit above the best reachable loss of
+ * each dataset, so the target is honest everywhere. */
+const TARGET_LOSS: Record<string, number> = {
+  clean: 0.05,
+  noisy: 0.3,
+  outlier: 0.75,
+  curved: 0.75,
+  "two-hills": 0.28
 };
 
 export default function GradientDescentRace({ onResult, resetSignal }: ModuleComponentProps) {
-  const [datasetId, setDatasetId] = useState(regressionDatasets[0].id);
+  const [datasetId, setDatasetId] = useState(datasets[0].id);
   const [lr, setLr] = useState(0.15);
-  const [m, setM] = useState(STARTS.bad.m);
-  const [b, setB] = useState(STARTS.bad.b);
-  const [trajectory, setTrajectory] = useState<{ m: number; b: number }[]>([STARTS.bad]);
+  const [m, setM] = useState(STARTS_LINE.bad.m);
+  const [b, setB] = useState(STARTS_LINE.bad.b);
+  const [trajectory, setTrajectory] = useState<{ m: number; b: number }[]>([STARTS_LINE.bad]);
   const [lossHistory, setLossHistory] = useState<number[]>([]);
   const [running, setRunning] = useState(false);
   const [escaped, setEscaped] = useState(false);
-  const stateRef = useRef({ m: STARTS.bad.m, b: STARTS.bad.b });
+  const [trapped, setTrapped] = useState(false);
+  const stateRef = useRef({ m: STARTS_LINE.bad.m, b: STARTS_LINE.bad.b });
   const randRef = useRef(makeRng(4242));
 
-  const dataset = regressionDatasets.find((d) => d.id === datasetId)!;
-  const loss = useMemo(() => mse(dataset.points, m, b), [dataset, m, b]);
+  const dataset = datasets.find((d) => d.id === datasetId)!;
+  const isBump = dataset.model === "bump";
+  const STARTS = isBump ? STARTS_BUMP : STARTS_LINE;
+  const lossOf = useMemo(
+    () =>
+      isBump
+        ? (mm: number, bb: number) => bumpMse(dataset.points, mm, bb)
+        : (mm: number, bb: number) => mse(dataset.points, mm, bb),
+    [dataset, isBump]
+  );
+  const loss = useMemo(() => lossOf(m, b), [lossOf, m, b]);
+  const bestPoint = useMemo(() => (isBump ? bestBumpFit(dataset.points) : undefined), [dataset, isBump]);
   const steps = lossHistory.length;
 
   const setStart = useCallback((sm: number, sb: number) => {
@@ -46,18 +81,21 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
     setLossHistory([]);
     setRunning(false);
     setEscaped(false);
+    setTrapped(false);
   }, []);
 
   useEffect(() => {
-    setDatasetId(regressionDatasets[0].id);
+    setDatasetId(datasets[0].id);
     setLr(0.15);
-    setStart(STARTS.bad.m, STARTS.bad.b);
+    setStart(STARTS_LINE.bad.m, STARTS_LINE.bad.b);
   }, [resetSignal, setStart]);
 
   const stepOnce = useCallback((): boolean => {
     const { m: cm, b: cb } = stateRef.current;
-    const l = mse(dataset.points, cm, cb);
-    const { dm, db } = mseGradient(dataset.points, cm, cb);
+    const l = lossOf(cm, cb);
+    const { dm, db } = isBump
+      ? bumpMseGradient(dataset.points, cm, cb)
+      : mseGradient(dataset.points, cm, cb);
     let nm = cm - lr * dm;
     let nb = cb - lr * db;
     let out = false;
@@ -72,8 +110,13 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
     setTrajectory((t) => [...t.slice(-160), { m: nm, b: nb }]);
     setLossHistory((h) => [...h.slice(-400), Math.min(l, 99)]);
     if (out) setEscaped(true);
+    // Two-hills: descent settled in the shallow valley = a local minimum.
+    if (isBump && Math.abs(nb - 0.7) < 0.25 && nm > 0.5 && nm < 1.5) {
+      const nl = lossOf(nm, nb);
+      if (nl < 0.9 && nl > 0.4) setTrapped(true);
+    }
     return out;
-  }, [dataset, lr]);
+  }, [dataset, lr, lossOf, isBump]);
 
   useEffect(() => {
     if (!running) return;
@@ -90,18 +133,20 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
     );
   }, [dataset, lr, steps, loss, escaped, onResult]);
 
-  const reachedTarget = loss < 0.15;
+  const targetLoss = TARGET_LOSS[datasetId] ?? 0.15;
+  const reachedTarget = loss < targetLoss;
 
   return (
     <div className="panel">
       <div className="controlRow" style={{ justifyContent: "space-between", marginBottom: 12 }}>
         <Segmented
           ariaLabel="Dataset"
-          options={regressionDatasets.map((d) => ({ value: d.id, label: d.label }))}
+          options={datasets.map((d) => ({ value: d.id, label: d.label }))}
           value={datasetId}
           onChange={(id) => {
             setDatasetId(id);
-            setStart(stateRef.current.m, stateRef.current.b);
+            const s = datasets.find((d) => d.id === id)?.model === "bump" ? STARTS_BUMP : STARTS_LINE;
+            setStart(s.bad.m, s.bad.b);
           }}
         />
         <div className="controlRow">
@@ -123,8 +168,14 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
 
       <div className="ctxGrid" style={{ gridTemplateColumns: "1.1fr 1fr", alignItems: "start" }}>
         <div className="vizStage" style={{ padding: 12 }}>
-          <div className="panelTitle" style={{ paddingLeft: 6 }}>The line learning</div>
-          <RegressionPlot points={dataset.points} line={{ m, b }} showErrors />
+          <div className="panelTitle" style={{ paddingLeft: 6 }}>
+            The {isBump ? "bump" : "line"} learning
+          </div>
+          {isBump ? (
+            <RegressionPlot points={dataset.points} curve={(x) => bumpPredict(m, b, x)} showErrors />
+          ) : (
+            <RegressionPlot points={dataset.points} line={{ m, b }} showErrors />
+          )}
           <div style={{ padding: "10px 6px 4px" }}>
             <MiniChart
               series={[{ label: "loss", color: "var(--blue)", values: lossHistory }]}
@@ -146,6 +197,10 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
               b: Math.max(-3, Math.min(3, t.b))
             }))}
             showBest
+            lossFn={isBump ? lossOf : undefined}
+            bestPoint={bestPoint}
+            mLabel={isBump ? "height m" : "slope m"}
+            bLabel={isBump ? "center b" : "intercept b"}
             onChange={(nm, nb) => {
               if (!running) setStart(nm, nb);
             }}
@@ -195,7 +250,10 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
         <span className="statPill">
           loss <span className="statValue">{Number.isFinite(loss) ? loss.toFixed(3) : "∞"}</span>
         </span>
-        {reachedTarget && <span className="copiedFlash">🏁 below 0.15!</span>}
+        {reachedTarget && <span className="copiedFlash">🏁 below {targetLoss}: deepest valley!</span>}
+        {trapped && !reachedTarget && (
+          <span className="copiedFlash">🕳 Settled in the SHALLOW valley: a local minimum!</span>
+        )}
       </div>
 
       <hr className="divider" />
@@ -205,12 +263,24 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
           {
             id: "fast",
             title: "Fastest safe descent",
-            goal: "Reach loss below 0.15 in as few steps as possible. What is your record?",
+            goal: `Reach the target loss (below ${targetLoss} here) in as few steps as possible. What is your record?`,
             done: reachedTarget
           },
           { id: "fail", title: "Make it fail", goal: "Choose a learning rate that makes the loss bounce or explode.", done: escaped },
           { id: "slow", title: "Slow learner", goal: "Make the model improve, but painfully slowly. How many steps would the valley take?" },
-          { id: "rescue", title: "Bad start rescue", goal: "Start from the bad corner and still reach the valley. Which settings work?" }
+          { id: "rescue", title: "Bad start rescue", goal: "Start from the bad corner and still reach the valley. Which settings work?" },
+          {
+            id: "trapped",
+            title: "The trap valley",
+            goal: "On Two hills, run from the 😈 start. The loss falls, then stops falling. Where did the ball settle? Compare with the star.",
+            done: trapped
+          },
+          {
+            id: "escape",
+            title: "Escape the trap",
+            goal: "Still on Two hills: from the same 😈 start, find settings (or a smarter start) that reach the DEEPEST valley.",
+            done: isBump && reachedTarget
+          }
         ]}
       />
 
@@ -218,6 +288,8 @@ export default function GradientDescentRace({ onResult, resetSignal }: ModuleCom
         Each step: compute the slope of the landscape (the gradient), then move a little bit
         downhill. The learning rate controls the step size. Too small is slow. Too large can jump
         past the valley.
+        {isBump &&
+          " On this landscape there are TWO valleys: gradient descent only ever rolls downhill, so whichever valley it enters first is where it stays. Real neural network landscapes are full of valleys like this."}
       </p>
     </div>
   );
