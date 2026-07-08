@@ -4,6 +4,7 @@ import type { LabModule } from "../../lib/types";
 
 export const hiddenStructureModules: LabModule[] = [
   {
+    hidden: true, // temporarily hidden; delete this line to restore
     id: "similarity-lenses",
     dayId: "hidden-structure",
     title: "What Makes Things Similar?",
