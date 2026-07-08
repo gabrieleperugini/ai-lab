@@ -2,7 +2,7 @@ import type { LabDay, LabModule } from "../lib/types";
 import { day1Modules } from "./day1-llm/modules";
 import { learningMachinesModules } from "./learning-machines/modules";
 import { hiddenStructureModules } from "./hidden-structure/modules";
-import { learningConsequencesModules } from "./day3-unsupervised-rl/modules";
+import { learningConsequencesModules } from "./learning-consequences/modules";
 
 export const days: LabDay[] = [
   {
@@ -43,8 +43,8 @@ export const days: LabDay[] = [
     title: "Learning by Consequences",
     tagline: "Rewards, agents, policies",
     narrative:
-      "The last kind of learning: no labels and no fixed dataset, just an agent acting in a world and learning from rewards (including rewards that backfire).",
-    available: false,
+      "The last kind of learning. In supervised learning, examples come with correct answers. In unsupervised learning, we look for structure without labels. Here there is no teacher at all: an agent acts in a world, collects rewards and consequences, and gradually changes its behavior (sometimes in ways we did not intend).",
+    available: true,
     modules: learningConsequencesModules
   }
 ];

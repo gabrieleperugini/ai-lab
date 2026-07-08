@@ -344,3 +344,35 @@ Assumptions and implementation decisions for the AI Lab platform (v1, July 2026)
   in the local min) and "Escape the trap".
 - LossContour accepts lossFn/bestPoint/axis-label props; line modules are
   unchanged (FitTheLine never sees the two-hills dataset).
+
+## Learning by Consequences / RL section (July 2026, from rl_learning_by_consequences_agent_prompt.md)
+
+- Checkpoint tag `checkpoint-before-rl-section` (revert: `git checkout checkpoint-before-rl-section`);
+  work merged from branch `rl-learning-by-consequences`.
+- Engine: src/lib/rl/gridworld.ts + qLearning.ts. Tabular Q-learning
+  (defaults alpha 0.2, gamma 0.9, epsilon 0.2, 80 max steps), ASCII map
+  parser (S G # T C M P), optional slip probability (icy floor), coin mask
+  in the state so disappearing coins stay exactly tabular.
+- Greedy ties break in FIXED order on purpose: with exploration ~0 on the
+  "Exploration trap" map (step cost 0) the agent repeats the same wall bump
+  forever. That map's epsilon curve is verified: 0% at eps=0.02, ~100% at
+  0.1-0.5, ~16% at 1.0. On other maps negative step costs provide implicit
+  exploration, which is why the lesson needs the free-step map.
+- Reward Hacking scenarios all verified broken AND fixable in scripts/qa_rl.ts:
+  coin loop (respawning coin beats +5 goal under gamma 0.9; fix respawn off
+  or step cost), almost-goal (agent circles ~17 steps next to the goal
+  farming a +0.5 proximity bonus; fix terminal-only reward), coward (with
+  trap -100 on 15%-slip ice, HIDING is the optimal policy; fix by softening
+  to ~-5 and training 500), wall hugger (paying +0.3 per right press makes
+  bumping the right wall optimal; success 0%, ~64 bumps/episode).
+- Coward fix challenge threshold is 70% (verified ~80% at trap -5 with 600
+  episodes; slip makes 100% impossible, which is honest).
+- Rocket Landing implemented fully (not scaffolded): 3-parameter policy
+  (braking altitude, target touchdown speed, gain), random search over 150
+  policies, score = 100 + softness bonus - fuelPenalty*fuelUsed - time.
+  Fuel penalty 0 vs 2 measurably changes the found landing style.
+- Animations (episode playback, rocket) advance on wall-clock time, not
+  interval counts, so background-tab timer throttling cannot freeze them.
+- Old placeholder dir src/content/day3-unsupervised-rl/ deleted; content now
+  in src/content/learning-consequences/. Section available: true, still in
+  lockedDayIds (students see "Opens later"; teacher mode has full access).
