@@ -154,6 +154,7 @@ export const hiddenStructureModules: LabModule[] = [
     wide: true
   },
   {
+    hidden: true, // temporarily hidden; delete this line to restore
     id: "recommender",
     dayId: "hidden-structure",
     title: "Recommendation Engine",
