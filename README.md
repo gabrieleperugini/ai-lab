@@ -8,7 +8,7 @@ no accounts, no API keys.
 - **Language Models** (route `#/day1`, fully implemented, 9 modules)
 - **Learning Machines** (route `#/learning-machines`, fully implemented, 9 modules)
 - **Hidden Structure** (route `#/hidden-structure`, fully implemented, 5 modules)
-- **Learning by Consequences** (RL, coming soon: scaffolded placeholders)
+- **Learning by Consequences** (route `#/learning-consequences`, fully implemented, 3 modules)
 
 **The probabilities are real, from two models.** Day 1 modules M1-M4 and the
 Reasoning Demo show next-token probabilities and sampled continuations computed
@@ -189,6 +189,28 @@ shifted, and thickened digit variants, softmax confidences), the Data
 Detective toy world in `src/content/learning-machines/dataDetective.ts`
 (learners in `src/lib/learning/toyClassifier.ts`), and the budget presets in
 `src/content/learning-machines/nnBudgetChallenges.ts`.
+
+## Learning by Consequences section
+
+The reinforcement learning block (route `#/learning-consequences`, shown as
+the second thematic part of "Day 3"). Three modules on a shared tabular
+Q-learning engine:
+
+1. Maze Learner (gridworld Q-learning: episodes, rewards, policy arrows,
+   value heatmap, exploration and learning-rate controls, four map presets)
+2. Reward Hacking Lab (four verified reward-design loopholes: Coin Loop,
+   Almost There, Coward Agent on an icy floor, Wall Hugger, each with fix
+   controls and a heuristic "What happened?" panel)
+3. Rocket Landing (bonus continuous-control demo: three-parameter landing
+   policy, hand tuning plus random search, no deep RL)
+
+Engine and content: `src/lib/rl/gridworld.ts` (ASCII maps, deterministic
+moves with optional slip, coins/mud/prize cells), `src/lib/rl/qLearning.ts`
+(tabular Q-learning, fixed-order tie-breaking so a no-exploration agent
+visibly repeats itself), `src/lib/rl/rocket.ts` (physics + random search),
+maps and scenarios in `src/content/learning-consequences/`. Every scenario
+loophole, fix, and challenge threshold is verified by simulation in
+`scripts/qa_rl.ts` (run with `npx tsx scripts/qa_rl.ts`).
 
 Everything runs in the browser with plain TypeScript (no new dependencies, no
 TensorFlow.js): seeded datasets, exact regression gradients, Chebyshev

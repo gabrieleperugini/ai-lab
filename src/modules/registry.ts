@@ -36,5 +36,8 @@ export const moduleRegistry: Record<
   BlobsBreak: lazy(() => import("./hidden/BlobsBreak")),
   SpectralSprings: lazy(() => import("./hidden/SpectralSprings")),
   Recommender: lazy(() => import("./hidden/Recommender")),
+  MazeLearner: lazy(() => import("./rl/MazeLearner")),
+  RewardHackingLab: lazy(() => import("./rl/RewardHackingLab")),
+  RocketLanding: lazy(() => import("./rl/RocketLanding")),
   Placeholder: lazy(() => import("./PlaceholderModule"))
 };
